@@ -1,26 +1,43 @@
-import {useEffect, useState } from "react";
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from 'react-redux'
+import {useEffect } from "react";
+import { Link, Route, Routes } from 'react-router-dom';
 
 function App() {
-const [data, setData] = useState(null);
+  const stateMessage = useSelector(state => state.Message)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-  fetch("/api")
-    .then((res) => res.json())
-    .then((data) => setData(data.message));
-}, []);
+    fetchData()
+    setInterval(fetchData, 600000) // 10 minutes in ms
+  }, []);
+
+  function fetchData() {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => dispatch({type: "setMessage", text: data.message}))
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={
+        <div className="App">
+          <p>{stateMessage ? stateMessage : "Loading..."}</p>
+        </div>
+      } />
+
+      <Route path="/admin" element={
+        <h1>Här ska man kunna lägga till artiklar o sånt kanske</h1>
+      } />
+
+      <Route path="*" element={
+        <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
+          <h1>404</h1>
+          <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
+          <Link to="/">Gå tillbaka till Startsidan😁</Link>
+        </div>
+      } />
+
+    </Routes>
   );
 }
 
