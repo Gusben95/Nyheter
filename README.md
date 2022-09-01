@@ -1,11 +1,11 @@
 # Nyheter
 
-Koden skrivs på    ###### Engelska
+Koden skrivs på Engelska
 
-Commits skrivs på  ###### Engelska
+Commits skrivs på Engelska
 
 ## Naming
- Filer
+ ###### Filer
  - små bokstäver ex: index
  
  ###### Funktioner
