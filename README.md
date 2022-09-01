@@ -1,15 +1,20 @@
 # Nyheter
 
-Koden skrivs på    ### Engelska
-Commits skrivs på  ### Engelska
+Koden skrivs på    ###### Engelska
+
+Commits skrivs på  ###### Engelska
+
 ## Naming
  Filer
  - små bokstäver ex: index
- Funktioner
+ 
+ ###### Funktioner
  - camelcase     ex: minNyaFunktion
- varibler
+ 
+ ###### varibler
  - små bokstäver ex: age
- Components
+ 
+ ###### Components
  - Stor bokstav  ex: Hamburgarmeny
  
 
