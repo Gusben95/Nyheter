@@ -3,6 +3,7 @@ import {useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage';
 import Admin from './views/Admin';
+import Contact from './views/Contact';
 
 function App() {
   const dispatch = useDispatch()
@@ -26,6 +27,10 @@ function App() {
 
       <Route path="/admin" element={
         <Admin />
+      } />
+
+      <Route path="/contact" element={
+        <Contact />
       } />
 
       <Route path="*" element={
