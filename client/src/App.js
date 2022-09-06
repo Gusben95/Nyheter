@@ -1,9 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
+import Homepage from './views/Homepage';
+import Admin from './views/Admin';
+import Contact from './views/Contact';
 
 function App() {
-  const stateMessage = useSelector(state => state.Message)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,13 +22,15 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={
-        <div className="App">
-          <p>{stateMessage ? stateMessage : "Loading..."}</p>
-        </div>
+        <Homepage />
       } />
 
       <Route path="/admin" element={
-        <h1>Här ska man kunna lägga till artiklar o sånt kanske</h1>
+        <Admin />
+      } />
+
+      <Route path="/contact" element={
+        <Contact />
       } />
 
       <Route path="*" element={
