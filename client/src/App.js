@@ -7,14 +7,21 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchData()
-    setInterval(fetchData, 600000) // 10 minutes in ms
+    fetchData();
+    fetchArticles();
+    setInterval(fetchData, 600000); // 10 minutes in ms
   }, []);
 
   function fetchData() {
     fetch("/api")
       .then((res) => res.json())
       .then((data) => dispatch({type: "setMessage", text: data.message}))
+  }
+
+  async function fetchArticles() {
+    const response = await fetch("/api/testArticle");
+    const data = await response.json();
+    console.log(data);
   }
 
   return (
