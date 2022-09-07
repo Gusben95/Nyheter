@@ -3,11 +3,19 @@ import styles from './Contact.module.css'
 
 export default function Contact() {
     return (
-    <div className='contactPage'>
-        <h2> Tipslåda</h2>
+    <div className={styles.contactPage}>
+        <div className={styles.tips}>
+        <fieldset>   
+        <legend><h2>Tipslåda</h2></legend> 
 				Här kan du skicka in tips annonymt om saker i samhället som du anser bör rapporteras. <br/>
-        <textarea /> <br/>
+        <div className={styles.tipsRuta}>            
+        <textarea /> 
+        </div> 
+        
+        <br/>
+        </fieldset> 
         <button>skicka tipset</button>
+        </div>
 
         <h2>Kontakta oss. </h2>
         <ul>
