@@ -4,6 +4,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage';
 import Admin from './views/Admin';
 import Contact from './views/Contact';
+import Navbar from './components/Navbar';
 
 function App() {
   const dispatch = useDispatch()
@@ -29,23 +30,23 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={
-        <Homepage />
+        [<Homepage key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="/admin" element={
-        <Admin />
+        [<Admin key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="/contact" element={
-        <Contact />
+        [<Contact key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="*" element={
-        <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
+        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
           <Link to="/">Gå tillbaka till Startsidan😁</Link>
-        </div>
+        </div>, <Navbar key="2" />]
       } />
 
     </Routes>
