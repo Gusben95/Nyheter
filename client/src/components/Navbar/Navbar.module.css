@@ -39,6 +39,10 @@ nav.opened {
   text-decoration: underline;
 }
 
+a {
+  color: black;
+}
+
 /* The dark background shown behind the navbar when its open */
 .navbarDarkBackground {
   position: absolute;
@@ -92,6 +96,19 @@ nav.opened {
   background-color: #FF4136;
   color: black;
   font-size: 1.4em;
+  box-shadow: 0px 0px 0px #FF4136;
+  cursor: pointer;
+
+  animation: 2s pulseBoxShadow infinite;
+}
+
+@keyframes pulseBoxShadow {
+  from {
+    box-shadow: 0px 0px 0px #FF4136;
+  }
+  to {
+    box-shadow: 0px 0px 40px #ff403690;
+  }
 }
 
 /* desktop */
