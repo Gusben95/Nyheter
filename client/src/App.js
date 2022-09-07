@@ -5,6 +5,9 @@ import Homepage from './views/Homepage';
 import Admin from './views/Admin';
 import Contact from './views/Contact';
 import Navbar from './components/Navbar';
+import Login from './views/Login';
+
+
 
 function App() {
   const dispatch = useDispatch()
@@ -32,6 +35,10 @@ function App() {
 
       <Route path="/contact" element={
         [<Contact key="1" />, <Navbar key="2" />]
+      } />
+
+    <Route path="/login" element={
+        [<Login key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="*" element={
