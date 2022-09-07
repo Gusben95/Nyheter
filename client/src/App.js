@@ -1,13 +1,12 @@
 import { useDispatch } from 'react-redux'
 import {useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
-import Homepage from './views/Homepage';
-import Admin from './views/Admin';
-import Contact from './views/Contact';
-import Navbar from './components/Navbar';
-import Login from './views/Login';
-
-
+import Homepage from './views/Homepage/Homepage';
+import Admin from './views/Admin/Admin';
+import Contact from './views/Contact/Contact';
+import Navbar from './components/Navbar/Navbar';
+import Login from './views/Login/Login';
+import Subscribe from './views/Subscribe/Subscribe';
 
 function App() {
   const dispatch = useDispatch()
@@ -29,16 +28,24 @@ function App() {
         [<Homepage key="1" />, <Navbar key="2" />]
       } />
 
+      <Route path="/kategori/:category" element={
+        [<Homepage key="1" />, <Navbar key="2" />]
+      } />
+
       <Route path="/admin" element={
         [<Admin key="1" />, <Navbar key="2" />]
       } />
 
-      <Route path="/contact" element={
+      <Route path="/kontakt" element={
         [<Contact key="1" />, <Navbar key="2" />]
       } />
 
-    <Route path="/login" element={
+      <Route path="/login" element={
         [<Login key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/prenumerera" element={
+        [<Subscribe key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="*" element={
