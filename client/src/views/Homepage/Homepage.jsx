@@ -6,7 +6,7 @@ import ArticleComp from '../../components/Article/ArticleComp'
 import styles from './Homepage.module.css'
 
 export default function Homepage(props) {
-   const stateArticles = useSelector(state => state.Articles)
+  const stateArticles = useSelector(state => state.Articles)
 
   useEffect(()=>{
     console.log("stateArticles", stateArticles)
