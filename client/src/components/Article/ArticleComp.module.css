@@ -1,0 +1,27 @@
+.article {
+  width: 80%;
+  background-color: whitesmoke;
+  margin: 5px auto;
+}
+
+.articleImg {
+  width: 100%;
+}
+
+.articleHeader {
+  font-size: 2em;
+}
+
+.mainText {
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  font-size: 1em;
+  line-height: 1.3em;
+  margin:0;
+  max-width: 2000px;
+}

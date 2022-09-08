@@ -1,9 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
+import Homepage from './views/Homepage/Homepage';
+import Admin from './views/Admin/Admin';
+import Contact from './views/Contact/Contact';
+import Navbar from './components/Navbar/Navbar';
+import Login from './views/Login/Login';
+import Subscribe from './views/Subscribe/Subscribe';
 
 function App() {
-  const stateMessage = useSelector(state => state.Message)
   const dispatch = useDispatch()
 
   // let article = {
@@ -51,21 +56,35 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={
-        <div className="App">
-          <p>{stateMessage ? stateMessage : "Loading..."}</p>
-        </div>
+        [<Homepage key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/kategori/:category" element={
+        [<Homepage key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="/admin" element={
-        <h1>Här ska man kunna lägga till artiklar o sånt kanske</h1>
+        [<Admin key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/kontakt" element={
+        [<Contact key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/login" element={
+        [<Login key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/prenumerera" element={
+        [<Subscribe key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="*" element={
-        <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
+        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
           <Link to="/">Gå tillbaka till Startsidan😁</Link>
-        </div>
+        </div>, <Navbar key="2" />]
       } />
 
     </Routes>
