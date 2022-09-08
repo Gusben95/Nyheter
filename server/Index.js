@@ -37,7 +37,7 @@ app.get('/items', (request, response) => {
         title: item.title,
         shortDescription: item.shortDescription,
         mainText: item.mainText,
-        categorys: item.categorys,
+        categories: item.categories,
         author: item.author,
         dateAdded: item.dateAdded,
         views: item.views,
