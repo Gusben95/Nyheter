@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux'
-import {useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage';
 import Admin from './views/Admin/Admin';
@@ -10,6 +10,18 @@ import Subscribe from './views/Subscribe/Subscribe';
 
 function App() {
   const dispatch = useDispatch()
+
+  // let article = {
+  //   title: "title",
+  //   shortDescription: "shortDescription 1234",
+  //   mainText: "mainText",
+  //   categorys: ["category 1", "category 2", "category 3"],
+  //   author: "author",
+  //   images: ["image 1", "image 2", "image 3"]
+  // }
+  // useEffect(() =>{
+  //   PostArticle(article);
+  // }, [])
 
   useEffect(() => {
     fetchData();
@@ -24,7 +36,19 @@ function App() {
   }
 
   async function fetchArticles() {
-    const response = await fetch("/api/testArticle");
+    const response = await fetch("/items");
+    const data = await response.json();
+    console.log(data);
+  }
+
+  async function PostArticle(article) {
+    const response = await fetch("/postArticle", {
+      method: 'POST',
+      body: JSON.stringify(article),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     const data = await response.json();
     console.log(data);
   }
