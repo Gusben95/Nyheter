@@ -7,7 +7,6 @@ const express = require("express");
 // should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
 const dbName = 'nyheter'
-
 let db
 
 const init = () =>
@@ -23,6 +22,13 @@ const getArticles = () => {
   return collection.find({}).toArray()
 }
 
+const getCategory = (category) => {
+  const collection = db.collection('article')
+  return collection.find({
+    'categories': category
+  }).toArray()
+}
+
 // Post an article to the database, will get a unique id from mongoDB.
 const postArticle = async (doc) => {
   doc.dateAdded = new Date();
@@ -32,9 +38,9 @@ const postArticle = async (doc) => {
   return await collection.insertOne(doc);
 }
 
-
 module.exports = {
   init,
   getArticles,
-  postArticle
+  postArticle,
+  getCategory
 }

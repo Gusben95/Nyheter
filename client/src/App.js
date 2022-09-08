@@ -15,36 +15,53 @@ function App() {
   //   title: "title",
   //   shortDescription: "shortDescription 1234",
   //   mainText: "mainText",
-  //   categorys: ["category 1", "category 2", "category 3"],
+  //   categories: ["category 1", "category 2", "category 3"],
   //   author: "author",
   //   images: ["image 1", "image 2", "image 3"]
   // }
   // useEffect(() =>{
-  //   PostArticle(article);
+  //   postArticle(article);
   // }, [])
 
+  let thisCatagory = {category: "sport"};
+
   useEffect(() => {
-    fetchData();
+    fetchArticlesByCategory(thisCatagory)
     fetchArticles();
-    setInterval(fetchData, 600000); // 10 minutes in ms
+    setInterval(fetchArticles, 600000); // 10 minutes in ms
   }, []);
 
-  function fetchData() {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => dispatch({type: "setMessage", text: data.message}))
-  }
+  // function fetchData() {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch({type: "setMessage", text: data.message}))
+  // }
 
+  // fetches all articles
   async function fetchArticles() {
-    const response = await fetch("/items");
+    const response = await fetch("/allArticles");
     const data = await response.json();
     console.log(data);
   }
 
-  async function PostArticle(article) {
+  // post a article
+  async function postArticle(article) {
     const response = await fetch("/postArticle", {
       method: 'POST',
       body: JSON.stringify(article),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+  }
+
+  async function fetchArticlesByCategory(category) {
+    console.log(category)
+    const response = await fetch("/articlesByCategory", {
+      method: 'POST',
+      body: JSON.stringify(category),
       headers: {
         'Content-Type': 'application/json'
       }
