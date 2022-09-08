@@ -52,6 +52,10 @@ app.get('/allArticles', (request, response) => {
     })
 })
 
+// fetches articles from the database depending on the category
+// body should contain an object
+// let thisCatagory = {category: "sport"};
+// something like this
 app.post('/articlesByCategory', async (request, response) => {
   let category = await request.body.category;
   console.log(category);
@@ -112,7 +116,8 @@ app.post('/postArticle', async (request, response) => {
 //
 // });
 // const uri = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// const client = new MongoClient(uri, {
+// useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // client.connect(async err => {
 //   const collection = client.db("sample_airbnb").collection("listingsAndReviews");
 //   // perform actions on the collection object
