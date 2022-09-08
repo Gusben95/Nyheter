@@ -17,30 +17,32 @@ export default function Navbar() {
     
       <nav className={navbarOpened ? styles.opened : ""} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
+        
+        <h2
+          style={{margin: "0",marginTop: "-20px"}}
+        >Nyhetssidan</h2><img onClick={(e)=>{navigate("/"); toggleNavbar(e);}} alt="logo"/>
 
-        <section className={styles.upperPart}>
-          <img onClick={(e)=>{navigate("/"); toggleNavbar(e);}} alt="logo"/>
+        <div className={styles.searchPart}>
+          <input />
+          <button onClick={toggleNavbar}>🔎</button>
+        </div>
+
+        <button className={styles.subscribe} onClick={(e) => {
+            toggleNavbar(e);
+            navigate("/prenumerera")
+        }}>Prenumerera</button>
+        <div>
+          <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
+        </div>
+
+        <h2>Dagens ↓</h2>
+        <section className={styles.linksPart}>
           <Link onClick={toggleNavbar} to="/kategori/inrikes" data-text="Inrikes" className={styles.link}>Inrikes</Link>
           <Link onClick={toggleNavbar} to="/kategori/utrikes" data-text="Utrikes" className={styles.link}>Utrikes</Link>
           <Link onClick={toggleNavbar} to="/kategori/sport" data-text="Sport" className={styles.link}>Sport</Link>
         </section>
 
-        <section className={styles.userAndSearchPart}>
-          <button className={styles.subscribe} onClick={(e) => {
-             toggleNavbar(e);
-             navigate("/prenumerera")
-          }}>Prenumerera</button>
-          <div>
-            <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
-          </div>
-
-
-          <div className={styles.searchPart}>
-            <input />
-            <button onClick={toggleNavbar}>🔎</button>
-          </div>
-          <Link to="/kontakt" onClick={toggleNavbar}>Kontakta oss</Link>
-        </section>
+        <Link to="/kontakt" onClick={toggleNavbar}>Kontakta oss</Link>
       </nav>
     </div>
   )

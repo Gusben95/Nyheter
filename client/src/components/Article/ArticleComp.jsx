@@ -1,7 +1,7 @@
 import styles from './ArticleComp.module.css'
 
 export default function ArticleComp(props) {
-  let {title, mainText, images} = props.article;
+  let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views} = props.article;
 
   return (
     <div className={styles.article}>
@@ -9,8 +9,8 @@ export default function ArticleComp(props) {
 
       <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
       
-      <p className={styles.mainText}>
-        {mainText ? mainText : ""}
+      <p className={styles.shortDescription}>
+        {shortDescription ? shortDescription : ""}
       </p>
     </div>
   )

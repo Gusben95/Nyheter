@@ -6,36 +6,45 @@ import ArticleComp from '../../components/Article/ArticleComp'
 import styles from './Homepage.module.css'
 
 export default function Homepage(props) {
-  const stateMessage = useSelector(state => state.Message)
+   const stateArticles = useSelector(state => state.Articles)
 
   useEffect(()=>{
-    console.log(stateMessage)
-  }, [stateMessage])
+    console.log("stateArticles", stateArticles)
+  }, [stateArticles])
 
   // Om användaren går in på /kategori/sport så kommer category nedan vara "sport"
   // Men går dom in på /kategori/ bara, så hamnar dom på 404 istället :)
   const { category } = useParams();
 
-  const fakeArticle = {
-    title: "asd",
-    mainText: "Lorem ipsum idk asdlasjkl as jlasdjl klks jalsdl jkl kdsalj adl jdsjkl adljskdjalskdjalsdkjka sdlal sdkj alskdjalskd als djklalks jdljk adlkj ljk asljdslj kdsaljk ldajk slj kdaslj kdsaljk dasljk dsaljkdsaljk dsaljk ljk ljkdasljk dasljk ljk dlsj k",
-    images: [
-      "https://previews.123rf.com/images/rigsby8131/rigsby81311808/rigsby8131180800043/107738830-breaking-news-written-in-red-with-a-newspaper-article-blurred-in-the-background.jpg",
-      "imageLink absolutely"
-    ]
-  };
-
-  const fakeSportArticle = {
-    title: "Sport senaste nytt!",
-    mainText: "Inte attans kan jag sport?? det handlar typ om gubbar som springer efter en boll eller något, idk lol fråga någon annan som kanske kan sport lite bättre",
-    images: [
-      "asd fake img link i guess"
-    ]
+  async function postArticle() {
+    let article = {
+      title: "SuperDuperNiceTitle3",
+      shortDescription: "This isjnasjdajsj slkjasl kjasdklj dalsjk jkl adsljk das jlkasdlkjaskljdkljsalkj slkkalk jsdkl jasdklj aklj dlkj asdlkj asldk jrt but not almost maybe very long aswell",
+      mainText: "Thisas lj das ljal al al al a l is tj kasdasdkasdkasdkkkj  asldkjaslk jaslk aslakjs las dasl dasl dasdl asl asdl sdal dsal adsl dasl al asdl adsl asdl dsl adsl dsal dasl asl al jhadfhl dj kbh v mchb cv cv cvvckhbcvkvkhsvsvh   v vjk vjk  jksjkv bor this article, it should bljk adsklj adsljk asjkl dasdjkl adsjkl asdljk dsajlk sdajkl  super too long. Also this text should have some longer parts than all the other stuff and should do the stuff and things.",
+      categories: ["sport"],
+      author: "Some random dude",
+      images: ["https://www.gp.se/image/policy:1.80563596:1662633910/4MURQztTgxwit-Ow4Y-6eLGgn-0-jpg.jpg?f=Wide&w=1320&$p$f$w=4081854"]
+    }
+    const response = await fetch("/postArticle", {
+      method: 'POST',
+      body: JSON.stringify(article),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
   }
+
+  let articlesMapped = stateArticles.map((articleFromStore, key) => {
+    return <ArticleComp key={key} article={articleFromStore} />
+  })
 
   return (
     <div className={styles.homepage}>    
-      <ArticleComp article={category === "sport" ? fakeSportArticle : fakeArticle}/>
+      {articlesMapped}
+
+      <button onClick={postArticle}>Post article</button>
     </div>
   )
 }

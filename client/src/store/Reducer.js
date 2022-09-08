@@ -1,39 +1,16 @@
 import { legacy_createStore as createStore } from 'redux'
 
 const init = {
-  User: {
-    id: Number,
-    name: String,
-    email: String,
-    stillPaying: Boolean,
-    subscriptionEnd: String,
-    preference: [
-      "", ""
-    ]
-  },
-  Articles: [
-    {
-      title: String,
-      shortDescription: String,
-      mainText: String,
-      categorys: String,
-      author: Number,
-      dateAdded: String,
-      views: String,
-      images: [
-        "", ""
-      ]
-    },
-  ],
-  Message: ""
+  User: {},
+  Articles: [],
 }
 
 function dispatchActions(state = init, action) {
   switch(action.type) {
-    case 'setMessage': 
+    case 'addArticles': 
       return {
         ...state,
-        Message: action.text
+        Articles: action.data
       }
     default: 
       return state
