@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
@@ -7,7 +8,9 @@ import styles from './Homepage.module.css'
 export default function Homepage(props) {
   const stateMessage = useSelector(state => state.Message)
 
-  console.log(stateMessage)
+  useEffect(()=>{
+    console.log(stateMessage)
+  }, [stateMessage])
 
   // Om användaren går in på /kategori/sport så kommer category nedan vara "sport"
   // Men går dom in på /kategori/ bara, så hamnar dom på 404 istället :)
