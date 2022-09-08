@@ -21,6 +21,7 @@ nav {
   z-index: 2;
 
   transform: translateX(-102%);
+  transition: transform 0.5s ease;
 }
 
 /* When navbar is opened */
@@ -63,13 +64,23 @@ a {
   border: none;
   background: transparent;
 
-  font-size: 1.5em;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.closeNavbarBtn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 1.7em;
   cursor: pointer;
 }
 
 /* Upper part of the navbar, where links and logo is */
 .upperPart {
-  height: 60%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -79,6 +90,7 @@ a {
 .userAndSearchPart {
   display: flex;
   flex-direction: column;
+  margin-top: auto;
 }
 
 .upperPart > *, .userAndSearchPart > * {
