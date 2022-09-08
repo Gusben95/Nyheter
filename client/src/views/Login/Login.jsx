@@ -24,6 +24,8 @@ return(
 <br></br>
 
 <Link to="/forgotPassword">Glömt Lösenord?</Link>
+<br></br>
+<Link to="/registerNewUser">Bli Prenumerant</Link>
 
     </fieldset> 
 

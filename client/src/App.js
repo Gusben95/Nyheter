@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage';
@@ -11,18 +11,6 @@ import Subscribe from './views/Subscribe/Subscribe';
 function App() {
   const dispatch = useDispatch()
 
-  // let article = {
-  //   title: "title",
-  //   shortDescription: "shortDescription 1234",
-  //   mainText: "mainText",
-  //   categories: ["category 1", "category 2", "category 3"],
-  //   author: "author",
-  //   images: ["image 1", "image 2", "image 3"]
-  // }
-  // useEffect(() =>{
-  //   postArticle(article);
-  // }, [])
-
   let thisCatagory = {category: "sport"};
 
   useEffect(() => {
@@ -31,30 +19,11 @@ function App() {
     setInterval(fetchArticles, 600000); // 10 minutes in ms
   }, []);
 
-  // function fetchData() {
-  //   fetch("/api")
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch({type: "setMessage", text: data.message}))
-  // }
-
-  // fetches all articles
   async function fetchArticles() {
     const response = await fetch("/allArticles");
     const data = await response.json();
-    console.log(data);
-  }
-
-  // post a article
-  async function postArticle(article) {
-    const response = await fetch("/postArticle", {
-      method: 'POST',
-      body: JSON.stringify(article),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const data = await response.json();
-    console.log(data);
+    dispatch({type:"addArticles", data: data})
+    console.log("fetchedArticles", data);
   }
 
   async function fetchArticlesByCategory(category) {
