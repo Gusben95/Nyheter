@@ -12,7 +12,7 @@ Commits skrivs på Engelska
  - camelcase     ex: minNyaFunktion
  
  ###### varibler
- - små bokstäver ex: age
+ - camelCase ex: minVariabel
  
  ###### Components
  - Stor bokstav  ex: Hamburgarmeny

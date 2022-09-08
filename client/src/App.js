@@ -11,17 +11,33 @@ import Subscribe from './views/Subscribe/Subscribe';
 function App() {
   const dispatch = useDispatch()
 
+  let thisCatagory = {category: "sport"};
+
   useEffect(() => {
+    fetchArticlesByCategory(thisCatagory)
     fetchArticles();
     setInterval(fetchArticles, 600000); // 10 minutes in ms
   }, []);
 
   async function fetchArticles() {
-    const response = await fetch("/items");
+    const response = await fetch("/allArticles");
     const data = await response.json();
     dispatch({type:"addArticles", data: data})
     console.log("fetchedArticles", data);
-  }  
+  }
+
+  async function fetchArticlesByCategory(category) {
+    console.log(category)
+    const response = await fetch("/articlesByCategory", {
+      method: 'POST',
+      body: JSON.stringify(category),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+  }
 
   return (
     <Routes>

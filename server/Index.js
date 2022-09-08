@@ -2,7 +2,8 @@ const express = require("express");
 const {
   init,
   getArticles,
-  postArticle
+  postArticle,
+  getCategory
 } = require('./db/articleDb')
 const {
   MongoClient,
@@ -20,17 +21,41 @@ init().then(() => {
   app.listen(PORT);
 })
 
-app.get("/api", (req, res) => {
-  res.json({
-    message: "Hello from Axel!"
-  });
-});
+// app.get("/api", (req, res) => {
+//   res.json({
+//     message: "Hello from Axel!"
+//   });
+// });
 
 
 // Get all the articles from the database.
 // Loops through the articles the places them in an array
-app.get('/items', (request, response) => {
+app.get('/allArticles', (request, response) => {
   getArticles()
+    .then((items) => {
+      items = items.map((item) => ({
+        id: item._id,
+        title: item.title,
+        shortDescription: item.shortDescription,
+        mainText: item.mainText,
+        categories: item.categories,
+        author: item.author,
+        dateAdded: item.dateAdded,
+        views: item.views,
+        images: item.images
+      }))
+      response.json(items)
+    })
+    .catch((err) => {
+      console.log(err)
+      response.status(500).end()
+    })
+})
+
+app.post('/articlesByCategory', async (request, response) => {
+  let category = await request.body.category;
+  console.log(category);
+  getCategory(category)
     .then((items) => {
       items = items.map((item) => ({
         id: item._id,
@@ -57,9 +82,9 @@ app.get('/items', (request, response) => {
 //   title: "title",
 //   shortDescription: "shortDescription",
 //   mainText: "mainText",
-//   categorys: "categorys",
+//   categories: ["category 1", "category 2", "category 3"],
 //   author: "author",
-//   images: "images"
+//   images: ["image 1", "image 2", "image 3"]
 // }
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
