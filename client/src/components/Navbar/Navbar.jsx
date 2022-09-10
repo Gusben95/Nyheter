@@ -68,8 +68,8 @@ export default function Navbar() {
         <h2 onClick={toggleOldSection} style={{borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
         {oldSectionOpened ? (
           <section className={styles.linksPart} style={{borderBottom: "1px solid #DBDBDB"}}>
-            <Link onClick={toggleNavbar} to="/lastweek" className={styles.link}>Hela veckan</Link>
-            <Link onClick={toggleNavbar} to="/lastweek" className={styles.link}>Förra veckan</Link>
+            <Link onClick={toggleNavbar} to="/helaVeckan" className={styles.link}>Hela veckan</Link>
+            <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
           </section>
         ) : ""}
 

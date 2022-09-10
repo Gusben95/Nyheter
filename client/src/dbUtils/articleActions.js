@@ -14,6 +14,7 @@ async function fetchArticlesByCategory(category) {
     }
   });
   const data = await response.json();
+  return data;
 }
 
 async function postArticle(article) {
@@ -26,6 +27,7 @@ async function postArticle(article) {
   });
   const data = await response.json();
   console.log(data);
+  return data;
 }
 
 module.exports = { fetchArticles, fetchArticlesByCategory, postArticle }

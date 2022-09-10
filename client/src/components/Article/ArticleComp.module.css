@@ -1,7 +1,8 @@
 .article {
   width: 80%;
-  background-color: whitesmoke;
-  margin: 5px auto;
+  margin: 20px auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .articleImg {
@@ -12,6 +13,8 @@
 .articleHeader {
   font-size: 2em;
   word-break: break-word;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .shortDescription {

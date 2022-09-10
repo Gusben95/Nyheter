@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-import { useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage';
 import Admin from './views/Admin/Admin';
@@ -8,18 +6,8 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
 import Search from './views/Search/Search'
-const { fetchArticles, fetchArticlesByCategory } = require('./dbUtils/articleActions')
 
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    setInterval(()=>{
-      fetchArticles().then(articles =>{
-      dispatch({type:"addArticles", data: articles});
-      })}, 600000); // 10 minutes in ms
-  }, []);
-
   return (
     <Routes>
       <Route path="/" element={
