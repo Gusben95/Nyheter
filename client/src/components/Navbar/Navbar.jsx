@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
@@ -5,44 +6,75 @@ import styles from './Navbar.module.css'
 export default function Navbar() {
   let navigate = useNavigate();
   const [navbarOpened, setNavbarOpened] = useState(false);
+  const [todaySectionOpened, setTodaySectionOpened] = useState(true)
+  const [oldSectionOpened, setOldSectionOpened] = useState(false)
+
+  const searchBarRef = useRef("")
 
   function toggleNavbar(e) {
-    e.stopPropagation()
-    navbarOpened ? setNavbarOpened(false) : setNavbarOpened(true)
+    e.stopPropagation();
+    navbarOpened ? setNavbarOpened(false) : setNavbarOpened(true);
+  }
+
+  function toggleTodaysSection(e) {
+    e.stopPropagation();
+    todaySectionOpened ? setTodaySectionOpened(false) : setTodaySectionOpened(true);
+  }
+
+  function toggleOldSection(e) {
+    e.stopPropagation();
+    oldSectionOpened ? setOldSectionOpened(false) : setOldSectionOpened(true);
+  }
+
+  function doASearch(e) {
+    e.preventDefault()
+    console.log(searchBarRef.current.value)
+    navigate("/search/" + searchBarRef.current.value)
   }
 
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
       <button className={styles.openNavbarBtn} onClick={toggleNavbar}>&#9776;</button>
     
-      <nav className={navbarOpened ? styles.opened : ""} onClick={(e)=> {e.stopPropagation()}}>
+      <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
         
         <h2
-          style={{margin: "0",marginTop: "-20px"}}
+          style={{margin: "0"}}
         >Nyhetssidan</h2><img onClick={(e)=>{navigate("/"); toggleNavbar(e);}} alt="logo"/>
 
-        <div className={styles.searchPart}>
-          <input />
-          <button onClick={toggleNavbar}>🔎</button>
-        </div>
+        <form className={styles.searchPart} onSubmit={doASearch}>
+          <input placeholder='Search' ref={searchBarRef}/>
+          <button type='submit' onClick={toggleNavbar}>🔎</button>
+        </form>
 
         <button className={styles.subscribe} onClick={(e) => {
             toggleNavbar(e);
             navigate("/prenumerera")
         }}>Prenumerera</button>
-        <div>
+        <div style={{paddingBottom: "10px"}}>
           <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
         </div>
 
-        <h2>Dagens ↓</h2>
-        <section className={styles.linksPart}>
-          <Link onClick={toggleNavbar} to="/kategori/inrikes" data-text="Inrikes" className={styles.link}>Inrikes</Link>
-          <Link onClick={toggleNavbar} to="/kategori/utrikes" data-text="Utrikes" className={styles.link}>Utrikes</Link>
-          <Link onClick={toggleNavbar} to="/kategori/sport" data-text="Sport" className={styles.link}>Sport</Link>
-        </section>
+        <h2 onClick={toggleTodaysSection} style={!todaySectionOpened ? {} : {borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
+        {todaySectionOpened ? (
+          <section className={styles.linksPart}>
+            <Link onClick={toggleNavbar} to="/kategori/inrikes" className={styles.link}>Inrikes</Link>
+            <Link onClick={toggleNavbar} to="/kategori/utrikes" className={styles.link}>Utrikes</Link>
+            <Link onClick={toggleNavbar} to="/kategori/sport" className={styles.link}>Sport</Link>
+          </section>
+        ) : ""}
 
-        <Link to="/kontakt" onClick={toggleNavbar}>Kontakta oss</Link>
+        <h2 onClick={toggleOldSection} style={{borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
+        {oldSectionOpened ? (
+          <section className={styles.linksPart} style={{borderBottom: "1px solid #DBDBDB"}}>
+            <Link onClick={toggleNavbar} to="/lastweek" className={styles.link}>Hela veckan</Link>
+            <Link onClick={toggleNavbar} to="/lastweek" className={styles.link}>Förra veckan</Link>
+          </section>
+        ) : ""}
+
+
+        <Link to="/kontakt" onClick={toggleNavbar} style={{marginTop: "auto"}}>Kontakta oss</Link>
       </nav>
     </div>
   )

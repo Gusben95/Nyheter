@@ -7,6 +7,7 @@ import Contact from './views/Contact/Contact';
 import Navbar from './components/Navbar/Navbar';
 import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
+import Search from './views/Search/Search'
 const { fetchArticles, fetchArticlesByCategory } = require('./dbUtils/articleActions')
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
 
       <Route path="/admin" element={
         [<Admin key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/search/:query" element={
+        [<Search key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="/kontakt" element={

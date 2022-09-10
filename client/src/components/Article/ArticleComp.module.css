@@ -6,6 +6,7 @@
 
 .articleImg {
   width: 100%;
+  aspect-ratio: 16/9;
 }
 
 .articleHeader {
@@ -13,7 +14,7 @@
   word-break: break-word;
 }
 
-.mainText {
+.shortDescription {
   overflow: hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;

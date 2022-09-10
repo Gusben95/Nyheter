@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 
 import styles from './Homepage.module.css'
@@ -34,14 +34,19 @@ export default function Homepage(props) {
     images: ["https://media-exp1.licdn.com/dms/image/C4D03AQHUnfYM6tUqGA/profile-displayphoto-shrink_400_400/0/1622753442642?e=1668038400&v=beta&t=6rq-8BC-PrQVomJAwRfzXRAxRcWqPgTL7-hZBNc3EUs"]
   }
 
-
-
   let articlesMapped = stateArticles.map((articleFromStore, key) => {
     return <ArticleComp key={key} article={articleFromStore} />
   })
 
   return (
     <div className={styles.homepage}>
+      <section className={styles.superAd} style={{textAlign: "center", padding: "10px", backgroundColor: "black", color: "white"}}>
+        <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
+        <h3>Mindre än 2.5kr om dagen!</h3>
+        <Link to="/prenumerera">Prenumerera nu</Link>
+        <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
+      </section>
+
       {articlesMapped}
 
       <button onClick={() => postArticle(article) }>Post article</button>
