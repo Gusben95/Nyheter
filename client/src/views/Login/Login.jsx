@@ -4,34 +4,22 @@ import styles from './Login.module.css'
 export default function Login(){
 return(
 <div className={styles.LoginPage}>
-<h1> Login - Nyhetssidan </h1>
+  <div className={styles.Login}>
+    <fieldset>   
+      <legend>Logga in</legend>
 
-<div className={styles.Login}>
-<fieldset>   
+      <label htmlFor='uname'><b>Användarnamn</b></label>
+      <input type='text' placeholder='Användarnamn' name='uname' required></input>
 
-<legend><h4>Logga in</h4></legend>
+      <label htmlFor='psw'><b>Lösenord</b></label>
+      <input type='password' placeholder='Lösenord' name='pwd' required></input>
 
-    <label htmlFor='uname'><b>Användarnamn</b></label>
-    <br></br>
-    <input type='text' placeholder='Användarnamn' name='uname' required></input>
-<br></br>
-    <label htmlFor='psw'><b>Lösenord</b></label>
-    <br></br>
-    <input type='password' placeholder='Lösenord' name='pwd' required></input>
+      <button type='submit'>Logga in</button>
 
-    <br></br>
-    <button type='submit'>Logga in</button>
-<br></br>
-
-<Link to="/forgotPassword">Glömt Lösenord?</Link>
-<br></br>
-<Link to="/registerNewUser">Bli Prenumerant</Link>
-
+      <Link to="/glomtlosenord">Glömt Lösenord?</Link>
+      <Link to="/prenumerera">Bli Prenumerant</Link>
     </fieldset> 
-
-</div>
-
-
+  </div>
 </div>
 
 

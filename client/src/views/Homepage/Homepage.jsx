@@ -1,22 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 
 import styles from './Homepage.module.css'
 
-const { fetchArticles, fetchArticlesByCategory, postArticle } = require('../../dbUtils/articleActions')
+const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articleActions')
 
 export default function Homepage() {
   const dispatch = useDispatch()
   const stateArticles = useSelector(state => state.Articles)
+  const [isLoading, setIsLoading] = useState(true)
 
   const { category } = useParams();
 
   useEffect(()=>{
+    setIsLoading(true)
     if(category === undefined) {
       fetchArticles().then(articles =>{
         dispatch({type:"addArticles", data: articles});
+        setIsLoading(false)
       })
 
       /* setInterval(()=>{
@@ -29,6 +32,7 @@ export default function Homepage() {
           articles = []
         }
         dispatch({type: "addArticles", data: articles});
+        setIsLoading(false)
       });
 
       /* setInterval(()=>{
@@ -42,21 +46,28 @@ export default function Homepage() {
     console.log("stateArticles", stateArticles)
   }, [stateArticles]);
 
-  let article = {
-    title: "Drottning Elizabeth är gravid! Kim Jong Un är världens sexigaste man!",
-    shortDescription: "",
-    mainText: "",
-    categories: ["inrikes"],
-    author: "Vegard Tenold Aase",
-    images: [""]
+  //split array into chunks of 10 articles
+  let stateArticlesCopy = [...stateArticles]
+  let articlesSplit = []
+  while(stateArticlesCopy.length) {
+    articlesSplit.push(stateArticlesCopy.splice(0,10));
   }
 
-  let articlesMapped = stateArticles.map((articleFromStore, key) => {
-    return <ArticleComp key={key} article={articleFromStore} />
+  let articlesMapped = [];
+  articlesSplit.forEach((articlesChunk, index) => {
+    articlesMapped.push(articlesSplit[index].map((articleFromStore, key) => {
+      if(key === 4 || key === 5 || key === 6 || key === 7) { // the fourth article of every chunk of 10
+        return <ArticleComp key={articleFromStore.id} article={articleFromStore} smallVersion />
+      } else {
+        return <ArticleComp key={articleFromStore.id} article={articleFromStore} />
+      }
+    }))
   })
 
   return (
     <div className={styles.homepage}>
+      <h1 style={{textAlign: "center"}}>Nyhetssidan</h1>
+
       <section className={styles.superAd} style={{textAlign: "center", padding: "10px", backgroundColor: "black", color: "white"}}>
         <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
         <h3>Mindre än 2.5kr om dagen!</h3>
@@ -64,9 +75,15 @@ export default function Homepage() {
         <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
       </section>
 
-      {articlesMapped}
-
-      <button onClick={() => postArticle(article) }>Post article</button>
+      {isLoading ? (
+        <div className={styles.loadingContainer}>
+          <h2>Loading...</h2>
+        </div>
+      ) : (
+        <>
+          {articlesMapped}
+        </>
+      )}
     </div>
   )
 }
