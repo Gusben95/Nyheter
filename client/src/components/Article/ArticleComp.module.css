@@ -1,8 +1,27 @@
-.article {
-  width: 80%;
+.article, .smallArticle {
+  width: 95%;
   margin: 20px auto;
   padding-bottom: 10px;
   border-bottom: 1px solid #DBDBDB;
+}
+
+.smallArticle {
+  display: flex;
+  flex-direction: row;
+}
+
+.smallArticle .articleImg {
+  width: 33%;
+  flex-shrink: 0;
+  aspect-ratio: 4/3;
+}
+
+.smallArticle .articleHeader {
+  font-size: 6vw;
+}
+
+.smallArticle .articleContent {
+  padding-left: 5px;
 }
 
 .articleImg {
