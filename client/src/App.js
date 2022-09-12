@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-import { useEffect } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage';
 import Admin from './views/Admin/Admin';
@@ -7,18 +5,9 @@ import Contact from './views/Contact/Contact';
 import Navbar from './components/Navbar/Navbar';
 import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
-const { fetchArticles, fetchArticlesByCategory } = require('./dbUtils/articleActions')
+import Search from './views/Search/Search'
 
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    setInterval(()=>{
-      fetchArticles().then(articles =>{
-      dispatch({type:"addArticles", data: articles});
-      })}, 600000); // 10 minutes in ms
-  }, []);
-
   return (
     <Routes>
       <Route path="/" element={
@@ -31,6 +20,10 @@ function App() {
 
       <Route path="/admin" element={
         [<Admin key="1" />, <Navbar key="2" />]
+      } />
+
+      <Route path="/search/:query" element={
+        [<Search key="1" />, <Navbar key="2" />]
       } />
 
       <Route path="/kontakt" element={
