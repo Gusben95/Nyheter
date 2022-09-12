@@ -4,7 +4,7 @@ import styles from './Login.module.css'
 export default function Login(){
 return(
 
-    <fieldset className={'styles.LoginPage'}>   
+    <fieldset className={styles.LoginPage}>   
       <legend>Logga in</legend>
 
       <label htmlFor='uname'><b>Användarnamn</b></label>
