@@ -3,7 +3,7 @@ import styles from './Login.module.css'
 
 export default function Login(){
 return(
-
+  <div className={styles.loginContainer}>
     <fieldset className={styles.LoginPage}>   
       <legend>Logga in</legend>
 
@@ -19,7 +19,5 @@ return(
       <Link to="/glomtlosenord">Glömt Lösenord?</Link>
       <Link to="/prenumerera">Bli Prenumerant</Link>
     </fieldset> 
-
-
-
+  </div>
 )}
