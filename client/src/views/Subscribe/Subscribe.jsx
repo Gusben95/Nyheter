@@ -8,11 +8,11 @@ const [clickedMonths, setClickedMonths] = useState()
   function clickSubscribe(months){
     console.log(months)
     if(clickedMonths) {
-      document.getElementById( String(clickedMonths) ).style.border = "1px solid black"
+      document.getElementById( "Months" + String(clickedMonths) ).style.border = "1px solid transparent"
     }
     
     setClickedMonths(months)
-    document.getElementById( String(months) ).style.border = "1px solid red"
+    document.getElementById( "Months" + String(months) ).style.border = "1px solid black"
   }
   return (
     <section className={styles.subscribePage}>
@@ -20,15 +20,30 @@ const [clickedMonths, setClickedMonths] = useState()
       <h2>Prenumerera och få tillgång till alla artiklar </h2>
 
       <section className={styles.cardContainer}>
-        <div id="3" className={styles.subscribeCard} onClick={()=>{clickSubscribe(3)}}>
+        <div 
+        id="Months3" 
+        className={styles.subscribeCard} 
+        onClick={()=>{clickSubscribe(3)}}
+        style={{transform: "scale(0.9)", backgroundColor: "rgba(211, 211, 211, 0.2)"}}
+        >
           <h2 className={styles.monthHeader}>3 Månader</h2>
           <h2 className={styles.monthPrice}>300:-</h2>
         </div>
-        <div id="6" className={styles.subscribeCard} onClick={()=>{clickSubscribe(6)}}>
+        <div 
+        id="Months6" 
+        className={styles.subscribeCard} 
+        onClick={()=>{clickSubscribe(6)}}
+        style={{transform: "scale(0.9)", backgroundColor: "rgba(211, 211, 211, 0.2)"}}
+        >
           <h2 className={styles.monthHeader}>6 Månader</h2>
           <h2 className={styles.monthPrice}>500:-</h2>
         </div>
-        <div id="12" className={styles.subscribeCard} onClick={()=>{clickSubscribe(12)}}>
+        <div 
+        id="Months12" 
+        className={styles.subscribeCard} 
+        onClick={()=>{clickSubscribe(12)}}
+        style={{boxShadow: "2px 2px 16px lightblue"}}
+        >
           <h2 className={styles.monthHeader}>12 Månader</h2>
           <h2 className={styles.monthPrice}>800:-</h2>
           <p className={styles.monthWarning}>Mest prisvärda alternativet!</p>
