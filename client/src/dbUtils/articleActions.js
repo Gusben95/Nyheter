@@ -17,6 +17,18 @@ async function fetchArticlesByCategory(category) {
   return data;
 }
 
+async function fetchArticlesBySearch(searchInput) {
+  const response = await fetch("/articlesBySearch", {
+    method: 'POST',
+    body: JSON.stringify(searchInput),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  return data;
+}
+
 async function postArticle(article) {
   const response = await fetch("/postArticle", {
     method: 'POST',
@@ -61,4 +73,4 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = { fetchArticles, fetchArticlesByCategory, postArticle, fetchArticleAndSendToDatabase }
+module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBySearch, postArticle, fetchArticleAndSendToDatabase }
