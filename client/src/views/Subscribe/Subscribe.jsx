@@ -6,32 +6,46 @@ export default function Subscribe() {
 const [clickedMonths, setClickedMonths] = useState()
 
   function clickSubscribe(months){
-    setClickedMonths(months)
     console.log(months)
-
+    if(clickedMonths) {
+      document.getElementById( String(clickedMonths) ).style.border = "1px solid black"
+    }
+    
+    setClickedMonths(months)
+    document.getElementById( String(months) ).style.border = "1px solid red"
   }
   return (
-    <section>
+    <section className={styles.subscribePage}>
       <h1>NYHETSSIDAN</h1>
       <h2>Prenumerera och få tillgång till alla artiklar </h2>
-      <h2>Kostnad:</h2>
 
-      <div className={styles.SubscribeCard} onClick={()=>{clickSubscribe(3)}}><h2>3 Månader: 300Sek</h2></div>
-      <div className={styles.SubscribeCard} onClick={()=>{clickSubscribe(6)}}><h2>6 Månader: 500Sek</h2></div>
-      <div className={styles.SubscribeCard} onClick={()=>{clickSubscribe(12)}}><h2>12 Månader: 800Sek</h2><p>Mest prisvärda alternativet!</p></div>
+      <section className={styles.cardContainer}>
+        <div id="3" className={styles.subscribeCard} onClick={()=>{clickSubscribe(3)}}>
+          <h2 className={styles.monthHeader}>3 Månader</h2>
+          <h2 className={styles.monthPrice}>300:-</h2>
+        </div>
+        <div id="6" className={styles.subscribeCard} onClick={()=>{clickSubscribe(6)}}>
+          <h2 className={styles.monthHeader}>6 Månader</h2>
+          <h2 className={styles.monthPrice}>500:-</h2>
+        </div>
+        <div id="12" className={styles.subscribeCard} onClick={()=>{clickSubscribe(12)}}>
+          <h2 className={styles.monthHeader}>12 Månader</h2>
+          <h2 className={styles.monthPrice}>800:-</h2>
+          <p className={styles.monthWarning}>Mest prisvärda alternativet!</p>
+        </div>
+      </section>
 
-      
-      {clickedMonths ? (<section>
-        <input type='text' placeholder='För och efternamn'></input>
-        
-        <input type='number' placeholder='Ditt kortnummer'></input>
-        <input type='text' placeholder='YY/MM'></input>
-        <input type='number' placeholder='CVC'></input>
-        <button>Betala</button>
-
-
-      </section>):''}
-
+      {clickedMonths ? (
+      <section className={styles.cardInfo}>
+        <input className={styles.cardNumber} type='number' placeholder='Ditt kortnummer'></input>
+        <div className={styles.smallCardInfo}>
+          <input className={styles.cardName} type='text' placeholder='För och efternamn'></input>
+          <input className={styles.cardExpiry} type='text' placeholder='YY/MM'></input>
+          <input className={styles.cardCVC} type='number' placeholder='CVC'></input>
+        </div>
+        <button className={styles.payButton}>Betala</button>
+      </section>
+      ):''}
 
       <ul>
         <h3>Vad ingår i abbonnemanget</h3>
