@@ -4,7 +4,7 @@ const {
 } = require('mongodb')
 const express = require("express");
 
-// should be moved to ENV variable
+// Should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
 const dbName = 'nyheter'
 let db
@@ -22,6 +22,7 @@ const getArticles = () => {
   return collection.find({}).toArray()
 }
 
+// Fetches articles from the database depending on the category
 const getCategory = (category) => {
   const collection = db.collection('article')
   return collection.find({
@@ -29,11 +30,28 @@ const getCategory = (category) => {
   }).toArray()
 }
 
+
+// Featch articles depending on the search query
 const getSearch = (searchInput) => {
+  // only need to index the collection once
+  // db.collection('article').createIndex({ title: "text", shortDescription: "text", mainText: "text" });
+  const query = { $text: { $search: searchInput } };
+  const sort = { score: { $meta: "textScore" } };
+
+  const projection = {
+    title: 1,
+    shortDescription: 1,
+    mainText: 1,
+    categories: 1,
+    author: 1,
+    dateAdded: 1,
+    images: 1,
+    views: 1,
+    score: { $meta: "textScore" },
+};
+
   const collection = db.collection('article')
-  return collection.find({
-    'title': searchInput
-  }).toArray()
+  return collection.find(query).sort(sort).project(projection).toArray()
 }
 
 // Post an article to the database, will get a unique id from mongoDB.
@@ -49,5 +67,6 @@ module.exports = {
   init,
   getArticles,
   postArticle,
+  getSearch,
   getCategory
 }

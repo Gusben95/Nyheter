@@ -17,8 +17,8 @@ async function fetchArticlesByCategory(category) {
   return data;
 }
 
-async function fetchArticlesBysearch(searchInput) {
-  const response = await fetch("/articlesBysearch", {
+async function fetchArticlesBySearch(searchInput) {
+  const response = await fetch("/articlesBySearch", {
     method: 'POST',
     body: JSON.stringify(searchInput),
     headers: {
@@ -26,6 +26,7 @@ async function fetchArticlesBysearch(searchInput) {
     }
   });
   const data = await response.json();
+  return data;
 }
 
 async function postArticle(article) {
@@ -72,4 +73,4 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBysearch, postArticle, fetchArticleAndSendToDatabase }
+module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBySearch, postArticle, fetchArticleAndSendToDatabase }
