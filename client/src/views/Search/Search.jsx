@@ -7,17 +7,18 @@ const { fetchArticlesBySearch } = require('../../dbUtils/articleActions')
 
 export default function Search() {
   const { query } = useParams();
-  const [searchResults, setsearchResults] = useState({})
+  const [searchResults, setsearchResults] = useState([])
   let articlesMapped = []
 
   useEffect(()=>{
     fetchArticlesBySearch({searchInput: query}).then(articles => { setsearchResults(articles)});
   }, [query]);
 
+  articlesMapped = searchResults.map((searchResult, key) => {
+    return <ArticleComp key={searchResult.id} article={searchResult} />
+  })
 
-    articlesMapped.map((searchResults, key) => {
-      return <ArticleComp key={searchResults.id} article={searchResults} />
-    })
+  console.log(searchResults);
 
 
   return (
