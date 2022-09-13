@@ -29,6 +29,13 @@ const getCategory = (category) => {
   }).toArray()
 }
 
+const getSearch = (searchInput) => {
+  const collection = db.collection('article')
+  return collection.find({
+    'title': searchInput
+  }).toArray()
+}
+
 // Post an article to the database, will get a unique id from mongoDB.
 const postArticle = async (doc) => {
   doc.dateAdded = new Date();

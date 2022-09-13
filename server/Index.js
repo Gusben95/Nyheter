@@ -58,8 +58,31 @@ app.get('/allArticles', (request, response) => {
 // something like this
 app.post('/articlesByCategory', async (request, response) => {
   let category = await request.body.category;
-  console.log(category);
   getCategory(category)
+    .then((items) => {
+      items = items.map((item) => ({
+        id: item._id,
+        title: item.title,
+        shortDescription: item.shortDescription,
+        mainText: item.mainText,
+        categories: item.categories,
+        author: item.author,
+        dateAdded: item.dateAdded,
+        views: item.views,
+        images: item.images
+      }))
+      response.json(items)
+    })
+    .catch((err) => {
+      console.log(err)
+      response.status(500).end()
+    })
+})
+
+app.post('/articlesBySearch', async (request, response) => {
+  let searchInput = await request.body.searchInput;
+  console.log(searchInput);
+  getSearch(searchInput)
     .then((items) => {
       items = items.map((item) => ({
         id: item._id,
