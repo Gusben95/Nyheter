@@ -1,4 +1,3 @@
-
 async function fetchArticles() {
   const response = await fetch("/allArticles");
   const data = await response.json();
@@ -41,6 +40,8 @@ async function postArticle(article) {
   console.log(data);
   return data;
 }
+
+
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
   let api_key = "4e2e0d17af1c40ec976605105ef2b6cd";
