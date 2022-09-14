@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
+import { hashPassword, comparePassword } from '../../utilis/bcrypt'
 
 export default function Login(){
 return(
@@ -8,9 +9,8 @@ return(
       <legend>Logga in</legend>
 
       <label htmlFor='uname'><b>Användarnamn</b></label>
-      <input type='text' placeholder='Användarnamn' name='uname' required></input>
+      <input type='text' autocomplete="on" placeholder='Användarnamn' name='uname' required></input>
       
-
       <label htmlFor='psw'><b>Lösenord</b></label>
       <input type='password' placeholder='Lösenord' name='pwd' required></input>
 
