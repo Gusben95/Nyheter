@@ -26,7 +26,7 @@ return(
       <legend>Logga in</legend>
 
       <label htmlFor='uname'><b>Email</b></label>
-      <input type='text' ref={emailInput} placeholder='Email' name='uname' required></input>
+      <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
       
       <label htmlFor='psw'><b>Lösenord</b></label>
       <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
