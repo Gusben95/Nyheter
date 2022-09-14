@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
 import { useRef } from 'react'
 
-const { deleteArticle } = require('../../dbUtils/articleActions')
+const { deleteArticle, updateArticle } = require('../../dbUtils/articleActions')
 
 export default function Login(){
 
@@ -18,7 +18,21 @@ export default function Login(){
 
         console.log(email, password);
 
-        deleteArticle({id: emailInput.current.value})
+
+        // tested the updateArticle and deleteArticle routes
+        // let testArticle = {
+        //   id: "6321d667eb2e448892d5e77d",
+        //   title: "hej",
+        //   shortDescription: "hallå",
+        //   mainText: "kul",
+        //   categories: "itemories",
+        //   author: "ite",
+        //   dateAdded: "iteteAdded",
+        //   views: 10,
+        //   images: ["hek", "lol"]
+        // }
+        // updateArticle(testArticle)
+        // deleteArticle({id: emailInput.current.value})
 
     }
 

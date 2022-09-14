@@ -3,9 +3,10 @@ const {
   init,
   getArticles,
   postArticle,
-  deleteArticle,
   getSearch,
-  getCategory
+  getCategory,
+  deleteArticle,
+  updateArticle
 } = require('./db/articleDb')
 // const {
 //   getUserWithEmail
@@ -121,6 +122,7 @@ app.post('/postArticle', async (request, response) => {
   response.json("Success")
 })
 
+// Deletes an article from the database with the id of the article
 app.post('/deleteArticle', async (request, response) => {
   let article = await request.body.id;
   console.log(article);
@@ -131,10 +133,15 @@ app.post('/deleteArticle', async (request, response) => {
   response.json(res)
 })
 
-app.post('/editArticle', async (request, response) =>{
+// Updates an article in the database with the id of the article
+app.post('/updateArticle', async (request, response) => {
   let updatedArticle = await request.body
-  console.log(updatedArticle);
-  response.json("bajs")
+  console.log(updatedArticle)
+  let res = await updateArticle(updatedArticle).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
 })
 
 // -------- account database --------

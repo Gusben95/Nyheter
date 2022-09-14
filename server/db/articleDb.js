@@ -73,11 +73,32 @@ const deleteArticle = async (article) => {
   return deleteResult.deletedCount
 }
 
+const updateArticle = async (article) => {
+  const collection = db.collection('article')
+  let articleId = new ObjectId(article.id)
+  const filter = { _id: articleId }
+  const updatedDoc = {
+    $set : {
+      title: article.title,
+      shortDescription: article.shortDescription,
+      mainText: article.mainText,
+      categories: article.categories,
+      author: article.author,
+      dateUpdated: new Date(),
+      images: article.images
+    }
+  }
+  const result = await collection.updateOne(filter, updatedDoc);
+  return result
+
+}
+
 module.exports = {
   init,
   getArticles,
   postArticle,
   getSearch,
   getCategory,
-  deleteArticle
+  deleteArticle,
+  updateArticle
 }
