@@ -39,9 +39,10 @@ export default function Navbar() {
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
         
-        <h2
-          style={{margin: "0"}}
-        >Nyhetssidan</h2><img onClick={(e)=>{navigate("/"); toggleNavbar(e);}} alt="logo"/>
+        <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
+          <h2 style={{margin: "0"}}>Nyhetssidan</h2>
+          <img alt="logo"/>
+        </div>
 
         <form className={styles.searchPart} onSubmit={doASearch}>
           <input placeholder='Search' ref={searchBarRef}/>
