@@ -16,7 +16,6 @@ export default function Login(){
         const password = passwordInput.current.value
 
         console.log(email, password);
-    
     }
 
 
@@ -25,11 +24,8 @@ return(
     <fieldset className={styles.LoginPage}>   
       <legend>Logga in</legend>
 
-      <label htmlFor='uname'><b>Email</b></label>
-      <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
-      
-      <label htmlFor='psw'><b>Lösenord</b></label>
-      <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
+      <input type='text' ref={emailInput} placeholder='Email' className={styles.emailInput} required></input>
+      <input type='password' ref={passwordInput} placeholder='Lösenord' className={styles.passwordInput} required></input>
 
       <button onClick={loginAuth}>Logga in</button>
 

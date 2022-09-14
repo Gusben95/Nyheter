@@ -66,7 +66,7 @@ export default function Homepage() {
 
   return (
     <div className={styles.homepage}>
-      <h1 style={{textAlign: "center"}}>Nyhetssidan</h1>
+      <h1 style={{textAlign: "center", marginTop: "0", paddingTop: "1em"}}>Nyhetssidan</h1>
 
       <section className={styles.superAd} style={{textAlign: "center", padding: "10px", backgroundColor: "black", color: "white"}}>
         <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
