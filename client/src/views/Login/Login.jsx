@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
+import { hashPassword, comparePassword } from '../../utilis/bcrypt'
 import { useRef } from 'react'
 
 export default function Login(){
@@ -23,8 +24,11 @@ return(
     <fieldset className={styles.LoginPage}>   
       <legend>Logga in</legend>
 
-      <input type='text' ref={emailInput} placeholder='Email' className={styles.emailInput} required></input>
-      <input type='password' ref={passwordInput} placeholder='Lösenord' className={styles.passwordInput} required></input>
+      <label htmlFor='uname'>Email</label>
+      <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
+      
+      <label htmlFor='psw'>Lösenord</label>
+      <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
 
       <button onClick={loginAuth}>Logga in</button>
 

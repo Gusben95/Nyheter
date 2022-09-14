@@ -7,6 +7,9 @@ const {
   getCategory
 } = require('./db/articleDb')
 const {
+  getUserWithEmail
+} = require('./db/accountDb')
+const {
   MongoClient,
   ServerApiVersion
 } = require('mongodb');
@@ -22,7 +25,7 @@ init().then(() => {
   app.listen(PORT);
 })
 
-
+// -------- article database --------
 // Get all the articles from the database.
 // Loops through the articles the places them in an array
 app.get('/allArticles', (request, response) => {
@@ -116,4 +119,16 @@ app.post('/postArticle', async (request, response) => {
     response.status(500).end()
   })
   response.json("Success")
+})
+
+
+// -------- account database --------
+app.post('/getAccount', async (request, response) => {
+  let credentials = await request.body;
+  getUserWithEmail(credentials.email).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json("Success")
+
 })
