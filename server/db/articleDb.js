@@ -63,10 +63,21 @@ const postArticle = async (doc) => {
   return await collection.insertOne(doc);
 }
 
+// Delete an article from the database with the id from mongoDB
+const deleteArticle = async (article) => {
+  const collection = db.collection('article')
+  let articleId = new ObjectId(article);
+  // console.log("id i articleDb", article)
+  const doc = { _id: articleId}
+  const deleteResult = await collection.deleteMany(doc);
+  return deleteResult.deletedCount
+}
+
 module.exports = {
   init,
   getArticles,
   postArticle,
   getSearch,
-  getCategory
+  getCategory,
+  deleteArticle
 }

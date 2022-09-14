@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
 import { useRef } from 'react'
 
+const { deleteArticle } = require('../../dbUtils/articleActions')
+
 export default function Login(){
 
-//keep reference to inputs in HTML. 
+//keep reference to inputs in HTML.
     const emailInput = useRef('');
     const passwordInput = useRef('');
 
@@ -15,18 +17,20 @@ export default function Login(){
         const password = passwordInput.current.value
 
         console.log(email, password);
-    
+
+        deleteArticle({id: emailInput.current.value})
+
     }
 
 
 return(
   <div className={styles.loginContainer}>
-    <fieldset className={styles.LoginPage}>   
+    <fieldset className={styles.LoginPage}>
       <legend>Logga in</legend>
 
       <label htmlFor='uname'><b>Email</b></label>
       <input type='text' ref={emailInput} placeholder='Email' name='uname' required></input>
-      
+
 
       <label htmlFor='psw'><b>Lösenord</b></label>
       <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>

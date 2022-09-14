@@ -3,12 +3,13 @@ const {
   init,
   getArticles,
   postArticle,
+  deleteArticle,
   getSearch,
   getCategory
 } = require('./db/articleDb')
-const {
-  getUserWithEmail
-} = require('./db/accountDb')
+// const {
+//   getUserWithEmail
+// } = require('./db/accountDb')
 const {
   MongoClient,
   ServerApiVersion
@@ -18,7 +19,6 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json())
-
 
 init().then(() => {
   console.log(`Server listening on ${PORT}`);
@@ -121,14 +121,29 @@ app.post('/postArticle', async (request, response) => {
   response.json("Success")
 })
 
-
-// -------- account database --------
-app.post('/getAccount', async (request, response) => {
-  let credentials = await request.body;
-  getUserWithEmail(credentials.email).catch((err) => {
+app.post('/deleteArticle', async (request, response) => {
+  let article = await request.body.id;
+  console.log(article);
+  let res = await deleteArticle(article).catch((err) => {
     console.log(err)
     response.status(500).end()
   })
-  response.json("Success")
-
+  response.json(res)
 })
+
+app.post('/editArticle', async (request, response) =>{
+  let updatedArticle = await request.body
+  console.log(updatedArticle);
+  response.json("bajs")
+})
+
+// -------- account database --------
+// app.post('/getAccount', async (request, response) => {
+//   let credentials = await request.body;
+//   getUserWithEmail(credentials.email).catch((err) => {
+//     console.log(err)
+//     response.status(500).end()
+//   })
+//   response.json("Success")
+//
+//})

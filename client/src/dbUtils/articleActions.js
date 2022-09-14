@@ -41,6 +41,19 @@ async function postArticle(article) {
   return data;
 }
 
+async function deleteArticle(article) {
+  const response = await fetch("/deleteArticle", {
+    method: 'POST',
+    body: JSON.stringify(article),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
 
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
@@ -49,7 +62,6 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
 
   let response = await fetch(url);
   let data = await response.json();
-
   let article = data.articles[0];
 
   let articleToDB = {
@@ -74,4 +86,4 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBySearch, postArticle, fetchArticleAndSendToDatabase }
+module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBySearch, postArticle, deleteArticle, fetchArticleAndSendToDatabase }
