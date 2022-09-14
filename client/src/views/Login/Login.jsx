@@ -1,23 +1,29 @@
 import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
-import { hashPassword, comparePassword } from '../../utilis/bcrypt'
+import { hashPassword, comparePassword } from '../../utils/bcryptUtils'
 import { useRef } from 'react'
 
 export default function Login(){
 
 //keep reference to inputs in HTML. 
-    const emailInput = useRef('');
-    const passwordInput = useRef('');
+  const emailInput = useRef('');
+  const passwordInput = useRef('');
 
-    //Login in user
-    function loginAuth(){
-        //get email & password from ref (in html)
-        const email = emailInput.current.value
-        const password = passwordInput.current.value
+  //Login in user
+  async function loginAuth(){
+    //get email & password from ref (in html)
+    const email = emailInput.current.value;
+    const password = passwordInput.current.value;
 
-        console.log(email, password);
+    let hashedPassword;
+    if(password !== ""){
+      hashedPassword = await hashPassword(password)
     }
 
+    
+
+    console.log(email, password, hashedPassword);
+  }
 
 return(
   <div className={styles.loginContainer}>
