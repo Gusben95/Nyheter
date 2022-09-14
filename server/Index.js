@@ -5,7 +5,9 @@ const {
   getArticles,
   postArticle,
   getSearch,
-  getCategory
+  getCategory,
+  deleteArticle,
+  updateArticle
 } = require('./db/articleDb')
 // const {
 //   getUserWithEmail
@@ -122,14 +124,35 @@ app.post('/postArticle', async (request, response) => {
   response.json("Success")
 })
 
-
-// -------- account database --------
-app.post('/getAccount', async (request, response) => {
-  let credentials = await request.body;
-  getUserWithEmail(credentials.email).catch((err) => {
+// Deletes an article from the database with the id of the article
+app.post('/deleteArticle', async (request, response) => {
+  let article = await request.body.id;
+  console.log(article);
+  let res = await deleteArticle(article).catch((err) => {
     console.log(err)
     response.status(500).end()
   })
-  response.json("Success")
-
+  response.json(res)
 })
+
+// Updates an article in the database with the id of the article
+app.post('/updateArticle', async (request, response) => {
+  let updatedArticle = await request.body
+  console.log(updatedArticle)
+  let res = await updateArticle(updatedArticle).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
+
+// -------- account database --------
+// app.post('/getAccount', async (request, response) => {
+//   let credentials = await request.body;
+//   getUserWithEmail(credentials.email).catch((err) => {
+//     console.log(err)
+//     response.status(500).end()
+//   })
+//   response.json("Success")
+//
+//})
