@@ -3,8 +3,12 @@ const {
   init,
   getArticles,
   postArticle,
+  getSearch,
   getCategory
 } = require('./db/articleDb')
+const {
+  getUserWithEmail
+} = require('./db/accountDb')
 const {
   MongoClient,
   ServerApiVersion
@@ -21,13 +25,7 @@ init().then(() => {
   app.listen(PORT);
 })
 
-// app.get("/api", (req, res) => {
-//   res.json({
-//     message: "Hello from Axel!"
-//   });
-// });
-
-
+// -------- article database --------
 // Get all the articles from the database.
 // Loops through the articles the places them in an array
 app.get('/allArticles', (request, response) => {
@@ -58,8 +56,32 @@ app.get('/allArticles', (request, response) => {
 // something like this
 app.post('/articlesByCategory', async (request, response) => {
   let category = await request.body.category;
-  console.log(category);
   getCategory(category)
+    .then((items) => {
+      items = items.map((item) => ({
+        id: item._id,
+        title: item.title,
+        shortDescription: item.shortDescription,
+        mainText: item.mainText,
+        categories: item.categories,
+        author: item.author,
+        dateAdded: item.dateAdded,
+        views: item.views,
+        images: item.images
+      }))
+      response.json(items)
+    })
+    .catch((err) => {
+      console.log(err)
+      response.status(500).end()
+    })
+})
+
+// Fetches articles from the database depending on whats in the title, shortDescription and mainText
+// body should contain a search string
+app.post('/articlesBySearch', async (request, response) => {
+  let searchInput = await request.body.searchInput;
+  getSearch(searchInput)
     .then((items) => {
       items = items.map((item) => ({
         id: item._id,
@@ -100,43 +122,13 @@ app.post('/postArticle', async (request, response) => {
 })
 
 
-// Ignore this
-// app.get("/api/testArticle", (request, response) => {
-//     client.connect(async err => {
-//     const collection = client.db("nyheter").collection("article");
-//     const cursor = collection.find({});
-//     const allValues = await cursor.toArray();
-//     console.log(allValues);
-//     response.json(allValues);
-//     if (result.error) {
-//     console.log(result.error)
-//     }
-//     client.close();
-//   });
-//
-// });
-// const uri = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, {
-// useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-// client.connect(async err => {
-//   const collection = client.db("sample_airbnb").collection("listingsAndReviews");
-//   // perform actions on the collection object
-//   const pipeline = [
-//     {
-//       '$match': {
-//         'accommodates': {
-//           '$gt': 4
-//         }
-//       }
-//     }, {
-//       '$match': {
-//         'price': {
-//           '$lt': 500
-//         }
-//       }
-//     }
-//   ]
-//   const agg = await collection.aggregate(pipeline).toArray();
-//   console.log(agg);
-//   client.close();
-// });
+// -------- account database --------
+app.post('/getAccount', async (request, response) => {
+  let credentials = await request.body;
+  getUserWithEmail(credentials.email).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json("Success")
+
+})

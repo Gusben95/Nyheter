@@ -1,4 +1,3 @@
-
 async function fetchArticles() {
   const response = await fetch("/allArticles");
   const data = await response.json();
@@ -9,6 +8,18 @@ async function fetchArticlesByCategory(category) {
   const response = await fetch("/articlesByCategory", {
     method: 'POST',
     body: JSON.stringify(category),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function fetchArticlesBySearch(searchInput) {
+  const response = await fetch("/articlesBySearch", {
+    method: 'POST',
+    body: JSON.stringify(searchInput),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -29,6 +40,8 @@ async function postArticle(article) {
   console.log(data);
   return data;
 }
+
+
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
   let api_key = "4e2e0d17af1c40ec976605105ef2b6cd";
@@ -61,4 +74,4 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = { fetchArticles, fetchArticlesByCategory, postArticle, fetchArticleAndSendToDatabase }
+module.exports = { fetchArticles, fetchArticlesByCategory, fetchArticlesBySearch, postArticle, fetchArticleAndSendToDatabase }
