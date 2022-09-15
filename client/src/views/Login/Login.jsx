@@ -60,6 +60,17 @@ export default function Login(){
     //console.log(email, password, hashedPassword);
   }
 
+  function appleLogin() {
+    console.log('inloggad med apple');
+
+  }
+
+  function googleLogin() {
+    console.log('inloggad med google');
+
+  }
+
+
 return(
   <div className={styles.loginContainer}>
     <fieldset className={styles.LoginPage}>
@@ -75,7 +86,14 @@ return(
 
       <Link to="/glomtlosenord">Glömt Lösenord?</Link>
       <Link to="/prenumerera">Bli Prenumerant</Link>
+
+      <h3> Alternativa inloggningsmetoder:</h3>
+
+      <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
+      <button className='google' onClick={googleLogin}>Logga in med Google</button>
     </fieldset>
+
+
 
   </div>
 )}
