@@ -76,6 +76,8 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   let randomNumber = Math.floor(Math.random() * 100);
   let response = await fetch(url);
   let data = await response.json();
+
+  let randomNumber = Math.round(Math.random() * 99)
   let article = data.articles[randomNumber];
 
   let articleToDB = {

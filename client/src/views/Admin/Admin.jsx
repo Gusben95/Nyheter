@@ -18,6 +18,7 @@ export default function Admin() {
   async function createFakeArticle() {
     let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
     if(newArticle) {
+      console.log(newArticle.mainText)
       postArticle(newArticle)
 
       dispatch({type:"addArticles", data: [...stateArticles, newArticle]})

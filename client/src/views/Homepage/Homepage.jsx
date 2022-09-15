@@ -8,9 +8,9 @@ import styles from './Homepage.module.css'
 const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articleActions')
 
 export default function Homepage() {
-  const dispatch = useDispatch()
-  const stateArticles = useSelector(state => state.Articles)
-  const [isLoading, setIsLoading] = useState(true)
+  const dispatch = useDispatch();
+  const stateArticles = useSelector(state => state.Articles);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { category } = useParams();
 
