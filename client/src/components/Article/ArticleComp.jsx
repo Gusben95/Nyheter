@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import styles from './ArticleComp.module.css'
-var parse = require('html-react-parser');
+import { deleteArticle } from '../../dbUtils/articleActions';
+import { useDispatch } from 'react-redux';
 
 export default function ArticleComp(props) {
+  var parse = require('html-react-parser');
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views} = props.article;
 
   const [opened, setOpened] = useState(false);
+  const dispatch = useDispatch();
 
   function switchOpened(){
     opened ? setOpened(false) : setOpened(true)
@@ -13,7 +16,6 @@ export default function ArticleComp(props) {
 
   // This is to explain what the parent div should have as className
   let containerClass;
-
   // If the container is opened (big or small version), the opened article should show a big picture :)
   if(opened) {
     containerClass = styles.article
@@ -44,20 +46,34 @@ export default function ArticleComp(props) {
       </div>
 
       <div className={styles.articleContent}>
+
         <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
         
         {opened ? (
           <>
-            <p className={styles.mainText}>
+            <div className={styles.adminButtons}>
+              <button className={styles.editArticleBtn} onClick={() => {
+                /* editArticle({id: id}) */
+/*                 dispatch({type:"editArticle", data: id}) */
+              }}>✏️</button>
+              <button className={styles.deleteArticleBtn} onClick={() => {
+                // eslint-disable-next-line no-restricted-globals
+                if(confirm("Are you sure you want to delte this article?")) {
+                  deleteArticle({id: id})
+                  dispatch({type:"deleteArticle", data: id})
+                }
+              }}>🗑</button>
+            </div>
+            <div className={styles.mainText}>
               {mainTextParsed ? mainTextParsed : mainText}
-            </p>
+            </div>
             <p>Written by: {author}</p>
             <p>Written {dateFormatted}</p>
           </>
         ) : (
-          <p className={styles.shortDescription}>
+          <div className={styles.shortDescription}>
             {shortDescParsed ? shortDescParsed : shortDescription}
-          </p>
+          </div>
         )}
 
         <div className={styles.articleTags}>
