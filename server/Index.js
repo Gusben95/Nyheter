@@ -5,15 +5,18 @@ const {
   getArticles,
   postArticle,
   getSearch,
-  getCategory
+  getCategory,
+  deleteArticle,
+  updateArticle
 } = require('./db/articleDb')
+ const {
+   initAcc,
+   getAccountByEmail
+ } = require('./db/accountDb')
 // const {
-//   getUserWithEmail
-// } = require('./db/accountDb')
-const {
-  MongoClient,
-  ServerApiVersion
-} = require('mongodb');
+//   MongoClient,
+//   ServerApiVersion
+// } = require('mongodb');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -21,10 +24,10 @@ const app = express();
 app.use(express.json())
 app.use(helmet());
 
-init().then(() => {
+init().then(initAcc().then(() => {
   console.log(`Server listening on ${PORT}`);
   app.listen(PORT);
-})
+}))
 
 // -------- article database --------
 // Get all the articles from the database.
@@ -122,14 +125,50 @@ app.post('/postArticle', async (request, response) => {
   response.json("Success")
 })
 
-
-// -------- account database --------
-app.post('/getAccount', async (request, response) => {
-  let credentials = await request.body;
-  getUserWithEmail(credentials.email).catch((err) => {
+// Deletes an article from the database with the id of the article
+app.post('/deleteArticle', async (request, response) => {
+  let article = await request.body.id;
+  console.log(article);
+  let res = await deleteArticle(article).catch((err) => {
     console.log(err)
     response.status(500).end()
   })
-  response.json("Success")
-
+  response.json(res)
 })
+
+// Updates an article in the database with the id of the article
+app.post('/updateArticle', async (request, response) => {
+  let updatedArticle = await request.body
+  console.log(updatedArticle)
+  let res = await updateArticle(updatedArticle).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
+
+
+
+// -------- account database --------
+app.post('/getAccountWithEmail', async (request, response) => {
+  let account = await request.body
+  let res = await getAccountByEmail(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+
+  response.json(res);
+})
+
+
+
+
+// app.post('/getAccount', async (request, response) => {
+//   let credentials = await request.body;
+//   getUserWithEmail(credentials.email).catch((err) => {
+//     console.log(err)
+//     response.status(500).end()
+//   })
+//   response.json("Success")
+//
+//})

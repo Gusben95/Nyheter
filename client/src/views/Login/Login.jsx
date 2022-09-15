@@ -3,26 +3,61 @@ import styles from './Login.module.css'
 import { hashPassword, comparePassword } from '../../utils/bcryptUtils'
 import { useRef } from 'react'
 
+const { deleteArticle, updateArticle } = require('../../dbUtils/articleActions')
+const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
+
 export default function Login(){
 
-//keep reference to inputs in HTML. 
+//keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
 
   //Login in user
   async function loginAuth(){
-    //get email & password from ref (in html)
-    const email = emailInput.current.value;
-    const password = passwordInput.current.value;
+  //   //get email & password from ref (in html)
+  //   const account = {
+  //     email: emailInput.current.value,
+  //     password: passwordInput.current.value
+  //   }
+    // const email = emailInput.current.value;
+    // const password = passwordInput.current.value;
 
-    let hashedPassword;
-    if(password !== ""){
-      hashedPassword = await hashPassword(password)
+
+
+    //console.log(email, password);
+
+
+
+    const account = {
+      email: emailInput.current.value,
+      password: passwordInput.current.value
     }
 
-    
+    const accountInfo = await fetchAccountWithEmail(account)
+    console.log(accountInfo)
 
-    console.log(email, password, hashedPassword);
+
+    // tested the updateArticle and deleteArticle routes
+    // let testArticle = {
+    //   id: "6321d667eb2e448892d5e77d",
+    //   title: "hej",
+    //   shortDescription: "hallå",
+    //   mainText: "kul",
+    //   categories: "itemories",
+    //   author: "ite",
+    //   dateAdded: "iteteAdded",
+    //   views: 10,
+    //   images: ["hek", "lol"]
+    // }
+    // updateArticle(testArticle)
+    // deleteArticle({id: emailInput.current.value})
+
+    // let hashedPassword;
+    // if(password !== ""){
+    //   hashedPassword = await hashPassword(password)
+    // }
+
+    //console.log(email, password, hashedPassword);
   }
 
   function appleLogin() {
@@ -40,11 +75,12 @@ export default function Login(){
 
 return(
   <div className={styles.loginContainer}>
+
       <legend>Logga in</legend>
 
       <label htmlFor='uname'>Email</label>
       <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
-      
+
       <label htmlFor='psw'>Lösenord</label>
       <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
 

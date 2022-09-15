@@ -10,14 +10,21 @@
   flex-direction: row;
 }
 
-.smallArticle .articleImg {
+.smallArticle .imageContainer {
   width: 33%;
   flex-shrink: 0;
+}
+
+.smallArticle .articleImg {
   aspect-ratio: 4/3;
 }
 
+.smallArticle .articleHeader, .smallArticle .shortDescription{
+  font-size: 4vw;
+}
+
 .smallArticle .articleHeader {
-  font-size: 6vw;
+  margin-bottom: 2px;
 }
 
 .smallArticle .articleContent {
@@ -48,4 +55,19 @@
   line-height: 1.3em;
   margin:0;
   max-width: 2000px;
+}
+
+.articleTags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.articleTag {
+  padding: 5px 10px;
+  background-color: lightcoral;
+  border-radius: 10px;
+  text-transform: capitalize;
 }
