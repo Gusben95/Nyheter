@@ -1,0 +1,28 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+
+}
+
+.loginContainer input, .loginContainer button {
+    width: 80%;
+    border: 1px solid gray;
+    font-size: 1.2em;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.loginContainer button {
+    box-shadow: 2px 2px 4px lightgray;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.loginContainer button:hover{
+    box-shadow: unset;
+    background-color: beige;
+} 

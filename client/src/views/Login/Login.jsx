@@ -27,18 +27,19 @@ export default function Login(){
 
   function appleLogin() {
     console.log('inloggad med apple');
+    alert('inloggad med apple');
+
 
   }
 
   function googleLogin() {
     console.log('inloggad med google');
-
+    alert('inloggad med google');
   }
 
 
 return(
   <div className={styles.loginContainer}>
-    <fieldset className={styles.LoginPage}>   
       <legend>Logga in</legend>
 
       <label htmlFor='uname'>Email</label>
@@ -56,7 +57,6 @@ return(
 
       <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
       <button className='google' onClick={googleLogin}>Logga in med Google</button>
-    </fieldset>
 
 
 
