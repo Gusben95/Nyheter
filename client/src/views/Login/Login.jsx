@@ -4,6 +4,7 @@ import { hashPassword, comparePassword } from '../../utils/bcryptUtils'
 import { useRef } from 'react'
 
 const { deleteArticle, updateArticle } = require('../../dbUtils/articleActions')
+const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
 
 export default function Login(){
 
@@ -13,11 +14,28 @@ export default function Login(){
 
   //Login in user
   async function loginAuth(){
-    //get email & password from ref (in html)
-    const email = emailInput.current.value;
-    const password = passwordInput.current.value;
+  //   //get email & password from ref (in html)
+  //   const account = {
+  //     email: emailInput.current.value,
+  //     password: passwordInput.current.value
+  //   }
+    // const email = emailInput.current.value;
+    // const password = passwordInput.current.value;
 
-    console.log(email, password);
+
+
+    //console.log(email, password);
+
+
+
+    const account = {
+      email: emailInput.current.value,
+      password: passwordInput.current.value
+    }
+
+    const accountInfo = await fetchAccountWithEmail(account)
+    console.log(accountInfo)
+
 
     // tested the updateArticle and deleteArticle routes
     // let testArticle = {
@@ -34,12 +52,12 @@ export default function Login(){
     // updateArticle(testArticle)
     // deleteArticle({id: emailInput.current.value})
 
-    let hashedPassword;
-    if(password !== ""){
-      hashedPassword = await hashPassword(password)
-    }
+    // let hashedPassword;
+    // if(password !== ""){
+    //   hashedPassword = await hashPassword(password)
+    // }
 
-    console.log(email, password, hashedPassword);
+    //console.log(email, password, hashedPassword);
   }
 
 return(
