@@ -2,7 +2,6 @@ const {
   MongoClient,
   ObjectId
 } = require('mongodb')
-const express = require("express");
 
 
 // Should be moved to ENV variable
@@ -71,7 +70,7 @@ const deleteArticle = async (article) => {
   // console.log("id i articleDb", article)
   const doc = { _id: articleId}
   const deleteResult = await collection.deleteMany(doc);
-  return deleteResult.deletedCount
+  return deleteResult
 }
 
 const updateArticle = async (article) => {
@@ -93,6 +92,7 @@ const updateArticle = async (article) => {
   return result
 
 }
+
 
 module.exports = {
   init,
