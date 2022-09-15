@@ -6,36 +6,37 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
 import Search from './views/Search/Search'
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={
-        [<Homepage key="1" />, <Navbar key="2" />]
+        [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/kategori/:category" element={
-        [<Homepage key="1" />, <Navbar key="2" />]
+        [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/admin" element={
-        [<Admin key="1" />, <Navbar key="2" />]
+        [<Admin key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/search/:query" element={
-        [<Search key="1" />, <Navbar key="2" />]
+        [<Search key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/kontakt" element={
-        [<Contact key="1" />, <Navbar key="2" />]
+        [<Contact key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/login" element={
-        [<Login key="1" />, <Navbar key="2" />]
+        [<Login key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/prenumerera" element={
-        [<Subscribe key="1" />, <Navbar key="2" />]
+        [<Subscribe key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="*" element={
