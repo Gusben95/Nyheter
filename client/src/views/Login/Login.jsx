@@ -40,6 +40,11 @@ return(
 
       <Link to="/glomtlosenord">Glömt Lösenord?</Link>
       <Link to="/prenumerera">Bli Prenumerant</Link>
+
+      <h3> Alternativa inloggningsmetoder:</h3>
+
+      <button className='apple'>Logga in med Apple</button>
+      <button className='google'>Logga in med Google</button>
     </fieldset>
 
   </div>
