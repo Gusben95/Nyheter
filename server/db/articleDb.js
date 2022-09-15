@@ -2,7 +2,6 @@ const {
   MongoClient,
   ObjectId
 } = require('mongodb')
-const express = require("express");
 
 
 // Should be moved to ENV variable
@@ -64,10 +63,43 @@ const postArticle = async (doc) => {
   return await collection.insertOne(doc);
 }
 
+// Delete an article from the database with the id from mongoDB
+const deleteArticle = async (article) => {
+  const collection = db.collection('article')
+  let articleId = new ObjectId(article);
+  // console.log("id i articleDb", article)
+  const doc = { _id: articleId}
+  const deleteResult = await collection.deleteMany(doc);
+  return deleteResult
+}
+
+const updateArticle = async (article) => {
+  const collection = db.collection('article')
+  let articleId = new ObjectId(article.id)
+  const filter = { _id: articleId }
+  const updatedDoc = {
+    $set : {
+      title: article.title,
+      shortDescription: article.shortDescription,
+      mainText: article.mainText,
+      categories: article.categories,
+      author: article.author,
+      dateUpdated: new Date(),
+      images: article.images
+    }
+  }
+  const result = await collection.updateOne(filter, updatedDoc);
+  return result
+
+}
+
+
 module.exports = {
   init,
   getArticles,
   postArticle,
   getSearch,
-  getCategory
+  getCategory,
+  deleteArticle,
+  updateArticle
 }
