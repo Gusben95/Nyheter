@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ArticleComp.module.css'
-import { deleteArticle } from '../../dbUtils/articleActions';
+import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/articleActions';
 import { useDispatch } from 'react-redux';
 
 export default function ArticleComp(props) {
@@ -15,7 +15,7 @@ export default function ArticleComp(props) {
     if(!viewCounted && !opened) {
       setViewCounted(true);
       dispatch({type: "incrementViewCount", data: id});
-      // updateViews({id: id});
+      incrementViewCount({id: id});
     }
     
     setOpened(!opened);
