@@ -7,16 +7,17 @@ const {
   getSearch,
   getCategory,
   deleteArticle,
-  updateArticle
+  updateArticle,
+  updateViews
 } = require('./db/articleDb')
  const {
    initAcc,
    getAccountByEmail
  } = require('./db/accountDb')
-// const {
-//   MongoClient,
-//   ServerApiVersion
-// } = require('mongodb');
+ const {
+   comparePassword
+ } = require('./utils/bcryptUtils')
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -128,7 +129,6 @@ app.post('/postArticle', async (request, response) => {
 // Deletes an article from the database with the id of the article
 app.post('/deleteArticle', async (request, response) => {
   let article = await request.body.id;
-  console.log(article);
   let res = await deleteArticle(article).catch((err) => {
     console.log(err)
     response.status(500).end()
@@ -139,7 +139,6 @@ app.post('/deleteArticle', async (request, response) => {
 // Updates an article in the database with the id of the article
 app.post('/updateArticle', async (request, response) => {
   let updatedArticle = await request.body
-  console.log(updatedArticle)
   let res = await updateArticle(updatedArticle).catch((err) => {
     console.log(err)
     response.status(500).end()
@@ -147,6 +146,14 @@ app.post('/updateArticle', async (request, response) => {
   response.json(res)
 })
 
+app.post('/incrementViewCount', async (request, response) => {
+  let article = await request.body.id;
+  let res = await updateViews(article).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
 
 
 // -------- account database --------
@@ -156,19 +163,16 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
+  console.log(res);
+  if(res.length > 0){
+    const compareCheck = await comparePassword(account.password, res[0].password)
+    if (compareCheck){
+        response.json(res);
+    }else {
+      response.json("wrong password");
+    }
+  }else{
+    response.json("Wrong email");
+  }
 
-  response.json(res);
 })
-
-
-
-
-// app.post('/getAccount', async (request, response) => {
-//   let credentials = await request.body;
-//   getUserWithEmail(credentials.email).catch((err) => {
-//     console.log(err)
-//     response.status(500).end()
-//   })
-//   response.json("Success")
-//
-//})

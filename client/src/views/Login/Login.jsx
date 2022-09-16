@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
-import { hashPassword, comparePassword } from '../../utils/bcryptUtils'
+import { hashPassword } from '../../utils/bcryptUtils'
 import { useRef } from 'react'
 
 const { deleteArticle, updateArticle } = require('../../dbUtils/articleActions')
@@ -14,24 +14,17 @@ export default function Login(){
 
   //Login in user
   async function loginAuth(){
-  //   //get email & password from ref (in html)
-  //   const account = {
-  //     email: emailInput.current.value,
-  //     password: passwordInput.current.value
-  //   }
-    // const email = emailInput.current.value;
-    // const password = passwordInput.current.value;
-
-
-
-    //console.log(email, password);
-
-
-
+    //get email & password from ref (in html)
+    let password = passwordInput.current.value
+    let hashedPassword = ""
+    if(password !== ""){
+      hashedPassword = await hashPassword(password)
+    }
     const account = {
       email: emailInput.current.value,
-      password: passwordInput.current.value
+      password: hashedPassword
     }
+    console.log(account);
 
     const accountInfo = await fetchAccountWithEmail(account)
     console.log(accountInfo)
@@ -52,12 +45,6 @@ export default function Login(){
     // updateArticle(testArticle)
     // deleteArticle({id: emailInput.current.value})
 
-    // let hashedPassword;
-    // if(password !== ""){
-    //   hashedPassword = await hashPassword(password)
-    // }
-
-    //console.log(email, password, hashedPassword);
   }
 
   function appleLogin() {
