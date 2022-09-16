@@ -70,16 +70,16 @@ async function updateArticle(article) {
 
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
-  let api_key = "4e2e0d17af1c40ec976605105ef2b6cd";
-  let url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
+  const api_key = "4e2e0d17af1c40ec976605105ef2b6cd";
+  const url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
 
-  let response = await fetch(url);
-  let data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 
-  let randomNumber = Math.round(Math.random() * 99)
-  let article = data.articles[randomNumber];
+  const randomNumber = Math.round(Math.random() * 99)
+  const article = data.articles[randomNumber];
 
-  let articleToDB = {
+  const articleToDB = {
     title: article.title,
     shortDescription: article.description,
     mainText: article.content,
