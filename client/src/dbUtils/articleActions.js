@@ -67,6 +67,19 @@ async function updateArticle(article) {
   return data;
 }
 
+async function incrementViewCount(article) {
+  const response = await fetch("/incrementViewCount", {
+    method: 'POST',
+    body: JSON.stringify(article),
+    headers: {
+      'Content-Type':'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
 
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
@@ -108,5 +121,6 @@ module.exports = {
   postArticle,
   deleteArticle,
   updateArticle,
+  incrementViewCount,
   fetchArticleAndSendToDatabase
 }

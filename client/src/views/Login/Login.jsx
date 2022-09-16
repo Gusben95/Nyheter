@@ -15,6 +15,7 @@ export default function Login(){
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
+    console.log(account);
 
     const accountInfo = await fetchAccountWithEmail(account)
     console.log(accountInfo)

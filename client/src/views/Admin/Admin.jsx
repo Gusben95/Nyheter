@@ -20,7 +20,6 @@ export default function Admin() {
     if(newArticle) {
       console.log(newArticle.mainText)
       postArticle(newArticle)
-
       dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
     }
   }
