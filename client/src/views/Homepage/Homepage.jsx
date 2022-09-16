@@ -18,26 +18,26 @@ export default function Homepage() {
     setIsLoading(true)
     if(category === undefined) {
       fetchArticles().then(articles =>{
-        dispatch({type:"addArticles", data: articles});
+        dispatch({type:"setArticles", data: articles});
         setIsLoading(false)
       })
 
       /* setInterval(()=>{
       fetchArticles().then(articles =>{
-        dispatch({type:"addArticles", data: articles});
+        dispatch({type:"setArticles", data: articles});
       })}, 600000); // 10 minutes in ms */
     } else {
       fetchArticlesByCategory({category: category}).then(articles => {
         if(articles === undefined) {
           articles = []
         }
-        dispatch({type: "addArticles", data: articles});
+        dispatch({type: "setArticles", data: articles});
         setIsLoading(false)
       });
 
       /* setInterval(()=>{
       fetchArticlesByCategory({category: category}).then(articles =>{
-        dispatch({type:"addArticles", data: articles});
+        dispatch({type:"setArticles", data: articles});
       })}, 600000); // 10 minutes in ms */
     }
   }, [category])
@@ -50,13 +50,13 @@ export default function Homepage() {
   let stateArticlesCopy = [...stateArticles]
   let articlesSplit = []
   while(stateArticlesCopy.length) {
-    articlesSplit.push(stateArticlesCopy.splice(0,10));
+    articlesSplit.push(stateArticlesCopy.splice(0,8));
   }
 
   let articlesMapped = [];
   articlesSplit.forEach((articlesChunk, index) => {
     articlesMapped.push(articlesSplit[index].map((articleFromStore, key) => {
-      if(key === 4 || key === 5 || key === 6 || key === 7) { // the fourth article of every chunk of 10
+      if(key === 2 || key === 3 || key === 4 || key === 5) { // the fourth article of every chunk of 10
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} smallVersion />
       } else {
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} />
