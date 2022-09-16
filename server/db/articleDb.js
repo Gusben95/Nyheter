@@ -3,7 +3,6 @@ const {
   ObjectId
 } = require('mongodb')
 
-
 // Should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
 const dbName = 'nyheter'
@@ -29,7 +28,6 @@ const getCategory = (category) => {
     'categories': category
   }).toArray()
 }
-
 
 // Featch articles depending on the search query
 const getSearch = (searchInput) => {
@@ -90,7 +88,19 @@ const updateArticle = async (article) => {
   }
   const result = await collection.updateOne(filter, updatedDoc);
   return result
+}
 
+const updateViews = async (article) => {
+  const collection = db.collection('article')
+  let articleId = new ObjectId(article)
+  const filter = { _id: articleId }
+  const increment = {
+    $inc : {
+      views: 1
+    }
+  }
+  const result = await collection.updateOne(filter, increment);
+  return result
 }
 
 
@@ -101,5 +111,6 @@ module.exports = {
   getSearch,
   getCategory,
   deleteArticle,
-  updateArticle
+  updateArticle,
+  updateViews
 }
