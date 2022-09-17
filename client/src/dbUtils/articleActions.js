@@ -67,19 +67,32 @@ async function updateArticle(article) {
   return data;
 }
 
+async function incrementViewCount(article) {
+  const response = await fetch("/incrementViewCount", {
+    method: 'POST',
+    body: JSON.stringify(article),
+    headers: {
+      'Content-Type':'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
 
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
   let api_key = process.env.API_KEY;
   let url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
 
-  let response = await fetch(url);
-  let data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 
-  let randomNumber = Math.round(Math.random() * 99)
-  let article = data.articles[randomNumber];
+  const randomNumber = Math.round(Math.random() * 99)
+  const article = data.articles[randomNumber];
 
-  let articleToDB = {
+  const articleToDB = {
     title: article.title,
     shortDescription: article.description,
     mainText: article.content,
@@ -108,5 +121,6 @@ module.exports = {
   postArticle,
   deleteArticle,
   updateArticle,
+  incrementViewCount,
   fetchArticleAndSendToDatabase
 }

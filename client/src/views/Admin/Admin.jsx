@@ -11,7 +11,7 @@ export default function Admin() {
 
   useEffect(() => {
     fetchArticles().then(articles =>{
-      dispatch({type:"addArticles", data: articles});
+      dispatch({type:"setArticles", data: articles});
     })
   }, [])
 
@@ -20,8 +20,7 @@ export default function Admin() {
     if(newArticle) {
       console.log(newArticle.mainText)
       postArticle(newArticle)
-
-      dispatch({type:"addArticles", data: [...stateArticles, newArticle]})
+      dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
     }
   }
 

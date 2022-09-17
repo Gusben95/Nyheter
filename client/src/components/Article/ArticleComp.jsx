@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ArticleComp.module.css'
-import { deleteArticle } from '../../dbUtils/articleActions';
+import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/articleActions';
 import { useDispatch } from 'react-redux';
 
 export default function ArticleComp(props) {
@@ -8,10 +8,17 @@ export default function ArticleComp(props) {
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views} = props.article;
 
   const [opened, setOpened] = useState(false);
+  const [viewCounted, setViewCounted] = useState(false);
   const dispatch = useDispatch();
 
   function switchOpened(){
-    opened ? setOpened(false) : setOpened(true)
+    if(!viewCounted && !opened) {
+      setViewCounted(true);
+      dispatch({type: "incrementViewCount", data: id});
+      incrementViewCount({id: id});
+    }
+    
+    setOpened(!opened);
   }
 
   // This is to explain what the parent div should have as className
@@ -69,6 +76,8 @@ export default function ArticleComp(props) {
             </div>
             <p>Written by: {author}</p>
             <p>Written {dateFormatted}</p>
+
+            <h4>Visat {views === 1 ? views + " gång" : views + " gånger"}</h4>
           </>
         ) : (
           <div className={styles.shortDescription}>
