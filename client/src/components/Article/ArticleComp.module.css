@@ -93,3 +93,9 @@
   font-size: 1.4em;
   cursor: pointer;
 }
+
+.editingContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

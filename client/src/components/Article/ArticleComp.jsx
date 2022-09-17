@@ -6,10 +6,24 @@ import { useDispatch } from 'react-redux';
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views} = props.article;
-
+  
+  const [isEditing, setIsEditing] = useState(false);
   const [opened, setOpened] = useState(false);
   const [viewCounted, setViewCounted] = useState(false);
   const dispatch = useDispatch();
+
+  const newEditedArticle = {
+    title: title,
+    shortDescription: shortDescription,
+    mainText: mainText,
+    images: images,
+    categories: categories,
+    author: author,
+    dateAdded: dateAdded,
+    views: views,
+    id: id
+  }
+
 
   function switchOpened(){
     if(!viewCounted && !opened) {
@@ -17,8 +31,26 @@ export default function ArticleComp(props) {
       dispatch({type: "incrementViewCount", data: id});
       incrementViewCount({id: id});
     }
+
+    if(opened) {
+      setIsEditing(false);
+    }
     
     setOpened(!opened);
+  }
+
+  function switchEditing(){
+    setIsEditing(!isEditing);
+  }
+
+  function handleEdit(e) {
+    newEditedArticle[e.target.name] = e.target.value;
+  }
+
+  function sendEdit() {
+    updateArticle(newEditedArticle);
+    dispatch({type: "editArticle", data: newEditedArticle});
+    switchEditing();
   }
 
   // This is to explain what the parent div should have as className
@@ -58,26 +90,51 @@ export default function ArticleComp(props) {
         
         {opened ? (
           <>
-            <div className={styles.adminButtons}>
-              <button className={styles.editArticleBtn} onClick={() => {
-                /* editArticle({id: id}) */
-/*                 dispatch({type:"editArticle", data: id}) */
-              }}>✏️</button>
-              <button className={styles.deleteArticleBtn} onClick={() => {
-                // eslint-disable-next-line no-restricted-globals
-                if(confirm("Are you sure you want to delte this article?")) {
-                  deleteArticle({id: id})
-                  dispatch({type:"deleteArticle", data: id})
-                }
-              }}>🗑</button>
-            </div>
-            <div className={styles.mainText}>
-              {mainTextParsed ? mainTextParsed : mainText}
-            </div>
-            <p>Written by: {author}</p>
-            <p>Written {dateFormatted}</p>
+          {isEditing ? (
+              <div className={styles.editingContainer} onClick={(e)=> { e.stopPropagation() }}>
+                <input type="text" name="title" defaultValue={title} onChange={handleEdit} />
+                <input type="text" name="shortDescription" defaultValue={shortDescription} onChange={handleEdit} />
+                <textarea type="text" name="mainText" defaultValue={mainText} onChange={handleEdit} />
+                <input type="text" name="images" defaultValue={images} onChange={handleEdit} />
+                <div onChange={handleEdit}>
+                  <label htmlFor="inrikes">Inrikes</label>
+                  <input id="inrikes" type="radio" name="categories" value="inrikes" /> 
+                  <label htmlFor="utrikes">Utrikes</label>
+                  <input id="utrikes" type="radio" name="categories" value="utrikes" /> 
+                  <label htmlFor="sport">Sport</label>
+                  <input id="sport" type="radio" name="categories" value="sport" /> 
+                </div>
+                <input type="text" name="author" defaultValue={author} onChange={handleEdit} />
+                <input type="text" name="dateAdded" defaultValue={dateAdded} onChange={handleEdit} />
+                <input type="text" name="views" defaultValue={views} onChange={handleEdit} />
+                <input type="text" name="id" defaultValue={id} onChange={handleEdit} />
 
-            <h4>Visat {views === 1 ? views + " gång" : views + " gånger"}</h4>
+                <button onClick={sendEdit}>Save</button>
+              </div>
+            ) : (
+              <>
+                <div className={styles.adminButtons}>
+                  <button className={styles.editArticleBtn} onClick={(e)=> {
+                    e.stopPropagation();
+                    switchEditing();
+                  }}>✏️</button>
+                  <button className={styles.deleteArticleBtn} onClick={() => {
+                    // eslint-disable-next-line no-restricted-globals
+                    if(confirm("Are you sure you want to delte this article?")) {
+                      deleteArticle({id: id})
+                      dispatch({type:"deleteArticle", data: id})
+                    }
+                  }}>🗑</button>
+                </div>
+                <div className={styles.mainText}>
+                  {mainTextParsed ? mainTextParsed : mainText}
+                </div>
+                <p>Written by: {author}</p>
+                <p>Written {dateFormatted}</p>
+
+                <h4>Visat {views === 1 ? views + " gång" : views + " gånger"}</h4>
+              </>
+            )}
           </>
         ) : (
           <div className={styles.shortDescription}>
