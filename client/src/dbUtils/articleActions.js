@@ -83,8 +83,8 @@ async function incrementViewCount(article) {
 
 /* Göm API nyckel med dot.env */
 async function fetchArticleAndSendToDatabase(stateArticles) {
-  const api_key = "4e2e0d17af1c40ec976605105ef2b6cd";
-  const url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
+  let api_key = process.env.API_KEY;
+  let url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
 
   const response = await fetch(url);
   const data = await response.json();
