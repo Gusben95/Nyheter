@@ -24,7 +24,6 @@ export default function ArticleComp(props) {
     id: id
   }
 
-
   function switchOpened(){
     if(!viewCounted && !opened) {
       setViewCounted(true);
@@ -47,9 +46,26 @@ export default function ArticleComp(props) {
     newEditedArticle[e.target.name] = e.target.value;
   }
 
+  function handleRadioEdit(e) {
+    // we get here when one of the checkboxes is checked or unchecked
+    // we need to update the categories array in the newEditedArticle object
+    // add all categories that are in the article
+    let newCategories = categories;
+    // if the checkbox is checked, add it to the newCategories array
+    if(e.target.checked) {
+      newCategories.push(String(e.target.value));
+    }
+    // if the checkbox is unchecked, remove it from the newCategories array 
+    else {
+      newCategories = newEditedArticle.categories.filter(category => category !== String(e.target.value));
+    }
+    // update the newEditedArticle object
+    newEditedArticle.categories = newCategories;
+  }
+
   function sendEdit() {
     updateArticle(newEditedArticle);
-    dispatch({type: "editArticle", data: newEditedArticle});
+    dispatch({type: "updateArticle", data: newEditedArticle});
     switchEditing();
   }
 
@@ -57,10 +73,10 @@ export default function ArticleComp(props) {
   let containerClass;
   // If the container is opened (big or small version), the opened article should show a big picture :)
   if(opened) {
-    containerClass = styles.article
+    containerClass = styles.article;
   } else if(props.smallVersion) {
     // If artile is smallversion and not opened, show it as is :)
-    containerClass = styles.smallArticle
+    containerClass = styles.smallArticle;
   } else {
     // If article is small and not opened, show it as normal
     containerClass = styles.article;
@@ -71,12 +87,11 @@ export default function ArticleComp(props) {
   })
 
   // Format dateAdded into actual time, not just string code
-  let dateFormatted = new Date(dateAdded)
-  dateFormatted = dateFormatted.toLocaleDateString();
+  let dateFormatted = new Date(dateAdded).toLocaleDateString() + " Kl:" + new Date(dateAdded).toLocaleTimeString();
 
   // Format code in mainText and shortDescription into actual code
-  let mainTextParsed = parse(mainText)
-  let shortDescParsed = parse(shortDescription)
+  let mainTextParsed = parse(mainText);
+  let shortDescParsed = parse(shortDescription);
 
   return (
     <div className={containerClass} onClick={switchOpened}>
@@ -92,22 +107,31 @@ export default function ArticleComp(props) {
           <>
           {isEditing ? (
               <div className={styles.editingContainer} onClick={(e)=> { e.stopPropagation() }}>
+                <label className={styles.editingLabel}>Titel</label>
                 <input type="text" name="title" defaultValue={title} onChange={handleEdit} />
+                <label className={styles.editingLabel}>Kort beskrivning</label>
                 <input type="text" name="shortDescription" defaultValue={shortDescription} onChange={handleEdit} />
+                <label className={styles.editingLabel}>Brödtext</label>
                 <textarea type="text" name="mainText" defaultValue={mainText} onChange={handleEdit} />
+                <label className={styles.editingLabel}>Bilder</label>
                 <input type="text" name="images" defaultValue={images} onChange={handleEdit} />
-                <div onChange={handleEdit}>
+                <label className={styles.editingLabel}>Kategorier</label>
+                <div>
                   <label htmlFor="inrikes">Inrikes</label>
-                  <input id="inrikes" type="radio" name="categories" value="inrikes" /> 
+                  <input id="inrikes" type="checkbox"  onChange={handleRadioEdit} value="inrikes" defaultChecked={categories.includes("inrikes")} /> 
                   <label htmlFor="utrikes">Utrikes</label>
-                  <input id="utrikes" type="radio" name="categories" value="utrikes" /> 
+                  <input id="utrikes" type="checkbox"  onChange={handleRadioEdit} value="utrikes" defaultChecked={categories.includes("utrikes")} /> 
                   <label htmlFor="sport">Sport</label>
-                  <input id="sport" type="radio" name="categories" value="sport" /> 
+                  <input id="sport" type="checkbox"  onChange={handleRadioEdit} value="sport" defaultChecked={categories.includes("sport")} /> 
                 </div>
+                <label className={styles.editingLabel}>Skribent</label>
                 <input type="text" name="author" defaultValue={author} onChange={handleEdit} />
-                <input type="text" name="dateAdded" defaultValue={dateAdded} onChange={handleEdit} />
+                <label className={styles.editingLabel}>Views</label>
                 <input type="text" name="views" defaultValue={views} onChange={handleEdit} />
-                <input type="text" name="id" defaultValue={id} onChange={handleEdit} />
+                <label className={styles.editingLabel}>Datum skapad (Obs: Artikeln får ett nytt datum som visar när den blir uppdaterad)</label>
+                <input type="text" name="dateAdded" defaultValue={dateAdded} onChange={handleEdit} disabled />
+                <label className={styles.editingLabel}>Id</label>
+                <input type="text" name="id" defaultValue={id} onChange={handleEdit} disabled />
 
                 <button onClick={sendEdit}>Save</button>
               </div>
