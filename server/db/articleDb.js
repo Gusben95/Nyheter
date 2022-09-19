@@ -83,6 +83,7 @@ const updateArticle = async (article) => {
       categories: article.categories,
       author: article.author,
       dateUpdated: new Date(),
+      views: article.views,
       images: article.images
     }
   }
