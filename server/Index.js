@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+require('dotenv').config();
 const {
   init,
   getArticles,
@@ -45,7 +46,8 @@ app.get('/allArticles', (request, response) => {
         author: item.author,
         dateAdded: item.dateAdded,
         views: item.views,
-        images: item.images
+        images: item.images,
+        dateUpdated: item.dateUpdated
       }))
       response.json(items)
     })
@@ -72,7 +74,8 @@ app.post('/articlesByCategory', async (request, response) => {
         author: item.author,
         dateAdded: item.dateAdded,
         views: item.views,
-        images: item.images
+        images: item.images,
+        dateUpdated: item.dateUpdated
       }))
       response.json(items)
     })
@@ -97,7 +100,8 @@ app.post('/articlesBySearch', async (request, response) => {
         author: item.author,
         dateAdded: item.dateAdded,
         views: item.views,
-        images: item.images
+        images: item.images,
+        dateUpdated: item.dateUpdated
       }))
       response.json(items)
     })
@@ -136,9 +140,21 @@ app.post('/deleteArticle', async (request, response) => {
   response.json(res)
 })
 
-// Updates an article in the database with the id of the article
+// Updates an article in the database with the id of the article,
+// the body should contain an article object like this
+// article : {
+//      id: id,
+//      title: title,
+//      shortDescription: shortDescription,
+//      mainText: mainText,
+//      categories: categories,
+//      author: author,
+//      views: views,
+//      images: images
+//    }
 app.post('/updateArticle', async (request, response) => {
   let updatedArticle = await request.body
+  console.log(updatedArticle)
   let res = await updateArticle(updatedArticle).catch((err) => {
     console.log(err)
     response.status(500).end()
