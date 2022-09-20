@@ -27,10 +27,10 @@ export default function Footer() {
                     <p>Korrigeringar</p>
                     <p>Karriär</p>
                 </div>
-                <div className={styles.footerLinkMedia}>
-
-                </div>
             </div>
+            <div className={styles.footerLinkMedia}>
+            </div>    
+
 
             <p>Adress: Järntorget 1. 413 14, Göteborg.</p>
             <p>Telefonnummer: 12345678910 - Öppettider 10-16 vardagar.</p>
