@@ -31,4 +31,25 @@
 
 .footerLinkLeft, .footerLinkRight {
     width: 100%;
+    
+}
+
+.footerLinkLeft p, .footerLinkRight p {
+    cursor: pointer;
+
+}
+
+/* social media */
+
+.footerLinkMedia {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 15px;
+
+}
+
+.footerLinkMedia> svg {
+    width: 10%;
+    cursor: pointer;
 }
