@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+
 .footer {
     left: 0;
    bottom: 0;
    width: 100%;
-   background-color: lightgray ;
+   background-color: #600F0C;
    color: white;
    text-align: center;
+   font-family: 'Playfair Display', serif;
 }
