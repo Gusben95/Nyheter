@@ -54,9 +54,14 @@ export default function Homepage() {
   }
 
   let articlesMapped = [];
+  // map each chunk of 10 articles
   articlesSplit.forEach((articlesChunk, index) => {
+    // map each article in the chunk
     articlesMapped.push(articlesSplit[index].map((articleFromStore, key) => {
-      if(key === 2 || key === 3 || key === 4 || key === 5) { // the fourth article of every chunk of 10
+      // make the first 2 articles in the chunk bigger
+      // then make 4 in a row smaller
+      // then make the last 2 in the chunk bigger
+      if(key === 2 || key === 3 || key === 4 || key === 5) { // the second article of every chunk of 10
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} smallVersion />
       } else {
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} />
