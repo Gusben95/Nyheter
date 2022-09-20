@@ -1,7 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './views/Homepage/Homepage';
 import Admin from './views/Admin/Admin';
-import Contact from './views/Contact/Contact';
 import Navbar from './components/Navbar/Navbar';
 import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
@@ -25,10 +24,6 @@ function App() {
 
       <Route path="/search/:query" element={
         [<Search key="1" />, <Navbar key="2" />, <Footer key="3" />]
-      } />
-
-      <Route path="/kontakt" element={
-        [<Contact key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/login" element={

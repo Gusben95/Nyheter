@@ -88,8 +88,9 @@ export default function ArticleComp(props) {
   })
 
   // Format dateAdded into actual time, not just string code
-  let dateFormatted = new Date(dateAdded).toLocaleDateString() + " Kl:" + new Date(dateAdded).toLocaleTimeString();
+  let dateFormatted = "Uppladdad: " + new Date(dateAdded).toLocaleDateString() + " Kl:" + new Date(dateAdded).toLocaleTimeString();
   if(dateUpdated) {
+    // If the article has been updated, show the dateUpdated instead
     dateFormatted = "Redigerad: " + new Date(dateUpdated).toLocaleDateString() + " Kl:" + new Date(dateUpdated).toLocaleTimeString();
   }
 
@@ -165,8 +166,8 @@ export default function ArticleComp(props) {
                 <div className={styles.mainText}>
                   {mainTextParsed ? mainTextParsed : mainText}
                 </div>
-                <p>Written by: {author}</p>
-                <p>Written {dateFormatted}</p>
+                <p>Skriven av: {author}</p>
+                <p>{dateFormatted}</p>
 
                 <h4>Visat {views === 1 ? views + " gång" : views + " gånger"}</h4>
               </>
