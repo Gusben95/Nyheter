@@ -16,18 +16,18 @@ export default function Admin() {
   }, [])
 
   async function createFakeArticle() {
-  //   let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
-  //   if(newArticle) {
-  //     console.log(newArticle.mainText)
-  //     postArticle(newArticle)
-  //     dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
-  //   }
-
-  let updatedarticle = {
-    id: "6322e9335b1550c385b89a0a",
-    views: 200
-  }
-  updateArticle(updatedarticle);
+    let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
+    if(newArticle) {
+      console.log(newArticle.mainText)
+      postArticle(newArticle)
+      dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
+    }
+    //
+    // let updatedarticle = {
+    //   id: "6322e9335b1550c385b89a0a",
+    //   views: 200
+    // }
+    // updateArticle(updatedarticle);
   }
 
   return (
