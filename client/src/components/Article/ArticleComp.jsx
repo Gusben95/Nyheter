@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
-  let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views} = props.article;
+  let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views, dateUpdated} = props.article;
   
   const [isEditing, setIsEditing] = useState(false);
   const [opened, setOpened] = useState(false);
@@ -20,6 +20,7 @@ export default function ArticleComp(props) {
     categories: categories,
     author: author,
     dateAdded: dateAdded,
+    dateUpdated: dateUpdated,
     views: views,
     id: id
   }
@@ -88,6 +89,9 @@ export default function ArticleComp(props) {
 
   // Format dateAdded into actual time, not just string code
   let dateFormatted = new Date(dateAdded).toLocaleDateString() + " Kl:" + new Date(dateAdded).toLocaleTimeString();
+  if(dateUpdated) {
+    dateFormatted = "Redigerad: " + new Date(dateUpdated).toLocaleDateString() + " Kl:" + new Date(dateUpdated).toLocaleTimeString();
+  }
 
   // Format code in mainText and shortDescription into actual code
   let mainTextParsed = parse(mainText);
@@ -128,6 +132,14 @@ export default function ArticleComp(props) {
                 <input type="text" name="author" defaultValue={author} onChange={handleEdit} />
                 <label className={styles.editingLabel}>Views</label>
                 <input type="text" name="views" defaultValue={views} onChange={handleEdit} />
+                {dateUpdated ? (
+                  <>
+                    <label className={styles.editingLabel}>Senast uppdaterad</label>
+                    <input type="text" name="dateUpdated" defaultValue={dateUpdated} onChange={handleEdit} disabled />
+                  </>
+                  ) : (
+                    <></>
+                  )}
                 <label className={styles.editingLabel}>Datum skapad (Obs: Artikeln får ett nytt datum som visar när den blir uppdaterad)</label>
                 <input type="text" name="dateAdded" defaultValue={dateAdded} onChange={handleEdit} disabled />
                 <label className={styles.editingLabel}>Id</label>
