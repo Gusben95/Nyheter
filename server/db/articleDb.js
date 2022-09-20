@@ -73,20 +73,24 @@ const deleteArticle = async (article) => {
 
 const updateArticle = async (article) => {
   const collection = db.collection('article')
+
+  let updatedDoc = {};
+  if (article.title) updatedDoc.title = article.title;
+  if (article.shortDescription) updatedDoc.shortDescription = article.shortDescription;
+  if (article.mainText) updatedDoc.mainText = article.mainText;
+  if (article.categories) updatedDoc.categories = article.categories;
+  if (article.author) updatedDoc.author = article.author;
+  if (article.views) updatedDoc.views = article.views;
+  if (article.images) updatedDoc.images = article.images;
+  updatedDoc.dateUpdated = new Date();
+
+  updatedDoc = { $set : updatedDoc }
+  console.log(updatedDoc)
   let articleId = new ObjectId(article.id)
   const filter = { _id: articleId }
-  const updatedDoc = {
-    $set : {
-      title: article.title,
-      shortDescription: article.shortDescription,
-      mainText: article.mainText,
-      categories: article.categories,
-      author: article.author,
-      dateUpdated: new Date(),
-      images: article.images
-    }
-  }
+  console.log(filter)
   const result = await collection.updateOne(filter, updatedDoc);
+  console.log(result)
   return result
 }
 

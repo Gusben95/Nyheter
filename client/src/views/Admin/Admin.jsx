@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './Admin.module.css'
 
-const { fetchArticles, postArticle, fetchArticleAndSendToDatabase } = require('../../dbUtils/articleActions')
+const { fetchArticles, postArticle, fetchArticleAndSendToDatabase, updateArticle } = require('../../dbUtils/articleActions')
 
 export default function Admin() {
   const dispatch = useDispatch()
@@ -16,12 +16,18 @@ export default function Admin() {
   }, [])
 
   async function createFakeArticle() {
-    let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
-    if(newArticle) {
-      console.log(newArticle.mainText)
-      postArticle(newArticle)
-      dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
-    }
+  //   let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
+  //   if(newArticle) {
+  //     console.log(newArticle.mainText)
+  //     postArticle(newArticle)
+  //     dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
+  //   }
+
+  let updatedarticle = {
+    id: "6322e9335b1550c385b89a0a",
+    views: 200
+  }
+  updateArticle(updatedarticle);
   }
 
   return (
