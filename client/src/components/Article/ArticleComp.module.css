@@ -106,3 +106,22 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.noPayingMainText {
+  position: relative;
+}
+
+.noPayingMainTextShadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom,rgba(255,255,255,0) 0,white 100%);
+  background: -webkit-linear-gradient(top,rgba(255,255,255,0) 0,white 100%);
+  background: -moz-linear-gradient(top,rgba(255,255,255,0) 0,white 100%);
+}
+
+.subscribeNotif {
+  margin-top: 0px;
+}

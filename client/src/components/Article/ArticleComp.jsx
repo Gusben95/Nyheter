@@ -88,8 +88,6 @@ export default function ArticleComp(props) {
     containerClass = styles.article;
   }
 
-
-
   let categoriesMapped = categories.map((category, index) => {
     return <div className={styles.articleTag} onClick={()=>{navigate('/Kategori/' + category)}} key={index}>{category}</div>
   })
@@ -177,8 +175,11 @@ export default function ArticleComp(props) {
                   <div className={styles.mainText}>
                     { !stateUser.isPaying ? (
                       <>
-                        {mainTextSliced}
-                        <h4>Du måste vara betalande medlem för att läsa artiklar! <Link to="/prenumerera">Prenumerera</Link></h4>
+                        <div className={styles.noPayingMainText}>
+                          <div className={styles.noPayingMainTextShadow}> </div>
+                          {mainTextSliced}
+                        </div>
+                        <h4 className={styles.subscribeNotif}>Bli medlem idag för endast 2kr/dagen! <Link to="/prenumerera">Prenumerera</Link></h4>
                       </>
                     ) : (
                       <>
