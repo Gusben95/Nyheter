@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './ArticleComp.module.css'
 import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/articleActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
@@ -14,6 +14,8 @@ export default function ArticleComp(props) {
   const [opened, setOpened] = useState(false);
   const [viewCounted, setViewCounted] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const newEditedArticle = {
     title: title,
@@ -86,8 +88,10 @@ export default function ArticleComp(props) {
     containerClass = styles.article;
   }
 
+
+
   let categoriesMapped = categories.map((category, index) => {
-    return <div className={styles.articleTag} key={index}>{category}</div>
+    return <div className={styles.articleTag} onClick={()=>{navigate('/Kategori/' + category)}} key={index}>{category}</div>
   })
 
   // Format dateAdded into actual time, not just string code
