@@ -79,6 +79,10 @@ export default function Homepage() {
     }))
   })
 
+  function scrollToTop(){
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }
+
   return (
     <div className={styles.homepage}>
       <h1 className={styles.title}>Nyhetssidan</h1>
@@ -87,10 +91,9 @@ export default function Homepage() {
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
       ) : (
         <section className={styles.superAd}>
-          <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
-          <h3>Mindre än 2.5kr om dagen!</h3>
+          <h3>Få obegränsad tillgång till Nyhetssidan! Läs trovärdig, prisvinnande nyheter ur ett enhörningsperspektiv. 10kr/månaden i 1 år.</h3>
           <Link to="/prenumerera">Prenumerera nu</Link>
-          <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
+          <section><p>Redan prenumererad?</p><Link to="/login">Logga in</Link></section>
         </section>
       )}
 
@@ -103,6 +106,7 @@ export default function Homepage() {
           {articlesMapped}
         </>
       )}
+      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️Tillbaka till toppen</section>
     </div>
   )
 }
