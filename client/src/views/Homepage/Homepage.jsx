@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 
 import styles from './Homepage.module.css'
@@ -9,13 +9,12 @@ const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articl
 
 export default function Homepage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const stateArticles = useSelector(state => state.Articles);
   const stateUser = useSelector(state => state.User);
   const [isLoading, setIsLoading] = useState(true);
 
   const { category } = useParams();
-
-
 
   useEffect(()=>{
     setIsLoading(true)
@@ -85,7 +84,7 @@ export default function Homepage() {
 
   return (
     <div className={styles.homepage}>
-      <h1 className={styles.title}>Nyhetssidan</h1>
+      <h1 className={styles.title} onClick={()=>{navigate("/")}}>Nyhetssidan</h1>
 
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
