@@ -72,6 +72,13 @@
   background-color: lightcoral;
   border-radius: 10px;
   text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+.articleTag:hover {
+  background-color: rgb(245, 159, 159);
 }
 
 .adminButtons {
