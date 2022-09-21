@@ -1,0 +1,12 @@
+.title {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 1em;
+}
+
+.superAd {
+  text-align: center;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}

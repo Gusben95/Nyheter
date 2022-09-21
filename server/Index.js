@@ -172,6 +172,12 @@ app.post('/incrementViewCount', async (request, response) => {
 })
 
 
+// will fetche articles orded by date
+// app.post('/articleByDate', async (request, response) => {
+//   let article = await request.body
+// })
+
+
 // -------- account database --------
 app.post('/getAccountWithEmail', async (request, response) => {
   let account = await request.body
