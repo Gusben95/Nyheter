@@ -91,7 +91,11 @@ export default function Homepage() {
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
       ) : (
         <section className={styles.superAd}>
-          <h3>Få obegränsad tillgång till Nyhetssidan! Läs trovärdig, prisvinnande nyheter ur ett enhörningsperspektiv. 10kr/månaden i 1 år.</h3>
+          <article className={styles.adText}>
+            <h3 style={{margin: "1px"}}>Få obegränsad tillgång till Nyhetssidan!</h3>
+            <h3 style={{margin: "1px"}}>Läs trovärdig, prisvinnande nyheter ur ett enhörningsperspektiv.</h3>
+            <h3 style={{margin: "1px"}}> 2kr/dag i 1 år.</h3>
+          </article>
           <Link to="/prenumerera">Prenumerera nu</Link>
           <section><p>Redan prenumererad?</p><Link to="/login">Logga in</Link></section>
         </section>

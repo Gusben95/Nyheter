@@ -1,6 +1,7 @@
 .homepage {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%);
+  background: rgb(96, 15, 12);
+  /* background: rgb(0, 0, 0); */
+  /* background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%); */
 }
 
 .title {
@@ -18,10 +19,15 @@
   padding: 10px;
   padding-bottom: 10%;
   background: rgb(96, 15, 12);
-  background: linear-gradient(180deg, rgba(96, 15, 12, 1) 50%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(180deg, rgba(96, 15, 12, 1) 65%, rgba(0, 0, 0, 1) 93%, rgba(96, 15, 12, 1) 100%);
   color: white;
   flex-direction: column;
   justify-content: center;
+}
+.adText{
+  display: flex;
+  flex-direction:column;
+  
 }
 
 .toTheTop {
@@ -31,7 +37,7 @@
   background: #f0e0e1;
   align-items: center;
   height: 8vh;
-  width: 100vw;
+  width: 100%;
   font-size: 2em;
   cursor: pointer;
   color: black;
