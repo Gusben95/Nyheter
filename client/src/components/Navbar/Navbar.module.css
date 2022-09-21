@@ -73,7 +73,7 @@
   width: 20%;
   height: 4%;
   max-width: 130px;
-  min-width: 80px;
+  min-width: 100px;
   text-shadow: 3px 3px 5px rgb(30, 30, 30);
   color: rgb(30, 30, 30);
   font-size: 2em;
@@ -130,7 +130,7 @@
   width: 20%;
   height: 4%;
   max-width: 130px;
-  min-width: 80px;
+  min-width: 100px;
   font-size: 1em;
   font-stretch: expanded;
   cursor: pointer;
