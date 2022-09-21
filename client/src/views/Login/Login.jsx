@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
-import styles from './Login.module.css'
 import { useRef } from 'react'
+import styles from './Login.module.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
 
 export default function Login(){
+
+  const stateUser = useSelector(state => state.User)
+  const dispatch = useDispatch();
+
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -15,10 +20,15 @@ export default function Login(){
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
-    console.log(account);
 
     const accountInfo = await fetchAccountWithEmail(account)
     console.log(accountInfo)
+
+    if(accountInfo?.email) {
+      dispatch({type: "setUser", data: accountInfo})
+    } else {
+      alert("Wrong email or password")
+    }
   }
 
   function appleLogin() {
@@ -31,30 +41,48 @@ export default function Login(){
     alert('inloggad med google');
   }
 
-return(
-  <div className={styles.loginContainer}>
+  let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
+
+  return(
+    <div className={styles.loginContainer}>
       <h1>Nyhetssidan</h1>
 
-      <h2>Logga in</h2>
-      <label htmlFor='uname'>Email</label>
-      <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
+      { stateUser.email ? (
+        <section className={styles.loggedIn}>
+          <h2>Hej {stateUser.name}</h2>
+          <h4>Du är {stateUser.role}</h4>
+          {stateUser.stillPaying ? (
+            <>
+              <p>Du betalar fortfarande</p>
+              <p>Kom ihåg att din prenumeration slutar {subscriptionEndFormatted}</p>
+            </>
+          ) : ""}
+        </section>
+      ) : (
+        <section className={styles.loginForm}>
+          <h2>Logga in</h2>
+          <label htmlFor='uname'>Email</label>
+          <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
 
-      <label htmlFor='psw'>Lösenord</label>
-      <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
+          <label htmlFor='psw'>Lösenord</label>
+          <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
 
-      <button onClick={loginAuth}>Logga in</button>
+          <button onClick={loginAuth}>Logga in</button>
 
-      <Link to="/glomtlosenord">Glömt Lösenord?</Link>
+          <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
-      <div className={styles.brContainer}>
-        <span className={styles.brTitle}>
-          Alternativt:
-        </span>
-      </div>
+          <div className={styles.brContainer}>
+            <span className={styles.brTitle}>
+              Alternativt:
+            </span>
+          </div>
 
-      <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
-      <button className='google' onClick={googleLogin}>Logga in med Google</button>
+          <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
+          <button className='google' onClick={googleLogin}>Logga in med Google</button>
 
-      <Link to="/prenumerera">Bli Prenumerant</Link>
-  </div>
-)}
+          <Link to="/prenumerera">Bli Prenumerant</Link>
+        </section>
+      )}
+    </div>
+  )
+}

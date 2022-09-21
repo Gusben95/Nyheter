@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import styles from './ArticleComp.module.css'
 import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/articleActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views, dateUpdated} = props.article;
   
+  const stateUser = useSelector(state => state.User);
+
   const [isEditing, setIsEditing] = useState(false);
   const [opened, setOpened] = useState(false);
   const [viewCounted, setViewCounted] = useState(false);
@@ -98,6 +101,8 @@ export default function ArticleComp(props) {
   let mainTextParsed = parse(mainText);
   let shortDescParsed = parse(shortDescription);
 
+  let mainTextSliced = mainText.slice(0, 100) + "...";
+
   return (
     <div className={containerClass} onClick={switchOpened}>
       <div className={styles.imageContainer}>
@@ -150,26 +155,37 @@ export default function ArticleComp(props) {
               </div>
             ) : (
               <>
-                <div className={styles.adminButtons}>
-                  <button className={styles.editArticleBtn} onClick={(e)=> {
-                    e.stopPropagation();
-                    switchEditing();
-                  }}>✏️</button>
-                  <button className={styles.deleteArticleBtn} onClick={() => {
-                    // eslint-disable-next-line no-restricted-globals
-                    if(confirm("Are you sure you want to delte this article?")) {
-                      deleteArticle({id: id})
-                      dispatch({type:"deleteArticle", data: id})
-                    }
-                  }}>🗑</button>
-                </div>
-                <div className={styles.mainText}>
-                  {mainTextParsed ? mainTextParsed : mainText}
-                </div>
-                <p>Skriven av: {author}</p>
-                <p>{dateFormatted}</p>
+                { stateUser.role === "admin" ? (
+                  <div className={styles.adminButtons}>
+                    <button className={styles.editArticleBtn} onClick={(e)=> {
+                      e.stopPropagation();
+                      switchEditing();
+                    }}>✏️</button>
+                    <button className={styles.deleteArticleBtn} onClick={() => {
+                      // eslint-disable-next-line no-restricted-globals
+                      if(confirm("Are you sure you want to delete this article?")) {
+                        deleteArticle({id: id})
+                        dispatch({type:"deleteArticle", data: id})
+                      }
+                    }}>🗑</button>
+                  </div>
+                ) : ""}
+                  <div className={styles.mainText}>
+                    { !stateUser.isPaying ? (
+                      <>
+                        {mainTextSliced}
+                        <h4>Du måste vara betalande medlem för att läsa artiklar! <Link to="/prenumerera">Prenumerera</Link></h4>
+                      </>
+                    ) : (
+                      <>
+                        {mainTextParsed ? mainTextParsed : mainText}
+                      </>
+                    )}
+                  </div>
+                  <p>Skriven av: {author}</p>
+                  <p>{dateFormatted}</p>
 
-                <h4>Visat {views === 1 ? views + " gång" : views + " gånger"}</h4>
+                  <h4>{views} visningar</h4>
               </>
             )}
           </>
