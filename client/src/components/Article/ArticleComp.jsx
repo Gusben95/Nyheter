@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views, dateUpdated} = props.article;
-  
+
   const stateUser = useSelector(state => state.User);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -38,7 +38,7 @@ export default function ArticleComp(props) {
     if(opened) {
       setIsEditing(false);
     }
-    
+
     setOpened(!opened);
   }
 
@@ -59,7 +59,7 @@ export default function ArticleComp(props) {
     if(e.target.checked) {
       newCategories.push(String(e.target.value));
     }
-    // if the checkbox is unchecked, remove it from the newCategories array 
+    // if the checkbox is unchecked, remove it from the newCategories array
     else {
       newCategories = newEditedArticle.categories.filter(category => category !== String(e.target.value));
     }
@@ -112,7 +112,7 @@ export default function ArticleComp(props) {
       <div className={styles.articleContent}>
 
         <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
-        
+
         {opened ? (
           <>
           {isEditing ? (
@@ -128,11 +128,11 @@ export default function ArticleComp(props) {
                 <label className={styles.editingLabel}>Kategorier</label>
                 <div>
                   <label htmlFor="inrikes">Inrikes</label>
-                  <input id="inrikes" type="checkbox"  onChange={handleRadioEdit} value="inrikes" defaultChecked={categories.includes("inrikes")} /> 
+                  <input id="inrikes" type="checkbox"  onChange={handleRadioEdit} value="inrikes" defaultChecked={categories.includes("inrikes")} />
                   <label htmlFor="utrikes">Utrikes</label>
-                  <input id="utrikes" type="checkbox"  onChange={handleRadioEdit} value="utrikes" defaultChecked={categories.includes("utrikes")} /> 
+                  <input id="utrikes" type="checkbox"  onChange={handleRadioEdit} value="utrikes" defaultChecked={categories.includes("utrikes")} />
                   <label htmlFor="sport">Sport</label>
-                  <input id="sport" type="checkbox"  onChange={handleRadioEdit} value="sport" defaultChecked={categories.includes("sport")} /> 
+                  <input id="sport" type="checkbox"  onChange={handleRadioEdit} value="sport" defaultChecked={categories.includes("sport")} />
                 </div>
                 <label className={styles.editingLabel}>Skribent</label>
                 <input type="text" name="author" defaultValue={author} onChange={handleEdit} />
