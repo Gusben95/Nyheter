@@ -1,8 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+
 .footer {
     left: 0;
    bottom: 0;
    width: 100%;
-   background-color: lightgray ;
+   background-color: #600F0C;
    color: white;
-   text-align: center;
+   font-family: 'Playfair Display', serif;
+   padding: 20px 0px;
+}
+
+.footer> h4 {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 10px 20px;
+}
+
+.footer>* {
+    padding-left: 20px;
+}
+
+.footerLinks {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid white;
+    padding-bottom: 20px;
+    
+}
+
+.footerLinkLeft, .footerLinkRight {
+    width: 100%;
+    
+}
+
+.footerLinkLeft p, .footerLinkRight p {
+    cursor: pointer;
+
+}
+
+/* social media */
+
+.footerLinkMedia {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 15px;
+
+}
+
+.footerLinkMedia> svg {
+    width: 10%;
+    cursor: pointer;
 }
