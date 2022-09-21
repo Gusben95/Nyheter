@@ -9,9 +9,26 @@ export default function Admin() {
   const dispatch = useDispatch()
   const stateArticles = useSelector(state => state.Articles)
 
+  useEffect(() => {
+    fetchArticles().then(articles =>{
+      dispatch({type:"setArticles", data: articles});
+    })
+  }, [])
+
+  async function createFakeArticle() {
+    let newArticle = await fetchArticleAndSendToDatabase(stateArticles)
+    if(newArticle) {
+      console.log(newArticle.mainText)
+      postArticle(newArticle)
+      dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
+    }
+  }
+
   return (
     <div className={styles.adminpage}>
       <h1>Här ska man kunna lägga till artiklar o sånt kanske</h1>
+
+      <button onClick={createFakeArticle}>Post article</button>
     </div>
   )
 }
