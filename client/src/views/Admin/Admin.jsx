@@ -22,6 +22,12 @@ export default function Admin() {
       postArticle(newArticle)
       dispatch({type:"setArticles", data: [...stateArticles, newArticle]})
     }
+    //
+    // let updatedarticle = {
+    //   id: "6322e9335b1550c385b89a0a",
+    //   views: 200
+    // }
+    // updateArticle(updatedarticle);
   }
 
   return (
