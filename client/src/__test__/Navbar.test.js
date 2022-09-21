@@ -10,6 +10,24 @@ const MockNavbar = () => {
   )
 }
 
+const url = "http://localhost/";
+
+const capitalizeFirstLetter= (str) => {
+  const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+  return capitalized;
+};
+
+const categories = (x) => {
+  x.forEach(x => {
+    const linkElement = screen.getByRole('link', {name: capitalizeFirstLetter(x)});
+    fireEvent.click(linkElement);
+    expect(window.location.href).toBe(`${url}kategori/${x}`);    
+  });
+}
+
+
+
+
 
 describe('Navbar', () => {
 
@@ -28,6 +46,14 @@ describe('Navbar', () => {
 //   expect(navElement).toHaveClass('Navbar_opened')
 // })
 
+  it('should redirect to "/prenumerera" when button is clicked', () => {
+    render(<MockNavbar/>)
+    const buttonElement = screen.getByRole('button', {name: /subscribe/i});
+    fireEvent.click(buttonElement);
+    expect(window.location.href).toBe(`${url}prenumerera`);
+
+  })
+
 
 
   //search//
@@ -45,7 +71,7 @@ describe('Navbar', () => {
     const buttonElement = screen.getByRole('button', {name: /🔎/i});
     fireEvent.change(inputElement, {target: {value: "testtest"}})
     fireEvent.click(buttonElement);
-    expect(window.location.href).toBe("http://localhost/search/testtest");
+    expect(window.location.href).toBe(`${url}search/testtest`);
   });
 
 
@@ -54,14 +80,14 @@ describe('Navbar', () => {
     render(<MockNavbar/>)
     const logo = screen.getByText(/Nyhetssidan/i);
     fireEvent.click(logo);
-    expect(window.location.href).toBe("http://localhost/");
+    expect(window.location.href).toBe(`${url}`);
   });
 
   it('should redirect to "/prenumerera" when button is clicked', () => {
     render(<MockNavbar/>);
     const buttonElement = screen.getByRole('button', {name: /prenumerera/i});
     fireEvent.click(buttonElement);
-    expect(window.location.href).toBe("http://localhost/prenumerera");
+    expect(window.location.href).toBe(`${url}prenumerera`);
   });
 
   it('should redirect to "/login" when button is clicked', () => {
@@ -94,25 +120,12 @@ describe('Navbar', () => {
   // })
 
 
+  it('should redirect to respective sub-category "/kategori/..." when link i clicked', () => {
+    render(<MockNavbar/>);
+    categories(['sport', 'inrikes', 'utrikes'])
+  })
 
-  it('should redirect to "/kategori/inrikes" when link is clicked', () => {
-    render(<MockNavbar/>);
-    const linkElement = screen.getByRole('link', {name: /inrikes/i});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe("http://localhost/kategori/inrikes");
-  });
-  it('should redirect to "/kategori/utrikes" when link is clicked', () => {
-    render(<MockNavbar/>);
-    const linkElement = screen.getByRole('link', {name: /utrikes/i});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe("http://localhost/kategori/utrikes");
-  });
-  it('should redirect to "/kategori/sport" when link is clicked', () => {
-    render(<MockNavbar/>);
-    const linkElement = screen.getByRole('link', {name: /sport/i});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe("http://localhost/kategori/sport");
-  });  
+
 
 
 

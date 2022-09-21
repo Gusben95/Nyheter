@@ -19,7 +19,7 @@ function App() {
       } />
 
       <Route path="/admin" element={
-        [<Admin key="1" />, <Navbar key="2" />, <Footer key="3" />]
+        [<Admin key="1" />, <Navbar key="2" hideSubsctibe />, <Footer key="3" />]
       } />
 
       <Route path="/search/:query" element={
@@ -31,7 +31,7 @@ function App() {
       } />
 
       <Route path="/prenumerera" element={
-        [<Subscribe key="1" />, <Navbar key="2" />, <Footer key="3" />]
+        [<Subscribe key="1" />, <Navbar key="2" hideSubsctibe />, <Footer key="3" />]
       } />
 
       <Route path="*" element={
@@ -39,7 +39,7 @@ function App() {
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
           <Link to="/">Gå tillbaka till Startsidan😁</Link>
-        </div>, <Navbar key="2" />]
+        </div>, <Navbar key="2" hideSubsctibe />]
       } />
 
     </Routes>

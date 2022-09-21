@@ -10,14 +10,24 @@ const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articl
 export default function Homepage() {
   const dispatch = useDispatch();
   const stateArticles = useSelector(state => state.Articles);
+  const stateUser = useSelector(state => state.User);
   const [isLoading, setIsLoading] = useState(true);
 
   const { category } = useParams();
+
+
 
   useEffect(()=>{
     setIsLoading(true)
     if(category === undefined) {
       fetchArticles().then(articles =>{
+
+        articles.sort(function compare(a, b) {
+          var dateA = new Date(a.dateAdded);
+          var dateB = new Date(b.dateAdded);
+          return dateB - dateA;
+        });
+
         dispatch({type:"setArticles", data: articles});
         setIsLoading(false)
       })
@@ -71,14 +81,18 @@ export default function Homepage() {
 
   return (
     <div className={styles.homepage}>
-      <h1 style={{textAlign: "center", marginTop: "0", paddingTop: "1em"}}>Nyhetssidan</h1>
+      <h1 className={styles.title}>Nyhetssidan</h1>
 
-      <section className={styles.superAd} style={{textAlign: "center", padding: "10px", backgroundColor: "black", color: "white"}}>
-        <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
-        <h3>Mindre än 2.5kr om dagen!</h3>
-        <Link to="/prenumerera">Prenumerera nu</Link>
-        <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
-      </section>
+      {stateUser.email ? (
+        <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
+      ) : (
+        <section className={styles.superAd}>
+          <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
+          <h3>Mindre än 2.5kr om dagen!</h3>
+          <Link to="/prenumerera">Prenumerera nu</Link>
+          <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
+        </section>
+      )}
 
       {isLoading ? (
         <div className={styles.loadingContainer}>
