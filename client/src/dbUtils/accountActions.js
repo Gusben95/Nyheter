@@ -11,6 +11,6 @@ const data = await response.json();
 return data[0];
 }
 
-module.exports = {
+export{
   fetchAccountWithEmail
 }

@@ -114,7 +114,7 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = {
+export{
   fetchArticles,
   fetchArticlesByCategory,
   fetchArticlesBySearch,
