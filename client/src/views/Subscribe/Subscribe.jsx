@@ -49,6 +49,8 @@ export default function Subscribe() {
         </ul>
       </div>
 
+    
+
 
       <section className="cardContainer">
         <div
@@ -99,37 +101,7 @@ export default function Subscribe() {
         </div>
       </section>
 
-      <section className={clickedMonths ? "cardInfo opened" : "cardInfo"}>
-        <input className="cardName" type='text' placeholder='Namn'></input>
-        <input className="cardNumber" type='number' placeholder='Ditt kortnummer' maxLength={12}></input>
-        <div className="smallCardInfo">
-          <select className='cardExpiry Month'>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-            <option value="06">06</option>
-            <option value="07">07</option>
-            <option value="08">08</option>
-            <option value="09">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-          <select className='cardExpiry Year'>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-          </select>
-          <input className="cardCVC" type='number' placeholder='CVC' maxLength={3}></input>
-        </div>
-        <button className="payButton">Betala</button>
-      </section>
-
+      
 
     </section>
   )
