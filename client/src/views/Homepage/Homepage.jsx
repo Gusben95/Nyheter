@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 
 import styles from './Homepage.module.css'
@@ -12,6 +12,7 @@ export default function Homepage() {
   const stateArticles = useSelector(state => state.Articles);
   const stateUser = useSelector(state => state.User);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { category } = useParams();
 
@@ -83,9 +84,13 @@ export default function Homepage() {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }
 
+  function linkToHomepage(){
+    navigate('/')
+  }
+
   return (
     <div className={styles.homepage}>
-      <h1 className={styles.title}>Nyhetssidan</h1>
+      <h1 className={styles.title} onClick={linkToHomepage}>Nyhetssidan</h1>
 
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
