@@ -67,7 +67,7 @@
   align-items: center;
   top: -2.5px;
   right: -2.5px;
-  border: solid 1px black;
+  border: solid 1.5px black;
   background: #f0e0e1;
   border-bottom-left-radius: 15px;
   width: 20%;
@@ -100,7 +100,7 @@
 	}
 
 	50% {
-		transform: scale(0.82);
+		transform: scale(0.85);
 	}
 
 	100% {
