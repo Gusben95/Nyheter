@@ -4,6 +4,8 @@ import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import EditingArticleFields from '../editArticle/EditingArticleFields';
+
 export default function ArticleComp(props) {
   var parse = require('html-react-parser');
   let {author, categories, dateAdded, id, images, mainText, shortDescription, title, views, dateUpdated} = props.article;
@@ -75,19 +77,6 @@ export default function ArticleComp(props) {
     switchEditing();
   }
 
-  // This is to explain what the parent div should have as className
-  let containerClass;
-  // If the container is opened (big or small version), the opened article should show a big picture :)
-  if(opened) {
-    containerClass = styles.article;
-  } else if(props.smallVersion) {
-    // If artile is smallversion and not opened, show it as is :)
-    containerClass = styles.smallArticle;
-  } else {
-    // If article is small and not opened, show it as normal
-    containerClass = styles.article;
-  }
-
   let categoriesMapped = categories.map((category, index) => {
     return <div className={styles.articleTag} onClick={()=>{navigate('/Kategori/' + category)}} key={index}>{category}</div>
   })
@@ -106,104 +95,86 @@ export default function ArticleComp(props) {
   let mainTextSliced = mainText.slice(0, 100) + "...";
 
   return (
-    <div className={containerClass} onClick={switchOpened}>
-      <div className={styles.imageContainer}>
-        <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} />
-      </div>
+    <div className={styles.article} onClick={switchOpened}>
+      {props.smallVersion && !opened ? (
+        <div className={styles.smallArticle}>
+          <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
 
-      <div className={styles.articleContent}>
+          <div className={styles.articleContent}>
 
-        <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
-
-        {opened ? (
-          <>
-          {isEditing ? (
-              <div className={styles.editingContainer} onClick={(e)=> { e.stopPropagation() }}>
-                <label className={styles.editingLabel}>Titel</label>
-                <input type="text" name="title" defaultValue={title} onChange={handleEdit} />
-                <label className={styles.editingLabel}>Kort beskrivning</label>
-                <input type="text" name="shortDescription" defaultValue={shortDescription} onChange={handleEdit} />
-                <label className={styles.editingLabel}>Brödtext</label>
-                <textarea type="text" name="mainText" defaultValue={mainText} onChange={handleEdit} />
-                <label className={styles.editingLabel}>Bilder</label>
-                <input type="text" name="images" defaultValue={images} onChange={handleEdit} />
-                <label className={styles.editingLabel}>Kategorier</label>
-                <div>
-                  <label htmlFor="inrikes">Inrikes</label>
-                  <input id="inrikes" type="checkbox"  onChange={handleRadioEdit} value="inrikes" defaultChecked={categories.includes("inrikes")} />
-                  <label htmlFor="utrikes">Utrikes</label>
-                  <input id="utrikes" type="checkbox"  onChange={handleRadioEdit} value="utrikes" defaultChecked={categories.includes("utrikes")} />
-                  <label htmlFor="sport">Sport</label>
-                  <input id="sport" type="checkbox"  onChange={handleRadioEdit} value="sport" defaultChecked={categories.includes("sport")} />
-                </div>
-                <label className={styles.editingLabel}>Skribent</label>
-                <input type="text" name="author" defaultValue={author} onChange={handleEdit} />
-                <label className={styles.editingLabel}>Views</label>
-                <input type="text" name="views" defaultValue={views} onChange={handleEdit} />
-                {dateUpdated ? (
-                  <>
-                    <label className={styles.editingLabel}>Senast uppdaterad</label>
-                    <input type="text" name="dateUpdated" defaultValue={dateUpdated} onChange={handleEdit} disabled />
-                  </>
-                  ) : (
-                    <></>
-                  )}
-                <label className={styles.editingLabel}>Datum skapad (Obs: Artikeln får ett nytt datum som visar när den blir uppdaterad)</label>
-                <input type="text" name="dateAdded" defaultValue={dateAdded} onChange={handleEdit} disabled />
-                <label className={styles.editingLabel}>Id</label>
-                <input type="text" name="id" defaultValue={id} onChange={handleEdit} disabled />
-
-                <button onClick={sendEdit}>Save</button>
-              </div>
-            ) : (
-              <>
-                { stateUser.role === "admin" ? (
-                  <div className={styles.adminButtons}>
-                    <button className={styles.editArticleBtn} onClick={(e)=> {
-                      e.stopPropagation();
-                      switchEditing();
-                    }}>✏️</button>
-                    <button className={styles.deleteArticleBtn} onClick={() => {
-                      // eslint-disable-next-line no-restricted-globals
-                      if(confirm("Are you sure you want to delete this article?")) {
-                        deleteArticle({id: id})
-                        dispatch({type:"deleteArticle", data: id})
-                      }
-                    }}>🗑</button>
-                  </div>
-                ) : ""}
-                  <div className={styles.mainText}>
-                    { !stateUser.isPaying ? (
-                      <>
-                        <div className={styles.noPayingMainText}>
-                          <div className={styles.noPayingMainTextShadow}> </div>
-                          {mainTextSliced}
-                        </div>
-                        <h4 className={styles.subscribeNotif}>Bli medlem idag för endast 2kr/dagen! <Link to="/prenumerera">Prenumerera</Link></h4>
-                      </>
-                    ) : (
-                      <>
-                        {mainTextParsed ? mainTextParsed : mainText}
-                      </>
-                    )}
-                  </div>
-                  <p>Skriven av: {author}</p>
-                  <p>{dateFormatted}</p>
-
-                  <h4>{views} visningar</h4>
-              </>
-            )}
-          </>
-        ) : (
-          <div className={styles.shortDescription}>
-            {shortDescParsed ? shortDescParsed : shortDescription}
+            <div className={styles.shortDescription}>
+              {shortDescParsed ? shortDescParsed : shortDescription}
+            </div>
+            <div className={styles.imageContainer}>
+              <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} />
+            </div>
           </div>
-        )}
-
-        <div className={styles.articleTags}>
-          {categoriesMapped}
         </div>
-      </div>
+      ) : (
+        <div className={styles.largeArticle}>
+          <div className={styles.imageContainer}>
+            <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} />
+          </div>
+
+          <div className={styles.articleContent}>
+
+            <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
+
+            {opened ? (
+              <>
+              {isEditing ? (
+                  <EditingArticleFields article={newEditedArticle} handleEdit={handleEdit} handleRadioEdit={handleRadioEdit} sendEdit={sendEdit} />
+                ) : (
+                  <>
+                    { stateUser.role === "admin" ? (
+                      <div className={styles.adminButtons}>
+                        <button className={styles.editArticleBtn} onClick={(e)=> {
+                          e.stopPropagation();
+                          switchEditing();
+                        }}>✏️</button>
+                        <button className={styles.deleteArticleBtn} onClick={() => {
+                          // eslint-disable-next-line no-restricted-globals
+                          if(confirm("Are you sure you want to delete this article?")) {
+                            deleteArticle({id: id})
+                            dispatch({type:"deleteArticle", data: id})
+                          }
+                        }}>🗑</button>
+                      </div>
+                    ) : ""}
+                      <div className={styles.mainText}>
+                        { !stateUser.isPaying ? (
+                          <>
+                            <div className={styles.noPayingMainText}>
+                              <div className={styles.noPayingMainTextShadow}> </div>
+                              {mainTextSliced}
+                            </div>
+                            <h4 className={styles.subscribeNotif}>Bli medlem idag för endast 2kr/dagen! <Link to="/prenumerera">Prenumerera</Link></h4>
+                          </>
+                        ) : (
+                          <>
+                            {mainTextParsed ? mainTextParsed : mainText}
+                          </>
+                        )}
+                      </div>
+                      <p>Skriven av: {author}</p>
+                      <p>{dateFormatted}</p>
+
+                      <h4>{views} visningar</h4>
+                  </>
+                )}
+              </>
+            ) : (
+              <div className={styles.shortDescription}>
+                {shortDescParsed ? shortDescParsed : shortDescription}
+              </div>
+            )}
+
+            <div className={styles.articleTags}>
+              {categoriesMapped}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
