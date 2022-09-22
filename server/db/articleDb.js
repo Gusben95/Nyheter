@@ -33,9 +33,16 @@ const getCategory = (category) => {
 const getSearch = (searchInput) => {
   // only need to index the collection once
   // db.collection('article').createIndex({ title: "text", shortDescription: "text", mainText: "text" });
-  const query = { $text: { $search: searchInput } };
-  const sort = { score: { $meta: "textScore" } };
-
+  const query = {
+    $text: {
+      $search: searchInput
+    }
+  };
+  const sort = {
+    score: {
+      $meta: "textScore"
+    }
+  };
   const projection = {
     title: 1,
     shortDescription: 1,
@@ -45,8 +52,10 @@ const getSearch = (searchInput) => {
     dateAdded: 1,
     images: 1,
     views: 1,
-    score: { $meta: "textScore" },
-};
+    score: {
+      $meta: "textScore"
+    },
+  };
 
   const collection = db.collection('article')
   return collection.find(query).sort(sort).project(projection).toArray()
@@ -66,14 +75,15 @@ const deleteArticle = async (article) => {
   const collection = db.collection('article')
   let articleId = new ObjectId(article);
   // console.log("id i articleDb", article)
-  const doc = { _id: articleId}
+  const doc = {
+    _id: articleId
+  }
   const deleteResult = await collection.deleteMany(doc);
   return deleteResult
 }
 
 const updateArticle = async (article) => {
   const collection = db.collection('article')
-
   let updatedDoc = {};
   if (article.title) updatedDoc.title = article.title;
   if (article.shortDescription) updatedDoc.shortDescription = article.shortDescription;
@@ -83,23 +93,25 @@ const updateArticle = async (article) => {
   if (article.views) updatedDoc.views = article.views;
   if (article.images) updatedDoc.images = article.images;
   updatedDoc.dateUpdated = new Date();
-
-  updatedDoc = { $set : updatedDoc }
-  console.log(updatedDoc)
+  updatedDoc = {
+    $set: updatedDoc
+  }
   let articleId = new ObjectId(article.id)
-  const filter = { _id: articleId }
-  console.log(filter)
+  const filter = {
+    _id: articleId
+  }
   const result = await collection.updateOne(filter, updatedDoc);
-  console.log(result)
   return result
 }
 
 const updateViews = async (article) => {
   const collection = db.collection('article')
   let articleId = new ObjectId(article)
-  const filter = { _id: articleId }
+  const filter = {
+    _id: articleId
+  }
   const increment = {
-    $inc : {
+    $inc: {
       views: 1
     }
   }
