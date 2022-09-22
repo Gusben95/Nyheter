@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
+/* göm med env */
 const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
 
 
@@ -65,12 +66,16 @@ const onFailure = (err) => {
     console.log('failed:', err);
 };
 
+function linkToHomepage(){
+  navigate('/')
+}
+
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
 
   return(
     <div className={styles.loginContainer}>
-      <h1>Nyhetssidan</h1>
+      <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
 
       { stateUser.email ? (
         <section className={styles.loggedIn}>
