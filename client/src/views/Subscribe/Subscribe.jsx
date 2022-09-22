@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Subscribe.css'
 
 export default function Subscribe() {
 
   const [clickedMonths, setClickedMonths] = useState()
+  const navigate = useNavigate()
 
   function clickSubscribe(months) {
     console.log(months)
@@ -15,10 +17,14 @@ export default function Subscribe() {
     document.getElementsByClassName("month" + String(months))[0].classList.add("highlightedSubscribeCard")
   }
 
+  function linkToHomepage(){
+    navigate('/')
+  }
+
   return (
     <section className="subscribePage">
 
-      <h1>NYHETSSIDAN</h1>
+      <h1 onClick={linkToHomepage} >NYHETSSIDAN</h1>
 
       <div className='subscribeHeader'>
         <h2>Prenumerera och få tillgång till alla artiklar </h2>
