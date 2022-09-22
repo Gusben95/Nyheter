@@ -13,7 +13,8 @@ const {
 } = require('./db/articleDb')
  const {
    initAcc,
-   getAccountByEmail
+   getAccountByEmail,
+   createAccount
  } = require('./db/accountDb')
  const {
    comparePassword
@@ -207,7 +208,7 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
-  console.log(res);
+  console.log(response);
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
@@ -218,5 +219,14 @@ app.post('/getAccountWithEmail', async (request, response) => {
   }else{
     response.json("Wrong email");
   }
+})
 
+app.post('/createAccount', async (request, response) => {
+  let account = await request.body
+  console.log(account)
+  let res = await createAccount(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  //console.log(response)
 })

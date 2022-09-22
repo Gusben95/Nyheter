@@ -47,10 +47,16 @@ h1 {
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
+  transition: all 0.3s;
+
 }
 
 .subscribeCard:hover {
   background-color: #3e1615;
+}
+
+.subscribeCard:active {
+  background-color: #6e5857;
 }
 
 .subscribeBtn:hover {
