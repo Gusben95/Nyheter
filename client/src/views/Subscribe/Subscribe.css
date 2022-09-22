@@ -45,7 +45,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.subscribeCard:hover {
+  background-color: #3e1615;
 }
 
 .subscribeBtn:hover {
@@ -70,21 +75,3 @@ h1 {
 }
 
 
-/* All payment boxes css */
-
-.subscribeBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-  
-
-}
-
-.allBoxes {
-  width: 60%;
-  border: 2px solid;
-  padding: 20px;
-  text-align: center;
-  font-size: large;
-}
