@@ -106,14 +106,14 @@ export default function ArticleComp(props) {
               {shortDescParsed ? shortDescParsed : shortDescription}
             </div>
             <div className={styles.imageContainer}>
-              <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} />
+              <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} loading="lazy" />
             </div>
           </div>
         </div>
       ) : (
         <div className={styles.largeArticle}>
           <div className={styles.imageContainer}>
-            <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} />
+            <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} loading="lazy" />
           </div>
 
           <div className={styles.articleContent}>
