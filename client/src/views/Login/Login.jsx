@@ -1,9 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
 import styles from './Login.module.css'
+import { useRef,useEffect } from 'react'
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
 
+
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
+/* göm med env */
+const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
+
 
 export default function Login(){
   const stateUser = useSelector(state => state.User)
@@ -43,16 +49,33 @@ export default function Login(){
     alert('inloggad med apple');
   }
 
-  function googleLogin() {
-    console.log('inloggad med google');
-    alert('inloggad med google');
-  }
+useEffect(() => {
+     const initClient = () => {
+           gapi.client.init({
+           clientId: clientId,
+           scope: ''
+         });
+      };
+      gapi.load('client:auth2', initClient);
+  }, []);
+
+  const onSuccess = (res) => {
+    console.log('success:', res);
+};
+const onFailure = (err) => {
+    console.log('failed:', err);
+};
+
+function linkToHomepage(){
+  navigate('/')
+}
+
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
 
   return(
     <div className={styles.loginContainer}>
-      <h1>Nyhetssidan</h1>
+      <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
 
       { stateUser.email ? (
         <section className={styles.loggedIn}>
@@ -84,12 +107,18 @@ export default function Login(){
             </span>
           </div>
 
-          <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
-          <button className='google' onClick={googleLogin}>Logga in med Google</button>
+      <GoogleLogin
+      clientId={clientId}
+      buttonText="Sign in with Google"
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+      cookiePolicy={'single_host_origin'}
+      isSignedIn={true}
+      />
 
-          <Link to="/prenumerera">Bli Prenumerant</Link>
-        </section>
+      <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
+      <Link to="/prenumerera">Bli Prenumerant</Link>
+      </section>
       )}
-    </div>
-  )
-}
+  </div>
+)}
