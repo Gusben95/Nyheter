@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 import styles from './Login.module.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
 
 export default function Login(){
-
   const stateUser = useSelector(state => state.User)
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -26,6 +26,13 @@ export default function Login(){
 
     if(accountInfo?.email) {
       dispatch({type: "setUser", data: accountInfo})
+
+      if(accountInfo?.role === "admin") {
+        // eslint-disable-next-line no-restricted-globals
+        if(confirm("Admin logged in, redirect to admin page?")) {
+          navigate('/admin')
+        }
+      }
     } else {
       alert("Wrong email or password")
     }

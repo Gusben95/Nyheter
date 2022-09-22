@@ -5,6 +5,13 @@
   border-bottom: 1px solid #DBDBDB;
 
   position: relative;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.largeArticle:hover, .smallArticle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .smallArticle {
@@ -71,7 +78,7 @@
 
 .articleTag {
   padding: 5px 10px;
-  background-color: lightcoral;
+  background-color: #DE382C;
   border-radius: 10px;
   text-transform: capitalize;
   cursor: pointer;
