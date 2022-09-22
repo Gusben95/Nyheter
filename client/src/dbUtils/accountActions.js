@@ -8,9 +8,9 @@ const response = await fetch("/getAccountWithEmail", {
 });
 
 const data = await response.json();
-return data;
+return data[0];
 }
 
-module.exports = {
+export{
   fetchAccountWithEmail
 }

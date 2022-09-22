@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
-export default function Navbar() {
+export default function Navbar({hideSubsctibe}) {
   let navigate = useNavigate();
   const [navbarOpened, setNavbarOpened] = useState(false);
   const [todaySectionOpened, setTodaySectionOpened] = useState(true)
@@ -32,13 +32,22 @@ export default function Navbar() {
     navigate("/search/" + searchBarRef.current.value)
   }
 
+  function navigateToSubcribe(e){
+    e.stopPropagation();
+    setNavbarOpened(false);
+    navigate("/prenumerera");
+  }
+
+  //<button className={styles.openNavbarBtn} onClick={toggleNavbar}>&#9776;</button>
+
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
-      <button className={styles.openNavbarBtn} onClick={toggleNavbar}>&#9776;</button>
-    
+      <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div className={styles.hamburger1}></div><div className={styles.hamburger2}></div><div className={styles.hamburger3}></div></section>
+      <button className={styles.subscribeBtn} style={hideSubsctibe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
+
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
-        
+
         <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
           <h2 style={{margin: "0"}}>Nyhetssidan</h2>
           <img alt="logo"/>
@@ -49,10 +58,7 @@ export default function Navbar() {
           <button type='submit' onClick={toggleNavbar}>🔎</button>
         </form>
 
-        <button className={styles.subscribe} onClick={(e) => {
-            toggleNavbar(e);
-            navigate("/prenumerera")
-        }}>Prenumerera</button>
+        <button className={styles.subscribe} onClick={navigateToSubcribe}>Prenumerera</button>
         <div style={{paddingBottom: "10px"}}>
           <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
         </div>

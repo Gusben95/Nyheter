@@ -1,103 +1,70 @@
-.subscribePage > h1, .subscribePage > h2 {
+h1 {
   text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.subscribePage {
+  background-color: #600F0C;
+  color: white;
+}
+
+.subscribeHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px white solid;
+}
+
+.subscribeBtn {
+  width: 80%;
+  padding: 20px;
+  font-size: 1.2em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: black;
 }
 
 .cardContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .subscribeCard {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  box-shadow: 2px 2px 8px rgba(211, 211, 211, 1);
-
+  background: #390907;
+  margin:20px auto;
+  /* width: 70vw; */
+  position: relative;
+  width: 70%;
+  height: 0;
+  padding-bottom: 70%;
   display: flex;
   flex-direction: column;
-
-  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.subscribeCard > * {
-  margin: 5px;
+.subscribeBtn:hover {
+  background-color: lightgray;
 }
 
-.month3, .month6 {
-  scale: 0.9;
-  background-color: rgba(211, 211, 211, 0.2);
-}
-
-.month12 {
-  box-shadow: 2px 2px 8px rgba(255, 182, 182, 0.8);
-  border: 2px solid rgba(211, 211, 211, 0.4);
-}
-
-.highlightedSubscribeCard {
-  border: 2px solid black !important;
-  background-color: rgba(255, 182, 182, 0.1) !important;
-}
-
-.monthWarning {
-  color: orangered;
-}
-
-.cardInfo {
-  width: 100%;
-
-  max-height: 0;
-  overflow: hidden;
-
-  padding: 0px;
-  
-  background-color: rgb(232, 232, 232);
-  box-shadow: inset 2px 2px 8px rgb(141, 141, 141);
-  
-  display: flex;
-  flex-wrap: wrap;
-
-  transition: max-height 1s ease;
-}
-
-.cardInfo.opened {
-  max-height: 300px;
-  padding: 10px;
-}
-
-.cardInfo input, .payButton, .cardExpiry {
-  padding: 5px 10px;
-  border: 1px solid lightgrey;
+.subscribeBtn:active {
   background-color: white;
-  border-radius: 10px;
-  font-size: 1.2em;
-  cursor: pointer;
 }
 
-.cardNumber, .cardName {
-  width: 100%;
-  flex-shrink: 0;
-  margin-bottom: 5px;
+.subscribeInfo {
+  text-align: center;
 }
 
-.smallCardInfo {
-  display: flex;
-  width: 100%;
-  gap: 5px;
-  margin-bottom: 5px;
+.subscribeList {
+  list-style: none;
+  padding: 0;
 }
 
-.cardExpiry, .cardCVC {
-  width: 100%
-}
-
-.payButton {
-  width: 100%;
-
-  transition: all 0.3s ease;
-}
-
-.payButton:hover {
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.69);
+.subscribeList li {
+  padding: 10px;
 }

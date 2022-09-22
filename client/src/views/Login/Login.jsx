@@ -3,6 +3,7 @@ import styles from './Login.module.css'
 import { useRef,useEffect } from 'react'
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
@@ -10,6 +11,10 @@ const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleuserc
 
 
 export default function Login(){
+  const stateUser = useSelector(state => state.User)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -20,10 +25,22 @@ export default function Login(){
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
-    console.log(account);
 
     const accountInfo = await fetchAccountWithEmail(account)
     console.log(accountInfo)
+
+    if(accountInfo?.email) {
+      dispatch({type: "setUser", data: accountInfo})
+
+      if(accountInfo?.role === "admin") {
+        // eslint-disable-next-line no-restricted-globals
+        if(confirm("Admin logged in, redirect to admin page?")) {
+          navigate('/admin')
+        }
+      }
+    } else {
+      alert("Wrong email or password")
+    }
   }
 
   function appleLogin() {
@@ -49,26 +66,41 @@ const onFailure = (err) => {
 };
 
 
-return(
-  <div className={styles.loginContainer}>
+  let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
+
+  return(
+    <div className={styles.loginContainer}>
       <h1>Nyhetssidan</h1>
 
-      <h2>Logga in</h2>
-      <label htmlFor='uname'>Email</label>
-      <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
+      { stateUser.email ? (
+        <section className={styles.loggedIn}>
+          <h2>Hej {stateUser.name}</h2>
+          <h4>Du är {stateUser.role}</h4>
+          {stateUser.stillPaying ? (
+            <>
+              <p>Du betalar fortfarande</p>
+              <p>Kom ihåg att din prenumeration slutar {subscriptionEndFormatted}</p>
+            </>
+          ) : ""}
+        </section>
+      ) : (
+        <section className={styles.loginForm}>
+          <h2>Logga in</h2>
+          <label htmlFor='uname'>Email</label>
+          <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
 
-      <label htmlFor='psw'>Lösenord</label>
-      <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
+          <label htmlFor='psw'>Lösenord</label>
+          <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
 
-      <button onClick={loginAuth}>Logga in</button>
+          <button onClick={loginAuth}>Logga in</button>
 
-      <Link to="/glomtlosenord">Glömt Lösenord?</Link>
+          <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
-      <div className={styles.brContainer}>
-        <span className={styles.brTitle}>
-          Alternativt:
-        </span>
-      </div>
+          <div className={styles.brContainer}>
+            <span className={styles.brTitle}>
+              Alternativt:
+            </span>
+          </div>
 
       <GoogleLogin
       clientId={clientId}
@@ -77,9 +109,11 @@ return(
       onFailure={onFailure}
       cookiePolicy={'single_host_origin'}
       isSignedIn={true}
-  />
+      />
 
       <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
       <Link to="/prenumerera">Bli Prenumerant</Link>
+      </section>
+      )}
   </div>
 )}

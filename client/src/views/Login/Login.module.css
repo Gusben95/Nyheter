@@ -1,11 +1,11 @@
-.loginContainer {
+.loginForm, .loggedIn {
     display: flex;
     flex-direction: column;
     
     align-items: center;
 }
 
-.loginContainer input, .loginContainer button {
+.loginForm input, .loginForm button {
     width: 80%;
     border: 1px solid gray;
     font-size: 1.2em;
@@ -14,14 +14,13 @@
     margin-bottom: 10px;
 }
 
-.loginContainer button {
+.loginForm button {
     box-shadow: 2px 2px 4px lightgray;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
 
-.loginContainer button:hover{
+.loginForm button:hover{
     box-shadow: unset;
     background-color: beige;
 } 
@@ -37,6 +36,6 @@
 
 .brTitle {
     font-size: 24px;
-    background-color: white;
+    background-color: #600F0C;
     padding: 0 10px;
 }
