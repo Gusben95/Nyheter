@@ -83,7 +83,7 @@ async function incrementViewCount(article) {
 }
 
 
-/* Göm API nyckel med dot.env */
+/*Should be moved to ENV variable */
 async function fetchArticleAndSendToDatabase(stateArticles) {
   let api_key = process.env.REACT_APP_API_KEY;
   let url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
