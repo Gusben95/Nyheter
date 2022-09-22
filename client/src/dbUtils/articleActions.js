@@ -1,8 +1,10 @@
-let BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+//const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+const BASE_URL = "http://localhost:3000"
 
 async function fetchArticles() {
   const response = await fetch(BASE_URL + "/allArticles");
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
