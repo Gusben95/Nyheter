@@ -1,5 +1,7 @@
+let BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+
 async function fetchAccountWithEmail(account){
-const response = await fetch("/getAccountWithEmail", {
+const response = await fetch(BASE_URL + "/getAccountWithEmail", {
   method: 'POST',
   body: JSON.stringify(account),
   headers: {
