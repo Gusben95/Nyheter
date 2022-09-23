@@ -29,7 +29,7 @@ export default function Login(){
     if (googleLoginAuth){
       account.email = googleLoginAuth;
     }
-
+    
 
     const accountInfo = await fetchAccountWithEmail(account)
     console.log(accountInfo)
@@ -66,7 +66,7 @@ useEffect(() => {
   const onSuccess = (res) => {
     let email = res.profileObj.email;
     let name = res.profileObj.name;
-    loginAuth
+    console.log(name)
     console.log('success:', res);
 };
 const onFailure = (err) => {
