@@ -21,13 +21,16 @@ export default function Login(){
   const passwordInput = useRef('');
 
   //Login in user
-  async function loginAuth(){
-    const account = {
+  async function loginAuth(loginWithProvider){
+    let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
-
+    if(loginWithProvider){
+      account = loginWithProvider
+    };
     const accountInfo = await fetchAccountWithEmail(account)
+
     console.log(accountInfo)
 
     if(accountInfo?.email) {
@@ -61,6 +64,12 @@ useEffect(() => {
 
   const onSuccess = (res) => {
     console.log('success:', res);
+    const profile = {
+      email: res.profileObj.email,
+      name: res.profileObj.name,
+      signInPlatform: "google"
+    }
+    loginAuth(profile);
 };
 const onFailure = (err) => {
     console.log('failed:', err);
