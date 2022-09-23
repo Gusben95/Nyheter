@@ -27,24 +27,7 @@ const categories = (x) => {
 
 
 
-
-
 describe('Navbar', () => {
-
-//   it('Nav should not have class name opened when clicked', () => {
-//     render(<MockNavbar/>)
-//     const navElement = screen.getByRole('nav')
-//     const buttonElement = screen.getByRole('button', {name: /x/i})
-//     fireEvent.click(buttonElement)
-//     expect(navElement).not.toHaveClass('Navbar_opened')
-//   })
-//   it('Nav should have class name opened when clicked', () => {
-//   render(<MockNavbar/>)
-//   const navElement = screen.getByRole('nav')
-//   const buttonElement = screen.getByRole('button', {name: /x/i})
-//   fireEvent.click(buttonElement)
-//   expect(navElement).toHaveClass('Navbar_opened')
-// })
 
   it('should redirect to "/prenumerera" when button is clicked', () => {
     render(<MockNavbar/>)
@@ -53,8 +36,6 @@ describe('Navbar', () => {
     expect(window.location.href).toBe(`${url}prenumerera`);
 
   })
-
-
 
   //search//
   it('should be able to type into input', () => {
@@ -105,29 +86,10 @@ describe('Navbar', () => {
   });
 
 
-
-  // it('should initialy render "Dagens ↑"', () => {
-    
-  // })  
-  // it('should render "Dagens ↓" when clicked', () => {
-    
-  // })
-  // it('should initialy render "Äldre ↑"', () => {
-    
-  // })  
-  // it('should render "Äldre ↓" when clicked', () => {
-    
-  // })
-
-
   it('should redirect to respective sub-category "/kategori/..." when link i clicked', () => {
     render(<MockNavbar/>);
     categories(['sport', 'inrikes', 'utrikes'])
   })
-
-
-
-
 
   // it('should redirect to "/helaVeckan" when link is clicked', () => {
   //   render(<MockNavbar/>);
@@ -141,7 +103,6 @@ describe('Navbar', () => {
   //   fireEvent.click(linkElement);
   //   expect(window.location.href).toBe("http://localhost/forraVeckan");
   // });
-
 
 
 });
