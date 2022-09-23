@@ -5,11 +5,11 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
 
+import Profile from '../../components/Profile/Profile';
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
 /* göm med env */
 const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
-
 
 export default function Login(){
   const stateUser = useSelector(state => state.User)
@@ -26,6 +26,7 @@ export default function Login(){
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
+    console.log(loginWithProvider)
     if(loginWithProvider){
       account = loginWithProvider
     };
@@ -52,17 +53,17 @@ export default function Login(){
     alert('inloggad med apple');
   }
 
-useEffect(() => {
-     const initClient = () => {
-           gapi.client.init({
-           clientId: clientId,
-           scope: ''
-         });
-      };
-      gapi.load('client:auth2', initClient);
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ''
+      });
+    };
+    gapi.load('client:auth2', initClient);
   }, []);
 
-  const onSuccess = (res) => {
+  const onGoogleSuccess = (res) => {
     console.log('success:', res);
     const profile = {
       email: res.profileObj.email,
@@ -70,33 +71,18 @@ useEffect(() => {
       signInPlatform: "google"
     }
     loginAuth(profile);
-};
-const onFailure = (err) => {
-    console.log('failed:', err);
-};
+  };
 
-function linkToHomepage(){
-  navigate('/')
-}
-
-
-  let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
+  function linkToHomepage(){
+    navigate('/')
+  }
 
   return(
     <div className={styles.loginContainer}>
       <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
 
       { stateUser.email ? (
-        <section className={styles.loggedIn}>
-          <h2>Hej {stateUser.name}</h2>
-          <h4>Du är {stateUser.role}</h4>
-          {stateUser.stillPaying ? (
-            <>
-              <p>Du betalar fortfarande</p>
-              <p>Kom ihåg att din prenumeration slutar {subscriptionEndFormatted}</p>
-            </>
-          ) : ""}
-        </section>
+        <Profile />
       ) : (
         <section className={styles.loginForm}>
           <h2>Logga in</h2>
@@ -106,7 +92,7 @@ function linkToHomepage(){
           <label htmlFor='psw'>Lösenord</label>
           <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required></input>
 
-          <button onClick={loginAuth}>Logga in</button>
+          <button onClick={()=> {loginAuth()}}>Logga in</button>
 
           <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
@@ -119,8 +105,8 @@ function linkToHomepage(){
       <GoogleLogin
       clientId={clientId}
       buttonText="Sign in with Google"
-      onSuccess={onSuccess}
-      onFailure={onFailure}
+      onSuccess={onGoogleSuccess}
+      onFailure={(err) => {console.log("Error sign in with Google: ", err)}}
       cookiePolicy={'single_host_origin'}
       isSignedIn={true}
       />
