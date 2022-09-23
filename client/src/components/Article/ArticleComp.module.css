@@ -120,9 +120,16 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, white 100%);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0, white 100%);
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0, white 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #600F0C 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0, #600F0C 100%);
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0, #600F0C 100%);
+}
+
+.largeArticle:hover .noPayingMainTextShadow, .smallArticle:hover .noPayingMainTextShadow {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #6F2725 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0, #6F2725 100%);
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0, #6F2725 100%);
+
 }
 
 .subscribeNotif {

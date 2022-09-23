@@ -142,7 +142,7 @@ export default function ArticleComp(props) {
                       </div>
                     ) : ""}
                       <div className={styles.mainText}>
-                        { !stateUser.isPaying ? (
+                        { !stateUser.stillPaying ? (
                           <>
                             <div className={styles.noPayingMainText}>
                               <div className={styles.noPayingMainTextShadow}> </div>
