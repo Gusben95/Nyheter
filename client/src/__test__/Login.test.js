@@ -18,24 +18,29 @@ const validateEmail = (email) => {
     );
 };
 
+const user = {
+  email: "hej@hotmail.com",
+  password: ""
+}
+
 describe('Login', () => {
 
   it("vaild with correct email input",() => {
     render(<MockLogin/>)
     const inputEmail  = screen.getByPlaceholderText(/email/i);
-    fireEvent.change(inputEmail, "hej@hotmail.com")
+    fireEvent.change(inputEmail, user.email)
     expect(validateEmail(inputEmail)).toBeTruthy()
   });
 
-  // it('should be able to type email and password', () => {
-  //   render(<MockLogin/>)
-  //   const inputEmail  = screen.getByPlaceholderText(/email/i);
-  //   const inputPassword  = screen.getByPlaceholderText(/lösenord/i);
-  //   fireEvent.change(inputEmail, "hej@hotmail.com")
-  //   fireEvent.change(inputPassword, "hej@hotmail.com")
-  //   expect(inputEmail).toBeInTheDocument()
-  //   expect(inputPassword).toBeInTheDocument()
-  // })
+  it('should be able to type email and password', () => {
+    render(<MockLogin/>)
+    const inputEmail  = screen.getByPlaceholderText(/email/i);
+    const inputPassword  = screen.getByPlaceholderText(/lösenord/i);
+    fireEvent.change(inputEmail, user.email)
+    fireEvent.change(inputPassword, user.password)
+    expect(inputEmail).toBeInTheDocument()
+    expect(inputPassword).toBeInTheDocument()
+  })
   it('should not redirect to "/somewere" without email and password is typed after button "logga in" is clicked', () => {
     
   });
@@ -50,12 +55,12 @@ describe('Login', () => {
   it('should redirect to "/somewere" when button "Logga in med Google" is clicked', () => {
     
   })  
-  // it('should redirect to "/prenumerera" when link "Bli prenumerant" is clicked', () => {
-  //   render(<MockLogin/>)
-  //   const linkElement = screen.getByRole('link', {name: /bli prenumerant/i})
-  //   fireEvent.click(linkElement)
-  //   expect(window.location.href).toBe("http://localhost/prenumerera")
-  // })
+  it('should redirect to "/prenumerera" when link "Bli prenumerant" is clicked', () => {
+    render(<MockLogin/>)
+    const linkElement = screen.getByRole('link', {name: /bli prenumerant/i})
+    fireEvent.click(linkElement)
+    expect(window.location.href).toBe("http://localhost/prenumerera")
+  })
   it('', () =>{})
 
 })
