@@ -4,3 +4,8 @@
   
   align-items: center;
 }
+
+.editableText {
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+}

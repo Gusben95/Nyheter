@@ -23,7 +23,6 @@ export default function Login(){
   //Login in user
   async function loginAuth(loginWithProvider){
     let account = {
-
       email: emailInput.current.value,
       password: passwordInput.current.value
     } 
