@@ -23,13 +23,15 @@ export default function Login(){
   //Login in user
   async function loginAuth(loginWithProvider){
     let account = {
+
       email: emailInput.current.value,
       password: passwordInput.current.value
-    }
+    } 
     console.log(loginWithProvider)
     if(loginWithProvider){
       account = loginWithProvider
     };
+    
     const accountInfo = await fetchAccountWithEmail(account)
 
     console.log(accountInfo)
