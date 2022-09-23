@@ -64,12 +64,6 @@ describe('Navbar', () => {
     expect(window.location.href).toBe(`${url}`);
   });
 
-  it('should redirect to "/prenumerera" when button is clicked', () => {
-    render(<MockNavbar/>);
-    const buttonElement = screen.getByRole('button', {name: /prenumerera/i});
-    fireEvent.click(buttonElement);
-    expect(window.location.href).toBe(`${url}prenumerera`);
-  });
 
   it('should redirect to "/login" when button is clicked', () => {
     render(<MockNavbar/>);
