@@ -13,7 +13,8 @@ const {
 } = require('./db/articleDb')
  const {
    initAcc,
-   getAccountByEmail
+   getAccountByEmail,
+   createAccount
  } = require('./db/accountDb')
  const {
    comparePassword
@@ -30,6 +31,28 @@ init().then(initAcc().then(() => {
   console.log(`Server listening on ${PORT}`);
   app.listen(PORT);
 }))
+
+// Add headers before the routes are defined
+app.use(function (req, res, next) {
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  res.setHeader('cross-origin-resource-policy', 'cross-origin');
+
+  // Pass to next layer of middleware
+  next();
+});
 
 // -------- article database --------
 // Get all the articles from the database.
@@ -185,7 +208,7 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
-  console.log(res);
+  console.log(response);
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
@@ -196,5 +219,14 @@ app.post('/getAccountWithEmail', async (request, response) => {
   }else{
     response.json("Wrong email");
   }
+})
 
+app.post('/createAccount', async (request, response) => {
+  let account = await request.body
+  console.log(account)
+  let res = await createAccount(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  //console.log(response)
 })

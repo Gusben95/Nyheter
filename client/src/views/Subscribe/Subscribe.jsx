@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Subscribe.css'
 
 export default function Subscribe() {
 
   const [clickedMonths, setClickedMonths] = useState()
+  const navigate = useNavigate()
 
   function clickSubscribe(months) {
     console.log(months)
@@ -15,10 +17,14 @@ export default function Subscribe() {
     document.getElementsByClassName("month" + String(months))[0].classList.add("highlightedSubscribeCard")
   }
 
+  function linkToHomepage(){
+    navigate('/')
+  }
+
   return (
     <section className="subscribePage">
 
-      <h1>NYHETSSIDAN</h1>
+      <h1 onClick={linkToHomepage} >NYHETSSIDAN</h1>
 
       <div className='subscribeHeader'>
         <h2>Prenumerera och få tillgång till alla artiklar </h2>
@@ -42,6 +48,8 @@ export default function Subscribe() {
           <li>Reklamfria videoklipp</li>
         </ul>
       </div>
+
+    
 
 
       <section className="cardContainer">
@@ -93,37 +101,7 @@ export default function Subscribe() {
         </div>
       </section>
 
-      <section className={clickedMonths ? "cardInfo opened" : "cardInfo"}>
-        <input className="cardName" type='text' placeholder='Namn'></input>
-        <input className="cardNumber" type='number' placeholder='Ditt kortnummer' maxLength={12}></input>
-        <div className="smallCardInfo">
-          <select className='cardExpiry Month'>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-            <option value="06">06</option>
-            <option value="07">07</option>
-            <option value="08">08</option>
-            <option value="09">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-          <select className='cardExpiry Year'>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-          </select>
-          <input className="cardCVC" type='number' placeholder='CVC' maxLength={3}></input>
-        </div>
-        <button className="payButton">Betala</button>
-      </section>
-
+      
 
     </section>
   )

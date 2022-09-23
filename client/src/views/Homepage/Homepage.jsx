@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 
 import styles from './Homepage.module.css'
@@ -12,6 +12,7 @@ export default function Homepage() {
   const stateArticles = useSelector(state => state.Articles);
   const stateUser = useSelector(state => state.User);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { category } = useParams();
 
@@ -79,18 +80,29 @@ export default function Homepage() {
     }))
   })
 
+  function scrollToTop(){
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }
+
+  function linkToHomepage(){
+    navigate('/')
+  }
+
   return (
     <div className={styles.homepage}>
-      <h1 className={styles.title}>Nyhetssidan</h1>
+      <h1 className={styles.title} onClick={linkToHomepage}>Nyhetssidan</h1>
 
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
       ) : (
         <section className={styles.superAd}>
-          <h1>Få tillgång till allt innehåll på Nyhetssidan.se</h1>
-          <h3>Mindre än 2.5kr om dagen!</h3>
+          <article className={styles.adText}>
+            <h2 style={{margin: "1px"}}>Få obegränsad tillgång till Nyhetssidan!</h2>
+            <h3 style={{margin: "1px"}}>Läs trovärdig, prisvinnande nyheter ur ett enhörningsperspektiv.</h3>
+            <h3 style={{margin: "1px"}}> 2kr/dag i 1 år.</h3>
+          </article>
           <Link to="/prenumerera">Prenumerera nu</Link>
-          <p>Redan prenumererad?</p><Link to="/login">Logga in</Link>
+          <section><p>Redan prenumererad?</p><Link to="/login">Logga in</Link></section>
         </section>
       )}
 
@@ -103,6 +115,7 @@ export default function Homepage() {
           {articlesMapped}
         </>
       )}
+      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️Tillbaka till toppen</section>
     </div>
   )
 }

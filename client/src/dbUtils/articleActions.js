@@ -1,11 +1,15 @@
+//const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+const BASE_URL = "http://localhost:3000"
+
 async function fetchArticles() {
-  const response = await fetch("/allArticles");
+  const response = await fetch(BASE_URL + "/allArticles");
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
 async function fetchArticlesByCategory(category) {
-  const response = await fetch("/articlesByCategory", {
+  const response = await fetch(BASE_URL + "/articlesByCategory", {
     method: 'POST',
     body: JSON.stringify(category),
     headers: {
@@ -17,7 +21,7 @@ async function fetchArticlesByCategory(category) {
 }
 
 async function fetchArticlesBySearch(searchInput) {
-  const response = await fetch("/articlesBySearch", {
+  const response = await fetch(BASE_URL + "/articlesBySearch", {
     method: 'POST',
     body: JSON.stringify(searchInput),
     headers: {
@@ -29,7 +33,7 @@ async function fetchArticlesBySearch(searchInput) {
 }
 
 async function postArticle(article) {
-  const response = await fetch("/postArticle", {
+  const response = await fetch(BASE_URL + "/postArticle", {
     method: 'POST',
     body: JSON.stringify(article),
     headers: {
@@ -42,7 +46,7 @@ async function postArticle(article) {
 }
 
 async function deleteArticle(article) {
-  const response = await fetch("/deleteArticle", {
+  const response = await fetch(BASE_URL + "/deleteArticle", {
     method: 'POST',
     body: JSON.stringify(article),
     headers: {
@@ -55,7 +59,7 @@ async function deleteArticle(article) {
 }
 
 async function updateArticle(article) {
-  const response = await fetch("/updateArticle", {
+  const response = await fetch(BASE_URL + "/updateArticle", {
     method: 'POST',
     body: JSON.stringify(article),
     headers: {
@@ -68,7 +72,7 @@ async function updateArticle(article) {
 }
 
 async function incrementViewCount(article) {
-  const response = await fetch("/incrementViewCount", {
+  const response = await fetch(BASE_URL + "/incrementViewCount", {
     method: 'POST',
     body: JSON.stringify(article),
     headers: {
@@ -81,7 +85,7 @@ async function incrementViewCount(article) {
 }
 
 
-/* Göm API nyckel med dot.env */
+/*Should be moved to ENV variable */
 async function fetchArticleAndSendToDatabase(stateArticles) {
   let api_key = process.env.REACT_APP_API_KEY;
   let url = "https://newsapi.org/v2/everything?q=funny&apiKey=" + api_key
@@ -114,7 +118,7 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   }
 }
 
-module.exports = {
+export{
   fetchArticles,
   fetchArticlesByCategory,
   fetchArticlesBySearch,

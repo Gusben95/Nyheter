@@ -42,7 +42,7 @@ export default function Navbar({hideSubsctibe}) {
 
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
-      <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div></div><div></div><div></div></section>
+      <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div className={styles.hamburger1}></div><div className={styles.hamburger2}></div><div className={styles.hamburger3}></div></section>
       <button className={styles.subscribeBtn} style={hideSubsctibe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
 
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>

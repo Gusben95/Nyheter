@@ -2,6 +2,9 @@ const {
   MongoClient,
   ObjectId
 } = require('mongodb')
+const {
+  hashPassword
+} = require('../utils/bcryptUtils')
 
 
 // Should be moved to ENV variable
@@ -24,8 +27,20 @@ const getAccountByEmail = (account) => {
   }).toArray()
 }
 
+const createAccount = async (account) => {
+  const collection = db.collection('account')
+  account.preference = [];
+  account.role = "user";
+  account.stillPaying = false;
+  account.subscriptionEnd = "";
+  account.password = await hashPassword(account.password);
+  console.log(account);
+  return await collection.insertOne(account);
+}
+
 
 module.exports = {
   initAcc,
-  getAccountByEmail
+  getAccountByEmail,
+  createAccount
 }

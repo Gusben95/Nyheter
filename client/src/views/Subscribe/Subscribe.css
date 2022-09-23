@@ -15,7 +15,6 @@ h1 {
   justify-content: center;
   align-items: center;
   border-bottom: 1px white solid;
-
 }
 
 .subscribeBtn {
@@ -26,8 +25,38 @@ h1 {
   cursor: pointer;
   transition: all 0.3s;
   color: black;
+}
 
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 
+.subscribeCard {
+  background: #390907;
+  margin:20px auto;
+  /* width: 70vw; */
+  position: relative;
+  width: 70%;
+  height: 0;
+  padding-bottom: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: all 0.3s;
+
+}
+
+.subscribeCard:hover {
+  background-color: #3e1615;
+}
+
+.subscribeCard:active {
+  background-color: #6e5857;
 }
 
 .subscribeBtn:hover {
@@ -45,9 +74,10 @@ h1 {
 .subscribeList {
   list-style: none;
   padding: 0;
-
 }
 
-.subscribeList li { 
+.subscribeList li {
   padding: 10px;
 }
+
+
