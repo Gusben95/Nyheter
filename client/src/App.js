@@ -35,10 +35,10 @@ function App() {
       } />
 
       <Route path="*" element={
-        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#FFFAF1"}}>
+        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#600F0C"}}>
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
-          <Link to="/">Gå tillbaka till Startsidan😁</Link>
+          <h3><Link style={{color: "white"}} to="/">Gå tillbaka till Startsidan😁</Link></h3>
         </div>, <Navbar key="2" hideSubsctibe />]
       } />
 
