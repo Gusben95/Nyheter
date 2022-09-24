@@ -78,9 +78,6 @@ export default function Navbar({hideSubsctibe}) {
             <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
           </section>
         ) : ""}
-
-
-        <Link to="/kontakt" onClick={toggleNavbar} style={{marginTop: "auto"}}>Kontakta oss</Link>
       </nav>
     </div>
   )
