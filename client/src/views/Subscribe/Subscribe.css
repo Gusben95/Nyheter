@@ -30,25 +30,29 @@ h1 {
 .cardContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
 }
 
 .subscribeCard {
   background: #390907;
   margin:20px auto;
-  /* width: 70vw; */
   position: relative;
   width: 70%;
   height: 0;
-  padding-bottom: 70%;
+  padding: 35% 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   cursor: pointer;
+  border: 1px solid transparent;
   transition: all 0.3s;
+}
 
+.highlightedSubscribeCard {
+  border: 1px solid white;
+  box-shadow: 2px 2px 8px black;
+  border-radius: 10px;
 }
 
 .subscribeCard:hover {
@@ -80,4 +84,19 @@ h1 {
   padding: 10px;
 }
 
+.cardMenu {
+  background-color: #3A0C0A;
+  max-height: 0px;
+  animation: openUp 0.5s forwards;
+  overflow: hidden;
+  padding: 10px;
+}
 
+@keyframes openUp {
+  0% {
+    max-height: 0px;
+  }
+  100% {
+    max-height: 1000px;
+  }
+}
