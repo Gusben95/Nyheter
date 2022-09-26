@@ -29,7 +29,6 @@ const getAccountByEmail = (account) => {
 
 const createAccount = async (account) => {
   const collection = db.collection('account')
-  account.preference = [];
   account.role = "user";
   account.stillPaying = false;
   account.subscriptionEnd = "";

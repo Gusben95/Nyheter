@@ -36,7 +36,7 @@
 }
 
 .link {
-  color: black;
+  color: white;
   text-decoration: none;
   font-size: 1.4em;
   font-weight: bold;
@@ -137,7 +137,6 @@
   z-index:3;
 }
 
-
 .closeNavbarBtn {
   position: fixed;
   display: flex;
@@ -162,13 +161,13 @@
   width: 100%;
 }
 
-.searchPart>input {
+.searchPart > input {
   width: 100%;
   font-size: 1.1em;
   padding: 0.6em 2.5em 0.6em 0.6em;
 }
 
-.searchPart>button {
+.searchPart > button {
   position: absolute;
   top: 50%;
   right: 0.8em;
@@ -188,32 +187,8 @@
   margin-bottom: 10px;
 }
 
-.upperPart>*, .userAndSearchPart>* {
+.upperPart > *, .userAndSearchPart > * {
   margin-top: 10px;
-}
-
-/* nav input, nav button {
-  border-radius: 5px;
-  border: 1px solid grey;
-  box-shadow: 1px 2px 4px grey;
-  padding: 5px;
-} */
-.subscribe {
-  background-color: #FF4136;
-  color: black;
-  font-size: 1.4em;
-  box-shadow: 0 0 0 #FF4136;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px 0;
-  transition: 0.3s all ease;
-  animation: 2s pulseBoxShadow infinite;
-}
-
-.subscribe:hover {
-  background-color: #ff271c;
 }
 
 .login {
@@ -228,16 +203,6 @@
 
 .login:hover {
   background-color: rgb(221, 221, 221);
-}
-
-@keyframes pulseBoxShadow {
-  from {
-    box-shadow: 0 0 0 #FF4136;
-  }
-
-  to {
-    box-shadow: 0 0 40px #ff403690;
-  }
 }
 
 /* desktop */

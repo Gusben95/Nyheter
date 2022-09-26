@@ -58,8 +58,7 @@ export default function Navbar({hideSubsctibe}) {
           <button type='submit' onClick={toggleNavbar}>🔎</button>
         </form>
 
-        <button className={styles.subscribe} onClick={navigateToSubcribe}>Prenumerera</button>
-        <div style={{paddingBottom: "10px"}}>
+        <div style={{padding: "10px 0px"}}>
           <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
         </div>
 
@@ -79,9 +78,6 @@ export default function Navbar({hideSubsctibe}) {
             <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
           </section>
         ) : ""}
-
-
-        <Link to="/kontakt" onClick={toggleNavbar} style={{marginTop: "auto"}}>Kontakta oss</Link>
       </nav>
     </div>
   )
