@@ -72,31 +72,9 @@ describe('Navbar', () => {
     expect(window.location.href).toBe("http://localhost/login");
   });
 
-  it('should redirect to "/kontakt" when link is clicked', () => {
-    render(<MockNavbar/>);
-    const linkElement = screen.getByRole('link', {name: /kontakta oss/i});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe("http://localhost/kontakt");
-  });
-
-
   it('should redirect to respective sub-category "/kategori/..." when link i clicked', () => {
     render(<MockNavbar/>);
     categories(['sport', 'inrikes', 'utrikes'])
   })
-
-  // it('should redirect to "/helaVeckan" when link is clicked', () => {
-  //   render(<MockNavbar/>);
-  //   const linkElement = screen.getByRole('link', {name: /hela veckan/i});
-  //   fireEvent.click(linkElement);
-  //   expect(window.location.href).toBe("http://localhost/helaveckan");
-  // });  
-  // it('should redirect to "/forraVeckan" when link is clicked', () => {
-  //   render(<MockNavbar/>);
-  //   const linkElement = screen.getByRole('link', {name: /förra veckan/i});
-  //   fireEvent.click(linkElement);
-  //   expect(window.location.href).toBe("http://localhost/forraVeckan");
-  // });
-
 
 });
