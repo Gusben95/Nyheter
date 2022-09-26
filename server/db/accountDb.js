@@ -5,7 +5,7 @@ const {
 const {
   hashPassword
 } = require('../utils/bcryptUtils')
-
+require('dotenv').config();
 
 // Should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
