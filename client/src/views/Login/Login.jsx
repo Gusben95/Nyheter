@@ -28,24 +28,24 @@ export default function Login(){
     } 
     console.log(loginWithProvider)
     if(loginWithProvider){
-      account = loginWithProvider
-    };
+      account = loginWithProvider;
+    }
     
-    const accountInfo = await fetchAccountWithEmail(account)
+    const accountInfo = await fetchAccountWithEmail(account);
 
-    console.log(accountInfo)
+    console.log(accountInfo);
 
     if(accountInfo?.email) {
-      dispatch({type: "setUser", data: accountInfo})
+      dispatch({type: "setUser", data: accountInfo});
 
       if(accountInfo?.role === "admin") {
         // eslint-disable-next-line no-restricted-globals
         if(confirm("Admin logged in, redirect to admin page?")) {
-          navigate('/admin')
-        }
-      }
+          navigate('/admin');
+        };
+      };
     } else {
-      alert("Wrong email or password")
+      alert("Wrong email or password");
     }
   }
 
