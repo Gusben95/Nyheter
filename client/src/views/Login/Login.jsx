@@ -15,7 +15,7 @@ export default function Login(){
   const stateUser = useSelector(state => state.User)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
@@ -25,12 +25,12 @@ export default function Login(){
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
-    } 
+    }
     console.log(loginWithProvider)
     if(loginWithProvider){
       account = loginWithProvider
     };
-    
+
     const accountInfo = await fetchAccountWithEmail(account)
 
     console.log(accountInfo)
@@ -45,7 +45,7 @@ export default function Login(){
         }
       }
     } else {
-      alert("Wrong email or password")
+      alert(accountInfo)
     }
   }
 
