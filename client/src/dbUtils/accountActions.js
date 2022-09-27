@@ -9,7 +9,14 @@ async function fetchAccountWithEmail(account){
       'Content-Type': 'application/json'
     }
   });
-  const data = await response.json();
+  let data = response;
+  console.log(data)
+  if (data.status === 500){
+    console.log("hej")
+    return data.json();
+  }
+  data = await data.json();
+  console.log(data)
   return data[0];
 }
 

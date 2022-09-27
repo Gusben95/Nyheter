@@ -203,20 +203,25 @@ app.post('/incrementViewCount', async (request, response) => {
 
 // -------- account database --------
 app.post('/getAccountWithEmail', async (request, response) => {
+
+
   let account = await request.body
+  account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
+  console.log(account.email);
   let res = await getAccountByEmail(account).catch((err) => {
     console.log(err)
     response.status(500).end()
   })
-  console.log(response);
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
         response.json(res);
     }else {
+      response.status(500)
       response.json("wrong password");
     }
   }else{
+    response.status(500)
     response.json("Wrong email");
   }
 })

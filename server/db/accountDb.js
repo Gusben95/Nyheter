@@ -20,11 +20,14 @@ const initAcc = () =>
     db = client.db(dbName)
   })
 
-const getAccountByEmail = (account) => {
+const getAccountByEmail = async (account) => {
+
   const collection = db.collection('account')
-  return collection.find({
+  let res = await collection.find({
     email: account.email
   }).toArray()
+  console.log(res)
+  return res;
 }
 
 const createAccount = async (account) => {
