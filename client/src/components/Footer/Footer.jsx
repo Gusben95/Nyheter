@@ -6,6 +6,8 @@ import styles from './Footer.module.css'
 
 export default function Footer() {
 
+    const navigate = useNavigate();
+
     function linkToFacebook() {
         window.location.href = ('https://www.facebook.com')
     }
@@ -19,6 +21,11 @@ export default function Footer() {
 
     function linkToTwitter() {
         window.location.href = ('https://www.twitter.com')
+    }
+
+    function navigateToComming(){
+        navigate("/kommersnart")
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
     return (
@@ -36,14 +43,14 @@ export default function Footer() {
             <div className={styles.footerContent}>
             <div className={styles.footerLinks}>
                 <div className={styles.footerLinkLeft}>
-                    <p>Om oss</p>
-                    <p>Hjälp</p>
-                    <p>Annonsera</p>
+                    <p onClick={navigateToComming}>Om oss</p>
+                    <p onClick={navigateToComming}>Hjälp</p>
+                    <p onClick={navigateToComming}>Annonsera</p>
                 </div>
                 <div className={styles.footerLinkRight}>
-                    <p>Kontakta oss</p>
-                    <p>Korrigeringar</p>
-                    <p>Karriär</p>
+                    <p onClick={navigateToComming}>Kontakta oss</p>
+                    <p onClick={navigateToComming}>Korrigeringar</p>
+                    <p onClick={navigateToComming}>Karriär</p>
                 </div>
             </div>
             <div className={styles.footerMediaContact}>
