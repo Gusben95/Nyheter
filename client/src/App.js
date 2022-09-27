@@ -6,6 +6,7 @@ import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
 import Search from './views/Search/Search'
 import Footer from './components/Footer/Footer';
+import Coomingsoon from './components/Footer/Coomingsoon';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       } />
 
       <Route path="/admin" element={
-        [<Admin key="1" />, <Navbar key="2" hideSubsctibe />, <Footer key="3" />]
+        [<Admin key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
       <Route path="/search/:query" element={
@@ -31,7 +32,11 @@ function App() {
       } />
 
       <Route path="/prenumerera" element={
-        [<Subscribe key="1" />, <Navbar key="2" hideSubsctibe />, <Footer key="3" />]
+        [<Subscribe key="1" />, <Navbar key="2" hideSubscribe/>, <Footer key="3" />]
+      } />
+
+      <Route path="/kommersnart" element={
+        [<Coomingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
       <Route path="*" element={
@@ -39,7 +44,7 @@ function App() {
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
           <h3><Link style={{color: "white"}} to="/">Gå tillbaka till Startsidan😁</Link></h3>
-        </div>, <Navbar key="2" hideSubsctibe />]
+        </div>, <Navbar key="2" hideSubscribe/>]
       } />
 
     </Routes>
