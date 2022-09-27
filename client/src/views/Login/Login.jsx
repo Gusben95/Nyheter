@@ -19,31 +19,38 @@ export default function Login(){
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
+  // Check email syntax
 
   //Login in user
+
   async function loginAuth(loginWithProvider){
+    function validateEmail(email)
+    {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+  if (!validateEmail()){
+      alert("Ej giltig email")
+    return
+    }
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
     console.log(loginWithProvider)
     if(loginWithProvider){
-      account = loginWithProvider
-    };
 
-    const accountInfo = await fetchAccountWithEmail(account)
-
-    console.log(accountInfo)
+    console.log(accountInfo);
 
     if(accountInfo?.email) {
-      dispatch({type: "setUser", data: accountInfo})
+      dispatch({type: "setUser", data: accountInfo});
 
       if(accountInfo?.role === "admin") {
         // eslint-disable-next-line no-restricted-globals
         if(confirm("Admin logged in, redirect to admin page?")) {
-          navigate('/admin')
-        }
-      }
+          navigate('/admin');
+        };
+      };
     } else {
       alert(accountInfo)
     }

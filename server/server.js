@@ -203,7 +203,11 @@ app.post('/incrementViewCount', async (request, response) => {
 
 // -------- account database --------
 app.post('/getAccountWithEmail', async (request, response) => {
+
+
   let account = await request.body
+  account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
+  console.log(account.email);
   let res = await getAccountByEmail(account).catch((err) => {
     console.log(err)
     response.status(500).end()
