@@ -11,13 +11,19 @@
    padding: 20px 0px;
 }
 
-.footer> h3 {
+.footerContent {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.footerHead> h3 {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     padding: 10px 20px;
 }
 
-.footer>* {
+.footerHead>* {
     padding-left: 20px;
 }
 
@@ -26,7 +32,6 @@
     flex-direction: row;
     border-bottom: 1px solid white;
     padding-bottom: 20px;
-
 }
 
 .footerLinkLeft, .footerLinkRight {
@@ -52,4 +57,24 @@
 .footerLinkMedia> svg {
     width: 10%;
     cursor: pointer;
+}
+
+/* Media querys phone / computer views */
+
+@media (min-width: 560px) {
+    .footerContent {
+        flex-direction: row;
+    }
+
+    .footerLinks {
+        border-bottom: none;
+        border-right: 1px solid white;
+        padding-bottom: 0;
+    }
+    .footerContent>div {
+        width: 100%;
+        padding-left: 20px;
+    }
+    
+    
 }
