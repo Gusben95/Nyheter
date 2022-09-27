@@ -17,22 +17,12 @@ const MockNavbar = () => {
 
 const url = "http://localhost/";
 const searchValue = "testest";
-
 const categoryArray = ['inrikes', 'utrikes', 'sport']
 
 const capitalizeFirstLetter= (str) => {
   const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
   return capitalized;
 };
-
-// const categoryFunc = (x) => {
-//   x.forEach(x => {
-//     const linkElement = screen.getByRole('link', {name: capitalizeFirstLetter(x)});
-//     fireEvent.click(linkElement);
-//     expect(window.location.href).toBe(`${url}kategori/${x}`);    
-//   });
-// }
-
 
 
 describe('Navbar', () => {
