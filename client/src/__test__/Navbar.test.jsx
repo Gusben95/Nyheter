@@ -1,81 +1,112 @@
 import { render , screen, fireEvent} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../store/Reducer';
+
 import Navbar from '../components/Navbar/Navbar';
 
 const MockNavbar = () => {
   return (
-    <BrowserRouter>
-      <Navbar/>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar/>
+      </BrowserRouter>
+    </Provider>
   )
 }
 
 const url = "http://localhost/";
 const searchValue = "testest";
 
+const categoryArray = ['inrikes', 'utrikes', 'sport']
+
 const capitalizeFirstLetter= (str) => {
   const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
   return capitalized;
 };
 
-const categories = (x) => {
-  x.forEach(x => {
-    const linkElement = screen.getByRole('link', {name: capitalizeFirstLetter(x)});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe(`${url}kategori/${x}`);    
-  });
-}
+// const categoryFunc = (x) => {
+//   x.forEach(x => {
+//     const linkElement = screen.getByRole('link', {name: capitalizeFirstLetter(x)});
+//     fireEvent.click(linkElement);
+//     expect(window.location.href).toBe(`${url}kategori/${x}`);    
+//   });
+// }
 
 
 
 describe('Navbar', () => {
-
-  it('should redirect to "/prenumerera" when button is clicked', () => {
+  it('subscribe button should be rendered', () => {
     render(<MockNavbar/>)
-    const buttonElement = screen.getByRole('button', {name: /subscribe/i});
-    fireEvent.click(buttonElement);
-    expect(window.location.href).toBe(`${url}prenumerera`);
-
+    const subscribeButtonEl = screen.getByRole('button', {name: /subscribe/i})
+    expect(subscribeButtonEl).toBeInTheDocument()
+  })
+  it('subscribe button should redirect when clicked', () => {
+    render(<MockNavbar/>)
+    const subscribeButtonEl = screen.getByRole('button', {name: /subscribe/i})
+    fireEvent.click(subscribeButtonEl)
+    expect(window.location.href).toBe(`${url}prenumerera`)
   })
 
-  //search//
-  it('should be able to type into input', () => {
-    render(<MockNavbar/>);
-    const inputElement = screen.getByPlaceholderText(/search/i);
-    const buttonElement = screen.getByRole('button', {name: /🔎/i});
-    fireEvent.change(inputElement, {target: {value: searchValue}})
-    fireEvent.click(buttonElement);
-    expect(inputElement).toBeInTheDocument();
+  // it('hamburger button should be rendered', () => {
+  //   const { container } = render(<MockNavbar/>)
+  //   screen.debug()
+  //   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+  //   const test = container.getElementsByClassName("openNavbarBtn")
+  //   expect(test).toBeVisible()
+  // })
+
+  it('logo should be rendered', () => {
+    render(<MockNavbar/>)
+    const logo = screen.getByText(/Nyhetssidan/i);
+    fireEvent.click(logo);
+    expect(window.location.href).toBe(`${url}`);
   });
-  it('should redirect to "/search/.." when typed in input and clicked on search button', () => {
-    render(<MockNavbar/>);
-    const inputElement = screen.getByPlaceholderText(/search/i);
-    const buttonElement = screen.getByRole('button', {name: /🔎/i});
-    fireEvent.change(inputElement, {target: {value: searchValue}})
-    fireEvent.click(buttonElement);
-    expect(window.location.href).toBe(`${url}search/${searchValue}`);
-  });
-
-
-
-  it('should redirect to "/" when logo is clicked', () => {
+  it('logo should redirect when clicked', () => {
     render(<MockNavbar/>)
     const logo = screen.getByText(/Nyhetssidan/i);
     fireEvent.click(logo);
     expect(window.location.href).toBe(`${url}`);
   });
 
-
-  it('should redirect to "/login" when button is clicked', () => {
+  it('search input should change', () => {
+    render(<MockNavbar/>)
+    const searchInputEl = screen.getByPlaceholderText(/search/i)
+    fireEvent.change(searchInputEl, {target: {value: searchValue}})
+    expect(searchInputEl.value).toBe(searchValue)
+  })
+  it('search input should redirect when clicked', () => {
     render(<MockNavbar/>);
-    const buttonElement = screen.getByRole('button', {name: /logga in/i});
-    fireEvent.click(buttonElement);
-    expect(window.location.href).toBe(`${url}login`);
-  });
+    const searchInputEl = screen.getByPlaceholderText(/search/i);
+    const buttonEl = screen.getByRole('button', {name: /🔎/i});
+    fireEvent.change(searchInputEl, {target: {value: searchValue}})
+    fireEvent.click(buttonEl);
+    expect(window.location.href).toBe(`${url}search/${searchValue}`);
+  })
 
-  it('should redirect to respective sub-category "/kategori/..." when link i clicked', () => {
+  it('login button should be rendered', () => {
+    render(<MockNavbar/>)
+    const loginButtonEl = screen.getByRole('button', {name: /logga in/i})
+    expect(loginButtonEl).toBeInTheDocument()
+  })
+  it('login button should redirect when clicked', () => {
+    render(<MockNavbar/>)
+    const loginButtonEl = screen.getByRole('button', {name: /logga in/i})
+    fireEvent.click(loginButtonEl)
+    expect(window.location.href).toBe(`${url}login`)
+  })
+
+  it('categories links should be rendered', () => {
     render(<MockNavbar/>);
-    categories(['sport', 'inrikes', 'utrikes'])
+    expect(categoryArray.length).toEqual(3)
+  })
+  it('categories links should redirect to respective sub-category when clicked', () => {
+    render(<MockNavbar/>);
+    categoryArray.forEach(x => {
+      const linkElement = screen.getByRole('link', {name: capitalizeFirstLetter(x)});
+      fireEvent.click(linkElement);
+      expect(window.location.href).toBe(`${url}kategori/${x}`);    
+    })
   })
 
 });
