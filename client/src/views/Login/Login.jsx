@@ -19,9 +19,20 @@ export default function Login(){
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
+  // Check email syntax
 
   //Login in user
+  
   async function loginAuth(loginWithProvider){
+    function validateEmail(email) 
+    {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+  if (!validateEmail()){
+      alert("Ej giltig email")
+    return 
+    }
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
