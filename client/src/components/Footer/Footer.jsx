@@ -6,6 +6,8 @@ import styles from './Footer.module.css'
 
 export default function Footer() {
 
+    let navigate = useNavigate()
+
     function linkToFacebook(){
         window.location.href = ('https://www.facebook.com')
     }
@@ -21,6 +23,11 @@ export default function Footer() {
         window.location.href = ('https://www.twitter.com')
     }
 
+    function linkToCoomingSoon(){
+        navigate("/kommersnart")
+        
+    }
+
     return (
         <footer className={styles.footer}>
             {/* <h2> Tipslåda</h2>
@@ -34,14 +41,14 @@ export default function Footer() {
 
             <div className={styles.footerLinks}>
                 <div className={styles.footerLinkLeft}>
-                    <p>Om oss</p>
-                    <p>Hjälp</p>
-                    <p>Annonsera</p>
+                    <p onClick={linkToCoomingSoon}>Om oss</p>
+                    <p onClick={linkToCoomingSoon}>Hjälp</p>
+                    <p onClick={linkToCoomingSoon}>Annonsera</p>
                 </div>
                 <div className={styles.footerLinkRight}>
-                    <p>Kontakta oss</p>
-                    <p>Korrigeringar</p>
-                    <p>Karriär</p>
+                    <p onClick={linkToCoomingSoon}>Kontakta oss</p>
+                    <p onClick={linkToCoomingSoon}>Korrigeringar</p>
+                    <p onClick={linkToCoomingSoon}>Karriär</p>
                 </div>
             </div>
             <div className={styles.footerLinkMedia}>
