@@ -212,15 +212,16 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
- 
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
         response.json(res);
     }else {
+      response.status(500)
       response.json("wrong password");
     }
   }else{
+    response.status(500)
     response.json("Wrong email");
   }
 })
