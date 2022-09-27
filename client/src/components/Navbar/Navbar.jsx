@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
-export default function Navbar({hideSubsctibe}) {
+export default function Navbar({hideSubscribe}) {
   let navigate = useNavigate();
   const [navbarOpened, setNavbarOpened] = useState(false);
   const [todaySectionOpened, setTodaySectionOpened] = useState(true)
@@ -43,7 +43,7 @@ export default function Navbar({hideSubsctibe}) {
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
       <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div className={styles.hamburger1}></div><div className={styles.hamburger2}></div><div className={styles.hamburger3}></div></section>
-      <button className={styles.subscribeBtn} style={hideSubsctibe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
+      <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
 
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
