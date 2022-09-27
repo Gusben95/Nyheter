@@ -1,8 +1,11 @@
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './SignUp.module.css';
+import { createAccount } from '../../dbUtils/accountActions';
 
 export default function SignUp() {
   const passwordRepeat = useRef();
+  const dispatch = useDispatch();
 
   let preferences = [];
   function handleCheckbox(e) {
@@ -25,14 +28,17 @@ export default function SignUp() {
     signInPlatform: "nyhetssidan",
   }
 
-  function test() {
+  function register() {
     if(passwordRepeat.current.value !== account.password) {
       alert("Lösenorden matchar inte");
       return;
     }
 
-    /* dispatch({type: "setUser", data: account});
-    createAccount(account); */
+    //try to login, and if the email already exists, it will return an error.
+    //THEN we can create a new account.
+
+    dispatch({type: "setUser", data: account});
+    createAccount(account);
   }
 
   return (
@@ -62,7 +68,7 @@ export default function SignUp() {
         </div>
       </div>
 
-      <button onClick={test}>Registrera</button>
+      <button onClick={register}>Registrera</button>
     </section>
 
   )
