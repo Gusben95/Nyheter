@@ -23,15 +23,6 @@ export default function Footer() {
         window.location.href = ('https://www.twitter.com')
     }
 
-    function linkToCoomingSoon(){
-        navigate("/kommersnart")
-        /* window.scrollTo({top: 0, left: 0, behavior: 'smooth'}); */
-    }
-
- /*    function scrollToTop(){
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      } */
-
     return (
         <footer className={styles.footer}>
             {/* <h2> Tipslåda</h2>
@@ -45,14 +36,14 @@ export default function Footer() {
 
             <div className={styles.footerLinks}>
                 <div className={styles.footerLinkLeft}>
-                    <p onClick={linkToCoomingSoon()}>Om oss</p>
-                    <p onClick={linkToCoomingSoon}>Hjälp</p>
-                    <p onClick={linkToCoomingSoon}>Annonsera</p>
+                    <p>Om oss</p>
+                    <p>Hjälp</p>
+                    <p>Annonsera</p>
                 </div>
                 <div className={styles.footerLinkRight}>
-                    <p onClick={linkToCoomingSoon}>Kontakta oss</p>
-                    <p onClick={linkToCoomingSoon}>Korrigeringar</p>
-                    <p onClick={linkToCoomingSoon}>Karriär</p>
+                    <p>Kontakta oss</p>
+                    <p>Korrigeringar</p>
+                    <p>Karriär</p>
                 </div>
             </div>
             <div className={styles.footerLinkMedia}>
