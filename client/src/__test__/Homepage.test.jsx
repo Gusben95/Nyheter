@@ -14,25 +14,45 @@ const MockHomepage = () => {
   )
 };
 
+const url = "http://localhost/";
+
+
 describe('Homepage', () => {
-  it('should redirect to "/prenumerera" when link is clicked', () => {
-    render(<MockHomepage/>);
-    const linkElement = screen.getByRole('link', {name: /prenumerera nu/i});
-    fireEvent.click(linkElement);
-    expect(window.location.href).toBe("http://localhost/prenumerera");
-  })
-  it('should redirect to "/prenumerera" when link is clicked', () => {
+  it('subscribe link should be rendered', () => {
     render(<MockHomepage/>)
-    const linkElement = screen.getByRole('link', {name: /logga in/i})
-    fireEvent.click(linkElement)
-    expect(window.location.href).toBe("http://localhost/login")
+    const subscribeLinkEl = screen.getByText(/prenumerera nu/i)
+    expect(subscribeLinkEl).toBeInTheDocument()
   })
-  it('should render loading or articles',( )=> { /* hur articles???*/
+  it('subscribe link should redirect when clicked', () => {
     render(<MockHomepage/>)
-    const loading = screen.getByText(/loading.../i)
-    expect(loading).toBeTruthy()
+    const subscribeLinkEl = screen.getByText(/prenumerera nu/i)
+    fireEvent.click(subscribeLinkEl)
+    expect(window.location.href).toBe(`${url}prenumerera`)
   })
-  it('should go back to top when ⬆️ is clicked', () => {
+
+  it('login link should be rendered', () => {
+    render(<MockHomepage/>)
+    const loginLinkEl = screen.getByText(/logga in/i)
+    expect(loginLinkEl).toBeInTheDocument()
+  })
+  it('login link should redirect when clicked', () => {
+    render(<MockHomepage/>)
+    const loginLinkEl = screen.getByText(/logga in/i)
+    fireEvent.click(loginLinkEl)
+    expect(window.location.href).toBe(`${url}login`)
+  })
+
+  // it('articles should be rendered', () => {
+  //   render(<MockHomepage/>)
+  //   screen.debug()
+  // })
+
+  it('back to top should be rendered', () => {
+    render(<MockHomepage/>)
+    const backToTop = screen.getByText(/Tillbaka till toppen/i)
+    expect(backToTop).toBeInTheDocument()
+  })
+  it('back to top should scrollToTop when clicked', () => {
     window.scrollTo = jest.fn()
     render(<MockHomepage/>)
     const backToTop = screen.getByText(/Tillbaka till toppen/i)
