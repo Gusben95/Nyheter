@@ -33,7 +33,7 @@ export default function ArticleComp(props) {
   }
 
   function switchOpened(){
-    if(!viewCounted && !opened) {
+    if(!viewCounted && !opened && views) {
       setViewCounted(true);
       dispatch({type: "incrementViewCount", data: id});
       incrementViewCount({id: id});
@@ -77,7 +77,7 @@ export default function ArticleComp(props) {
     switchEditing();
   }
 
-  let categoriesMapped = categories.map((category, index) => {
+  let categoriesMapped = categories?.map((category, index) => {
     return <div className={styles.articleTag} onClick={()=>{navigate('/Kategori/' + category)}} key={index}>{category}</div>
   })
 
@@ -89,8 +89,14 @@ export default function ArticleComp(props) {
   }
 
   // Format code in mainText and shortDescription into actual code
-  let mainTextParsed = parse(mainText);
-  let shortDescParsed = parse(shortDescription);
+  var mainTextParsed;
+  if(mainText) {
+    mainTextParsed = parse(mainText);
+  }
+  var shortDescParsed;
+  if(shortDescription) {
+    shortDescParsed = parse(shortDescription);
+  }
 
   return (
     <div className={styles.article} onClick={switchOpened}>
@@ -109,7 +115,7 @@ export default function ArticleComp(props) {
           </div>
         </div>
       ) : (
-        <div className={styles.largeArticle}>
+        <div className={`${styles.largeArticle} ${opened ? styles.openedArticle : ""}`}>
           <div className={styles.imageContainer}>
             <img className={styles.articleImg} src={images ? images[0] : ""} alt={title ? title : ""} loading="lazy" />
           </div>
@@ -155,9 +161,17 @@ export default function ArticleComp(props) {
                         )}
                       </div>
                       <p>Skriven av: {author}</p>
-                      <p>{dateFormatted}</p>
-
-                      <h4>{views} visningar</h4>
+                      {dateAdded ? (
+                        <p>{dateFormatted}</p>
+                      ) : (
+                        <p>Uppladdad: {new Date().toLocaleDateString()} Kl:{new Date().toLocaleTimeString()}</p>
+                      )}
+                      
+                      {views ? (
+                        <h4>{views} visningar</h4>
+                      ) : (
+                        <p>0 visningar</p>
+                      )}
                   </>
                 )}
               </>

@@ -1,10 +1,11 @@
 import { fetchArticles, postArticle, fetchArticleAndSendToDatabase } from '../../dbUtils/articleActions';
 import { createAccount } from '../../dbUtils/accountActions';
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './Admin.module.css'
 import { useNavigate } from 'react-router-dom';
+import ArticleComp from '../../components/Article/ArticleComp';
 
 
 export default function Admin() {
@@ -13,6 +14,15 @@ export default function Admin() {
   const stateArticles = useSelector(state => state.Articles)
   const stateUser = useSelector(state => state.User)
 
+  const [newArticle, setNewArticle] = useState({
+    title: "",
+    shortDescription: "",
+    mainText: "",
+    categories: [],
+    author: "",
+    images: []
+  })
+
   useEffect(() => {
     if(stateUser?.role !== "admin") {
       alert("Du måste vara admin för att komma åt denna sida");
@@ -20,14 +30,9 @@ export default function Admin() {
     }
   }, [stateUser])
 
-  let newArticle = {
-    title: "",
-    shortDescription: "",
-    mainText: "",
-    categories: [],
-    author: "",
-    images: []
-  }
+  useEffect(() => {
+    console.log(newArticle)
+  }, [newArticle])
 
   useEffect(() => {
     fetchArticles().then(articles =>{
@@ -44,29 +49,35 @@ export default function Admin() {
   }
 
   function handleEdit(e) {
-    newArticle[e.target.name] = e.target.value;
+    let newArticleCopy = {...newArticle};
+    newArticleCopy[e.target.name] = e.target.value;
+    setNewArticle(newArticleCopy);
   }
-
+  
   function handleImageEdit(e) {
-    newArticle.images = [e.target.value];
-    console.log(newArticle.images);
+    let newArticleCopy = {...newArticle};
+    newArticleCopy.images = [e.target.value];
+    setNewArticle(newArticleCopy);
   }
 
   function handleRadioEdit(e) {
     // we get here when one of the checkboxes is checked or unchecked
     // we need to update the categories array in the newEditedArticle object
     // add all categories that are in the article
-    let newCategories = newArticle.categories;
+    let newArticleCopy = {...newArticle};
+
+    let newCategories = newArticleCopy.categories;
     // if the checkbox is checked, add it to the newCategories array
     if(e.target.checked) {
       newCategories.push(String(e.target.value));
     }
     // if the checkbox is unchecked, remove it from the newCategories array
     else {
-      newCategories = newArticle.categories.filter(category => category !== String(e.target.value));
+      newCategories = newArticleCopy.categories.filter(category => category !== String(e.target.value));
     }
     // update the newEditedArticle object
-    newArticle.categories = newCategories;
+    newArticleCopy.categories = newCategories;
+    setNewArticle(newArticleCopy);
   }
 
   function sendArticle() {
@@ -102,6 +113,9 @@ export default function Admin() {
 
         <button onClick={sendArticle}>Spara</button>
       </div>
+
+      <h2 style={{textAlign: "center"}}>Live exempel av hur artikeln kommer se ut:</h2>
+      <ArticleComp article={newArticle} />
 
       <button onClick={createFakeArticle}>Post article</button>
     </div>

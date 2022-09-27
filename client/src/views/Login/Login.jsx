@@ -24,15 +24,6 @@ export default function Login(){
   //Login in user
   
   async function loginAuth(loginWithProvider){
-    function validateEmail(email) 
-    {
-        let re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-  if (!validateEmail()){
-      alert("Ej giltig email")
-    return 
-    }
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
