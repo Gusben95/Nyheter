@@ -1,9 +1,9 @@
-import { render , screen, fireEvent, getByText, getByRole} from '@testing-library/react';
+import { render , screen, fireEvent , getByRole} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../store/Reducer';
-
 import { BrowserRouter } from 'react-router-dom';
 import Login from '../views/Login/Login';
+
 
 const MockLogin = () => {
   return (  
@@ -16,62 +16,105 @@ const MockLogin = () => {
 }
 
 const url = "http://localhost/";
-
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
-
 const user = {
   email: "hej@hotmail.com",
-  password: ""
+  password: "hoi"
 }
+
 
 describe('Login', () => {
 
-  it("alert when button is clicked",() => { //denna måste göras om
-    render(<MockLogin/>);
-    const inputEmailElement = screen.getByPlaceholderText(/email/i);
-    const inputPasswordElement = screen.getByPlaceholderText(/lösenord/i);
-    const buttonElement = screen.getByRole('button', {name: "Logga in"});
-    fireEvent.change(inputEmailElement, {target: {value: user.email}});
-    fireEvent.change(inputPasswordElement, {target: {value: user.password}});
-    fireEvent.click(buttonElement);
-
-    global.alert = jest.fn();
-    expect(global.alert).toHaveBeenCalledTimes(0);
-    });
-
-  it('should be able to type email and password', () => {
+  it('username input should be rendered', () => {
     render(<MockLogin/>)
-    const inputEmail  = screen.getByPlaceholderText(/email/i);
-    const inputPassword  = screen.getByPlaceholderText(/lösenord/i);
-    fireEvent.change(inputEmail, user.email)
-    fireEvent.change(inputPassword, user.password)
-    expect(inputEmail).toBeInTheDocument()
-    expect(inputPassword).toBeInTheDocument()
+    const usernameInputEl = screen.getByPlaceholderText(/email/i)
+    expect(usernameInputEl).toBeInTheDocument()
   })
-  it('should not redirect to "/somewere" without email and password is typed after button "logga in" is clicked', () => {
-    
-  });
-  it('should redirect to "/somewere" when link "glömt lösenord?" is clicked', () => {
-
-  });
-
-
-  it('should redirect to "/somewere" when button "Logga in med Apple" is clicked', () => {
-
-  })
-  it('should redirect to "/somewere" when button "Logga in med Google" is clicked', () => {
-    
-  })  
-  it('should redirect to "/prenumerera" when link "Bli prenumerant" is clicked', () => {
+  it('password input should be rendered', () => {
     render(<MockLogin/>)
-    const linkElement = screen.getByRole('link', {name: /bli prenumerant/i})
-    fireEvent.click(linkElement)
+    const passwordInputEl = screen.getByPlaceholderText(/lösenord/i)
+    expect(passwordInputEl).toBeInTheDocument()
+  })
+
+  it('username input should change', () => {
+    render(<MockLogin/>)
+    const usernameInputEl = screen.getByPlaceholderText(/email/i)
+    fireEvent.change(usernameInputEl, {target: {value: user.email}})
+    expect(usernameInputEl.value).toBe(user.email)
+  })
+  it('password input should change', () => {
+    render(<MockLogin/>)
+    const passwordInputEl = screen.getByPlaceholderText(/lösenord/i)
+    fireEvent.change(passwordInputEl, {target: {value: user.password}})
+    expect(passwordInputEl.value).toBe(user.password)
+  })
+
+  it('button login should be rendered', () => {
+    render(<MockLogin/>)
+    const buttonEl = screen.getByRole('button', {name: "Logga in"})
+    expect(buttonEl).toBeInTheDocument()
+  })
+  it('button login should be enabled', () => {
+    render(<MockLogin/>)
+    const buttonEl = screen.getByRole('button', {name: "Logga in"})
+    expect(buttonEl).toBeEnabled()
+  })
+
+  // it('error message should not be visible', () => {
+  //   render(<MockLogin/>)
+  //   const errorEl = 
+  //   expect(errorEl).not.toBeVisible()
+  // })
+  // it('error message should be visible when email is incorrect', () => {
+  //   render(<MockLogin/>)
+  //   const errorEl = 
+  //   expect(errorEl).toBeVisible()
+  // })
+
+  it('forgotten password link should be rendered', () => {
+    render(<MockLogin/>)
+    const forgottenPasswordLinkEl = screen.getByText(/glömt lösenord?/i)
+    expect(forgottenPasswordLinkEl).toBeInTheDocument()
+  })
+  it('forgotten password link should redirect when clicked', () => {
+    render(<MockLogin/>)
+    const forgottenPasswordLinkEl = screen.getByText(/glömt lösenord?/i)
+    fireEvent.click(forgottenPasswordLinkEl)
+    expect(window.location.href).toBe(`${url}glomtlosenord`)
+  })
+
+  it('google login should be rendered', () => {
+    render(<MockLogin/>)
+    const googleLinkEl = screen.getByText(/Sign in with Google/i)
+    expect(googleLinkEl).toBeInTheDocument()
+  })
+  // it('google login should redirect when clicked', () => {
+  //   render(<MockLogin/>)
+  //   const googleLinkEl = screen.getByText(/Sign in with Google/i)
+  //   fireEvent.click(googleLinkEl)
+  //   expect(googleLinkEl)......
+  // })
+  
+  it('apple login should be rendered', () => {
+    render(<MockLogin/>)
+    const appleLinkEl = screen.getByRole('button', {name: /logga in med apple/i})
+    expect(appleLinkEl).toBeInTheDocument()
+  })
+  // it('apple login should redirect when clicked', () => {
+  //   render(<MockLogin/>)
+  //   const appleLinkEl = screen.getByRole('button', {name: /logga in med apple/i})
+  //   fireEvent.click(appleLinkEl)
+  //   expect(appleLinkEl)......
+  // })
+
+  it('subscriber link should be rendered', () => {
+    render(<MockLogin/>)
+    const subscriberLinkEl = screen.getByText(/bli prenumerant/i)
+    expect(subscriberLinkEl).toBeInTheDocument()
+  })
+  it('subscriber link should redirect when clicked', () => {
+    render(<MockLogin/>)
+    const subscriberLinkEl = screen.getByText(/bli prenumerant/i)
+    fireEvent.click(subscriberLinkEl)
     expect(window.location.href).toBe(`${url}prenumerera`)
   })
 
