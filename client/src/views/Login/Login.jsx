@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
 import { useRef,useEffect } from 'react'
 import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script';
+// import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
 
 import Profile from '../../components/Profile/Profile';
@@ -54,15 +54,15 @@ export default function Login(){
     alert('inloggad med apple');
   }
 
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: ''
-      });
-    };
-    gapi.load('client:auth2', initClient);
-  }, []);
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: ''
+  //     });
+  //   };
+  //   gapi.load('client:auth2', initClient);
+  // }, []);
 
   const onGoogleSuccess = (res) => {
     console.log('success:', res);
