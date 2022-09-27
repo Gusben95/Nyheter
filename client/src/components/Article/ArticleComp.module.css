@@ -135,3 +135,12 @@
 .subscribeNotif {
   margin-top: 0px;
 }
+
+
+/* Media query phone / computer view */
+
+@media (min-width: 958px){
+  .largeArticle, .smallArticle{
+    width: 65%;
+  }  
+}
