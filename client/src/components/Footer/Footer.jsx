@@ -25,8 +25,12 @@ export default function Footer() {
 
     function linkToCoomingSoon(){
         navigate("/kommersnart")
-        
+        /* window.scrollTo({top: 0, left: 0, behavior: 'smooth'}); */
     }
+
+ /*    function scrollToTop(){
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      } */
 
     return (
         <footer className={styles.footer}>
@@ -41,7 +45,7 @@ export default function Footer() {
 
             <div className={styles.footerLinks}>
                 <div className={styles.footerLinkLeft}>
-                    <p onClick={linkToCoomingSoon}>Om oss</p>
+                    <p onClick={linkToCoomingSoon()}>Om oss</p>
                     <p onClick={linkToCoomingSoon}>Hjälp</p>
                     <p onClick={linkToCoomingSoon}>Annonsera</p>
                 </div>
