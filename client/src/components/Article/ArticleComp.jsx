@@ -92,8 +92,6 @@ export default function ArticleComp(props) {
   let mainTextParsed = parse(mainText);
   let shortDescParsed = parse(shortDescription);
 
-  let mainTextSliced = mainText.slice(0, 100) + "...";
-
   return (
     <div className={styles.article} onClick={switchOpened}>
       {props.smallVersion && !opened ? (
@@ -146,7 +144,7 @@ export default function ArticleComp(props) {
                           <>
                             <div className={styles.noPayingMainText}>
                               <div className={styles.noPayingMainTextShadow}> </div>
-                              {mainTextSliced}
+                              {shortDescription}
                             </div>
                             <h4 className={styles.subscribeNotif}>Bli medlem idag för endast 2kr/dagen! <Link to="/prenumerera">Prenumerera</Link></h4>
                           </>
