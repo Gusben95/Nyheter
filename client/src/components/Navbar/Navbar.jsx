@@ -1,10 +1,13 @@
 import { useRef } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
-export default function Navbar({hideSubsctibe}) {
+export default function Navbar({hideSubscribe}) {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
+  const stateUser = useSelector(state => state.User);
   const [navbarOpened, setNavbarOpened] = useState(false);
   const [todaySectionOpened, setTodaySectionOpened] = useState(true)
   const [oldSectionOpened, setOldSectionOpened] = useState(false)
@@ -38,12 +41,16 @@ export default function Navbar({hideSubsctibe}) {
     navigate("/prenumerera");
   }
 
+  function handleLogout() {
+    dispatch({type: 'logout'});
+  }
+
   //<button className={styles.openNavbarBtn} onClick={toggleNavbar}>&#9776;</button>
 
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
       <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div className={styles.hamburger1}></div><div className={styles.hamburger2}></div><div className={styles.hamburger3}></div></section>
-      <button className={styles.subscribeBtn} style={hideSubsctibe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
+      <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
 
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
@@ -59,7 +66,13 @@ export default function Navbar({hideSubsctibe}) {
         </form>
 
         <div style={{padding: "10px 0px"}}>
-          <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
+          {stateUser.email ? (
+            <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
+          ) : (
+            <> 
+            <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
+            </>
+          ) }
         </div>
 
         <h2 onClick={toggleTodaysSection} style={!todaySectionOpened ? {} : {borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
