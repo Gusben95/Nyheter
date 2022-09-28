@@ -56,7 +56,7 @@ export default function Navbar({hideSubscribe}) {
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
 
         <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
-          <h2 style={{margin: "0"}}>Nyhetssidan</h2>
+          <h2 style={{margin: "0", cursor:'pointer'}}>Nyhetssidan</h2>
           <img alt="logo"/>
         </div>
 
