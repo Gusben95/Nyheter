@@ -4,6 +4,7 @@ import store from '../store/Reducer';
 import { BrowserRouter } from 'react-router-dom';
 import Homepage from '../views/Homepage/Homepage';
 
+
 const MockHomepage = () => {
   return (
     <Provider store={store}>
@@ -18,6 +19,7 @@ const url = "http://localhost/";
 
 
 describe('Homepage', () => {
+
   it('subscribe link should be rendered', () => {
     render(<MockHomepage/>)
     const subscribeLinkEl = screen.getByText(/prenumerera nu/i)

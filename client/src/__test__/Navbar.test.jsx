@@ -38,13 +38,11 @@ describe('Navbar', () => {
     expect(window.location.href).toBe(`${url}prenumerera`)
   })
 
-  // it('hamburger button should be rendered', () => {
-  //   const { container } = render(<MockNavbar/>)
-  //   screen.debug()
-  //   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  //   const test = container.getElementsByClassName("openNavbarBtn")
-  //   expect(test).toBeVisible()
-  // })
+  it('hamburger should be rendered', () => {
+    render(<MockNavbar/>)
+    const buttonEl = screen.getByRole('button', {name: "𝗫"})
+    expect(buttonEl).toBeInTheDocument()
+  })
 
   it('logo should be rendered', () => {
     render(<MockNavbar/>)
