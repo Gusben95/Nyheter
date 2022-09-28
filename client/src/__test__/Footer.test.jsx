@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 
 const MockFooter = () => {
-
   return (
       <Provider store={store}>
         <BrowserRouter>
@@ -15,29 +14,31 @@ const MockFooter = () => {
   )
 };
 
+const url = "http://localhost/";
+
+const linkArray = ['Om oss', 'Hjälp', 'Annonsera', 'Kontakta oss', 'Korrigeringar', 'Karriär']
+
+const capitalizeFirstLetter= (str) => {
+  const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+  return capitalized;
+};
+
 describe('Footer', () => {
-  it('should redirect to "/facebook" when icon is clicked', () => {
+  it('linkArray should be rendered', () => {
     render(<MockFooter/>)
-    const linkElement = screen.getByRole('svg', {name: /facebook/i})
-    fireEvent.click(linkElement)
-    expect(window.location.href).toBe("https://www.facebook.com/")
+    linkArray.forEach(link => {
+      const pEl = screen.getByText(capitalizeFirstLetter(link));
+      expect(pEl).toBeInTheDocument()  
+    })
   })
-  it('should redirect to "/instagram" when icon is clicked', () => {
+  it('linkArray should redirect when clicked', () => {
     render(<MockFooter/>)
-    const linkElement = screen.getByRole('link', {name: /instagram/i})
-    fireEvent.click(linkElement)
-    expect(window.location.href).toBe("https://www.instagram.com/")
+    linkArray.forEach(x => {
+      const pEl = screen.getByText(capitalizeFirstLetter(x));
+      fireEvent.click(pEl);
+      expect(window.location.href).toBe(`${url}kommersnart`);    
+    })
   })
-  it('should redirect to "/youtube" when icon is clicked', () => {
-    render(<MockFooter/>)
-    const linkElement = screen.getByRole('link', {name: /youtube/i})
-    fireEvent.click(linkElement)
-    expect(window.location.href).toBe("http://youtube.com/")
-  })
-  it('should redirect to "/twitter" when icon is clicked', () => {
-    render(<MockFooter/>)
-    const linkElement = screen.getBy('link', {target: {type: "twitter"}})
-    fireEvent.click(linkElement)
-    expect(window.location.href).toBe("https://twitter.com/")
-  })
+
+
 })
