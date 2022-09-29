@@ -26,3 +26,7 @@ https://docs.google.com/spreadsheets/d/1Nvvvp2-1CAOd1tbiaIdjHMpLGl5FWOapZ2Guzvgj
 
 Figma
 https://www.figma.com/file/F33gMd2FckVyaHBnQpo0TY/Nyhetssida?node-id=0%3A1
+
+Inlogg admin på sidan:
+hej@gmail.com
+pwd123

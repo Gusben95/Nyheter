@@ -5,7 +5,7 @@ import Navbar from '../Navbar/Navbar'
 
 export default function Commingsoon() {
 
-  // Set the date we're counting down to
+  // Date we're counting down to
 var countDownDate = new Date("Jan 8, 2023 15:37:25").getTime();
 
 // Update the count down every 1 second

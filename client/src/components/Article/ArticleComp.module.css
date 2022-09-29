@@ -20,7 +20,7 @@
 
 .smallArticle .articleContent {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .smallArticle .imageContainer {
@@ -28,6 +28,7 @@
 }
 
 .smallArticle .shortDescription {
+  margin-left: 10px;
   width: 66%
 }
 
@@ -54,15 +55,6 @@
 .shortDescription {
   overflow: hidden;
   word-wrap: break-word;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  font-size: 1em;
-  line-height: 1.3em;
-  margin: 0;
-  max-width: 2000px;
 }
 
 .articleTags {
@@ -143,4 +135,8 @@
   .largeArticle, .smallArticle{
     width: 65%;
   }  
+
+  .openedArticle {
+    width: 80% !important;
+  }
 }
