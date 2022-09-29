@@ -61,11 +61,6 @@ export default function Login(){
     }
   }
 
-  function appleLogin() {
-    console.log('inloggad med apple');
-    alert('inloggad med apple');
-  }
-
   useEffect(() => {
     const initClient = () => {
       gapi.client.init({
@@ -124,7 +119,7 @@ export default function Login(){
       isSignedIn={true}
       />
 
-      <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
+      <button className='facebook'>Logga in med Facebook</button>
       <Link to="/prenumerera">Bli Prenumerant</Link>
       </section>
       )}
