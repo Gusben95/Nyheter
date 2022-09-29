@@ -17,7 +17,8 @@ const {
   initAcc,
   getAccountByEmail,
   createAccount,
-  updateAccount
+  updateAccount,
+  updatePassword
 } = require('./db/accountDb')
 const {
   comparePassword
@@ -246,7 +247,14 @@ app.post('/updateAccount', async (request, response) => {
   })
   response.json(res)
 })
-
+app.post('/updatePassword', async (request, response) => {
+  let account = await request.body
+  let res = await updatePassword(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
 
 // mail
 app.get('/send-email', async function (req, res) {

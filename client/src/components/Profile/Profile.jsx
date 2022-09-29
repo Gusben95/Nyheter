@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { updateAccount } from '../../dbUtils/accountActions';
+import { updateAccount, updatePassword } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
 
@@ -46,10 +46,13 @@ export default function Profile() {
   }
 
   function changePassword() {
-    let newPassword = prompt("Skriv in ditt nya lösenord");
-    if(newPassword) {
-      /* changePasswordInDatabase(newPassword); */
-    }
+   // let newPassword = prompt("Skriv in ditt nya lösenord");
+   // if(newPassword) {
+   /* changePasswordInDatabase(newPassword); */
+   //   }
+   
+   
+   
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
