@@ -15,10 +15,9 @@
 
 .superAd {
   display: flex;
-  height: 40vh;
   text-align: center;
   padding: 10px;
-  padding-bottom: 10%;
+  padding-bottom: 3em;
   background: rgb(96, 15, 12);
   background: linear-gradient(180deg, rgba(96, 15, 12, 1) 65%, rgba(0, 0, 0, 1) 93%, rgba(96, 15, 12, 1) 100%);
   color: white;
@@ -37,6 +36,7 @@
   margin-top: 20px;
   cursor: pointer;
   box-shadow: 2px 2px 4px lightgrey;
+  display: block;
 }
 
 .superAd a:hover {
