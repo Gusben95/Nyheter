@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateAccount } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
 
@@ -8,7 +9,7 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   let newUser = {
-    _id: stateUser._id,
+    _id: stateUser.id,
     name: stateUser.name,
     email: stateUser.email,
     password: stateUser.password,
@@ -41,7 +42,7 @@ export default function Profile() {
 
   function saveEdit() {
     dispatch({type: "updateUser", data: newUser});
-    /* editUser(newUser); */
+    updateAccount(newUser);
   }
 
   function changePassword() {
@@ -55,20 +56,20 @@ export default function Profile() {
 
   return (
     <section className={styles.loggedIn}>
-      <h2 style={{display: "inline"}}>Hej <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <h2 style={{display: "inline"}}>Hej <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="name"
         >{stateUser.name}</span>
       .</h2>
-      <p style={{display: "inline"}}>Din email är: <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <p style={{display: "inline"}}>Din email är: <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="email"
         >{stateUser.email}</span>
@@ -96,7 +97,7 @@ export default function Profile() {
         <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
       <button onClick={() => dispatch({type: "logout"})}>Logga ut</button>
-      
+
     </section>
   )
 }

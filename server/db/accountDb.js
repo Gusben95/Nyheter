@@ -47,15 +47,17 @@ const createAccount = async (account) => {
 const updateAccount = async (account) => {
   const collection = db.collection('account')
   let updatedAccount = {};
-  if (account.name) updatedDoc.name = account.name;
-  if (account.password) updatedDoc.password = await hashPassword(account.password);
-  if (account.email) updatedDoc.email = account.email;
-  if (account.preference) updatedDoc.preference = account.preference;
-  if (account.role) updatedDoc.role = account.role;
-  if (account.stillPaying) updatedDoc.stillPaying = account.stillPaying;
-  if (account.subscriptionEnd) updatedDoc.subscriptionEnd = account.subscriptionEnd;
-  if (account.token) updatedDoc.token = account.token;
+  if (account.name) updatedAccount.name = account.name;
+  //if (account.password) updatedAccount.password = await hashPassword(account.password);
+  if (account.email) updatedAccount.email = account.email;
+  if (account.preference) updatedAccount.preference = account.preference;
+  if (account.role) updatedAccount.role = account.role;
+  if (account.stillPaying) updatedAccount.stillPaying = account.stillPaying;
+  if (account.subscriptionEnd) updatedAccount.subscriptionEnd = account.subscriptionEnd;
+  if (account.token) updatedAccount.token = account.token;
 
+  console.log(updatedAccount)
+  console.log(account.id)
   updatedAccount = {
     $set: updatedAccount
   }
@@ -63,7 +65,7 @@ const updateAccount = async (account) => {
   const filter = {
     _id: accountId
   }
-  const result = await collection.updateOne(filter, updatedDoc);
+  const result = await collection.updateOne(filter, updatedAccount);
   return result;
 }
 
