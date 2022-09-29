@@ -16,8 +16,6 @@ export default function Homepage() {
 
   const { category } = useParams();
 
-
-
   useEffect(()=>{
     setIsLoading(true)
     if(category === undefined) {
@@ -29,7 +27,7 @@ export default function Homepage() {
           return dateB - dateA;
         });
 
-        dispatch({type:"setArticles", data: articles});
+      dispatch({type:"setArticles", data: articles});
         setIsLoading(false)
       })
 
@@ -56,6 +54,21 @@ export default function Homepage() {
   useEffect(() =>{
     console.log("stateArticles", stateArticles)
   }, [stateArticles]);
+
+  //This code is for when we want the homepage to ONLY show articles from the last 24 hours
+  // to make it a truly "dagens" page
+
+  /* let todayDay = new Date().toLocaleDateString()
+  let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1);
+  let todayAtMidnightPlusOneDay = todayAtMidnight + 86400000;
+  let todaysArticles = stateArticles.filter(article => {
+    let articleDate = new Date(article.dateAdded).getTime();
+    console.log("articleDate", articleDate)
+    console.log("todayAtMidnight", todayAtMidnight)
+    // if the article was added between midnight and midnight + 1 day (today)
+    return articleDate >= todayAtMidnight && articleDate < todayAtMidnightPlusOneDay;
+  }) */
+  //let stateArticlesCopy = [...todaysArticles]
 
   //split array into chunks of 10 articles
   let stateArticlesCopy = [...stateArticles]

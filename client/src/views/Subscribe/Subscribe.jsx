@@ -11,6 +11,7 @@ export default function Subscribe() {
   const firstCard = useRef();
   const navigate = useNavigate();
   const stateUser = useSelector(state => state.User);
+  const stateArticles = useSelector(state => state.Articles);
 
   function clickSubscribe(months) {
     console.log(months)
@@ -59,6 +60,13 @@ var countdownfunction = setInterval(function() {
     navigate('/')
   }
 
+/*   function getRandomArticleImage() {
+    if (stateArticles.length > 0) {
+      let randomArticle = stateArticles[Math.floor(Math.random() * stateArticles.length)];
+      return randomArticle.images[0];
+    }
+  } */
+
   return (
     <section className="subscribePage">
 
@@ -90,6 +98,7 @@ var countdownfunction = setInterval(function() {
       <section className="cardContainer">
         <div
           className="subscribeCard month3"
+          style={{backgroundImage: `url(${stateArticles[0]?.images[0]})`}}
 
           ref={firstCard}
           aria-label='Kort för 3 månader prenumeration'
@@ -101,8 +110,10 @@ var countdownfunction = setInterval(function() {
             }
           }}
         >
-          <h2 className="monthHeader">3 Månader</h2>
-          <h2 className="monthPrice">300:-</h2>
+          <div className="subscribeCardContent">
+            <h2 className="monthHeader">3 Månader</h2>
+            <h2 className="monthPrice">300:-</h2>
+          </div>
         </div>
         {clickedMonths === 3 ? (
           <div className="cardMenu">
@@ -121,18 +132,21 @@ var countdownfunction = setInterval(function() {
         ) : ""}
         <div
           className="subscribeCard month6"
-          onClick={() => { clickSubscribe(6) }}
-
+          style={{backgroundImage: `url(${stateArticles[1]?.images[0]})`}}
+          
           aria-label='Kort för 6 månader prenumeration'
           tabIndex={2}
+          onClick={() => { clickSubscribe(6) }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.target.click()
             }
           }}
         >
-          <h2 className="monthHeader">6 Månader</h2>
-          <h2 className="monthPrice">500:-</h2>
+          <div className="subscribeCardContent">
+            <h2 className="monthHeader">6 Månader</h2>
+            <h2 className="monthPrice">500:-</h2>
+          </div>
         </div>
         {clickedMonths === 6 ? (
           <div className="cardMenu">
@@ -151,19 +165,22 @@ var countdownfunction = setInterval(function() {
         ) : ""}
         <div
           className="subscribeCard month12"
-          onClick={() => { clickSubscribe(12) }}
-
+          style={{backgroundImage: `url(${stateArticles[2]?.images[0]})`}}
+          
           aria-label='Kort för 12 månader prenumeration'
           tabIndex={3}
+          onClick={() => { clickSubscribe(12) }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.target.click()
             }
           }}
         >
-          <h2 className="monthHeader">12 Månader</h2>
-          <h2 className="monthPrice">800:-</h2>
-          <p className="monthWarning">Mest prisvärda alternativet!</p>
+          <div className="subscribeCardContent">
+            <h2 className="monthHeader">12 Månader</h2>
+            <h2 className="monthPrice">800:-</h2>
+            <p className="monthWarning">Mest prisvärda alternativet!</p>
+          </div>
         </div>
           {clickedMonths === 12 ? (
             <div className="cardMenu">
