@@ -11,14 +11,15 @@ const {
   updateArticle,
   updateViews
 } = require('./db/articleDb')
- const {
-   initAcc,
-   getAccountByEmail,
-   createAccount
- } = require('./db/accountDb')
- const {
-   comparePassword
- } = require('./utils/bcryptUtils')
+const {
+  initAcc,
+  getAccountByEmail,
+  createAccount,
+  updateAccount
+} = require('./db/accountDb')
+const {
+  comparePassword
+} = require('./utils/bcryptUtils')
 
 
 const PORT = process.env.PORT || 3001;
@@ -33,7 +34,7 @@ init().then(initAcc().then(() => {
 }))
 
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -203,8 +204,6 @@ app.post('/incrementViewCount', async (request, response) => {
 
 // -------- account database --------
 app.post('/getAccountWithEmail', async (request, response) => {
-
-
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   console.log(account.email);
@@ -212,15 +211,15 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
-  if(res.length > 0){
+  if (res.length > 0) {
     const compareCheck = await comparePassword(account.password, res[0].password)
-    if (compareCheck){
-        response.json(res);
-    }else {
+    if (compareCheck) {
+      response.json(res);
+    } else {
       response.status(500)
       response.json("wrong password");
     }
-  }else{
+  } else {
     response.status(500)
     response.json("Wrong email");
   }
@@ -233,5 +232,14 @@ app.post('/createAccount', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
-  //console.log(response)
+  response.json(res)
+})
+
+app.post('/updateAccount', async (request, response) => {
+  let account = await request.body
+  let res = await updateAccount(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
 })
