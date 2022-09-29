@@ -25,6 +25,7 @@ h1 {
   cursor: pointer;
   transition: all 0.3s;
   color: black;
+  border-radius: 20px;
 }
 
 .cardContainer {
