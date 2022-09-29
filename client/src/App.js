@@ -6,9 +6,32 @@ import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
 import Search from './views/Search/Search'
 import Footer from './components/Footer/Footer';
-import Coomingsoon from './components/Footer/Coomingsoon';
+/* import Comingsoon from './components/Footer/Footer.module.css'; */
+import Comingsoon from './views/Comingsoon/Comingsoon';
+
+import { useDispatch } from 'react-redux';
+import { fetchArticles } from './dbUtils/articleActions';
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+
+  // Since we want articles to be fetched on load,
+  // just load them directly when we load the page
+
+  //this load get overwritten by homepage later, but this helps other pages who need articles
+  useEffect(() => {
+    fetchArticles().then(articles =>{
+      articles.sort(function compare(a, b) {
+        var dateA = new Date(a.dateAdded);
+        var dateB = new Date(b.dateAdded);
+        return dateB - dateA;
+      });
+  
+      dispatch({type:"setArticles", data: articles});
+    })
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={
@@ -36,7 +59,7 @@ function App() {
       } />
 
       <Route path="/kommersnart" element={
-        [<Coomingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
+        [<Comingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
       <Route path="*" element={

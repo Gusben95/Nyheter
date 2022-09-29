@@ -15,20 +15,37 @@
 
 .superAd {
   display: flex;
-  height: 95vh;
   text-align: center;
   padding: 10px;
-  padding-bottom: 10%;
+  padding-bottom: 3em;
   background: rgb(96, 15, 12);
   background: linear-gradient(180deg, rgba(96, 15, 12, 1) 65%, rgba(0, 0, 0, 1) 93%, rgba(96, 15, 12, 1) 100%);
   color: white;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
+
+.superAd a {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.5em;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px lightgrey;
+  display: block;
+}
+
+.superAd a:hover {
+  background-color: rgb(221, 221, 221);
+}
+
 .adText{
   display: flex;
   flex-direction:column;
-  
 }
 
 .toTheTop {
@@ -43,7 +60,3 @@
   cursor: pointer;
   color: black;
 }
-
-
-
-

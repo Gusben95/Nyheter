@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom'
-import styles from './Footer.module.css'
-import Navbar from '../Navbar/Navbar'
 
+export default function Comingsoon() {
 
-export default function Commingsoon() {
-
-  // Set the date we're counting down to
+  // Date we're counting down to
 var countDownDate = new Date("Jan 8, 2023 15:37:25").getTime();
 
 // Update the count down every 1 second
@@ -36,11 +33,11 @@ var countdownfunction = setInterval(function() {
 
 
     return (
-        <footer className={styles.footer}>
+        <footer>
 
         <div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#600F0C"}}>
         <img alt="logo"/>
-          <h1>COOMING SOON</h1>
+          <h1>COMING SOON</h1>
           <h2>Oj du är lite snabb, sidan är fortfarande under uppbyggnad🏗</h2>
           <p id="demo" style={{fontSize: "30px"}}></p>
           

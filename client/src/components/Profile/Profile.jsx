@@ -40,8 +40,15 @@ export default function Profile() {
   }
 
   function saveEdit() {
-    console.log(newUser);
     dispatch({type: "updateUser", data: newUser});
+    /* editUser(newUser); */
+  }
+
+  function changePassword() {
+    let newPassword = prompt("Skriv in ditt nya lösenord");
+    if(newPassword) {
+      /* changePasswordInDatabase(newPassword); */
+    }
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
@@ -66,6 +73,7 @@ export default function Profile() {
         name="email"
         >{stateUser.email}</span>
       .</p>
+      <button onClick={changePassword}>Byt lösenord</button>
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>
@@ -87,6 +95,7 @@ export default function Profile() {
         <label htmlFor="sport">Sport</label>
         <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
+      <button onClick={() => dispatch({type: "logout"})}>Logga ut</button>
       
     </section>
   )

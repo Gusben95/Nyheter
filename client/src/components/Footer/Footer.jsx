@@ -23,7 +23,7 @@ export default function Footer() {
         window.location.href = ('https://www.twitter.com')
     }
 
-    function navigateToComming(){
+    function navigateToComingSoon(){
         navigate("/kommersnart")
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
@@ -43,14 +43,14 @@ export default function Footer() {
             <div className={styles.footerContent}>
             <div className={styles.footerLinks}>
                 <div className={styles.footerLinkLeft}>
-                    <p onClick={navigateToComming}>Om oss</p>
-                    <p onClick={navigateToComming}>Hjälp</p>
-                    <p onClick={navigateToComming}>Annonsera</p>
+                    <p onClick={navigateToComingSoon}>Om oss</p>
+                    <p onClick={navigateToComingSoon}>Hjälp</p>
+                    <p onClick={navigateToComingSoon}>Annonsera</p>
                 </div>
                 <div className={styles.footerLinkRight}>
-                    <p onClick={navigateToComming}>Kontakta oss</p>
-                    <p onClick={navigateToComming}>Korrigeringar</p>
-                    <p onClick={navigateToComming}>Karriär</p>
+                    <p onClick={navigateToComingSoon}>Kontakta oss</p>
+                    <p onClick={navigateToComingSoon}>Korrigeringar</p>
+                    <p onClick={navigateToComingSoon}>Karriär</p>
                 </div>
             </div>
             <div className={styles.footerMediaContact}>

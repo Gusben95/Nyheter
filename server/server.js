@@ -1,6 +1,8 @@
 const express = require("express");
+const nodeMailer = require('nodemailer');
 const helmet = require("helmet");
 require('dotenv').config();
+const bodyParser = require('body-parser');
 const {
   init,
   getArticles,
@@ -23,7 +25,8 @@ const {
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.json())
 app.use(helmet());
 
@@ -143,7 +146,7 @@ app.post('/articlesBySearch', async (request, response) => {
 //   categories: ["category 1", "category 2", "category 3"],
 //   author: "author",
 //   images: ["image 1", "image 2", "image 3"]
-// }
+// }  
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
   postArticle(article).catch((err) => {
@@ -212,16 +215,15 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
+ 
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
         response.json(res);
     }else {
-      response.status(500)
       response.json("wrong password");
     }
   }else{
-    response.status(500)
     response.json("Wrong email");
   }
 })
@@ -235,3 +237,48 @@ app.post('/createAccount', async (request, response) => {
   })
   //console.log(response)
 })
+
+
+// mail 
+app.get('/send-email', async function (req, res) {
+  const transporter = nodeMailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'eldora.kling45@ethereal.email',
+        pass: 'BtXAcaqnUVFeHneQdZ'
+    }
+    
+});
+let info = await transporter.sendMail({
+  from: '"Nyhetssidan" <Nyhetssidan@noreply.se>',
+  to: "nyheterunicorn@gmail.com", // Test email address
+  subject: "Nyhetssidans nyhetsbrev",
+  text: "Här kommer",
+  html: "Here's an <b>HTML version</b> of the email.",
+});
+console.log("Message sent: %s", info.messageId); // Output message ID
+console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to preview email
+  });
+
+  app.get('/pw-reset', async function (req, res) {
+    const transporter = nodeMailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+          user: 'eldora.kling45@ethereal.email',
+          pass: 'BtXAcaqnUVFeHneQdZ'
+      }
+      
+  });
+  let info = await transporter.sendMail({
+    from: '"Nyhetssidan" <Nyhetssidan@noreply.se>',
+    to: "nyheterunicorn@gmail.com", // Test email address
+    subject: "password reset",
+    text: "Här kommer ditt nya lösenord",
+    html: "Here's an <b>HTML version</b> of the email.",
+  });
+  console.log("Message sent: %s", info.messageId); // Output message ID
+  console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to preview email
+    });
+  
