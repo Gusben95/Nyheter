@@ -146,7 +146,7 @@ app.post('/articlesBySearch', async (request, response) => {
 //   categories: ["category 1", "category 2", "category 3"],
 //   author: "author",
 //   images: ["image 1", "image 2", "image 3"]
-// }
+// }  
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
   postArticle(article).catch((err) => {
@@ -215,16 +215,15 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
+ 
   if(res.length > 0){
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck){
         response.json(res);
     }else {
-      response.status(500)
       response.json("wrong password");
     }
   }else{
-    response.status(500)
     response.json("Wrong email");
   }
 })
@@ -246,8 +245,8 @@ app.get('/send-email', async function (req, res) {
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'lula.oberbrunner@ethereal.email',
-        pass: 'E5ANpSWFzwf53an2rA'
+        user: 'eldora.kling45@ethereal.email',
+        pass: 'BtXAcaqnUVFeHneQdZ'
     }
     
 });
@@ -267,8 +266,8 @@ console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to pre
       host: 'smtp.ethereal.email',
       port: 587,
       auth: {
-          user: 'lula.oberbrunner@ethereal.email',
-          pass: 'E5ANpSWFzwf53an2rA'
+          user: 'eldora.kling45@ethereal.email',
+          pass: 'BtXAcaqnUVFeHneQdZ'
       }
       
   });
