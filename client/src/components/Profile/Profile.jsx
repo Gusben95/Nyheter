@@ -27,7 +27,7 @@ export default function Profile() {
   }
 
   function handleCheckboxEdit(e) {
-    console.log(e.target)
+    /* console.log(e.target) */
 
     let newPreference = newUser.preference;
     if(e.target.checked) {
