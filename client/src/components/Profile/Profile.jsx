@@ -53,9 +53,6 @@ export default function Profile() {
    // if(newPassword) {
    /* changePasswordInDatabase(newPassword); */
    //   }
-   
-   
-   
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});

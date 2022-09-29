@@ -28,7 +28,7 @@ export default function SignUp() {
     signInPlatform: "nyhetssidan",
   }
 
-  function register() {
+  async function register() {
     if(passwordRepeat.current.value !== account.password) {
       alert("Lösenorden matchar inte");
       return;
@@ -38,7 +38,8 @@ export default function SignUp() {
     //THEN we can create a new account.
 
     dispatch({type: "setUser", data: account});
-    createAccount(account);
+    const response = await createAccount(account);
+    console.log(response)
   }
 
   return (
