@@ -21,7 +21,6 @@ const initAcc = () =>
   })
 
 const getAccountByEmail = async (account) => {
-
   const collection = db.collection('account')
   let res = await collection.find({
     email: account.email
@@ -48,7 +47,6 @@ const updateAccount = async (account) => {
   const collection = db.collection('account')
   let updatedAccount = {};
   if (account.name) updatedAccount.name = account.name;
-  //if (account.password) updatedAccount.password = await hashPassword(account.password);
   if (account.email) updatedAccount.email = account.email;
   if (account.preference) updatedAccount.preference = account.preference;
   if (account.role) updatedAccount.role = account.role;

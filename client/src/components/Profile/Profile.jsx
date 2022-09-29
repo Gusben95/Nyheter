@@ -9,7 +9,7 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   let newUser = {
-    _id: stateUser.id,
+    id: stateUser._id,
     name: stateUser.name,
     email: stateUser.email,
     password: stateUser.password,
@@ -21,8 +21,9 @@ export default function Profile() {
   }
 
   function handleEdit(e) {
-    newUser[e.target.name] = e.target.innerHTML;
-
+    //console.log([e.target.attributes.name.nodeValue])
+    newUser[e.target.attributes.name.nodeValue] = e.target.innerHTML;
+    console.log(newUser)
     saveEdit();
   }
 
@@ -41,7 +42,9 @@ export default function Profile() {
   }
 
   function saveEdit() {
+    console.log(newUser)
     dispatch({type: "updateUser", data: newUser});
+
     updateAccount(newUser);
   }
 
