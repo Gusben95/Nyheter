@@ -35,7 +35,7 @@ const createAccount = async (account) => {
   account.stillPaying = false;
   account.subscriptionEnd = "";
   account.password = await hashPassword(account.password);
-  console.log(account);
+  /* console.log(account); */
   return await collection.insertOne(account);
 }
 

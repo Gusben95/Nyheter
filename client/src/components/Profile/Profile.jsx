@@ -1,12 +1,17 @@
+import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateAccount, updatePassword } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
 
+
 export default function Profile() {
   const stateUser = useSelector(state => state.User);
   const dispatch = useDispatch();
+  const [changingPassword,setChangingpassword] = useState(false);
+  const newPassInput1 = useRef("");
+  const newPassInput2 = useRef("");
 
   let newUser = {
     id: stateUser._id,
@@ -28,7 +33,7 @@ export default function Profile() {
   }
 
   function handleCheckboxEdit(e) {
-    console.log(e.target)
+    /* console.log(e.target) */
 
     let newPreference = newUser.preference;
     if(e.target.checked) {
@@ -49,10 +54,13 @@ export default function Profile() {
   }
 
   function changePassword() {
-   // let newPassword = prompt("Skriv in ditt nya lösenord");
-   // if(newPassword) {
-   /* changePasswordInDatabase(newPassword); */
-   //   }
+   if (newPassInput1.current.value===newPassInput2.current.value){
+     updatePassword(newPassInput1.current.value)
+   }
+  }
+
+  function startChangePassword (){
+    setChangingpassword(true);
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
@@ -77,7 +85,14 @@ export default function Profile() {
         name="email"
         >{stateUser.email}</span>
       .</p>
-      <button onClick={changePassword}>Byt lösenord</button>
+      <button onClick={startChangePassword}>Byt lösenord</button>
+      {changingPassword?(
+        <div>
+          <input ref={newPassInput1} type="password" placeholder="Skriv in ditt nya lösenord"></input>
+          <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
+          <button onClick={changePassword}>Spara lösenordet</button>
+        </div>
+      ):""};
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>

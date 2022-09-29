@@ -65,7 +65,7 @@ const getSearch = (searchInput) => {
 const postArticle = async (doc) => {
   doc.dateAdded = new Date();
   doc.views = 0;
-  console.log(doc)
+  /* console.log(doc) */
   const collection = db.collection('article');
   return await collection.insertOne(doc);
 }

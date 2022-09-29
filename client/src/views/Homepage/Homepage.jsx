@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
+import Header from '../../components/Header/Header'
 
 import styles from './Homepage.module.css'
 
@@ -52,7 +53,7 @@ export default function Homepage() {
   }, [category])
 
   useEffect(() =>{
-    console.log("stateArticles", stateArticles)
+    /* console.log("stateArticles", stateArticles) */
   }, [stateArticles]);
 
   //This code is for when we want the homepage to ONLY show articles from the last 24 hours
@@ -97,13 +98,9 @@ export default function Homepage() {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }
 
-  function linkToHomepage(){
-    navigate('/')
-  }
-
   return (
     <div className={styles.homepage}>
-      <h1 className={styles.title} onClick={linkToHomepage}>Nyhetssidan</h1>
+      <Header />
 
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
