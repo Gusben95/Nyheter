@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:3000"
 async function fetchArticles() {
   const response = await fetch(BASE_URL + "/allArticles");
   const data = await response.json();
-  console.log(data);
+  /* console.log(data); */
   return data;
 }
 
@@ -41,7 +41,7 @@ async function postArticle(article) {
     }
   });
   const data = await response.json();
-  console.log(data);
+ /*  console.log(data); */
   return data;
 }
 
@@ -54,7 +54,7 @@ async function deleteArticle(article) {
     }
   });
   const data = await response.json();
-  console.log(data);
+  /* console.log(data); */
   return data;
 }
 
@@ -67,7 +67,7 @@ async function updateArticle(article) {
     }
   });
   const data = await response.json();
-  console.log(data);
+  /* console.log(data); */
   return data;
 }
 
@@ -80,7 +80,7 @@ async function incrementViewCount(article) {
     }
   });
   const data = await response.json();
-  console.log(data);
+  /* console.log(data); */
   return data;
 }
 

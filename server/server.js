@@ -210,7 +210,7 @@ app.post('/getAccountWithEmail', async (request, response) => {
 
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
-  console.log(account.email);
+  /* console.log(account.email); */
   let res = await getAccountByEmail(account).catch((err) => {
     console.log(err)
     response.status(500).end()
@@ -230,7 +230,7 @@ app.post('/getAccountWithEmail', async (request, response) => {
 
 app.post('/createAccount', async (request, response) => {
   let account = await request.body
-  console.log(account)
+  /* console.log(account) */
   let res = await createAccount(account).catch((err) => {
     console.log(err)
     response.status(500).end()

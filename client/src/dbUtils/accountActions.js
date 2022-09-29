@@ -10,13 +10,13 @@ async function fetchAccountWithEmail(account){
     }
   });
   let data = response;
-  console.log(data)
+  /* console.log(data) */
   if (data.status === 500){
     console.log("hej")
     return data.json();
   }
   data = await data.json();
-  console.log(data)
+  /* console.log(data) */
   return data[0];
 }
 

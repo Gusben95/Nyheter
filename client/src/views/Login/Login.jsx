@@ -38,14 +38,14 @@ export default function Login(){
     //     alert("Ej giltig email")
     //   return
     //   }
-    console.log(loginWithProvider)
+    /* console.log(loginWithProvider) */
     if(loginWithProvider){
       account = loginWithProvider;
     }
 
     const accountInfo = await fetchAccountWithEmail(account);
 
-    console.log(accountInfo);
+    /* console.log(accountInfo); */
 
     if(accountInfo?.email) {
       dispatch({type: "setUser", data: accountInfo});
@@ -72,7 +72,7 @@ export default function Login(){
   }, []);
 
   const onGoogleSuccess = (res) => {
-    console.log('success:', res);
+    /* console.log('success:', res); */
     const profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,

@@ -31,7 +31,7 @@ export default function Navbar({hideSubscribe}) {
 
   function doASearch(e) {
     e.preventDefault()
-    console.log(searchBarRef.current.value)
+    /* console.log(searchBarRef.current.value) */
     navigate("/search/" + searchBarRef.current.value)
   }
 

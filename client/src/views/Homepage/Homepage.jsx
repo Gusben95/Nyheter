@@ -52,7 +52,7 @@ export default function Homepage() {
   }, [category])
 
   useEffect(() =>{
-    console.log("stateArticles", stateArticles)
+    /* console.log("stateArticles", stateArticles) */
   }, [stateArticles]);
 
   //This code is for when we want the homepage to ONLY show articles from the last 24 hours
