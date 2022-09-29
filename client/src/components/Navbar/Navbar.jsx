@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import Header from '../Header/Header';
 import styles from './Navbar.module.css'
 
 export default function Navbar({hideSubscribe}) {
@@ -56,8 +57,7 @@ export default function Navbar({hideSubscribe}) {
         <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
 
         <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
-          <h2 style={{margin: "0", cursor:'pointer'}}>Nyhetssidan</h2>
-          <img alt="logo"/>
+          <Header />
         </div>
 
         <form className={styles.searchPart} onSubmit={doASearch}>
