@@ -6,7 +6,8 @@ import Login from './views/Login/Login';
 import Subscribe from './views/Subscribe/Subscribe';
 import Search from './views/Search/Search'
 import Footer from './components/Footer/Footer';
-import Coomingsoon from './components/Footer/Coomingsoon';
+/* import Comingsoon from './components/Footer/Footer.module.css'; */
+import Comingsoon from './views/Comingsoon/Comingsoon';
 
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
@@ -58,7 +59,7 @@ function App() {
       } />
 
       <Route path="/kommersnart" element={
-        [<Coomingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
+        [<Comingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
       <Route path="*" element={
