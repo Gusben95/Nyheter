@@ -13,14 +13,16 @@ const {
   updateArticle,
   updateViews
 } = require('./db/articleDb')
- const {
-   initAcc,
-   getAccountByEmail,
-   createAccount
- } = require('./db/accountDb')
- const {
-   comparePassword
- } = require('./utils/bcryptUtils')
+const {
+  initAcc,
+  getAccountByEmail,
+  createAccount,
+  updateAccount,
+  updatePassword
+} = require('./db/accountDb')
+const {
+  comparePassword
+} = require('./utils/bcryptUtils')
 
 
 const PORT = process.env.PORT || 3001;
@@ -36,7 +38,7 @@ init().then(initAcc().then(() => {
 }))
 
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -146,7 +148,7 @@ app.post('/articlesBySearch', async (request, response) => {
 //   categories: ["category 1", "category 2", "category 3"],
 //   author: "author",
 //   images: ["image 1", "image 2", "image 3"]
-// }  
+// }
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
   postArticle(article).catch((err) => {
@@ -206,8 +208,6 @@ app.post('/incrementViewCount', async (request, response) => {
 
 // -------- account database --------
 app.post('/getAccountWithEmail', async (request, response) => {
-
-
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   /* console.log(account.email); */
@@ -215,15 +215,16 @@ app.post('/getAccountWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
- 
-  if(res.length > 0){
+  if (res.length > 0) {
     const compareCheck = await comparePassword(account.password, res[0].password)
-    if (compareCheck){
-        response.json(res);
-    }else {
+    if (compareCheck) {
+      response.json(res);
+    } else {
+      response.status(500)
       response.json("wrong password");
     }
-  }else{
+  } else {
+    response.status(500)
     response.json("Wrong email");
   }
 })
@@ -235,11 +236,27 @@ app.post('/createAccount', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
-  //console.log(response)
+  response.json(res)
 })
 
+app.post('/updateAccount', async (request, response) => {
+  let account = await request.body
+  let res = await updateAccount(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
+app.post('/updatePassword', async (request, response) => {
+  let account = await request.body
+  let res = await updatePassword(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  response.json(res)
+})
 
-// mail 
+// mail
 app.get('/send-email', async function (req, res) {
   const transporter = nodeMailer.createTransport({
     host: 'smtp.ethereal.email',
@@ -248,7 +265,7 @@ app.get('/send-email', async function (req, res) {
         user: 'eldora.kling45@ethereal.email',
         pass: 'BtXAcaqnUVFeHneQdZ'
     }
-    
+
 });
 let info = await transporter.sendMail({
   from: '"Nyhetssidan" <Nyhetssidan@noreply.se>',
@@ -269,7 +286,7 @@ console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to pre
           user: 'eldora.kling45@ethereal.email',
           pass: 'BtXAcaqnUVFeHneQdZ'
       }
-      
+
   });
   let info = await transporter.sendMail({
     from: '"Nyhetssidan" <Nyhetssidan@noreply.se>',
@@ -281,4 +298,3 @@ console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to pre
   console.log("Message sent: %s", info.messageId); // Output message ID
   console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to preview email
     });
-  
