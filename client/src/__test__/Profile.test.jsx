@@ -18,31 +18,31 @@ const MockProfile = () => {
   )
 };
 
-const {MongoClient} = require('mongodb');
+// const {MongoClient} = require('mongodb');
 
-describe('insert', () => {
-  let connection;
-  let db;
+// describe('insert', () => {
+//   let connection;
+//   let db;
 
-  beforeAll(async () => {
-    connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    db = await connection.db(globalThis.__MONGO_DB_NAME__);
-  });
+//   beforeAll(async () => {
+//     connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     db = await connection.db(globalThis.__MONGO_DB_NAME__);
+//   });
 
-  afterAll(async () => {
-    await connection.close();
-  });
+//   afterAll(async () => {
+//     await connection.close();
+//   });
 
-  it('should insert a doc into collection', async () => {
-    const users = db.collection('user');
+//   it('should insert a doc into collection', async () => {
+//     const users = db.collection('user');
 
-    const mockUser = {_id: 'stateUser', name: 'mrUser'};
-    await users.insertOne(mockUser);
+//     const mockUser = {_id: 'stateUser', name: 'mrUser'};
+//     await users.insertOne(mockUser);
 
-    const insertedUser = await users.findOne({_id: 'stateUser'});
-    expect(insertedUser).toEqual(mockUser);
-  });
-});
+//     const insertedUser = await users.findOne({_id: 'stateUser'});
+//     expect(insertedUser).toEqual(mockUser);
+//   });
+// });
