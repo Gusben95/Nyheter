@@ -222,9 +222,9 @@ app.post('/incrementViewCount', async (request, response) => {
 //   let article = await request.body
 // })
 
-
+//repeatedLoginlimiter,
 // -------- account database --------
-app.post('/getAccountWithEmail', repeatedLoginlimiter,  async (request, response) => {
+app.post('/getAccountWithEmail',   async (request, response) => {
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   /* console.log(account.email); */
