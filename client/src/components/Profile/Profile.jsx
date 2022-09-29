@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { updateAccount, updatePassword } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
-import{updatePassword} from "../../dbUtils/accountActions";
+
 
 export default function Profile() {
   const stateUser = useSelector(state => state.User);
