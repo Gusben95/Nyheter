@@ -70,7 +70,7 @@ var countdownfunction = setInterval(function() {
   return (
     <section className="subscribePage">
 
-      <h1 onClick={linkToHomepage} >NYHETSSIDAN</h1>
+      <h1 onClick={linkToHomepage} style={{fontSize:"2em", cursor:"pointer", margin:"0,6,0,0"}} >Nyhetssidan</h1>
 
       <div className='subscribeHeader'>
         <h2>Prenumerera och få tillgång till alla artiklar </h2>

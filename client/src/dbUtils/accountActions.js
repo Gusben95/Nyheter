@@ -42,9 +42,20 @@ async function updateAccount(account) {
   const data = await response.json();
   return data;
 }
-
+async function updatePassword(account) {
+  const response = await fetch(BASE_URL + "/updatePassword", {
+    method: 'POST',
+    body: JSON.stringify(account),
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+  const data = await response.json();
+  return data;
+}
 export {
   fetchAccountWithEmail,
   createAccount,
-  updateAccount
+  updateAccount,
+  updatePassword
 }
