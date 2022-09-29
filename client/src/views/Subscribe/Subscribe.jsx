@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './Subscribe.css'
 
 import SignUp from '../../components/signUp/SignUp';
 import Payment from '../../components/Payment/Payment';
+import Header from '../../components/Header/Header';
+import { useEffect } from 'react';
 
 export default function Subscribe() {
   const [clickedMonths, setClickedMonths] = useState();
@@ -12,6 +14,7 @@ export default function Subscribe() {
   const navigate = useNavigate();
   const stateUser = useSelector(state => state.User);
   const stateArticles = useSelector(state => state.Articles);
+  const location = useLocation();
 
   function clickSubscribe(months) {
     console.log(months)
@@ -28,37 +31,35 @@ export default function Subscribe() {
     }, 60);
   }
 
-      // Date we're counting down to
-var countDownDate = new Date("Nov 2, 2022 15:37:25").getTime();
+  // Date we're counting down to
+  var countDownDate = new Date("Nov 2, 2022 15:37:25").getTime();
 
-// Update the count down every 1 second
-var countdownfunction = setInterval(function() {
+  // Update the count down every 1 second
+  useEffect(()=>{
+    var countdownfunction = setInterval(function() {
 
-  // Get todays date and time
-  var now = new Date().getTime();
-  
-  // Find the distance between now an the count down date
-  var distance = countDownDate - now;
-  
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + minutes + "m " + seconds + "s ";
-  
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(countdownfunction);
-    document.getElementById("demo").innerHTML = "Din premuneration har gått ut!";
-  }
-}, 1000);
-
-
-  function linkToHomepage(){
-    navigate('/')
-  }
+      // Get todays date and time
+      var now = new Date().getTime();
+      
+      // Find the distance between now an the count down date
+      var distance = countDownDate - now;
+      
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // Output the result in an element with id="demo"
+      document.getElementById("demo").innerHTML = days + "d " + minutes + "m " + seconds + "s ";
+      
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(countdownfunction);
+        document.getElementById("demo").innerHTML = "Din premuneration har gått ut!";
+      }
+    }, 1000);
+    return () => clearInterval(countdownfunction);
+  })
 
 /*   function getRandomArticleImage() {
     if (stateArticles.length > 0) {
@@ -69,8 +70,7 @@ var countdownfunction = setInterval(function() {
 
   return (
     <section className="subscribePage">
-
-      <h1 onClick={linkToHomepage} style={{fontSize:"2em", cursor:"pointer", margin:"0,6,0,0"}} >Nyhetssidan</h1>
+      <Header />
 
       <div className='subscribeHeader'>
         <h2>Prenumerera och få tillgång till alla artiklar </h2>

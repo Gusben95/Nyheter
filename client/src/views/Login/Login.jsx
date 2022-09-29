@@ -5,6 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
 
+import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
@@ -92,7 +93,7 @@ export default function Login(){
 
   return (
     <div className={styles.loginContainer}>
-      <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
+      <Header />
 
       { stateUser.email ? (
         <Profile />

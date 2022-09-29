@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateAccount, updatePassword } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
 import{updatePassword} from "../../dbUtils/accountActions";
@@ -13,7 +14,7 @@ export default function Profile() {
   const newPassInput2 = useRef("");
 
   let newUser = {
-    _id: stateUser._id,
+    _id: stateUser.id,
     name: stateUser.name,
     email: stateUser.email,
     password: stateUser.password,
@@ -46,39 +47,37 @@ export default function Profile() {
 
   function saveEdit() {
     dispatch({type: "updateUser", data: newUser});
-    /* editUser(newUser); */
+    updateAccount(newUser);
   }
 
   function changePassword() {
    if (newPassInput1.current.value===newPassInput2.current.value){
      updatePassword(newPassInput1.current.value)
    }
-
-
   }
+
   function startChangePassword (){
     setChangingpassword(true);
-    
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
 
   return (
     <section className={styles.loggedIn}>
-      <h2 style={{display: "inline"}}>Hej <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <h2 style={{display: "inline"}}>Hej <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="name"
         >{stateUser.name}</span>
       .</h2>
-      <p style={{display: "inline"}}>Din email är: <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <p style={{display: "inline"}}>Din email är: <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="email"
         >{stateUser.email}</span>
@@ -113,7 +112,7 @@ export default function Profile() {
         <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
       <button onClick={() => dispatch({type: "logout"})}>Logga ut</button>
-      
+
     </section>
   )
 }
