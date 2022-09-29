@@ -231,12 +231,19 @@ app.post('/getAccountWithEmail', async (request, response) => {
 
 app.post('/createAccount', async (request, response) => {
   let account = await request.body
-  /* console.log(account) */
-  let res = await createAccount(account).catch((err) => {
-    console.log(err)
-    response.status(500).end()
-  })
-  response.json(res)
+  const accountExists = await getAccountByEmail(account)
+    if(accountExists.length == 0){
+      console.log(account)
+      let res = await createAccount(account).catch((err) => {
+        console.log(err)
+        response.status(500).end()
+      })
+      response.json(res)
+    }
+    else {
+      response.json("account already exists");
+    }
+
 })
 
 app.post('/updateAccount', async (request, response) => {
