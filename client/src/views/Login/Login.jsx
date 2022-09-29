@@ -15,33 +15,34 @@ export default function Login(){
   const stateUser = useSelector(state => state.User)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
   // Check email syntax
 
   //Login in user
-  
+
   async function loginAuth(loginWithProvider){
-    function validateEmail(email) 
-    {
-        let re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-  if (!validateEmail()){
-      alert("Ej giltig email")
-    return 
-    }
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
-    } 
+    }
+    //   function validateEmail(email)
+    //   {
+    //       let re = /\S+@\S+\.\S+/;
+    //       return re.test(email);
+    //   }
+    //
+    // if (!validateEmail(account.email)){
+    //     alert("Ej giltig email")
+    //   return
+    //   }
     console.log(loginWithProvider)
     if(loginWithProvider){
       account = loginWithProvider;
     }
-    
+
     const accountInfo = await fetchAccountWithEmail(account);
 
     console.log(accountInfo);
@@ -56,7 +57,7 @@ export default function Login(){
         };
       };
     } else {
-      alert("Wrong email or password");
+      alert(accountInfo)
     }
   }
 
@@ -89,7 +90,7 @@ export default function Login(){
     navigate('/')
   }
 
-  return(
+  return (
     <div className={styles.loginContainer}>
       <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
 
