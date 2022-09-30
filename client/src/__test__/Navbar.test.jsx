@@ -44,18 +44,18 @@ describe('Navbar', () => {
     expect(buttonEl).toBeInTheDocument()
   })
 
-  it('logo should be rendered', () => {
-    render(<MockNavbar/>)
-    const logo = screen.getByText(/Nyhetssidan/i);
-    fireEvent.click(logo);
-    expect(window.location.href).toBe(`${url}`);
-  });
-  it('logo should redirect when clicked', () => {
-    render(<MockNavbar/>)
-    const logo = screen.getByText(/Nyhetssidan/i);
-    fireEvent.click(logo);
-    expect(window.location.href).toBe(`${url}`);
-  });
+  // it('logo should be rendered', () => {
+  //   render(<MockNavbar/>)
+  //   const logo = screen.getByText(/Nyhetssidan/i);
+  //   fireEvent.click(logo);
+  //   expect(window.location.href).toBe(`${url}`);
+  // });
+  // it('logo should redirect when clicked', () => {
+  //   render(<MockNavbar/>)
+  //   const logo = screen.getByText(/Nyhetssidan/i);
+  //   fireEvent.click(logo);
+  //   expect(window.location.href).toBe(`${url}`);
+  // });
 
   it('search input should change', () => {
     render(<MockNavbar/>)
