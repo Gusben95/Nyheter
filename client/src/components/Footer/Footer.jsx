@@ -25,7 +25,6 @@ export default function Footer() {
 
     function navigateToComingSoon(){
         navigate("/kommersnart")
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
     return (
