@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
-import { useRef,useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
+import FacebookLoginComponent from './facebookLoginComponent';
+
 
 import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
@@ -127,8 +129,8 @@ export default function Login(){
       cookiePolicy={'single_host_origin'}
       isSignedIn={true}
       />
+      <FacebookLoginComponent/>
 
-      <button className='facebook'>Logga in med Facebook</button>
       <Link to="/prenumerera">Bli Prenumerant</Link>
       </section>
       )}
