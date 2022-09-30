@@ -1,14 +1,20 @@
+import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateAccount, updatePassword } from '../../dbUtils/accountActions';
 
 import styles from './Profile.module.css'
+
 
 export default function Profile() {
   const stateUser = useSelector(state => state.User);
   const dispatch = useDispatch();
+  const [changingPassword,setChangingpassword] = useState(false);
+  const newPassInput1 = useRef("");
+  const newPassInput2 = useRef("");
 
   let newUser = {
-    _id: stateUser._id,
+    id: stateUser._id,
     name: stateUser.name,
     email: stateUser.email,
     password: stateUser.password,
@@ -20,13 +26,14 @@ export default function Profile() {
   }
 
   function handleEdit(e) {
-    newUser[e.target.name] = e.target.innerHTML;
-
+    //console.log([e.target.attributes.name.nodeValue])
+    newUser[e.target.attributes.name.nodeValue] = e.target.innerHTML;
+    console.log(newUser)
     saveEdit();
   }
 
   function handleCheckboxEdit(e) {
-    console.log(e.target)
+    /* console.log(e.target) */
 
     let newPreference = newUser.preference;
     if(e.target.checked) {
@@ -40,40 +47,52 @@ export default function Profile() {
   }
 
   function saveEdit() {
+    console.log(newUser)
     dispatch({type: "updateUser", data: newUser});
-    /* editUser(newUser); */
+
+    updateAccount(newUser);
   }
 
   function changePassword() {
-    let newPassword = prompt("Skriv in ditt nya lösenord");
-    if(newPassword) {
-      /* changePasswordInDatabase(newPassword); */
-    }
+   if (newPassInput1.current.value===newPassInput2.current.value){
+     updatePassword(newPassInput1.current.value)
+   }
+  }
+
+  function startChangePassword (){
+    setChangingpassword(true);
   }
 
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
 
   return (
     <section className={styles.loggedIn}>
-      <h2 style={{display: "inline"}}>Hej <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <h2 style={{display: "inline"}}>Hej <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="name"
         >{stateUser.name}</span>
       .</h2>
-      <p style={{display: "inline"}}>Din email är: <span 
-        contentEditable 
-        suppressContentEditableWarning={true} 
-        className={styles.editableText} 
-        onBlur={handleEdit} 
+      <p style={{display: "inline"}}>Din email är: <span
+        contentEditable
+        suppressContentEditableWarning={true}
+        className={styles.editableText}
+        onBlur={handleEdit}
         role="textbox"
         name="email"
         >{stateUser.email}</span>
       .</p>
-      <button onClick={changePassword}>Byt lösenord</button>
+      <button onClick={startChangePassword}>Byt lösenord</button>
+      {changingPassword?(
+        <div>
+          <input ref={newPassInput1} type="password" placeholder="Skriv in ditt nya lösenord"></input>
+          <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
+          <button onClick={changePassword}>Spara lösenordet</button>
+        </div>
+      ):""};
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>
@@ -96,7 +115,7 @@ export default function Profile() {
         <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
       <button onClick={() => dispatch({type: "logout"})}>Logga ut</button>
-      
+
     </section>
   )
 }

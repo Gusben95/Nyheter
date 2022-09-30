@@ -5,6 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 // import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux'
 
+import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
 
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
@@ -38,14 +39,14 @@ export default function Login(){
     //     alert("Ej giltig email")
     //   return
     //   }
-    console.log(loginWithProvider)
+    /* console.log(loginWithProvider) */
     if(loginWithProvider){
       account = loginWithProvider;
     }
 
     const accountInfo = await fetchAccountWithEmail(account);
 
-    console.log(accountInfo);
+    /* console.log(accountInfo); */
 
     if(accountInfo?.email) {
       dispatch({type: "setUser", data: accountInfo});
@@ -61,23 +62,18 @@ export default function Login(){
     }
   }
 
-  function appleLogin() {
-    console.log('inloggad med apple');
-    alert('inloggad med apple');
-  }
-
-  // useEffect(() => {
-  //   const initClient = () => {
-  //     gapi.client.init({
-  //       clientId: clientId,
-  //       scope: ''
-  //     });
-  //   };
-  //   gapi.load('client:auth2', initClient);
-  // }, []);
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ''
+      });
+    };
+    gapi.load('client:auth2', initClient);
+  }, []);
 
   const onGoogleSuccess = (res) => {
-    console.log('success:', res);
+    /* console.log('success:', res); */
     const profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,
@@ -92,7 +88,7 @@ export default function Login(){
 
   return (
     <div className={styles.loginContainer}>
-      <h1 onClick={linkToHomepage} >Nyhetssidan</h1>
+      <Header />
 
       { stateUser.email ? (
         <Profile />
@@ -124,7 +120,7 @@ export default function Login(){
       isSignedIn={true}
       />
 
-      <button className='apple' onClick={appleLogin}>Logga in med Apple</button>
+      <button className='facebook'>Logga in med Facebook</button>
       <Link to="/prenumerera">Bli Prenumerant</Link>
       </section>
       )}
