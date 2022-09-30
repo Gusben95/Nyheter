@@ -42,6 +42,12 @@ describe('Payment', () => {
   //   render(<MockPayment/>)
 
   // })
+
+// it('redirect chosen subsription option click to payment', () => {
+//   render(<MockPayment/>)
+  
+// })
+
 })
 
   //Mathias Test
@@ -63,3 +69,4 @@ describe('Payment', () => {
         expect(CardExpireInputEl).toBeInTheDocument()
     })
   })
+
