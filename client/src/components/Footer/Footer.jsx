@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Footer.module.css'
+import logo from '../../Logo.png';
 
 
 export default function Footer() {
@@ -27,16 +28,18 @@ export default function Footer() {
         navigate("/kommersnart")
     }
 
+    function scrollToTop(){
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }
+
     return (
         <footer className={styles.footer}>
-            {/* <h2> Tipslåda</h2>
-				Här kan du skicka in tips annonymt om saker i samhället som du anser bör rapporteras. <br/>
-        <textarea /> <br/>
-        <button>skicka tipset</button> */}
+           
             <div className={styles.footerHead}>
-                <h2>&copy;Nyhetssidan</h2>
+            <div className={styles.imgPosition}>
+            <img  src={logo} onClick={scrollToTop} alt="logo" />
+            </div>
 
-                <h3>Get in touch</h3>
             </div>
 
             <div className={styles.footerContent}>
@@ -61,9 +64,10 @@ export default function Footer() {
                 </div>
 
 
-                <p>Adress: Järntorget 1. 413 14, Göteborg.</p>
-                <p>Telefonnummer: 12345678910 - Öppettider 10-16 vardagar.</p>
-                <p>Mailadress: jacob.klaren@nyhetssida.se</p>
+                <p style={{textAlign: "center"}}>Adress: Järntorget 1. 413 14, Göteborg.</p>
+                <p style={{textAlign: "center"}}>Telefonnummer: 073-1121121.</p>
+                <p style={{textAlign: "center"}}> Öppettider 10-16 vardagar.</p>
+                <p style={{textAlign: "center"}}>Mailadress: jacob.klaren@nyhetssida.se</p>
 
             </div>
             </div>
