@@ -73,9 +73,7 @@ export default function Subscribe() {
       <Header />
 
       <div className='subscribeHeader'>
-        <h2>Prenumerera och få tillgång till alla artiklar </h2>
-
-        <h4> Njut av obegränsad tillgång till nyheter! </h4>
+        <h4>Njut av obegränsad tillgång till nyheter! </h4>
         <h4>Endast 2kr/dag i 12 månader!</h4>
 
         <button className='subscribeBtn' onClick={()=>{firstCard.current.scrollIntoView()}}>Prenumerera</button>

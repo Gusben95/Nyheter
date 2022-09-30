@@ -6,7 +6,7 @@ h1 {
 
 .subscribePage {
   background-color: #600F0C;
-  color: white;
+  color: #EFE1E1;
 }
 
 .subscribeHeader {
@@ -15,6 +15,10 @@ h1 {
   justify-content: center;
   align-items: center;
   border-bottom: 1px white solid;
+}
+
+.subscribeHeader > h4 {
+  margin: 1.25em;
 }
 
 .subscribeBtn {
@@ -108,5 +112,16 @@ h1 {
   }
   100% {
     max-height: 1000px;
+  }
+}
+
+@media (min-width:1024px){
+  .subscribeBtn {
+    width: 40%;
+    font-size: 1.25em;
+    border-radius: 1.25em;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: black;
   }
 }
