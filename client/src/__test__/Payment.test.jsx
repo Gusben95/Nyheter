@@ -62,6 +62,4 @@ describe('Payment', () => {
         const CardExpireInputEl = screen.getByText(/Utgångsdatum/i)
         expect(CardExpireInputEl).toBeInTheDocument()
     })
-
-
   })
