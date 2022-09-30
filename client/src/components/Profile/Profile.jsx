@@ -63,6 +63,11 @@ export default function Profile() {
     setChangingpassword(true);
   }
 
+  function logoutBtn(){
+    sessionStorage.setItem('token', "");
+    dispatch({type: "logout"})
+  }
+
   let subscriptionEndFormatted = new Date(stateUser.subscriptionEnd).toLocaleDateString('sv-SE', {year: 'numeric', month: 'long', day: 'numeric'});
 
   return (
@@ -92,7 +97,7 @@ export default function Profile() {
           <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
           <button onClick={changePassword}>Spara lösenordet</button>
         </div>
-      ):""};
+      ):""}
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>
@@ -114,7 +119,7 @@ export default function Profile() {
         <label htmlFor="sport">Sport</label>
         <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
-      <button onClick={() => dispatch({type: "logout"})}>Logga ut</button>
+      <button onClick={logoutBtn}>Logga ut</button>
 
     </section>
   )
