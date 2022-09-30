@@ -89,6 +89,8 @@ export default function Navbar({hideSubscribe}) {
           <section className={styles.linksPart} style={{borderBottom: "1px solid #DBDBDB"}}>
             <Link onClick={toggleNavbar} to="/helaVeckan" className={styles.link}>Hela veckan</Link>
             <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
+            <Link onClick={toggleNavbar} to="/allTid" className={styles.link}>All time i dagsordning</Link>
+            <Link onClick={toggleNavbar} to="/populart" className={styles.link}>Populärast av all time</Link>
           </section>
         ) : ""}
       </nav>

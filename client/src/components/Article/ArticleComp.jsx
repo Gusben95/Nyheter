@@ -33,7 +33,7 @@ export default function ArticleComp(props) {
   }
 
   function switchOpened(){
-    if(!viewCounted && !opened && views) {
+    if(!viewCounted && !opened && views !== undefined) {
       setViewCounted(true);
       dispatch({type: "incrementViewCount", data: id});
       incrementViewCount({id: id});

@@ -80,9 +80,13 @@ export default function Admin() {
     setNewArticle(newArticleCopy);
   }
 
-  function sendArticle() {
-    postArticle(newArticle);
-    dispatch({type: "addArticle", data: newArticle});
+  async function sendArticle() {
+    let response = await postArticle(newArticle);
+    if(response === "Success") {
+      dispatch({type: "addArticle", data: newArticle});
+      alert("Artikeln har skapats");
+      window.location.reload();
+    }
   }
 
   return (

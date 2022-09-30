@@ -43,8 +43,10 @@ export default function Payment(props) {
   return (
     <div className={styles.paymentContainer}>
       <h1>Payment</h1>
-      <p>Du har valt {props.subscription} Månader.</p>
-      <p>Det kostar {subscriptionCost}kr.</p>
+      <div style={{textAlign: "center"}}>
+        <p>Du har valt {props.subscription} Månader.</p>
+        <p>Det kostar {subscriptionCost}kr.</p>
+      </div>
 
       <section className={styles.cardDetails}>
         <h2>Kortuppgifter</h2>
