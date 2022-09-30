@@ -26,7 +26,7 @@ export default function FacebookLoginComponent() {
         <Card.Header>
           {!login &&
             <FacebookLogin
-              appId="921201001964201"
+              appId="668319644418705"
               autoLoad={true}
               fields="name,email,picture"
               scope="public_profile,user_friends"
