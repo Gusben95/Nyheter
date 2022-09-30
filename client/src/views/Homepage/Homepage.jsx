@@ -125,7 +125,7 @@ export default function Homepage() {
           {articlesMapped}
         </>
       )}
-      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️Tillbaka till toppen</section>
+      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️</section>
     </div>
   )
 }

@@ -5,10 +5,12 @@
     left: 0;
    bottom: 0;
    width: 100%;
-   background-color: #600F0C;
+   background-color: #a2282467;
    color: white;
    font-family: 'Playfair Display', serif;
-   padding: 20px 0px;
+   padding-bottom: 20px;
+   margin-top: 10px;
+   padding-top: 0.1px;
 }
 
 .footerContent {
@@ -23,13 +25,11 @@
     padding: 10px 20px;
 }
 
-.footerHead>* {
-    padding-left: 20px;
-}
-
 .footerLinks {
     display: flex;
     flex-direction: row;
+    text-align: center;
+    font-size: 16px; 
     border-bottom: 1px solid white;
     padding-bottom: 20px;
 }
@@ -41,6 +41,20 @@
 
 .footerLinkLeft p, .footerLinkRight p {
     cursor: pointer;
+
+}
+
+.imgPosition{
+    height:180px;
+    border: 5px black;
+    display: flex;
+    justify-content: center; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.imgPosition img{
+    height: 100%;
+    cursor: pointer; 
 
 }
 
