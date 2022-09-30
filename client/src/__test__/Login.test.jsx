@@ -104,23 +104,8 @@ describe('Login', () => {
   //   fireEvent.click(googleLinkEl)
   //   expect(googleLinkEl)......
   // })
-  
-  it('apple login should be rendered', () => {
-    render(<MockLogin/>)
-    const appleLinkEl = screen.getByRole('button', {name: /logga in med apple/i})
-    expect(appleLinkEl).toBeInTheDocument()
-  })
+
     
-  it('apple login should be rendered', () => {
-    render(<MockLogin/>)
-    screen.debug()
-  })
-  // it('apple login should redirect when clicked', () => {
-  //   render(<MockLogin/>)
-  //   const appleLinkEl = screen.getByRole('button', {name: /logga in med apple/i})
-  //   fireEvent.click(appleLinkEl)
-  //   expect(appleLinkEl)......
-  // })
 
   it('subscriber link should be rendered', () => {
     render(<MockLogin/>)
