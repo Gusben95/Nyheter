@@ -54,7 +54,7 @@ export default function Profile() {
   }
 
   function changePassword() {
-   if (newPassInput1.current.value===newPassInput2.current.value){
+   if (newPassInput1.current.value === newPassInput2.current.value){
      updatePassword(newPassInput1.current.value)
    }
   }

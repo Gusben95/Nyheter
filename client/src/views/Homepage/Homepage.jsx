@@ -60,7 +60,7 @@ export default function Homepage() {
   // to make it a truly "dagens" page
 
   /* let todayDay = new Date().toLocaleDateString()
-  let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1);
+  let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1).getTime();
   let todayAtMidnightPlusOneDay = todayAtMidnight + 86400000;
   let todaysArticles = stateArticles.filter(article => {
     let articleDate = new Date(article.dateAdded).getTime();
