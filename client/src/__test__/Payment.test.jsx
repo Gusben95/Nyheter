@@ -15,10 +15,10 @@ const MockPayment = () => {
 };
 
 describe('Payment', () => {
-  it('', () => {
-    render(<MockPayment/>)
-    screen.debug()
-  })
+  // it('', () => {
+  //   render(<MockPayment/>)
+  //   screen.debug()
+  // })
 
   it('cardCVC input should be rendered', () => {
     render(<MockPayment/>)
