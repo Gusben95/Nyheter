@@ -4,7 +4,6 @@ import store from '../store/Reducer';
 import { BrowserRouter } from 'react-router-dom';
 import Login from '../views/Login/Login';
 
-
 const MockLogin = () => {
   return (  
       <Provider store={store}>
@@ -17,8 +16,8 @@ const MockLogin = () => {
 
 const url = "http://localhost/";
 const user = {
-  email: "hej@hotmail.com",
-  password: "hoi"
+  email: "hejja@gmail.com",
+  password: "pwd123"
 }
 
 
@@ -57,6 +56,18 @@ describe('Login', () => {
     render(<MockLogin/>)
     const buttonEl = screen.getByRole('button', {name: "Logga in"})
     expect(buttonEl).toBeEnabled()
+  })
+
+  it('user who have logged in with email and password should redirect to user profile', () => {
+    render (<MockLogin/>)
+    const usernameInputEl = screen.getByPlaceholderText(/email/i)
+    fireEvent.change(usernameInputEl, {target: {value: user.email}})
+    const passwordInputEl = screen.getByPlaceholderText(/lösenord/i)
+    fireEvent.change(passwordInputEl, {target: {value: user.password}})
+    const buttonEl = screen.getByRole('button', {name: "Logga in"})
+    fireEvent.click(buttonEl)
+    expect(window.location.href).toBe("http://localhost/")
+
   })
 
   // it('error message should not be visible', () => {
