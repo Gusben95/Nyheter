@@ -92,7 +92,7 @@ export default function Profile() {
           <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
           <button onClick={changePassword}>Spara lösenordet</button>
         </div>
-      ):""};
+      ):""}
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>

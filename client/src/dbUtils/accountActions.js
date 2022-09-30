@@ -12,10 +12,28 @@ async function fetchAccountWithEmail(account) {
   let data = response;
   /* console.log(data) */
   if (data.status === 500) {
-    return data.json();
+    return await data.json();
   }
   data = await data.json();
   /* console.log(data) */
+  return data[0];
+}
+
+async function loginWithEmail(account) {
+  const response = await fetch(BASE_URL + "/loginWithEmail", {
+    method: 'POST',
+    body: JSON.stringify(account),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  let data = response;
+  /* console.log(data) */
+  if (data.status === 500) {
+    return await data.json();
+  }
+  data = await data.json();
+  // console.log(data) 
   return data[0];
 }
 
@@ -55,6 +73,7 @@ async function updatePassword(account) {
 }
 export {
   fetchAccountWithEmail,
+  loginWithEmail,
   createAccount,
   updateAccount,
   updatePassword

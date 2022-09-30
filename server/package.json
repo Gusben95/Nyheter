@@ -20,6 +20,7 @@
     "gapi-script": "^1.2.0",
     "googleapis": "^105.0.0",
     "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.9.1",
     "nodemailer": "^6.7.8",
     "react-google-login": "^5.2.2"

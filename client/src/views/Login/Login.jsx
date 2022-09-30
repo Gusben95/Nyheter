@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
 
-const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
+const { fetchAccountWithEmail, loginWithEmail, updateAccount } = require('../../dbUtils/accountActions')
 /* göm med env */
 const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
 
@@ -20,10 +20,17 @@ export default function Login(){
   //keep reference to inputs in HTML.
   const emailInput = useRef('');
   const passwordInput = useRef('');
-  // Check email syntax
 
+  //save token from login in sessionStorage
+  function saveToken(account) {
+    sessionStorage.setItem('token', account.token);
+    const accountToken = {
+      id: account._id,
+      token: account.token,
+    }
+    updateAccount(accountToken);
+  }
   //Login in user
-
   async function loginAuth(loginWithProvider){
     let account = {
       email: emailInput.current.value,
@@ -44,9 +51,10 @@ export default function Login(){
       account = loginWithProvider;
     }
 
-    const accountInfo = await fetchAccountWithEmail(account);
+    const accountInfo = await loginWithEmail(account);
+    //console.log(accountInfo)
+    saveToken(accountInfo)
 
-    /* console.log(accountInfo); */
 
     if(accountInfo?.email) {
       dispatch({type: "setUser", data: accountInfo});

@@ -31,6 +31,7 @@ const getCategory = (category) => {
 
 // Featch articles depending on the search query
 const getSearch = (searchInput) => {
+  const collection = db.collection('article')
   // only need to index the collection once
   // db.collection('article').createIndex({ title: "text", shortDescription: "text", mainText: "text" });
   const query = {
@@ -57,16 +58,14 @@ const getSearch = (searchInput) => {
     },
   };
 
-  const collection = db.collection('article')
   return collection.find(query).sort(sort).project(projection).toArray()
 }
 
 // Post an article to the database, will get a unique id from mongoDB.
 const postArticle = async (doc) => {
+  const collection = db.collection('article')
   doc.dateAdded = new Date();
   doc.views = 0;
-  /* console.log(doc) */
-  const collection = db.collection('article');
   return await collection.insertOne(doc);
 }
 

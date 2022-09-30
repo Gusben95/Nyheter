@@ -1,6 +1,7 @@
 const express = require("express");
 const nodeMailer = require('nodemailer');
 const helmet = require("helmet");
+const jwt = require("jsonwebtoken")
 require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
@@ -40,36 +41,30 @@ init().then(initAcc().then(() => {
 
 // Add headers before the routes are defined
 app.use(function(req, res, next) {
-
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
-
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
   // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true);
-
   res.setHeader('cross-origin-resource-policy', 'cross-origin');
-
   // Pass to next layer of middleware
   next();
 });
 
-// Login limiter 
+// Login limiter
 
 
 //***********************  FUNKTIONELL KOD AVSTÄNGD UNDER UTVÄCKLINGSFAS *************************
-// Förhindrar upprepade loginförsök från samma IP-Address 
+// Förhindrar upprepade loginförsök från samma IP-Address
 // const repeatedLoginlimiter = rateLimit({
-// 	windowMs: 10 * 60 * 1000, 
+// 	windowMs: 10 * 60 * 1000,
 // 	max: 5,
-// 	standardHeaders: true, 
-// 	legacyHeaders: false, 
+// 	standardHeaders: true,
+// 	legacyHeaders: false,
 
 // }
 // )
@@ -233,17 +228,36 @@ app.post('/getAccountWithEmail',   async (request, response) => {
     response.status(500).end()
   })
   if (res.length > 0) {
-    const compareCheck = await comparePassword(account.password, res[0].password)
-    if (compareCheck) {
-      response.json(res);
-    } else {
-      response.status(500)
-      response.json("wrong password");
-    }
+    response.json(res)
   } else {
     response.status(500)
     response.json("Wrong email");
   }
+})
+
+app.post('/loginWithEmail', async (request, response) => {
+  let account = await request.body;
+  account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
+  let res = await getAccountByEmail(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  if (res.length > 0 ) {
+    const compareCheck = await comparePassword(account.password, res[0].password)
+    if (compareCheck) {
+      res[0].token = jwt.sign({ username: res[0].email }, 'a1b1c1', {
+          expiresIn: 600 // Går ut om 10 min (värdet är i sekunder)
+          });
+
+      response.json(res);
+    } else {
+      response.status(500)
+      response.json("wrong password");
+    }} else {
+      response.status(500)
+      response.json("Wrong email");
+    }
+
 })
 
 app.post('/createAccount', async (request, response) => {
