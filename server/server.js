@@ -2,6 +2,7 @@ const express = require("express");
 const nodeMailer = require('nodemailer');
 const helmet = require("helmet");
 require('dotenv').config();
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const {
   init,
@@ -58,6 +59,22 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+// Login limiter 
+
+
+//***********************  FUNKTIONELL KOD AVSTÄNGD UNDER UTVÄCKLINGSFAS *************************
+// Förhindrar upprepade loginförsök från samma IP-Address 
+// const repeatedLoginlimiter = rateLimit({
+// 	windowMs: 10 * 60 * 1000, 
+// 	max: 5,
+// 	standardHeaders: true, 
+// 	legacyHeaders: false, 
+
+// }
+// )
+
+
 
 // -------- article database --------
 // Get all the articles from the database.
@@ -205,9 +222,11 @@ app.post('/incrementViewCount', async (request, response) => {
 //   let article = await request.body
 // })
 
+//repeatedLoginlimiter,
+
 
 // -------- account database --------
-app.post('/getAccountWithEmail', async (request, response) => {
+app.post('/getAccountWithEmail', /* repeatedLoginlimiter */  async (request, response) => {
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   /* console.log(account.email); */
