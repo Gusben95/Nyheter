@@ -35,7 +35,7 @@ export default function Footer() {
         <textarea /> <br/>
         <button>skicka tipset</button> */}
             <div className={styles.footerHead}>
-                <h2>Nyhetssidan</h2>
+                <h2>&copy;Nyhetssidan</h2>
 
                 <h3>Get in touch</h3>
             </div>
