@@ -8,15 +8,12 @@ import styles from './Homepage.module.css'
 
 const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articleActions')
 
-export default function Homepage(props) {
+export default function Homepage() {
   const dispatch = useDispatch();
   const stateArticles = useSelector(state => state.Articles);
   const stateUser = useSelector(state => state.User);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
-  let allTime = props.allTime;
-  let popular = props.popular;
 
   const { category } = useParams();
 
@@ -55,48 +52,27 @@ export default function Homepage(props) {
     }
   }, [category])
 
-  // This code is for when we want the homepage to ONLY show articles from the last 24 hours
+  useEffect(() =>{
+    /* console.log("stateArticles", stateArticles) */
+  }, [stateArticles]);
+
+  //This code is for when we want the homepage to ONLY show articles from the last 24 hours
   // to make it a truly "dagens" page
 
-  function getTodaysArticles() {
-    let todayDay = new Date().toLocaleDateString()
-    let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1);
-    let todayAtMidnightPlusOneDay = todayAtMidnight + 86400000;
-    let stateArticlesCopy = [...stateArticles];
-    return stateArticlesCopy.filter(article => {
-      let articleDate = new Date(article.dateAdded).getTime();
-      // if the article was added between midnight and midnight + 1 day (today)
-      return articleDate >= todayAtMidnight && articleDate < todayAtMidnightPlusOneDay;
-    })
-  }
+  /* let todayDay = new Date().toLocaleDateString()
+  let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1).getTime();
+  let todayAtMidnightPlusOneDay = todayAtMidnight + 86400000;
+  let todaysArticles = stateArticles.filter(article => {
+    let articleDate = new Date(article.dateAdded).getTime();
+    console.log("articleDate", articleDate)
+    console.log("todayAtMidnight", todayAtMidnight)
+    // if the article was added between midnight and midnight + 1 day (today)
+    return articleDate >= todayAtMidnight && articleDate < todayAtMidnightPlusOneDay;
+  }) */
+  //let stateArticlesCopy = [...todaysArticles]
 
-  function sortArticlesByViews(articles) {
-    let articlesCopy = [...articles];
-    return articlesCopy.sort(function compare(a, b) {
-      var viewsA = a.views;
-      var viewsB = b.views;
-      return viewsB - viewsA;
-    });
-  }
-
-  let todaysArticles = [];
-  // if not on alltime and not on popular, then show todays articles sorted by views
-  if(!allTime && !popular) {
-    todaysArticles = getTodaysArticles();
-    todaysArticles = sortArticlesByViews(todaysArticles);
-  }
-  if(popular) {
-    todaysArticles = sortArticlesByViews(stateArticles);
-  }
-  if(allTime) {
-    todaysArticles = stateArticles;
-  }
-  
   //split array into chunks of 10 articles
-
-  // again, if were on the true "dagens" categories, we only want to show todays articles
-  // else were on the all time page, and we want to show all articles
-  let stateArticlesCopy = todaysArticles;
+  let stateArticlesCopy = [...stateArticles]
   let articlesSplit = []
   while(stateArticlesCopy.length) {
     articlesSplit.push(stateArticlesCopy.splice(0,8));
@@ -146,17 +122,7 @@ export default function Homepage(props) {
         </div>
       ) : (
         <>
-          {articlesMapped.length > 0 ? (
-            <>
-              {articlesMapped}
-            </>
-          ) : (
-            <div className={styles.noArticlesContainer}>
-              <h2>Inga artiklar har skrivits idag...</h2>
-              <h2>Gå gärna in på All Time istället för att läsa alla våra artiklar.</h2>
-              <Link to="/allTid">All Time</Link>
-            </div>
-          )}
+          {articlesMapped}
         </>
       )}
       <section className={styles.toTheTop} onClick={scrollToTop}>⬆️Tillbaka till toppen</section>
