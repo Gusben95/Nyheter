@@ -37,13 +37,9 @@ export default function SignUp() {
     //try to login, and if the email already exists, it will return an error.
     //THEN we can create a new account.
 
-    //dispatch({type: "setUser", data: account});
-    const response = await createAccount(account);
-    if(response === "account already exists") {
-      alert("E-postadressen finns redan");
-      return
-    }
     dispatch({type: "setUser", data: account});
+    const response = await createAccount(account);
+    console.log(response)
   }
 
   return (

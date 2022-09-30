@@ -54,7 +54,7 @@ export default function Profile() {
   }
 
   function changePassword() {
-   if (newPassInput1.current.value===newPassInput2.current.value){
+   if (newPassInput1.current.value === newPassInput2.current.value){
      updatePassword(newPassInput1.current.value)
    }
   }
@@ -92,7 +92,7 @@ export default function Profile() {
           <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
           <button onClick={changePassword}>Spara lösenordet</button>
         </div>
-      ):""};
+      ):""}
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>

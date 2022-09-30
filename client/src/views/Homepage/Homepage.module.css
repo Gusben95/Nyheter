@@ -60,34 +60,3 @@
   cursor: pointer;
   color: black;
 }
-
-.noArticlesContainer {
-  width: 100%;
-  margin: 0px auto 20px auto;
-  padding-bottom: 10px;
-  position: relative;
-  text-align: center;
-  transition: all 0.3s ease;
-  padding: 20px 0;
-}
-
-.noArticlesContainer a {
-  text-decoration: none;
-  color: black;
-  font-size: 1.5em;
-  background-color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 2px 2px 4px lightgrey;
-}
-
-.noArticlesContainer a:hover {
-  background-color: rgb(221, 221, 221);
-}
-
-@media (min-width: 768px) {
-  .noArticlesContainer {
-    width: 65%;
-  }
-}

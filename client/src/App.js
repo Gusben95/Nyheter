@@ -41,14 +41,6 @@ function App() {
       <Route path="/kategori/:category" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
-      
-      <Route path="/allTid" element={
-        [<Homepage allTime key="1" />, <Navbar key="2" />, <Footer key="3" />]
-      } />
-      
-      <Route path="/populart" element={
-        [<Homepage popular key="1" />, <Navbar key="2" />, <Footer key="3" />]
-      } />
 
       <Route path="/admin" element={
         [<Admin key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
