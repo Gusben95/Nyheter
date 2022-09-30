@@ -43,17 +43,8 @@ describe('Payment', () => {
 
   // })
 })
-    return (  
-        <Provider store={store}>
-          <BrowserRouter>
-            <Payment/>
-          </BrowserRouter>
-        </Provider>
-    )
-  }
 
   //Mathias Test
-
   describe('Payment', () => {
     it('cardnumber input should be rendered', () => {
         render(<MockPayment/>)
@@ -71,6 +62,4 @@ describe('Payment', () => {
         const CardExpireInputEl = screen.getByText(/Utgångsdatum/i)
         expect(CardExpireInputEl).toBeInTheDocument()
     })
-
-
   })
