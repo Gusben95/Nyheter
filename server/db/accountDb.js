@@ -27,13 +27,20 @@ const getAccountByEmail = async (account) => {
   return res;
 }
 
+const getAccountWithToken = async (account) => {
+  const collection = db.collection('account')
+  let res = await collection.find({
+    token: account.token
+  }).toArray()
+  return res;
+}
+
 const createAccount = async (account) => {
   const collection = db.collection('account')
   account.role = "user";
   account.stillPaying = false;
   account.subscriptionEnd = "";
   account.password = await hashPassword(account.password);
-  /* console.log(account); */
   return await collection.insertOne(account);
 }
 
@@ -62,7 +69,6 @@ const updateAccount = async (account) => {
   if (account.stillPaying) updatedAccount.stillPaying = account.stillPaying;
   if (account.subscriptionEnd) updatedAccount.subscriptionEnd = account.subscriptionEnd;
   if (account.token) updatedAccount.token = account.token;
-
   updatedAccount = {
     $set: updatedAccount
   }
@@ -77,6 +83,7 @@ const updateAccount = async (account) => {
 module.exports = {
   initAcc,
   getAccountByEmail,
+  getAccountWithToken,
   createAccount,
   updatePassword,
   updateAccount

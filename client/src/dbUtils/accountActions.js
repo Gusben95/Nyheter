@@ -10,12 +10,10 @@ async function fetchAccountWithEmail(account) {
     }
   });
   let data = response;
-  /* console.log(data) */
   if (data.status === 500) {
-    return await data.json();
+    return await data.json()
   }
   data = await data.json();
-  /* console.log(data) */
   return data[0];
 }
 
@@ -28,12 +26,10 @@ async function loginWithEmail(account) {
     }
   });
   let data = response;
-  /* console.log(data) */
   if (data.status === 500) {
-    return await data.json();
+    return await data.json()
   }
   data = await data.json();
-  // console.log(data) 
   return data[0];
 }
 
@@ -60,6 +56,7 @@ async function updateAccount(account) {
   const data = await response.json();
   return data;
 }
+
 async function updatePassword(account) {
   const response = await fetch(BASE_URL + "/updatePassword", {
     method: 'POST',
@@ -69,10 +66,24 @@ async function updatePassword(account) {
     }
   })
   const data = await response.json();
-  return data;
+  return await data;
 }
+
+async function getAccountWithToken(account){
+  const response = await fetch(BASE_URL + "/getAccountWithToken", {
+    method: 'POST',
+    body: JSON.stringify(account),
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+  const data = await response.json();
+  return data[0];
+}
+
 export {
   fetchAccountWithEmail,
+  getAccountWithToken,
   loginWithEmail,
   createAccount,
   updateAccount,

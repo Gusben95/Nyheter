@@ -18,6 +18,7 @@ const {
 const {
   initAcc,
   getAccountByEmail,
+  getAccountWithToken,
   createAccount,
   updateAccount,
   updatePassword
@@ -56,8 +57,6 @@ app.use(function(req, res, next) {
 });
 
 // Login limiter
-
-
 //***********************  FUNKTIONELL KOD AVSTÄNGD UNDER UTVÄCKLINGSFAS *************************
 // Förhindrar upprepade loginförsök från samma IP-Address
 // const repeatedLoginlimiter = rateLimit({
@@ -65,10 +64,8 @@ app.use(function(req, res, next) {
 // 	max: 5,
 // 	standardHeaders: true,
 // 	legacyHeaders: false,
-
 // }
 // )
-
 
 
 // -------- article database --------
@@ -237,6 +234,20 @@ app.post('/getAccountWithEmail', /* repeatedLoginlimiter */  async (request, res
   }
 })
 
+app.post('/getAccountWithToken', async (request, response) => {
+  let account = await request.body
+  let res = await getAccountWithToken(account).catch((err) => {
+    console.log(err)
+    response.status(500).end()
+  })
+  if (res.length > 0) {
+    response.json(res)
+  } else {
+    response.status(500)
+    response.json("Token not found");
+  }
+})
+
 app.post('/loginWithEmail', async (request, response) => {
   let account = await request.body;
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
@@ -248,7 +259,7 @@ app.post('/loginWithEmail', async (request, response) => {
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck) {
       res[0].token = jwt.sign({ username: res[0].email }, 'a1b1c1', {
-          expiresIn: 600 // Går ut om 10 min (värdet är i sekunder)
+          expiresIn: '5m' // expires in 5 min
           });
 
       response.json(res);
