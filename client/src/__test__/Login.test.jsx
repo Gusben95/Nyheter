@@ -98,14 +98,12 @@ describe('Login', () => {
     const googleLinkEl = screen.getByText(/Sign in with Google/i)
     expect(googleLinkEl).toBeInTheDocument()
   })
-  // it('google login should redirect when clicked', () => {
-  //   render(<MockLogin/>)
-  //   const googleLinkEl = screen.getByText(/Sign in with Google/i)
-  //   fireEvent.click(googleLinkEl)
-  //   expect(googleLinkEl)......
-  // })
+  it('facebook login should be rendered', () => {
+    render(<MockLogin/>)
+    const facebookLinkEl = screen.getByText(/Logga in med Facebook/i)
+    expect(facebookLinkEl).toBeInTheDocument()
+  })
 
-    
 
   it('subscriber link should be rendered', () => {
     render(<MockLogin/>)
