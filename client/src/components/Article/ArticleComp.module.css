@@ -1,11 +1,11 @@
 .largeArticle, .smallArticle {
   width: 100%;
-  margin: 0px auto 20px auto;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #DBDBDB;
+  margin: 0px auto 1.25em auto;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid #EFE1E1;
   position: relative;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
 }
 
 .largeArticle:hover, .smallArticle:hover {
@@ -15,7 +15,7 @@
 .smallArticle {
   display: flex;
   flex-direction: column;
-  padding: 0px 10px 10px 10px;
+  padding: 0px 0.625em 1.25em 0.625em;
 }
 
 .smallArticle .articleContent {
@@ -37,7 +37,7 @@
 }
 
 .largeArticle .articleContent {
-  padding: 10px;
+  padding: 0.625em;
 }
 
 .articleImg {
@@ -46,10 +46,10 @@
 }
 
 .articleHeader {
-  font-size: 2em;
+  font-size: 1.625em;
   word-break: break-word;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0.425em;
 }
 
 .shortDescription {
@@ -62,20 +62,21 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: 5px;
+  margin-top: 0.625em;
 }
 
 .articleTag {
   padding: 5px 10px;
-  background-color: #DE382C;
-  border-radius: 10px;
+  color: #000000;
+  background-color: #EFE1E1;
+  border-radius: 0.625em;
   text-transform: capitalize;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .articleTag:hover {
-  background-color: rgb(245, 159, 159);
+  background-color: #E82C25;
 }
 
 .adminButtons {
@@ -106,37 +107,22 @@
   position: relative;
 }
 
-.noPayingMainTextShadow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #600F0C 100%);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0, #600F0C 100%);
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0, #600F0C 100%);
-}
-
-.largeArticle:hover .noPayingMainTextShadow, .smallArticle:hover .noPayingMainTextShadow {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #6F2725 100%);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0, #6F2725 100%);
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0, #6F2725 100%);
-
-}
-
 .subscribeNotif {
-  margin-top: 0px;
+  margin-top: 0.625em;
+}
+
+.subscribeNotif > a {
+  color: #E82C25;
 }
 
 
 /* Media query phone / computer view */
 
-@media (min-width: 958px){
+@media (min-width: 1024px){
   .largeArticle, .smallArticle{
-    width: 65%;
+    width: 50%;
   }  
-
   .openedArticle {
-    width: 80% !important;
+    width: 60% !important;
   }
 }

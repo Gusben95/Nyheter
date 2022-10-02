@@ -1,5 +1,5 @@
 .homepage {
-  background: rgb(96, 15, 12);
+  background: #600F0C;
   /* background: rgb(0, 0, 0); */
   /* background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%); */
 }
@@ -19,11 +19,12 @@
   padding: 10px;
   padding-bottom: 3em;
   background: rgb(96, 15, 12);
-  background: linear-gradient(180deg, rgba(96, 15, 12, 1) 65%, rgba(0, 0, 0, 1) 93%, rgba(96, 15, 12, 1) 100%);
+  background: linear-gradient(180deg,#600F0C 40%, black);
   color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0.225em;
 }
 
 .superAd a {
@@ -68,7 +69,7 @@
 
 @media (min-width:1024px) {
   .superAd a {
-    width:40%;
+    width:30%;
     border-radius: 1em
   }
  
