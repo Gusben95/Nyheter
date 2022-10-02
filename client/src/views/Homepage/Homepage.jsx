@@ -111,8 +111,8 @@ export default function Homepage() {
             <h3 style={{margin: "1px"}}>Läs trovärdiga nyheter från ett enhörningsperspektiv.</h3>
             <h3 style={{margin: "1px"}}> 2kr/dag i 12 månader.</h3>
           </article>
-          <Link to="/prenumerera">Prenumerera nu</Link>
-          <section><p>Redan prenumerant?</p><Link to="/login">Logga in</Link></section>
+          <Link to="/prenumerera">Prenumerera nu</Link><p>Redan prenumerant?</p>
+          <section className={styles.Login}><Link to="/login">Logga in</Link></section>
         </section>
       )}
 

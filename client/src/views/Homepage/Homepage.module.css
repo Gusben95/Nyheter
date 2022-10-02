@@ -35,8 +35,9 @@
   font-size: 1.5em;
   margin-top: 20px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px lightgrey;
+  box-shadow: rgba(0, 1, 2, 25%);
   display: block;
+ 
 }
 
 .superAd a:hover {
@@ -57,9 +58,24 @@
   bottom: 10px;
   right: 10px;
   border-bottom-left-radius: 15px;
-  color: rgb(30, 30, 30);
+  color: rgb(75, 75, 75);
   font-size: 2em;
   font-stretch: expanded;
   cursor: pointer;
   padding: 5px 0;
+}
+
+
+@media (min-width:1024px) {
+  .superAd a {
+    width:40%;
+    border-radius: 1em
+  }
+ 
+  .Login a {
+    width: 100%;
+    border-radius: 1em;
+    justify-items: center;
+    
+  }
 }
