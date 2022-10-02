@@ -67,7 +67,7 @@
   align-items: center;
   top: -2.5px;
   right: -2.5px;
- 
+  border: none;
   background: #EFE1E1;
   border-bottom-left-radius: 15px;
   width: 20%;
@@ -124,7 +124,6 @@
   align-items: center;
   top: -2.5px;
   left: -2.5px;
-  
   background: #EFE1E1;
   border-bottom-right-radius: 15px;
   width: 20%;
@@ -135,6 +134,7 @@
   font-stretch: expanded;
   cursor: pointer;
   z-index:3;
+  border: none;
 }
 
 .closeNavbarBtn {
@@ -144,7 +144,7 @@
   align-items: center;
   top: -2.5px;
   right: -2.5px;
-  
+  border: none;
   background: #EFE1E1;
   border-bottom-left-radius: 15px;
   width: 20%;

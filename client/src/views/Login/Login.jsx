@@ -10,6 +10,7 @@ import FacebookLoginComponent from './facebookLoginComponent';
 import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
 
+
 const { fetchAccountWithEmail } = require('../../dbUtils/accountActions')
 /* göm med env */
 const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
@@ -97,7 +98,7 @@ export default function Login(){
       ) : (
         <section className={styles.loginForm}>
           <h2>Logga in</h2>
-          <label htmlFor='uname'>Email</label>
+          <label htmlFor='uname'>E-post</label>
           <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required></input>
 
           <label htmlFor='psw'>Lösenord</label>
@@ -124,6 +125,7 @@ export default function Login(){
       <FacebookLoginComponent/>
 
       <Link to="/prenumerera">Bli Prenumerant</Link>
+      
       </section>
       )}
   </div>
