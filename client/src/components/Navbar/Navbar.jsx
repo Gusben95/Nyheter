@@ -81,7 +81,7 @@ export default function Navbar({hideSubscribe}) {
                   <Link to="/login" onClick={toggleNavbar}>Profil</Link>
                 </>
               ) : (
-                <Link to="/login" onClick={toggleNavbar}>Profil</Link>
+                <Link to="/login" style={{color: "white", paddingRight: '20px'}} onClick={toggleNavbar}>Profil</Link>
               )}
               <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
             </>
