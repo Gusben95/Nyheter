@@ -9,11 +9,44 @@
   border: 1px solid gray;
   font-size: 1.2em;
   border-radius: 5px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
+  padding: 5px 0.625em;
+  margin-bottom: 0.625em;
+  margin-top: 0.225em;
 }
 
 .preferenceContainer {
   display: flex;
   flex-direction: column;
+  margin: 1em;
+}
+
+.signUp > button{
+  margin: 0.225em;
+  padding: 0.625em;
+  border-radius: 1em;
+  border: none;
+}
+
+.signUp > button:hover{
+  background-color: #E82C25;
+  cursor: pointer;
+}
+
+@media(min-width:1024px){
+  .signUp input:not([type='checkbox'])  {
+    width: 50%;
+    border: 1px solid gray;
+    font-size: 1.2em;
+    border-radius: 5px;
+    padding: 5px 0.625em;
+    margin-bottom: 0.625em;
+    margin-top: 0.225em;
+  }
+
+  .signUp > button{
+    margin: 1.225em;
+    padding: 0.625em;
+    border-radius: 1em;
+    border: none;
+  }
 }

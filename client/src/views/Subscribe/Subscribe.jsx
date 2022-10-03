@@ -84,12 +84,10 @@ export default function Subscribe() {
       <Header />
 
       <div className='subscribeHeader'>
-        <h2>Prenumerera och få tillgång till alla artiklar </h2>
-
-        <h4> Njut av obegränsad tillgång till nyheter! </h4>
+        <h4>Njut av obegränsad tillgång till alla nyheter! </h4>
         <h4>Endast 2kr/dag i 12 månader!</h4>
 
-        <button className='subscribeBtn' onClick={()=>{firstCard.current.scrollIntoView()}}>Prenumerera</button>
+        <button className='subscribeBtn' onClick={()=>{firstCard.current.scrollIntoView()}}>Prenumerera nu</button>
 
         <p>Erbjudandet tar slut om:</p>
         <p id="demo"></p>
@@ -100,9 +98,7 @@ export default function Subscribe() {
         <ul className='subscribeList'>
           <li>Direkt tillgång på alla plattformar</li>
           <li>Läs hela artiklar utan reklam</li>
-          <li>Extraordinära repotage och djupgående intervjuer</li>
-          <li>Exklusiva nyhetsbrev varje vecka</li>
-          <li>Reklamfria videoklipp</li>
+          <li>Extraordinära reportage och djupgående intervjuer</li>
         </ul>
       </div>
 

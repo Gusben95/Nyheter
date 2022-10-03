@@ -167,7 +167,7 @@ export default function ArticleComp(props) {
                           </>
                         )}
                       </div>
-                      <p>Skriven av: {author}</p>
+                      <p>Artikelförfattare: {author}</p>
                       {dateAdded ? (
                         <p>{dateFormatted}</p>
                       ) : (

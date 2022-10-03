@@ -32,6 +32,22 @@ function App() {
     })
   }, []);
 
+  useEffect(() => {
+    const sessionToken = sessionStorage.getItem("token");
+    if (sessionToken !== null || sessionToken === "") {
+      let account = {
+        token: sessionToken
+      }
+      const featchToken = async () => {
+        let accountInfo = await getAccountWithToken(account);
+        if (accountInfo !== []) {
+          dispatch({type: "setUser", data: accountInfo});
+        }
+      }
+      featchToken().catch(console.error);
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={

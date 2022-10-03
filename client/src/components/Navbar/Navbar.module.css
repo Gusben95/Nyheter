@@ -1,7 +1,7 @@
 /* Regular left hand side navbar */
 .navbar {
   height: 100vh;
-  padding: 10px;
+  padding: 0.625em;
   width: 100%;
   max-width: 100vw;
   position: fixed;
@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   text-align: center;
   background-color: #600F0C;
-  box-shadow: 2px 2px 4px lightgray;
+  box-shadow: 2px 2px 4px #EFE1E1;
   z-index: 2;
   transform: translateX(102%);
   transition: transform 0.5s ease;
@@ -30,17 +30,17 @@
 
 .headers {
   cursor: pointer;
-  border-top: 1px solid #DBDBDB;
+  border-top: 1px solid #EFE1E1;
   padding: 10px;
   margin: 0;
 }
 
 .link {
-  color: white;
+  color: #EFE1E1;
   text-decoration: none;
   font-size: 1.4em;
   font-weight: bold;
-  padding: 20px;
+  padding: 1em;
 }
 
 .link:hover {
@@ -67,8 +67,8 @@
   align-items: center;
   top: -2.5px;
   right: -2.5px;
-  border: solid 1.5px black;
-  background: #f0e0e1;
+  border: none;
+  background: #EFE1E1;
   border-bottom-left-radius: 15px;
   width: 20%;
   height: 4%;
@@ -80,8 +80,8 @@
   font-stretch: expanded;
   cursor: pointer;
   padding: 5px 0;
-
 }
+
 .openNavbarBtn:hover .hamburger1{
 	animation: pulse 1.8s infinite;
 }
@@ -124,8 +124,7 @@
   align-items: center;
   top: -2.5px;
   left: -2.5px;
-  border: solid 1px black;
-  background: #f0e0e1;
+  background: #EFE1E1;
   border-bottom-right-radius: 15px;
   width: 20%;
   height: 4%;
@@ -135,6 +134,7 @@
   font-stretch: expanded;
   cursor: pointer;
   z-index:3;
+  border: none;
 }
 
 .closeNavbarBtn {
@@ -144,11 +144,11 @@
   align-items: center;
   top: -2.5px;
   right: -2.5px;
-  border: solid 1px black;
-  background: #f0e0e1;
+  border: none;
+  background: #EFE1E1;
   border-bottom-left-radius: 15px;
   width: 20%;
-  height: 5%;
+  height: 4%;
   max-width: 140px;
   min-width: 90px;
   font-size: 2em;
@@ -193,34 +193,55 @@
 
 .login {
   border: 1px solid black;
-  box-shadow: 2px 2px 4px lightgray;
-  background-color: white;
-  border-radius: 10px;
-  padding: 2px 5px;
+  box-shadow: rgba(0, 1, 2, 25%);
+  background-color: #EFE1E1;
+  border-radius: 0.25em;
   cursor: pointer;
   transition: 0.3s all ease;
+  margin: 1.25em;
 }
 
 .login:hover {
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(100, 98, 98);
 }
 
-/* desktop */
-/* nav {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+@media (min-width:1024px){
+  .searchPart {
+    position: relative;
+    width: 100%;
+  }
+  
+  .searchPart > input {
+    width: 40%;
+    font-size: 1.25em;
+    padding: 0.6em 2.5em 0.6em 0.6em;
+    border-radius: 1em;
+  }
+
+  .searchPart > button {
+    visibility: hidden;
+  }
+
+  .login {
+    border: 1px solid black;
+    box-shadow: rgba(0, 1, 2, 25%);
+    background-color: #EFE1E1;
+    border-radius: 1.25em;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    margin: 1.25em;
+    height: 2em;
+    width: 8%;
+  }
+  
+  .login:hover {
+    background-color: rgb(100, 98, 98);
+  }
+
+  .headers {
+  cursor: pointer;
+  border-top: 1px solid #EFE1E1;
   padding: 10px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-
-  background-color: white;
-  z-index: 2;
-  height: 3em;
-  box-shadow: 2px 2px 4px lightgray;
-} */
+  margin: 0;
+}
+}

@@ -81,7 +81,7 @@ export default function Profile() {
         name="name"
         >{stateUser.name}</span>
       .</h2>
-      <p style={{display: "inline"}}>Din email är: <span
+      <p style={{display: "inline"}}>Din e-post är: <span
         contentEditable
         suppressContentEditableWarning={true}
         className={styles.editableText}
