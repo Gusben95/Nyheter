@@ -43,6 +43,7 @@ export default function Navbar({hideSubscribe}) {
   }
 
   function handleLogout() {
+    sessionStorage.setItem('token', "");
     dispatch({type: 'logout'});
   }
 
