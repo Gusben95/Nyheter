@@ -8,6 +8,7 @@ import Search from './views/Search/Search'
 import Footer from './components/Footer/Footer';
 /* import Comingsoon from './components/Footer/Footer.module.css'; */
 import Comingsoon from './views/Comingsoon/Comingsoon';
+import { getAccountWithToken } from './dbUtils/accountActions';
 
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
