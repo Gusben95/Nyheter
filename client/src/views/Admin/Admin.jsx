@@ -46,7 +46,6 @@ export default function Admin() {
   }, [stateUser])
 
   useEffect(() => {
-    console.log(newArticle)
   }, [newArticle])
 
   useEffect(() => {
@@ -97,7 +96,6 @@ export default function Admin() {
 
   async function sendArticle() {
     let response = await postArticle(newArticle);
-    console.log(response);
     if(response === "Success") {
       dispatch({type:"addArticle", data: newArticle});
       alert("Artikeln har skapats");

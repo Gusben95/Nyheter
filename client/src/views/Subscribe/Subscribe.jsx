@@ -17,7 +17,6 @@ export default function Subscribe() {
   const location = useLocation();
 
   function clickSubscribe(months) {
-    console.log(months)
     if (clickedMonths) {
       document.getElementsByClassName("month" + String(clickedMonths))[0].classList.remove("highlightedSubscribeCard")
     }
