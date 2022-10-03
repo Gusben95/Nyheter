@@ -89,7 +89,11 @@ export default function Login() {
       name: res.profileObj.name,
       signInPlatform: "google"
     }
-    loginAuth(profile);
+
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Vill du Automatiskt logga in med Google?")) {
+      loginAuth(profile)
+    }
   };
 
   function linkToHomepage() {

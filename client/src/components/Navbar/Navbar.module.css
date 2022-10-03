@@ -10,7 +10,6 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   text-align: center;
   background-color: #600F0C;
   box-shadow: 2px 2px 4px #EFE1E1;
