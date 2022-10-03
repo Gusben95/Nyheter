@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
@@ -10,7 +10,11 @@ const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articl
 
 export default function Homepage({mostPopular}) {
   const dispatch = useDispatch();
+
   const stateArticles = useSelector(state => state.Articles);
+  const stateArticlesRef = useRef(stateArticles);
+  stateArticlesRef.current = stateArticles;
+
   const stateUser = useSelector(state => state.User);
   const [articlesToSplit, setArticlesToSplit] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -34,10 +38,27 @@ export default function Homepage({mostPopular}) {
         setIsLoading(false)
       })
 
-      /* setInterval(()=>{
-      fetchArticles().then(articles =>{
-        dispatch({type:"setArticles", data: articles});
-      })}, 600000); // 10 minutes in ms */
+      setInterval(()=>{
+        fetchArticles().then(articles =>{
+
+          articles.sort(function compare(a, b) {
+            var dateA = new Date(a.dateAdded);
+            var dateB = new Date(b.dateAdded);
+            return dateB - dateA;
+          });
+  
+          //go through all articles and check if they are in the stateArticles array
+          //if not, add them
+          articles.forEach(article => {
+            // we can use the .id property to check if the article is already in the stateArticles array
+            // since useState is not updated in intervals, we use the useRef hook to get the current value of the stateArticles array
+            let articleExists = stateArticlesRef.current.find(a => a.id === article.id)
+            if(!articleExists) {
+              dispatch({type:"addArticle", data: article})
+            }
+          })
+        })
+      }, 6000); // should be 600000ms (= 10 minutes) in production
     } else {
       fetchArticlesByCategory({category: category}).then(articles => {
         if(articles === undefined) {
@@ -47,10 +68,27 @@ export default function Homepage({mostPopular}) {
         setIsLoading(false)
       });
 
-      /* setInterval(()=>{
-      fetchArticlesByCategory({category: category}).then(articles =>{
-        dispatch({type:"setArticles", data: articles});
-      })}, 600000); // 10 minutes in ms */
+      setInterval(()=>{
+        fetchArticlesByCategory({category: category}).then(articles =>{
+
+          articles.sort(function compare(a, b) {
+            var dateA = new Date(a.dateAdded);
+            var dateB = new Date(b.dateAdded);
+            return dateB - dateA;
+          });
+  
+          //go through all articles and check if they are in the stateArticles array
+          //if not, add them
+          articles.forEach(article => {
+            // we can use the .id property to check if the article is already in the stateArticles array
+            // since useState is not updated in intervals, we use the useRef hook to get the current value of the stateArticles array
+            let articleExists = stateArticlesRef.current.find(a => a.id === article.id)
+            if(!articleExists) {
+              dispatch({type:"addArticle", data: article})
+            }
+          })
+        })
+      }, 6000); // should be 600000ms (= 10 minutes) in production
     }
   }, [category])
 
@@ -130,11 +168,11 @@ export default function Homepage({mostPopular}) {
         <section className={styles.superAd}>
           <article className={styles.adText}>
             <h2 style={{margin: "1px"}}>Få obegränsad tillgång till Nyhetssidan!</h2>
-            <h3 style={{margin: "1px"}}>Läs trovärdig, prisvinnande nyheter ur ett enhörningsperspektiv.</h3>
-            <h3 style={{margin: "1px"}}> 2kr/dag i 1 år.</h3>
+            <h3 style={{margin: "1px"}}>Läs trovärdiga nyheter från ett enhörningsperspektiv.</h3>
+            <h3 style={{margin: "1px"}}> 2kr/dag i 12 månader.</h3>
           </article>
-          <Link to="/prenumerera">Prenumerera nu</Link>
-          <section><p>Redan prenumererad?</p><Link to="/login">Logga in</Link></section>
+          <Link to="/prenumerera">Prenumerera nu</Link><p>Redan prenumerant?</p>
+          <section className={styles.Login}><Link to="/login">Logga in</Link></section>
         </section>
       )}
 

@@ -43,6 +43,7 @@ export default function Navbar({hideSubscribe}) {
   }
 
   function handleLogout() {
+    sessionStorage.setItem('token', "");
     dispatch({type: 'logout'});
   }
 
@@ -50,11 +51,17 @@ export default function Navbar({hideSubscribe}) {
 
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
-      <section className={styles.openNavbarBtn} onClick={toggleNavbar}><div className={styles.hamburger1}></div><div className={styles.hamburger2}></div><div className={styles.hamburger3}></div></section>
-      <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
+    <section className={styles.openNavbarBtn} onClick={toggleNavbar}>
+      <div className={styles.hamburger1}></div>
+      <div className={styles.hamburger2}></div>
+      <div className={styles.hamburger3}></div>
+    </section>
+
+  <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
 
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
-        <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
+      
+  <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
 
         <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
           <Header />
@@ -67,10 +74,20 @@ export default function Navbar({hideSubscribe}) {
 
         <div style={{padding: "10px 0px"}}>
           {stateUser.email ? (
-            <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
+            <>
+              {stateUser.role === "admin" ? (
+                <>
+                  <Link to="/admin" onClick={toggleNavbar}>Admin</Link>
+                  <Link to="/login" onClick={toggleNavbar}>Profil</Link>
+                </>
+              ) : (
+                <Link to="/login" style={{color: "white", paddingRight: '20px'}} onClick={toggleNavbar}>Profil</Link>
+              )}
+              <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
+            </>
           ) : (
             <> 
-            <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
+              <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
             </>
           ) }
         </div>

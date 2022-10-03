@@ -22,22 +22,6 @@ export default function Login() {
   const emailInput = useRef('');
   const passwordInput = useRef('');
 
-  useEffect(() => {
-    const sessionToken = sessionStorage.getItem("token");
-    if (sessionToken !== null || sessionToken === "") {
-      let account = {
-        token: sessionToken
-      }
-      const featchToken = async () => {
-        let accountInfo = await getAccountWithToken(account);
-        if (accountInfo !== []) {
-          dispatch({type: "setUser", data: accountInfo});
-        }
-      }
-      featchToken().catch(console.error);
-    }
-  }, []);
-
   //save token from login in sessionStorage
   function saveToken(account) {
     sessionStorage.setItem('token', account.token);
@@ -105,7 +89,11 @@ export default function Login() {
       name: res.profileObj.name,
       signInPlatform: "google"
     }
-    loginAuth(profile);
+
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Vill du Automatiskt logga in med Google?")) {
+      loginAuth(profile)
+    }
   };
 
   function linkToHomepage() {
@@ -128,7 +116,7 @@ export default function Login() {
               loginAuth()
             }}>Logga in</button>
 
-          <Link to="/glomtlosenord">Glömt Lösenord?</Link>
+          <Link style={{color: "white"}} to="/glomtlosenord">Glömt Lösenord?</Link>
 
           <div className={styles.brContainer}>
             <span className={styles.brTitle}>
@@ -141,7 +129,7 @@ export default function Login() {
           }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
           {/* <FacebookLoginComponent/> */}
 
-          <Link to="/prenumerera">Bli Prenumerant</Link>
+          <Link to="/prenumerera" style={{color: "white"}}>Bli Prenumerant</Link>
         </section>)
     }
   </div>)
