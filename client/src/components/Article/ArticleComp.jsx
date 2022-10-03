@@ -40,7 +40,7 @@ export default function ArticleComp(props) {
       }, 35);
     }
 
-    if(!viewCounted && !opened && views) {
+    if(!viewCounted && !opened && views !== undefined) {
       setViewCounted(true);
       // dispatch({type: "incrementViewCount", data: id});
       incrementViewCount({id: id});
