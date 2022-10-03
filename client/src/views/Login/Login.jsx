@@ -11,7 +11,7 @@ import Profile from '../../components/Profile/Profile';
 
 const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
 /* göm med env */
-const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_GOOGLE_LOGIN;
 
 export default function Login() {
   const stateUser = useSelector(state => state.User)
