@@ -13,7 +13,6 @@ import { getAccountWithToken } from './dbUtils/accountActions';
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
 import { useEffect } from 'react';
-import { getAccountWithToken } from './dbUtils/accountActions';
 
 function App() {
   const dispatch = useDispatch();
