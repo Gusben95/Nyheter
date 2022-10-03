@@ -196,15 +196,16 @@
 .login {
   border: 1px solid black;
   box-shadow: rgba(0, 1, 2, 25%);
-  background-color: #EFE1E1;
+  background-color: #600f0c;
   border-radius: 0.25em;
   cursor: pointer;
   transition: 0.3s all ease;
   margin: 1.25em;
+  color: white; 
 }
 
 .login:hover {
-  background-color: #600f0c;
+  background-color: rgb(0, 0, 0);
 }
 
 @media (min-width:1024px){
@@ -225,20 +226,9 @@
   }
 
   .login {
-    border: 1px solid black;
-    box-shadow: rgba(0, 1, 2, 25%);
-    background-color: #EFE1E1;
     border-radius: 1.25em;
-    cursor: pointer;
-    transition: 0.3s all ease;
     margin: 1.25em;
     height: 2em;
     width: 8%;
   }
-  
-  /* .login:hover {
-    background-color: rgb(100, 98, 98);
-  } */
-
-
 }

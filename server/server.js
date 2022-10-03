@@ -347,3 +347,9 @@ let info = await transporter.sendMail({
     html: "Here's an <b>HTML version</b> of the email.",
   });
     });
+    app.post('/articlesBySearch', async (request, response) => { 
+
+
+
+      
+    }

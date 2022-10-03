@@ -32,7 +32,7 @@
 }
 
 .superAd a {
-  background-color: rgb(0, 0, 0);
+  background-color: #600f0c;
   color: rgb(255, 255, 255);
   padding: 10px 20px;
   border-radius: 1em;
@@ -47,10 +47,11 @@
 
 .Login a {
   width: 100%;
+  
 }
 
 .superAd a:hover {
-  background-color: #e82c25;
+  background-color: #000000;
 }
 
 .adText{
