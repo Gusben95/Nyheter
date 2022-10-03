@@ -21,12 +21,12 @@ describe('signUp', () => {
 
   it('subscribe button should be rendered', () => {
     render(<MockSubscribe/>)
-    const premButtonEl = screen.getByRole('button', {name: /prenumerera/i})
+    const premButtonEl = screen.getByRole('button', {name: /Prenumerera nu/i})
     expect(premButtonEl).toBeInTheDocument()
   })
   it('subscribe button should render with correct text',  () => {
     const { queryByText } = render(<MockSubscribe/>);
-    expect(queryByText("Prenumerera")).toBeTruthy(); 
+    expect(queryByText("Prenumerera nu")).toBeTruthy(); 
   })
  
 });
