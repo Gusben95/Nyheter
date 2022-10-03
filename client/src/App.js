@@ -37,6 +37,10 @@ function App() {
       <Route path="/" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
+      
+      <Route path="/mestPopulara" element={
+        [<Homepage mostPopular key="1" />, <Navbar key="2" />, <Footer key="3" />]
+      } />
 
       <Route path="/kategori/:category" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
