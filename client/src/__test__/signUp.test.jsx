@@ -16,6 +16,12 @@ const MocksignUp = () => {
 
 const url = "http://localhost/";
 
+const user = {
+  name: 'hej',
+  email: "hejsan@gmail.com",
+  password: "pwd123",
+  password2: "pwd123"
+}
 
 describe('signUp', () => {
 
@@ -28,6 +34,29 @@ describe('signUp', () => {
     const { queryByText } = render(<MocksignUp/>);
     expect(queryByText(/registrera/i)).toBeTruthy(); 
   })
+
+  it('upprepa password input should be rendered', () => {
+    render(<MocksignUp/>)
+    const password2InputEl = screen.getByPlaceholderText("Upprepa lösenord")
+    expect(password2InputEl).toBeInTheDocument()
+  })
+
+  it('all inputs should be able to be changed', () => {
+    render(<MocksignUp/>)
+    const nameInputEl = screen.getByPlaceholderText(/namn/i)
+    const emailInputEl = screen.getByPlaceholderText(/email/i)
+    const passwordInputEl = screen.getByPlaceholderText("Lösenord")
+    const password2InputEl = screen.getByPlaceholderText(/upprepa lösenord/i)
+    fireEvent.change(nameInputEl, {target: {value: user.name}})
+    fireEvent.change(emailInputEl, {target: {value: user.email}})
+    fireEvent.change(passwordInputEl, {target: {value: user.password}})
+    fireEvent.change(password2InputEl, {target: {value: user.password2}})
+    expect(nameInputEl.value).toBe(user.name)
+    expect(emailInputEl.value).toBe(user.email)
+    expect(passwordInputEl.value).toBe(user.password)
+    expect(password2InputEl.value).toBe(user.password2)
+  })
+
 
   it('checkboxes should be able to be checked', () => {
     render(<MocksignUp/>)
