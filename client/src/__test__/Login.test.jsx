@@ -70,17 +70,6 @@ describe('Login', () => {
 
   })
 
-  // it('error message should not be visible', () => {
-  //   render(<MockLogin/>)
-  //   const errorEl = 
-  //   expect(errorEl).not.toBeVisible()
-  // })
-  // it('error message should be visible when email is incorrect', () => {
-  //   render(<MockLogin/>)
-  //   const errorEl = 
-  //   expect(errorEl).toBeVisible()
-  // })
-
   it('forgotten password link should be rendered', () => {
     render(<MockLogin/>)
     const forgottenPasswordLinkEl = screen.getByText(/glömt lösenord?/i)
@@ -98,12 +87,6 @@ describe('Login', () => {
     const googleLinkEl = screen.getByText(/Sign in with Google/i)
     expect(googleLinkEl).toBeInTheDocument()
   })
-  it('facebook login should be rendered', () => {
-    render(<MockLogin/>)
-    const facebookLinkEl = screen.getByText(/Logga in med Facebook/i)
-    expect(facebookLinkEl).toBeInTheDocument()
-  })
-
 
   it('subscriber link should be rendered', () => {
     render(<MockLogin/>)

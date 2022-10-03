@@ -44,22 +44,19 @@ describe('Homepage', () => {
     expect(window.location.href).toBe(`${url}login`)
   })
 
-  // it('articles should be rendered', () => {
-  //   render(<MockHomepage/>)
-  //   screen.debug()
-  // })
 
   it('back to top should be rendered', () => {
     render(<MockHomepage/>)
-    const backToTop = screen.getByText(/Tillbaka till toppen/i)
+    const backToTop = screen.getByText(/⬆️/i)
     expect(backToTop).toBeInTheDocument()
   })
   it('back to top should scrollToTop when clicked', () => {
     window.scrollTo = jest.fn()
     render(<MockHomepage/>)
-    const backToTop = screen.getByText(/Tillbaka till toppen/i)
+    const backToTop = screen.getByText(/⬆️/i)
     fireEvent.click(backToTop)
     expect(window.scrollTo).toBeCalledWith({"behavior": "smooth", "left": 0, "top": 0})
   })
+
 })
 

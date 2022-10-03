@@ -9,7 +9,6 @@ require('dotenv').config();
 
 // Should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
-
 const dbName = 'nyheter'
 let db
 
@@ -25,7 +24,14 @@ const getAccountByEmail = async (account) => {
   let res = await collection.find({
     email: account.email
   }).toArray()
-  console.log(res)
+  return res;
+}
+
+const getAccountWithToken = async (account) => {
+  const collection = db.collection('account')
+  let res = await collection.find({
+    token: account.token
+  }).toArray()
   return res;
 }
 
@@ -35,14 +41,13 @@ const createAccount = async (account) => {
   account.stillPaying = false;
   account.subscriptionEnd = "";
   account.password = await hashPassword(account.password);
-  /* console.log(account); */
   return await collection.insertOne(account);
 }
 
 const updatePassword = async (account) => {
   const collection = db.collection('account')
   let updatedPassword = {};
-  updatedPassword.password =  await hashPassword(account.password)
+  updatedPassword.password = await hashPassword(account.password)
   let accountId = new ObjectId(account.id)
   const filter = {
     _id: accountId
@@ -64,7 +69,6 @@ const updateAccount = async (account) => {
   if (account.stillPaying) updatedAccount.stillPaying = account.stillPaying;
   if (account.subscriptionEnd) updatedAccount.subscriptionEnd = account.subscriptionEnd;
   if (account.token) updatedAccount.token = account.token;
-
   updatedAccount = {
     $set: updatedAccount
   }
@@ -76,11 +80,11 @@ const updateAccount = async (account) => {
   return result;
 }
 
-
 module.exports = {
   initAcc,
   getAccountByEmail,
+  getAccountWithToken,
   createAccount,
-  updateAccount,
-  updatePassword
+  updatePassword,
+  updateAccount
 }

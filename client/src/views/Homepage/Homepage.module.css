@@ -49,14 +49,17 @@
 }
 
 .toTheTop {
-  position: relative;
+  position: fixed;
   display: flex;
-  padding-left: 8%;
-  background: #f0e0e1;
+  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  height: 8vh;
-  width: 100%;
+  bottom: 10px;
+  right: 10px;
+  border-bottom-left-radius: 15px;
+  color: rgb(30, 30, 30);
   font-size: 2em;
+  font-stretch: expanded;
   cursor: pointer;
-  color: black;
+  padding: 5px 0;
 }

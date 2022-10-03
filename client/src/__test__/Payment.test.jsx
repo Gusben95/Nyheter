@@ -1,8 +1,9 @@
-import { render , screen, fireEvent} from '@testing-library/react';
+import { render , screen, fireEvent, getByDisplayValue} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../store/Reducer';
 import { BrowserRouter } from 'react-router-dom';
 import Payment from '../components/Payment/Payment';
+import { userEvent } from '@testing-library/user-event';
 
 const MockPayment = () => {
   return (
@@ -17,11 +18,26 @@ const MockPayment = () => {
 
 describe('Payment', () => {
 
+  it('cardExpire dropdown should correctly set default option=N/A', () => {
+    render(<MockPayment />)
+    expect(screen.getByLabelText('Utgångsdatum').selected).toBeFalsy()
+  })
+  it('cardExpire dropdown should display the correct number of options', () => {
+    render(<MockPayment />)
+    expect(screen.getAllByRole('option').length).toBe(20)
+  })
+  it('cardExpire dropdown should allow user to change option', () => {
+    render(<MockPayment />)
+    fireEvent.select(screen.getByRole('option', {name: '02'}))
+    expect(screen.getByRole('option', {name: '02'})).toBeInTheDocument()
+  })
+  
   it('pay button should be rendered', () => {
     render(<MockPayment/>)
     const buttonEl = screen.getByRole('button', {name: /betala/i})
     expect(buttonEl).toBeInTheDocument()
   })
+
 
 
   //Mathias Test
