@@ -22,22 +22,6 @@ export default function Login() {
   const emailInput = useRef('');
   const passwordInput = useRef('');
 
-  useEffect(() => {
-    const sessionToken = sessionStorage.getItem("token");
-    if (sessionToken !== null || sessionToken === "") {
-      let account = {
-        token: sessionToken
-      }
-      const featchToken = async () => {
-        let accountInfo = await getAccountWithToken(account);
-        if (accountInfo !== []) {
-          dispatch({type: "setUser", data: accountInfo});
-        }
-      }
-      featchToken().catch(console.error);
-    }
-  }, []);
-
   //save token from login in sessionStorage
   function saveToken(account) {
     sessionStorage.setItem('token', account.token);

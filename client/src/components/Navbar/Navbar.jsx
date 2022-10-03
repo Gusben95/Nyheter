@@ -73,10 +73,20 @@ export default function Navbar({hideSubscribe}) {
 
         <div style={{padding: "10px 0px"}}>
           {stateUser.email ? (
-            <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
+            <>
+              {stateUser.role === "admin" ? (
+                <>
+                  <Link to="/admin" onClick={toggleNavbar}>Admin</Link>
+                  <Link to="/login" onClick={toggleNavbar}>Profil</Link>
+                </>
+              ) : (
+                <Link to="/login" onClick={toggleNavbar}>Profil</Link>
+              )}
+              <button className={styles.logoutBtn} onClick={handleLogout}>Logga ut</button>
+            </>
           ) : (
             <> 
-            <p style={{display: "inline"}}>Redan prenumerant? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
+              <p style={{display: "inline"}}>Redan prenumererad? </p><button className={styles.login} onClick={(e)=>{navigate("/login"); toggleNavbar(e)}}>Logga in</button>
             </>
           ) }
         </div>
