@@ -27,8 +27,16 @@ const MocksignUp = () => {
     })
     it('password input should be rendered', () => {
         render(<MocksignUp/>)
-        const passwordInputEl = screen.getByPlaceholderText(/lösenord/i)
+        const passwordInputEl = screen.getByPlaceholderText("Lösenord")
         expect(passwordInputEl).toBeInTheDocument()
       })
+
+
+      //Christian test
+    it('name input should be rendered', () => {
+      render(<MocksignUp/>)
+      const nameInputEl = screen.getByText(/namn/i)
+      expect(nameInputEl).toBeInTheDocument()
+    })
    
     });

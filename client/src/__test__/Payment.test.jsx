@@ -19,13 +19,6 @@ describe('Payment', () => {
   //   render(<MockPayment/>)
   //   screen.debug()
   // })
-
-  it('cardCVC input should be rendered', () => {
-    render(<MockPayment/>)
-    const cardcvcInputEl = screen.getByLabelText("CVC")
-    expect(cardcvcInputEl).toBeInTheDocument()
-  })
-
   // it('cardCVC input should change', () => {
   //   render(<MockPayment/>)
   //   const cardcvcInputEl = screen.getByLabelText("CVC")
@@ -40,9 +33,7 @@ describe('Payment', () => {
   })
   // it('pay button should redirect when clicked', () => {
   //   render(<MockPayment/>)
-
   // })
-
 // it('redirect chosen subsription option click to payment', () => {
 //   render(<MockPayment/>)
   
@@ -68,5 +59,13 @@ describe('Payment', () => {
         const CardExpireInputEl = screen.getByText(/Utgångsdatum/i)
         expect(CardExpireInputEl).toBeInTheDocument()
     })
+  })
+
+  //Christian Test
+
+  it('cardCVC input should be rendered', () => {
+    render(<MockPayment/>)
+    const cardcvcInputEl = screen.getByLabelText("CVC")
+    expect(cardcvcInputEl).toBeInTheDocument()
   })
 
