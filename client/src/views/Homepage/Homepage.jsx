@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 import Header from '../../components/Header/Header'
 
@@ -8,12 +8,18 @@ import styles from './Homepage.module.css'
 
 const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articleActions')
 
-export default function Homepage() {
+export default function Homepage({mostPopular}) {
   const dispatch = useDispatch();
+
   const stateArticles = useSelector(state => state.Articles);
+  const stateArticlesRef = useRef(stateArticles);
+  stateArticlesRef.current = stateArticles;
+
   const stateUser = useSelector(state => state.User);
+  const [articlesToSplit, setArticlesToSplit] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { category } = useParams();
 
@@ -32,10 +38,27 @@ export default function Homepage() {
         setIsLoading(false)
       })
 
-      /* setInterval(()=>{
-      fetchArticles().then(articles =>{
-        dispatch({type:"setArticles", data: articles});
-      })}, 600000); // 10 minutes in ms */
+      setInterval(()=>{
+        fetchArticles().then(articles =>{
+
+          articles.sort(function compare(a, b) {
+            var dateA = new Date(a.dateAdded);
+            var dateB = new Date(b.dateAdded);
+            return dateB - dateA;
+          });
+  
+          //go through all articles and check if they are in the stateArticles array
+          //if not, add them
+          articles.forEach(article => {
+            // we can use the .id property to check if the article is already in the stateArticles array
+            // since useState is not updated in intervals, we use the useRef hook to get the current value of the stateArticles array
+            let articleExists = stateArticlesRef.current.find(a => a.id === article.id)
+            if(!articleExists) {
+              dispatch({type:"addArticle", data: article})
+            }
+          })
+        })
+      }, 6000); // should be 600000ms (= 10 minutes) in production
     } else {
       fetchArticlesByCategory({category: category}).then(articles => {
         if(articles === undefined) {
@@ -45,10 +68,27 @@ export default function Homepage() {
         setIsLoading(false)
       });
 
-      /* setInterval(()=>{
-      fetchArticlesByCategory({category: category}).then(articles =>{
-        dispatch({type:"setArticles", data: articles});
-      })}, 600000); // 10 minutes in ms */
+      setInterval(()=>{
+        fetchArticlesByCategory({category: category}).then(articles =>{
+
+          articles.sort(function compare(a, b) {
+            var dateA = new Date(a.dateAdded);
+            var dateB = new Date(b.dateAdded);
+            return dateB - dateA;
+          });
+  
+          //go through all articles and check if they are in the stateArticles array
+          //if not, add them
+          articles.forEach(article => {
+            // we can use the .id property to check if the article is already in the stateArticles array
+            // since useState is not updated in intervals, we use the useRef hook to get the current value of the stateArticles array
+            let articleExists = stateArticlesRef.current.find(a => a.id === article.id)
+            if(!articleExists) {
+              dispatch({type:"addArticle", data: article})
+            }
+          })
+        })
+      }, 6000); // should be 600000ms (= 10 minutes) in production
     }
   }, [category])
 
@@ -58,24 +98,44 @@ export default function Homepage() {
 
   //This code is for when we want the homepage to ONLY show articles from the last 24 hours
   // to make it a truly "dagens" page
+  function showOnlyLast24Hours(articles) {
+    let articlesCopy = [...articles];
+    let todayDay = new Date();
+    let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1)
+    let todayAtMidnightPlusOneDay = new Date(todayAtMidnight).getTime() + 86400000;
+    let articlesFiltered = articlesCopy.filter(article => {
+      let articleDate = new Date(article.dateAdded).getTime();
+      // if the article was added between midnight and midnight + 1 day (today)
+      return articleDate >= todayAtMidnight && articleDate < todayAtMidnightPlusOneDay;
+    })
 
-  /* let todayDay = new Date().toLocaleDateString()
-  let todayAtMidnight = new Date(todayDay).setHours(0,0,0,1).getTime();
-  let todayAtMidnightPlusOneDay = todayAtMidnight + 86400000;
-  let todaysArticles = stateArticles.filter(article => {
-    let articleDate = new Date(article.dateAdded).getTime();
-    console.log("articleDate", articleDate)
-    console.log("todayAtMidnight", todayAtMidnight)
-    // if the article was added between midnight and midnight + 1 day (today)
-    return articleDate >= todayAtMidnight && articleDate < todayAtMidnightPlusOneDay;
-  }) */
-  //let stateArticlesCopy = [...todaysArticles]
+    return articlesFiltered;
+  }
+
+  function sortByViews(articles) {
+    let articlesCopy = [...articles];
+    articlesCopy.sort(function compare(a, b) {
+      return b.views - a.views;
+    });
+
+    return articlesCopy;
+  }
+
+  useEffect(() => {
+    let articlesToSlitBeforeState = [...stateArticles];
+    articlesToSlitBeforeState = sortByViews(articlesToSlitBeforeState);
+    
+    if(!mostPopular) {
+      articlesToSlitBeforeState = showOnlyLast24Hours(articlesToSlitBeforeState);
+    }
+
+    setArticlesToSplit(articlesToSlitBeforeState);
+  }, [stateArticles, location])
 
   //split array into chunks of 10 articles
-  let stateArticlesCopy = [...stateArticles]
   let articlesSplit = []
-  while(stateArticlesCopy.length) {
-    articlesSplit.push(stateArticlesCopy.splice(0,8));
+  while(articlesToSplit.length) {
+    articlesSplit.push(articlesToSplit.splice(0,8));
   }
 
   let articlesMapped = [];
@@ -122,7 +182,17 @@ export default function Homepage() {
         </div>
       ) : (
         <>
-          {articlesMapped}
+          {articlesMapped.length === 0 ? (
+            <div className={styles.noArticlesContainer} style={{textAlign: "center"}}>
+              <h2>Inga artiklar har skrivits idag ännu,</h2>
+              <h2>kolla in våran Mäst Populära artiklar sektion istället!</h2>
+              <Link to="/mestPopulara">Mest populära</Link>
+            </div>
+          ) : (
+            <>
+              {articlesMapped}
+            </>
+          )}
         </>
       )}
       <section className={styles.toTheTop} onClick={scrollToTop}>⬆️</section>

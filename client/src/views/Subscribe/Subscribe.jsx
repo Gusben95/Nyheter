@@ -68,6 +68,17 @@ export default function Subscribe() {
     }
   } */
 
+  //get current screen size
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  //update screen size
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize)
+  }, [])
+
   return (
     <section className="subscribePage">
       <Header />
@@ -111,7 +122,7 @@ export default function Subscribe() {
             <h2 className="monthPrice">300:-</h2>
           </div>
         </div>
-        {clickedMonths === 3 ? (
+        {clickedMonths === 3 && screenWidth <= 768 ? (
           <div className="cardMenu">
             {stateUser.email ? (
               <>
@@ -144,7 +155,7 @@ export default function Subscribe() {
             <h2 className="monthPrice">500:-</h2>
           </div>
         </div>
-        {clickedMonths === 6 ? (
+        {clickedMonths === 6 && screenWidth <= 768 ? (
           <div className="cardMenu">
             {stateUser.email ? (
               <>
@@ -178,7 +189,7 @@ export default function Subscribe() {
             <p className="monthWarning">Mest prisvärda alternativet!</p>
           </div>
         </div>
-          {clickedMonths === 12 ? (
+          {clickedMonths === 12 && screenWidth <= 768 ? (
             <div className="cardMenu">
               {stateUser.email ? (
                 <>
@@ -195,7 +206,21 @@ export default function Subscribe() {
           ) : ""}
       </section>
 
-      
+      {clickedMonths && screenWidth > 768 ? (
+        <div className="cardMenu">
+          {stateUser.email ? (
+            <>
+              {stateUser.stillPaying ? (
+                <h1>Get out of here!!</h1>
+              ) : (
+                <Payment subscription={clickedMonths} />
+              )}
+            </>
+          ) : (
+            <SignUp />
+          )}
+        </div>
+      ) : ""}
 
     </section>
   )

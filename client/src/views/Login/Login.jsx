@@ -34,6 +34,7 @@ export default function Login() {
 
   //Login in user
   async function loginAuth(loginWithProvider) {
+    console.log("loginAuth", loginWithProvider)
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
@@ -120,8 +121,9 @@ export default function Login() {
           </div>
 
           <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onGoogleSuccess} onFailure={(err) => {
-              console.log("Error sign in with Google: ", err)
-            }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> {/* <FacebookLoginComponent/> */}
+            console.log("Error sign in with Google: ", err)
+          }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
+          {/* <FacebookLoginComponent/> */}
 
           <Link to="/prenumerera">Bli Prenumerant</Link>
         </section>)
