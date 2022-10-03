@@ -91,7 +91,7 @@ export default function Navbar({hideSubscribe}) {
           ) }
         </div>
 
-        <h2 onClick={toggleTodaysSection} style={!todaySectionOpened ? {} : {borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
+        <h2 onClick={toggleTodaysSection} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
         {todaySectionOpened ? (
           <section className={styles.linksPart}>
             <Link onClick={toggleNavbar} to="/kategori/inrikes" className={styles.link}>Inrikes</Link>
@@ -100,9 +100,9 @@ export default function Navbar({hideSubscribe}) {
           </section>
         ) : ""}
 
-        <h2 onClick={toggleOldSection} style={{borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
+        <h2 onClick={toggleOldSection}  className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
         {oldSectionOpened ? (
-          <section className={styles.linksPart} style={{borderBottom: "1px solid #DBDBDB"}}>
+          <section className={styles.linksPart} >
             <Link onClick={toggleNavbar} to="/helaVeckan" className={styles.link}>Hela veckan</Link>
             <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
             <Link onClick={toggleNavbar} to="/mestPopulara" className={styles.link}>Mest populära artiklar</Link>

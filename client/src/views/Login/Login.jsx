@@ -113,7 +113,7 @@ export default function Login() {
               loginAuth()
             }}>Logga in</button>
 
-          <Link style={{color: "white"}} to="/glomtlosenord">Glömt Lösenord?</Link>
+          <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
           <div className={styles.brContainer}>
             <span className={styles.brTitle}>
@@ -126,7 +126,7 @@ export default function Login() {
           }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
           {/* <FacebookLoginComponent/> */}
 
-          <Link to="/prenumerera" style={{color: "white"}}>Bli Prenumerant</Link>
+          <Link to="/prenumerera">Bli Prenumerant</Link>
         </section>)
     }
   </div>)
