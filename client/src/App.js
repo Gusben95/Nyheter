@@ -12,6 +12,7 @@ import Comingsoon from './views/Comingsoon/Comingsoon';
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
 import { useEffect } from 'react';
+import { getAccountWithToken } from './dbUtils/accountActions';
 
 function App() {
   const dispatch = useDispatch();
@@ -76,10 +77,6 @@ function App() {
 
       <Route path="/prenumerera" element={
         [<Subscribe key="1" />, <Navbar key="2" hideSubscribe/>, <Footer key="3" />]
-      } />
-
-      <Route path="/kommersnart" element={
-        [<Comingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
       <Route path="/kommersnart" element={

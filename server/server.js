@@ -255,6 +255,12 @@ app.post('/loginWithEmail', async (request, response) => {
     console.log(err)
     response.status(500).end()
   })
+  if(res[0].signInPlatform !== "nyhetssidan") {
+    // if the account is not a nyhetssidan account
+    // the user doesnt have a password
+    response.json(res)
+    return;
+  }
   if (res.length > 0 ) {
     const compareCheck = await comparePassword(account.password, res[0].password)
     if (compareCheck) {
