@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './ArticleComp.module.css'
 import { updateArticle, deleteArticle, incrementViewCount } from '../../dbUtils/articleActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ export default function ArticleComp(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const articleElem = useRef(null);
 
   const newEditedArticle = {
     title: title,
@@ -33,6 +34,12 @@ export default function ArticleComp(props) {
   }
 
   function switchOpened(){
+    if(!opened && views) {
+      setTimeout(() => {
+        articleElem.current.scrollIntoView();
+      }, 35);
+    }
+
     if(!viewCounted && !opened && views) {
       setViewCounted(true);
       // dispatch({type: "incrementViewCount", data: id});
@@ -99,7 +106,7 @@ export default function ArticleComp(props) {
   }
 
   return (
-    <div className={styles.article} onClick={switchOpened}>
+    <div className={styles.article} onClick={switchOpened} ref={articleElem}>
       {props.smallVersion && !opened ? (
         <div className={styles.smallArticle}>
           <h2 className={styles.articleHeader}>{title ? title : ""}</h2>
