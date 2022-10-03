@@ -18,7 +18,6 @@ export default function Search() {
     return <ArticleComp key={searchResult.id} article={searchResult} />
   })
 
-  /* console.log(searchResults); */
 
 
   return (

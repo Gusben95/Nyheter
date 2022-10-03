@@ -73,7 +73,6 @@ const postArticle = async (doc) => {
 const deleteArticle = async (article) => {
   const collection = db.collection('article')
   let articleId = new ObjectId(article);
-  // console.log("id i articleDb", article)
   const doc = {
     _id: articleId
   }
