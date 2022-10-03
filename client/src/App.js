@@ -83,10 +83,6 @@ function App() {
         [<Comingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
       } />
 
-      <Route path="/kommersnart" element={
-        [<Comingsoon key="1" />, <Navbar key="2" hideSubscribe />, <Footer key="3" />]
-      } />
-
       <Route path="*" element={
         [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#600F0C"}}>
           <h1>404</h1>
