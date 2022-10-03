@@ -14,17 +14,8 @@ const MockPayment = () => {
   )
 };
 
+
 describe('Payment', () => {
-  // it('', () => {
-  //   render(<MockPayment/>)
-  //   screen.debug()
-  // })
-  // it('cardCVC input should change', () => {
-  //   render(<MockPayment/>)
-  //   const cardcvcInputEl = screen.getByLabelText("CVC")
-  //   fireEvent.change(cardcvcInputEl, {target: {value: user.email}})
-  //   expect(cardcvcInputEl.value).toBe(user.email)
-  // })
 
   it('pay button should be rendered', () => {
     render(<MockPayment/>)
@@ -34,38 +25,30 @@ describe('Payment', () => {
   // it('pay button should redirect when clicked', () => {
   //   render(<MockPayment/>)
   // })
-// it('redirect chosen subsription option click to payment', () => {
-//   render(<MockPayment/>)
-  
-// })
-
-})
 
   //Mathias Test
-  describe('Payment', () => {
-    it('cardnumber input should be rendered', () => {
-        render(<MockPayment/>)
-        const CardNumberInputEl = screen.getByText(/kortnummer/i)
-        expect(CardNumberInputEl).toBeInTheDocument()
-    })
-    it('cardHolder input should be rendered', () => {
-        render(<MockPayment/>)
-        const CardHolderInputEl = screen.getByText(/Namn på kortägare/i)
-        expect(CardHolderInputEl).toBeInTheDocument()
-    })
-
-    it('cardExpire input should be rendered', () => {
-        render(<MockPayment/>)
-        const CardExpireInputEl = screen.getByText(/Utgångsdatum/i)
-        expect(CardExpireInputEl).toBeInTheDocument()
-    })
+  it('cardnumber input should be rendered', () => {
+      render(<MockPayment/>)
+      const CardNumberInputEl = screen.getByText(/kortnummer/i)
+      expect(CardNumberInputEl).toBeInTheDocument()
   })
-
+  it('cardHolder input should be rendered', () => {
+      render(<MockPayment/>)
+      const CardHolderInputEl = screen.getByText(/Namn på kortägare/i)
+      expect(CardHolderInputEl).toBeInTheDocument()
+  })
+  it('cardExpire input should be rendered', () => {
+      render(<MockPayment/>)
+      const CardExpireInputEl = screen.getByText(/Utgångsdatum/i)
+      expect(CardExpireInputEl).toBeInTheDocument()
+  })
+  
   //Christian Test
-
   it('cardCVC input should be rendered', () => {
     render(<MockPayment/>)
     const cardcvcInputEl = screen.getByLabelText("CVC")
     expect(cardcvcInputEl).toBeInTheDocument()
   })
+})
+
 
