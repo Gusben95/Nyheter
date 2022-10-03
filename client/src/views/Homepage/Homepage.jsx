@@ -57,8 +57,6 @@ export default function Homepage({mostPopular}) {
               dispatch({type:"addArticle", data: article})
             }
           })
-          console.log("fetched articles")
-
         })
       }, 6000); // should be 600000ms (= 10 minutes) in production
     } else {
@@ -89,8 +87,6 @@ export default function Homepage({mostPopular}) {
               dispatch({type:"addArticle", data: article})
             }
           })
-          console.log("fetched articles")
-
         })
       }, 6000); // should be 600000ms (= 10 minutes) in production
     }
