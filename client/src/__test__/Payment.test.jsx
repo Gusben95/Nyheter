@@ -1,9 +1,8 @@
-import { render , screen, fireEvent, getByDisplayValue} from '@testing-library/react';
+import { render , screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../store/Reducer';
 import { BrowserRouter } from 'react-router-dom';
 import Payment from '../components/Payment/Payment';
-import { userEvent } from '@testing-library/user-event';
 
 const MockPayment = () => {
   return (
@@ -32,10 +31,12 @@ describe('Payment', () => {
     expect(screen.getByRole('option', {name: '02'})).toBeInTheDocument()
   })
   
-  it('pay button should be rendered', () => {
+  it('pay button should be rendered and clickable', () => {
     render(<MockPayment/>)
     const buttonEl = screen.getByRole('button', {name: /betala/i})
     expect(buttonEl).toBeInTheDocument()
+    fireEvent.click(buttonEl)
+    expect(buttonEl).toBeValid()
   })
 
 
