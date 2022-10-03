@@ -111,3 +111,16 @@ h1 {
     max-height: 1000px;
   }
 }
+
+@media (min-width: 768px) {
+  .cardContainer {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .subscribeCard {
+    width: 30%;
+    padding: 15%;
+    border-radius: 50%;
+  }
+}
