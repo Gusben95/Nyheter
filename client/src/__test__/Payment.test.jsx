@@ -22,9 +22,7 @@ describe('Payment', () => {
     const buttonEl = screen.getByRole('button', {name: /betala/i})
     expect(buttonEl).toBeInTheDocument()
   })
-  // it('pay button should redirect when clicked', () => {
-  //   render(<MockPayment/>)
-  // })
+
 
   //Mathias Test
   it('cardnumber input should be rendered', () => {

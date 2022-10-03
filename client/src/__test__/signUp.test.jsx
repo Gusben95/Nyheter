@@ -3,10 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store/Reducer';
 import SignUp from '../components/signUp/SignUp';
-import { userEvent } from '@testing-library/user-event';
-import { shallow } from 'enzyme';
-
-
 
 const MocksignUp = () => {
     return (
@@ -19,7 +15,6 @@ const MocksignUp = () => {
   }
 
 const url = "http://localhost/";
-
 
 
 describe('signUp', () => {
