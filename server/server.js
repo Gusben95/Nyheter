@@ -2,7 +2,6 @@ const express = require("express");
 const nodeMailer = require('nodemailer');
 const helmet = require("helmet");
 const jwt = require("jsonwebtoken")
-require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const {
@@ -58,13 +57,13 @@ app.use(function(req, res, next) {
 // Login limiter
 //***********************  FUNKTIONELL KOD AVSTÄNGD UNDER UTVÄCKLINGSFAS *************************
 // Förhindrar upprepade loginförsök från samma IP-Address
-// const repeatedLoginlimiter = rateLimit({
-// 	windowMs: 10 * 60 * 1000,
-// 	max: 5,
-// 	standardHeaders: true,
-// 	legacyHeaders: false,
-// }
-// )
+const repeatedLoginlimiter = rateLimit({
+ 	windowMs: 10 * 60 * 1000,
+ 	max: 5,
+ 	standardHeaders: true,
+ 	legacyHeaders: false,
+ }
+ )
 
 
 // -------- article database --------
@@ -216,7 +215,7 @@ app.post('/incrementViewCount', async (request, response) => {
 
 
 // -------- account database --------
-app.post('/getAccountWithEmail', /* repeatedLoginlimiter */  async (request, response) => {
+app.post('/getAccountWithEmail',  repeatedLoginlimiter, async (request, response) => {
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   let res = await getAccountByEmail(account).catch((err) => {
@@ -347,9 +346,9 @@ let info = await transporter.sendMail({
     html: "Here's an <b>HTML version</b> of the email.",
   });
     });
-    app.post('/articlesBySearch', async (request, response) => { 
+ /*    app.post('/articlesBySearch', async (request, response) => { 
 
 
 
       
-    }
+    } */
