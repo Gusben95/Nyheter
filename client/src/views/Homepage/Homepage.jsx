@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 import Header from '../../components/Header/Header'
+import Adds from '../../components/Adds/Adds'
 
 import styles from './Homepage.module.css'
 
@@ -160,7 +161,6 @@ export default function Homepage({mostPopular}) {
   return (
     <div className={styles.homepage}>
       <Header />
-
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
       ) : (
@@ -192,6 +192,7 @@ export default function Homepage({mostPopular}) {
               {articlesMapped}
             </>
           )}
+          <Adds/>
         </>
       )}
       <section className={styles.toTheTop} onClick={scrollToTop}>⬆️</section>
