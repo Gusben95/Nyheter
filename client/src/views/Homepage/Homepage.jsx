@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 import Header from '../../components/Header/Header'
+import Adds from '../../components/Adds/Adds'
 
 import styles from './Homepage.module.css'
 
