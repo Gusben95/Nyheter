@@ -11,6 +11,7 @@ import Comingsoon from './views/Comingsoon/Comingsoon';
 
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
+import { getAccountWithToken } from './dbUtils/accountActions';
 import { useEffect } from 'react';
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
         var dateB = new Date(b.dateAdded);
         return dateB - dateA;
       });
-  
+
       dispatch({type:"setArticles", data: articles});
     })
   }, []);
@@ -53,7 +54,7 @@ function App() {
       <Route path="/" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
-      
+
       <Route path="/mestPopulara" element={
         [<Homepage mostPopular key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
