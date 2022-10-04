@@ -12,7 +12,6 @@ import { getAccountWithToken } from './dbUtils/accountActions';
 
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
-import { getAccountWithToken } from './dbUtils/accountActions';
 import { useEffect } from 'react';
 import Header from './components/Header/Header';
 
@@ -87,7 +86,7 @@ function App() {
 
       <Route path="*" element={
         [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#F5F5F5"}}>
-          <Header></Header> 
+          <Header></Header>
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
           <h3><Link to="/">Gå tillbaka till Startsidan😁</Link></h3>
