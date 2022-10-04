@@ -39,7 +39,6 @@ export default function SignUp() {
 
     dispatch({type: "setUser", data: account});
     const response = await createAccount(account);
-    console.log(response)
   }
 
   return (

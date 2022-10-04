@@ -1,5 +1,9 @@
+.p{
+  color: black; 
+}
 .homepage {
-  background: #600F0C;
+  background: #efe1e1;   /* #600F0C; */
+  background: linear-gradient(180deg,#ffffff 50%, rgba(0, 0, 0, 0.057));
   /* background: rgb(0, 0, 0); */
   /* background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%); */
 }
@@ -8,7 +12,7 @@
   text-align: center;
   margin-top: 0;
   padding-top: 1em;
-  background-color: #600F0C;
+  background-color: #ffffff;
   margin: 0;
   cursor: pointer;
 }
@@ -18,9 +22,9 @@
   text-align: center;
   padding: 10px;
   padding-bottom: 3em;
-  background: rgb(96, 15, 12);
-  background: linear-gradient(180deg,#600F0C 40%, black);
-  color: white;
+  background: rgb(255, 255, 255);
+
+  color: rgb(0, 0, 0);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -28,8 +32,8 @@
 }
 
 .superAd a {
-  background-color: white;
-  color: black;
+  background-color: #600f0c;
+  color: rgb(255, 255, 255);
   padding: 10px 20px;
   border-radius: 1em;
   text-decoration: none;
@@ -43,10 +47,11 @@
 
 .Login a {
   width: 100%;
+  
 }
 
 .superAd a:hover {
-  background-color: #E82C25;
+  background-color: #000000;
 }
 
 .adText{

@@ -26,14 +26,11 @@ export default function Profile() {
   }
 
   function handleEdit(e) {
-    //console.log([e.target.attributes.name.nodeValue])
     newUser[e.target.attributes.name.nodeValue] = e.target.innerHTML;
-    console.log(newUser)
     saveEdit();
   }
 
   function handleCheckboxEdit(e) {
-    /* console.log(e.target) */
 
     let newPreference = newUser.preference;
     if(e.target.checked) {
@@ -47,7 +44,6 @@ export default function Profile() {
   }
 
   function saveEdit() {
-    console.log(newUser)
     dispatch({type: "updateUser", data: newUser});
 
     updateAccount(newUser);

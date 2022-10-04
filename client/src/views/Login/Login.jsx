@@ -11,7 +11,7 @@ import Profile from '../../components/Profile/Profile';
 
 const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
 /* göm med env */
-const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_GOOGLE_LOGIN;
 
 export default function Login() {
   const stateUser = useSelector(state => state.User)
@@ -34,7 +34,6 @@ export default function Login() {
 
   //Login in user
   async function loginAuth(loginWithProvider) {
-    console.log("loginAuth", loginWithProvider)
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
@@ -48,13 +47,12 @@ export default function Login() {
     //     alert("Ej giltig email")
     //   return
     //   }
-    /* console.log(loginWithProvider) */
+    
     if (loginWithProvider) {
       account = loginWithProvider;
     }
 
     const accountInfo = await loginWithEmail(account);
-    //console.log(accountInfo)
     saveToken(accountInfo)
 
     if (
@@ -83,13 +81,16 @@ export default function Login() {
   }, []);
 
   const onGoogleSuccess = (res) => {
-    /* console.log('success:', res); */
     const profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,
       signInPlatform: "google"
     }
-    loginAuth(profile);
+
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Vill du Automatiskt logga in med Google?")) {
+      loginAuth(profile)
+    }
   };
 
   function linkToHomepage() {
@@ -121,7 +122,7 @@ export default function Login() {
           </div>
 
           <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onGoogleSuccess} onFailure={(err) => {
-            console.log("Error sign in with Google: ", err)
+            console.error("Error sign in with Google")
           }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
           {/* <FacebookLoginComponent/> */}
 

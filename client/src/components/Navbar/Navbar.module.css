@@ -10,10 +10,9 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   text-align: center;
-  background-color: #600F0C;
-  box-shadow: 2px 2px 4px #EFE1E1;
+  background-color: #f5f5f5;
+  box-shadow: 2px 2px 4px #dedede;
   z-index: 2;
   transform: translateX(102%);
   transition: transform 0.5s ease;
@@ -30,13 +29,14 @@
 
 .headers {
   cursor: pointer;
-  border-top: 1px solid #EFE1E1;
+  border-bottom: 0.2em solid #600f0c;
+  border-top: 0.2em solid #600f0c;
   padding: 10px;
   margin: 0;
 }
 
 .link {
-  color: #EFE1E1;
+  color: #000000;
   text-decoration: none;
   font-size: 1.4em;
   font-weight: bold;
@@ -54,7 +54,7 @@
   left: 0;
   right: 0;
   height: 100%;
-  background-color: rgba(106, 106, 106, 0.4);
+  background-color: #6a6a6a66;
   z-index: 1;
 }
 
@@ -68,7 +68,7 @@
   top: -2.5px;
   right: -2.5px;
   border: none;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-left-radius: 15px;
   width: 20%;
   height: 4%;
@@ -109,11 +109,11 @@
 }
 
 .hamburger1, .hamburger2, .hamburger3{
-  background: black;
+  background: #f5f5f5;
   flex-direction: column;
   width: 45%;
   height: 1px;
-  border: solid 1.5px black;
+  border: solid 1.5px rgb(255, 255, 255);
 }
 
 /* The subscribe button in the top left */
@@ -124,7 +124,7 @@
   align-items: center;
   top: -2.5px;
   left: -2.5px;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-right-radius: 15px;
   width: 20%;
   height: 4%;
@@ -135,6 +135,7 @@
   cursor: pointer;
   z-index:3;
   border: none;
+  color: #f5f5f5; 
 }
 
 .closeNavbarBtn {
@@ -145,7 +146,7 @@
   top: -2.5px;
   right: -2.5px;
   border: none;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-left-radius: 15px;
   width: 20%;
   height: 4%;
@@ -154,6 +155,7 @@
   font-size: 2em;
   font-stretch: expanded;
   cursor: pointer;
+  color: #f5f5f5; 
 }
 
 .searchPart {
@@ -194,15 +196,16 @@
 .login {
   border: 1px solid black;
   box-shadow: rgba(0, 1, 2, 25%);
-  background-color: #EFE1E1;
+  background-color: #600f0c;
   border-radius: 0.25em;
   cursor: pointer;
   transition: 0.3s all ease;
   margin: 1.25em;
+  color: white; 
 }
 
 .login:hover {
-  background-color: rgb(100, 98, 98);
+  background-color: rgb(0, 0, 0);
 }
 
 @media (min-width:1024px){
@@ -223,25 +226,9 @@
   }
 
   .login {
-    border: 1px solid black;
-    box-shadow: rgba(0, 1, 2, 25%);
-    background-color: #EFE1E1;
     border-radius: 1.25em;
-    cursor: pointer;
-    transition: 0.3s all ease;
     margin: 1.25em;
     height: 2em;
     width: 8%;
   }
-  
-  .login:hover {
-    background-color: rgb(100, 98, 98);
-  }
-
-  .headers {
-  cursor: pointer;
-  border-top: 1px solid #EFE1E1;
-  padding: 10px;
-  margin: 0;
-}
 }
