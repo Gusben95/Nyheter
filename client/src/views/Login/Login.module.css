@@ -1,19 +1,16 @@
 .loginContainer{
     background-color: #f5f5f5;
     min-height: 100vh;
-
 }
-.loginForm  a {
-color: black; 
 
+.loginForm  a {
+    color: black; 
 }
 
 .loginForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-   
-
 }
 
 .loginForm input, .loginForm button {
@@ -31,10 +28,12 @@ color: black;
     border-radius: 2em;
     width: 35%;
     margin-top: 0.625em;
+    background-color: #600f0c;
+    color: white;
 }
 
 .loginForm button:hover{
-    background-color: #600f0c;
+    background-color: black;
 } 
 
 .brContainer {

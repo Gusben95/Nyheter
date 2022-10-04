@@ -184,7 +184,7 @@ export default function Homepage({mostPopular}) {
           {articlesMapped.length === 0 ? (
             <div className={styles.noArticlesContainer} style={{textAlign: "center"}}>
               <h2>Inga artiklar har skrivits idag ännu,</h2>
-              <h2>kolla in våran Mäst Populära artiklar sektion istället!</h2>
+              <h2>kolla in våran "mest populära artiklar" sektion istället!</h2>
               <Link to="/mestPopulara">Mest populära</Link>
             </div>
           ) : (

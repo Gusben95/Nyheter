@@ -42,12 +42,7 @@
   cursor: pointer;
   box-shadow: rgba(0, 1, 2, 25%);
   display: block;
-  width: 60%;
-}
-
-.Login a {
-  width: 100%;
-  
+  transition: all 0.3s ease;
 }
 
 .superAd a:hover {
@@ -73,19 +68,4 @@
   font-stretch: expanded;
   cursor: pointer;
   padding: 5px 0;
-}
-
-
-@media (min-width:1024px) {
-  .superAd a {
-    width:30%;
-    border-radius: 1em
-  }
- 
-  .Login a {
-    width: 110%;
-    border-radius: 1em;
-    justify-items: center;
-    margin-top: 0;
-  }
 }
