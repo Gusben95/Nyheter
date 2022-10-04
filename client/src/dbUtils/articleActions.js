@@ -1,5 +1,5 @@
-//const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
-const BASE_URL = "http://localhost:3001"
+const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+// const BASE_URL = "http://localhost:3001"
 
 async function fetchArticles() {
   const response = await fetch(BASE_URL + "/allArticles");
