@@ -161,7 +161,7 @@ export default function Homepage({mostPopular}) {
   return (
     <div className={styles.homepage}>
       <Header />
-
+      <Adds></Adds>
       {stateUser.email ? (
         <h2 style={{textAlign: "center"}}>Välkommen tillbaka {stateUser.name}</h2>
       ) : (

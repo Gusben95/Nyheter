@@ -6,15 +6,17 @@ import zero from './Images/zero.jpg'
 import unicorn from './Images/unicorn.jpg'
 import coke from './Images/coke.jpg'
 
-export default function Adds(){
 
+export default function Adds(){
+  let adds = [zero, coke, unicorn];
+  let randomizedAdd = adds[Math.floor(Math.random() * adds.length)];
+  
+  
   return(
 
     <div className='addsPlacement'>
-
-        <img src={zero}/>
-        <img src={unicorn}/>
-        <img src={coke}/>
+    
+    <img src={randomizedAdd}></img>
 
     </div>
   )  
