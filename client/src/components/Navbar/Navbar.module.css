@@ -15,12 +15,18 @@
   box-shadow: 2px 2px 4px #dedede;
   z-index: 2;
   transform: translateX(102%);
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 /* When navbar is opened */
 .navbar.opened {
   transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    width: 50%;
+  }
 }
 
 .navBarContainer {

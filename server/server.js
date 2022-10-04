@@ -57,13 +57,12 @@ app.use(function(req, res, next) {
 // Login limiter
 //***********************  FUNKTIONELL KOD AVSTÄNGD UNDER UTVÄCKLINGSFAS *************************
 // Förhindrar upprepade loginförsök från samma IP-Address
-const repeatedLoginlimiter = rateLimit({
- 	windowMs: 10 * 60 * 1000,
- 	max: 5,
- 	standardHeaders: true,
- 	legacyHeaders: false,
- }
- )
+// const repeatedLoginlimiter = rateLimit({
+// 	windowMs: 10 * 60 * 1000,
+// 	max: 5,
+// 	standardHeaders: true,
+// 	legacyHeaders: false,
+// })
 
 
 // -------- article database --------
@@ -87,7 +86,7 @@ app.get('/allArticles', (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.error('error')
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -115,7 +114,7 @@ app.post('/articlesByCategory', async (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.error('error')
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -141,7 +140,7 @@ app.post('/articlesBySearch', async (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.error('error')
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -159,7 +158,7 @@ app.post('/articlesBySearch', async (request, response) => {
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
   postArticle(article).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json("Success")
@@ -169,7 +168,7 @@ app.post('/postArticle', async (request, response) => {
 app.post('/deleteArticle', async (request, response) => {
   let article = await request.body.id;
   let res = await deleteArticle(article).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -190,7 +189,7 @@ app.post('/deleteArticle', async (request, response) => {
 app.post('/updateArticle', async (request, response) => {
   let updatedArticle = await request.body
   let res = await updateArticle(updatedArticle).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -199,7 +198,7 @@ app.post('/updateArticle', async (request, response) => {
 app.post('/incrementViewCount', async (request, response) => {
   let article = await request.body.id;
   let res = await updateViews(article).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -215,11 +214,11 @@ app.post('/incrementViewCount', async (request, response) => {
 
 
 // -------- account database --------
-app.post('/getAccountWithEmail',  repeatedLoginlimiter, async (request, response) => {
+app.post('/getAccountWithEmail', async (request, response) => {
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   let res = await getAccountByEmail(account).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   if (res.length > 0) {
@@ -233,7 +232,7 @@ app.post('/getAccountWithEmail',  repeatedLoginlimiter, async (request, response
 app.post('/getAccountWithToken', async (request, response) => {
   let account = await request.body
   let res = await getAccountWithToken(account).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   if (res.length > 0) {
@@ -248,7 +247,7 @@ app.post('/loginWithEmail', async (request, response) => {
   let account = await request.body;
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   let res = await getAccountByEmail(account).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   if(res[0].signInPlatform !== "nyhetssidan") {
@@ -280,7 +279,7 @@ app.post('/createAccount', async (request, response) => {
   const accountExists = await getAccountByEmail(account)
     if(accountExists.length == 0){
       let res = await createAccount(account).catch((err) => {
-        console.error('error')
+        console.error(err)
         response.status(500).end()
       })
       response.json(res)
@@ -294,7 +293,7 @@ app.post('/createAccount', async (request, response) => {
 app.post('/updateAccount', async (request, response) => {
   let account = await request.body
   let res = await updateAccount(account).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -302,7 +301,7 @@ app.post('/updateAccount', async (request, response) => {
 app.post('/updatePassword', async (request, response) => {
   let account = await request.body
   let res = await updatePassword(account).catch((err) => {
-    console.error('error')
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
