@@ -194,7 +194,7 @@ export default function Homepage({mostPopular}) {
           )}
         </>
       )}
-      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️</section>
+      <section className={styles.toTheTop} onClick={scrollToTop}>⇧</section>
     </div>
   )
 }

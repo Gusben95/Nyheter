@@ -20,19 +20,19 @@ useEffect(()=>{
 
     // Get todays date and time
     var now = new Date().getTime();
-    
+
     // Find the distance between now an the count down date
     var distance = countDownDate - now;
-    
+
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
+
     // Output the result in an element with id="demo"
     document.getElementById("demo").innerHTML = days + "d " + minutes + "m " + seconds + "s ";
-    
-    // If the count down is over, write some text 
+
+    // If the count down is over, write some text
     if (distance < 0) {
       clearInterval(countdownfunction);
       document.getElementById("demo").innerHTML = "Din premuneration har gått ut!";
@@ -45,13 +45,13 @@ useEffect(()=>{
     return (
         <footer>
 
-        <div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#600F0C"}}>
+        <div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#f5f5f5"}}>
         <img style={{ height: "35%", cursor:'pointer'}} src={logo} onClick={navigatetoHomepage}alt="logo" />
           <h1>COMING SOON</h1>
           <h2>Oj! Du är lite snabb, sidan är fortfarande under uppbyggnad🏗</h2>
           <p id="demo" style={{fontSize: "30px"}}></p>
-          
-          <h3><Link style={{color: "white"}} to="/">Gå tillbaka till Startsidan😁</Link></h3>
+
+          <h3><Link to="/">Gå tillbaka till Startsidan😁</Link></h3>
         </div>
         </footer>
     )
