@@ -7,6 +7,8 @@ import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
 const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
 
+const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
+
 export default function SignUp() {
   const passwordRepeat = useRef();
   const dispatch = useDispatch();
@@ -32,6 +34,24 @@ export default function SignUp() {
     signInPlatform: "nyhetssidan",
   }
 
+  function saveToken(account) {
+    sessionStorage.setItem('token', account.token);
+    const accountToken = {
+      id: account._id,
+      token: account.token
+    }
+    updateAccount(accountToken);
+  }
+
+  async function login(accountInfoFromGoogle) {
+    const accountInfo = await loginWithEmail(accountInfoFromGoogle);
+    saveToken(accountInfo)
+
+    if (accountInfo?.email) {
+      dispatch({type: "setUser", data: accountInfo});
+    }
+  }
+
   async function register() {
     if(passwordRepeat.current.value !== account.password) {
       console.log(passwordRepeat.current.value, account.password)
@@ -44,6 +64,10 @@ export default function SignUp() {
 
     dispatch({type: "setUser", data: account});
     const response = await createAccount(account);
+
+    if(response === "account already exists") {
+      login(account);
+    }
   }
 
   useEffect(() => {
@@ -53,7 +77,7 @@ export default function SignUp() {
     gapi.load('client:auth2', initClient);
   }, []);
 
-  const onGoogleSuccess = (res) => {
+  const onGoogleSuccess = async (res) => {
     const profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,
@@ -63,7 +87,11 @@ export default function SignUp() {
 
     // eslint-disable-next-line no-restricted-globals
     if(confirm("Vill du automatiskt skapa konto med Google?")) {
-      createAccount(profile);
+      let response = await createAccount(profile);
+      
+      if(response === "account already exists") {
+        login(profile);
+      }
     }
   };
 
