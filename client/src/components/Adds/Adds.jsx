@@ -14,10 +14,10 @@ export default function Adds(){
   
   return(
 
-    <div className='addsPlacement'>
+    <container className={styles.addsPlacement}>
     
-    <img src={randomizedAdd}></img>
+    <img className={styles.addsSinglePlacement} src={randomizedAdd}></img>
 
-    </div>
+    </container>
   )  
 }

@@ -1,6 +1,30 @@
-.addsPlacement img {
-
-        height: 8em;
-        width: 3em;
-    
+.addsSinglePlacement {
+     
+      display:flex;
+      align-items: center;
+      width: 50%;
+      height: 30%;
+      margin: 0px auto 1.25em auto;
+      padding-bottom: 0.625em;
+      position: relative;
+      cursor: pointer; 
   }
+
+/*   .addsPlacement{
+    aspect-ratio: 16/9;
+      width:30%; 
+      height:200px;
+      width:200px;
+      flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100% 
+      
+  }
+
+   .addsPlacement img{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden
+
+  }  */
