@@ -11,7 +11,7 @@ import Profile from '../../components/Profile/Profile';
 
 const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
 /* göm med env */
-const clientId = process.env.REACT_APP_GOOGLE_LOGIN;
+const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
 
 export default function Login() {
   const stateUser = useSelector(state => state.User)
@@ -47,7 +47,7 @@ export default function Login() {
     //     alert("Ej giltig email")
     //   return
     //   }
-    
+
     if (loginWithProvider) {
       account = loginWithProvider;
     }
@@ -123,7 +123,7 @@ export default function Login() {
 
           <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onGoogleSuccess} onFailure={(err) => {
             console.error("Error sign in with Google")
-          }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
+          }} cookiePolicy={'single_host_origin'} isSignedIn={true}/>
           {/* <FacebookLoginComponent/> */}
 
           <Link to="/prenumerera">Bli Prenumerant</Link>

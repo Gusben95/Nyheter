@@ -31,7 +31,7 @@ h1 {
   transition: all 0.3s;
   color: rgb(255, 255, 255) ;
   border: none;
-  background-color: #000000;
+  background-color: #600f0c;
 }
 
 .cardContainer {
@@ -41,7 +41,8 @@ h1 {
 }
 
 .subscribeCard {
-  background: #390907;
+  background: #600f0c;
+  color: white;
   margin:20px auto;
   position: relative;
   width: 70%;

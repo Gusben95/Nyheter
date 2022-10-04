@@ -30,6 +30,7 @@ export default function SignUp() {
 
   async function register() {
     if(passwordRepeat.current.value !== account.password) {
+      console.log(passwordRepeat.current.value, account.password)
       alert("Lösenorden matchar inte");
       return;
     }

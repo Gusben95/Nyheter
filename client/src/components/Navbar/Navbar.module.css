@@ -14,6 +14,7 @@
   background-color: #f5f5f5;
   box-shadow: 2px 2px 4px #dedede;
   z-index: 2;
+  overflow: scroll;
   transform: translateX(102%);
   transition: all 0.5s ease;
 }
@@ -141,7 +142,7 @@
   cursor: pointer;
   z-index:3;
   border: none;
-  color: #f5f5f5; 
+  color: #f5f5f5;
 }
 
 .closeNavbarBtn {
@@ -161,7 +162,7 @@
   font-size: 2em;
   font-stretch: expanded;
   cursor: pointer;
-  color: #f5f5f5; 
+  color: #f5f5f5;
 }
 
 .searchPart {
@@ -207,7 +208,7 @@
   cursor: pointer;
   transition: 0.3s all ease;
   margin: 1.25em;
-  color: white; 
+  color: white;
 }
 
 .login:hover {
@@ -219,7 +220,7 @@
     position: relative;
     width: 100%;
   }
-  
+
   .searchPart > input {
     width: 40%;
     font-size: 1.25em;
@@ -235,6 +236,5 @@
     border-radius: 1.25em;
     margin: 1.25em;
     height: 2em;
-    width: 8%;
   }
 }
