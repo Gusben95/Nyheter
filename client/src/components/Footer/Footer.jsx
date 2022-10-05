@@ -1,36 +1,36 @@
-import { useRef } from 'react';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+// import { useRef } from 'react';
+// import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import styles from './Footer.module.css'
 import logo from '../../Logo.png';
 
 
+function scrollToTop(){
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+}
+
+function linkToFacebook() {
+    window.location.href = ('https://www.facebook.com')
+}
+function linkToYotube() {
+    window.location.href = ('https://www.youtube.com')
+}
+function linkToTwitter() {
+    window.location.href = ('https://www.twitter.com')
+}
+
+export{scrollToTop, linkToFacebook, linkToYotube, linkToTwitter}
+
 export default function Footer() {
 
     const navigate = useNavigate();
-
-    function linkToFacebook() {
-        window.location.href = ('https://www.facebook.com')
-    }
     function linktoInstagram() {
         window.location.href = ('https://www.instagram.com')
     }
-
-    function linkToYotube() {
-        window.location.href = ('https://www.youtube.com')
-    }
-
-    function linkToTwitter() {
-        window.location.href = ('https://www.twitter.com')
-    }
-
+    
     function navigateToComingSoon(){
         navigate("/kommersnart")
     }
-
-    function scrollToTop(){
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }
 
     return (
         <footer className={styles.footer}>
