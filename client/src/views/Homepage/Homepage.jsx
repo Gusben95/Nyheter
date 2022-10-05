@@ -106,16 +106,7 @@ export default function Homepage({mostPopular}) {
       // make the first 2 articles in the chunk bigger
       // then make 4 in a row smaller
       // then make the last 2 in the chunk bigger
-
-      //add an ad at the end of articlesmapped if the articlesSplit is shorter than 2
-      if(articlesSplit.length <= 2 && key === articlesSplit.length - 1) {
-        return (
-          <div key={articleFromStore.id}>
-            <ArticleComp article={articleFromStore} smallVersion />
-            <Ad />
-          </div>
-        )
-      }
+        
       // add an ad after every 4 articles, between 2 small articles on either side
       if(key === 3) {
         return (

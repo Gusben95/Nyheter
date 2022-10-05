@@ -59,6 +59,11 @@ export default function SignUp() {
       return;
     }
 
+    if(account.email === "" || account.password === "" || account.name === "") {
+      alert("Du måste fylla i alla fält");
+      return;
+    }
+
     //try to login, and if the email already exists, it will return an error.
     //THEN we can create a new account.
 
