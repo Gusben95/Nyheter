@@ -130,7 +130,7 @@ export default function Homepage({mostPopular}) {
     }
 
     setArticlesToSplit(articlesToSlitBeforeState);
-  }, [stateArticles, location])
+  }, [stateArticles, location, stateUser])
 
   //split array into chunks of 10 articles
   let articlesSplit = []
@@ -146,7 +146,36 @@ export default function Homepage({mostPopular}) {
       // make the first 2 articles in the chunk bigger
       // then make 4 in a row smaller
       // then make the last 2 in the chunk bigger
-      if(key === 2 || key === 3 || key === 4 || key === 5) { // the second article of every chunk of 10
+
+      //add an ad at the end of articlesmapped if the articlesSplit is shorter than 2
+      if(articlesSplit.length <= 2 && key === articlesSplit.length - 1) {
+        return (
+          <div key={articleFromStore.id}>
+            <ArticleComp article={articleFromStore} smallVersion />
+            <Adds />
+          </div>
+        )
+      }
+      // add an ad after every 4 articles, between 2 small articles on either side
+      if(key === 3) {
+        return (
+          <div key={articleFromStore.id}>
+            <ArticleComp article={articleFromStore} smallVersion />
+            <Adds />
+          </div>
+        )
+      }
+      // add a large ad after the last article in the chunk of 8
+      if(key === 7) {
+        return (
+          <div key={articleFromStore.id}>
+            <ArticleComp article={articleFromStore} />
+            <Adds largeVersion />
+          </div>
+        )
+      }
+      // 2 large articles, then 4 small articles, then 2 large articles again
+      if(key === 2 || key === 4 || key === 5) {
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} smallVersion />
       } else {
         return <ArticleComp key={articleFromStore.id} article={articleFromStore} />
@@ -171,7 +200,7 @@ export default function Homepage({mostPopular}) {
             <h3 style={{margin: "1px"}}> 2kr/dag i 12 månader.</h3>
           </article>
           <Link to="/prenumerera">Prenumerera nu</Link><p>Redan prenumerant?</p>
-          <section className={styles.Login}><Link to="/login">Logga in</Link></section>
+          <Link to="/login" className={styles.Login}>Logga in</Link>
         </section>
       )}
 
@@ -184,7 +213,7 @@ export default function Homepage({mostPopular}) {
           {articlesMapped.length === 0 ? (
             <div className={styles.noArticlesContainer} style={{textAlign: "center"}}>
               <h2>Inga artiklar har skrivits idag ännu,</h2>
-              <h2>kolla in våran Mäst Populära artiklar sektion istället!</h2>
+              <h2>kolla in våran "mest populära artiklar" sektion istället!</h2>
               <Link to="/mestPopulara">Mest populära</Link>
             </div>
           ) : (
@@ -192,10 +221,9 @@ export default function Homepage({mostPopular}) {
               {articlesMapped}
             </>
           )}
-          <Adds/>
         </>
       )}
-      <section className={styles.toTheTop} onClick={scrollToTop}>⬆️</section>
+      <section className={styles.toTheTop} onClick={scrollToTop}>⇧</section>
     </div>
   )
 }
