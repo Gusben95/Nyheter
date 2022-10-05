@@ -137,7 +137,9 @@ export default function Admin() {
       <h2 style={{textAlign: "center"}}>Live exempel av hur artikeln kommer se ut:</h2>
       <ArticleComp article={newArticle} />
 
-      <button onClick={createFakeArticle}>Post article</button>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <button onClick={createFakeArticle} className={styles.addRandomArticleBtn}>Lägg till en färdig random artikel</button>
+      </div>
     </div>
   )
 }
