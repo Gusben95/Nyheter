@@ -9,6 +9,10 @@ import styles from './Homepage.module.css'
 
 const { fetchArticles, fetchArticlesByCategory } = require('../../dbUtils/articleActions')
 
+function scrollToTop(){
+  window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+}
+
 export default function Homepage({mostPopular}) {
   const dispatch = useDispatch();
 
@@ -183,9 +187,7 @@ export default function Homepage({mostPopular}) {
     }))
   })
 
-  function scrollToTop(){
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-  }
+
 
   return (
     <div className={styles.homepage}>
