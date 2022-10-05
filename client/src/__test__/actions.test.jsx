@@ -1,10 +1,12 @@
-import { fetchArticles } from '../dbUtils/articleActions'
+import {render,clean, cleanup} from '@testing-library/react'
+import {  postArticle } from '../../../server/db/articleDb'
+
 
 describe('Actions', () => {
 
-  it('postArticle should post an Article', async () => {
-    const postingArticles = await postArticle();
-    expect(postingArticles).toEqual(expect.any(/* Array */));
+  it('postArticle should post an Article', () => {
+    const postingArticles = postArticle();
+    expect(postingArticles).toPost(postArticle);
   })})
 
 
