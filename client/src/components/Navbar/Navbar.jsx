@@ -18,6 +18,12 @@ export default function Navbar({hideSubscribe}) {
   function toggleNavbar(e) {
     e.stopPropagation();
     navbarOpened ? setNavbarOpened(false) : setNavbarOpened(true);
+
+    if(navbarOpened) {
+      document.body.style.overflow = "unset";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   }
 
   function toggleTodaysSection(e) {

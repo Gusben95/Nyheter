@@ -49,6 +49,10 @@
   background-color: #000000;
 }
 
+.Login {
+  margin-top: 0 !important;
+}
+
 .adText{
   display: flex;
   flex-direction:column;

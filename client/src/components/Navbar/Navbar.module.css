@@ -14,7 +14,6 @@
   background-color: #f5f5f5;
   box-shadow: 2px 2px 4px #dedede;
   z-index: 2;
-  overflow: scroll;
   overflow-x: hidden;
   transform: translateX(102%);
   transition: all 0.5s ease;
@@ -224,11 +223,11 @@
 
 .LoginLogoutSection {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   gap: 5px;
-  padding: 5px;
+  padding: 0.5em;
 }
 
 .LoginLogoutSection a, .LoginLogoutSection button {
@@ -262,7 +261,6 @@
   border-radius: 0.25em;
   cursor: pointer;
   transition: 0.3s all ease;
-  margin-bottom: 1em;
   color: white;
 }
 
