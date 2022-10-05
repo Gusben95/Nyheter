@@ -1,4 +1,4 @@
-.addsPlacement {
+.adContainer {
   display:flex;
   align-items: center;
   width: 100%;
@@ -20,13 +20,13 @@
   cursor: pointer; 
 }
 
-.addsSinglePlacement {
+.adImage {
   height: 100%;
   width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .addsPlacement {
+  .adContainer {
     width: 50%;
     box-shadow: 2px 2px 13px grey;
   }
@@ -36,22 +36,3 @@
     box-shadow: 4px 4px 18px grey;
   }
 }
-
-/*   .addsPlacement{
-    aspect-ratio: 16/9;
-      width:30%; 
-      height:200px;
-      width:200px;
-      flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100% 
-      
-  }
-
-   .addsPlacement img{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden
-
-  }  */
