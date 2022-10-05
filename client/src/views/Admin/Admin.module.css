@@ -6,3 +6,24 @@
   width: 90%;
   margin: 0 auto;
 }
+
+.addRandomArticleBtn {
+  background-color: #600f0c;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  margin: 10px;
+  border-radius: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px black;
+  transition: all 0.3s ease;
+}
+
+.addRandomArticleBtn:hover {
+  background-color: #000000;
+}
+
+.addRandomArticleBtn:active {
+  box-shadow: none;
+}

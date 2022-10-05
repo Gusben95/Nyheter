@@ -38,6 +38,13 @@ export default function Login() {
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
+    if(!loginWithProvider) {
+      if(account.email === "" || account.password === "") {
+        alert("Du måste fylla i alla fält");
+        return;
+      }
+    }
+
     //   function validateEmail(email)
     //   {
     //       let re = /\S+@\S+\.\S+/;
