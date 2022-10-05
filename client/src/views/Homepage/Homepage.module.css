@@ -4,6 +4,7 @@
 .homepage {
   background: #efe1e1;   /* #600F0C; */
   background: linear-gradient(180deg,#ffffff 50%, rgba(0, 0, 0, 0.057));
+  padding-bottom: 5px;
   /* background: rgb(0, 0, 0); */
   /* background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%); */
 }
