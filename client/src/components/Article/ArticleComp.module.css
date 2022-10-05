@@ -5,9 +5,8 @@
   border-bottom: 3px solid #600f0c;
   position: relative;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   box-shadow: 1px 1px 8px grey;
-  
 }
 
 .largeArticle:hover, .smallArticle:hover {
@@ -119,6 +118,16 @@
 
 
 /* Media query phone / computer view */
+
+@media (min-width: 600px) {
+  .largeArticle, .smallArticle{
+    width: 80%;
+    box-shadow: 2px 2px 13px grey;
+  }  
+  .openedArticle {
+    width: 90% !important;
+  }
+}
 
 @media (min-width: 1024px){
   .largeArticle, .smallArticle{
