@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Header from '../../components/Header/Header';
 import Profile from '../../components/Profile/Profile';
 
-const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
+const {loginWithEmail, updateAccount} = require('../../dbUtils/accountActions')
 /* göm med env */
 const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
 
@@ -100,10 +100,6 @@ export default function Login() {
     }
   };
 
-  function linkToHomepage() {
-    navigate('/')
-  }
-
   return (<div className={styles.loginContainer}>
     <Header/> {
       stateUser.email
@@ -119,7 +115,7 @@ export default function Login() {
 
             <label htmlFor='psw'>Lösenord</label>
             <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required="required"></input>
-          
+
             <button type='submit' onClick={loginAuth}>Logga in</button>
           </form>
 

@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './Subscribe.css'
 
@@ -11,10 +10,7 @@ import { useEffect } from 'react';
 export default function Subscribe() {
   const [clickedMonths, setClickedMonths] = useState();
   const firstCard = useRef();
-  const navigate = useNavigate();
   const stateUser = useSelector(state => state.User);
-  const stateArticles = useSelector(state => state.Articles);
-  const location = useLocation();
 
   function clickSubscribe(months) {
     if (clickedMonths) {
@@ -158,7 +154,7 @@ export default function Subscribe() {
         ) : ""}
         <div
           className="subscribeCard month12"
-          
+
           aria-label='Kort för 12 månader prenumeration'
           tabIndex={3}
           onClick={() => { clickSubscribe(12) }}

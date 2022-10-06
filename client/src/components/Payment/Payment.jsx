@@ -1,9 +1,10 @@
 import styles from './Payment.module.css';
-
-import { useSelector } from 'react-redux';
+import { updateAccount } from '../../dbUtils/accountActions'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Payment(props) {
   const stateUser = useSelector(state => state.User);
+  const dispatch = useDispatch();
     //saves today as a long number
     let today = new Date().getTime();
     let ThreeMonthsFromToday = today + 7776000000;
@@ -36,8 +37,8 @@ export default function Payment(props) {
     }
 
     function pay() {
-      /* dispatch({type: "updateUser", data: newUser});
-      updateUser(newUser); */
+      dispatch({type: "updateUser", data: newUser});
+      updateAccount(newUser);
     }
 
   return (
