@@ -11,7 +11,7 @@ import Profile from '../../components/Profile/Profile';
 
 const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
 /* göm med env */
-const clientId = '299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com';
+const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
 
 export default function Login() {
   const stateUser = useSelector(state => state.User)
@@ -34,11 +34,17 @@ export default function Login() {
 
   //Login in user
   async function loginAuth(loginWithProvider) {
-    console.log("loginAuth", loginWithProvider)
     let account = {
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
+    if(!loginWithProvider) {
+      if(account.email === "" || account.password === "") {
+        alert("Du måste fylla i alla fält");
+        return;
+      }
+    }
+
     //   function validateEmail(email)
     //   {
     //       let re = /\S+@\S+\.\S+/;
@@ -48,13 +54,12 @@ export default function Login() {
     //     alert("Ej giltig email")
     //   return
     //   }
-    /* console.log(loginWithProvider) */
+
     if (loginWithProvider) {
       account = loginWithProvider;
     }
 
     const accountInfo = await loginWithEmail(account);
-    //console.log(accountInfo)
     saveToken(accountInfo)
 
     if (
@@ -83,7 +88,6 @@ export default function Login() {
   // }, []);
 
   const onGoogleSuccess = (res) => {
-    /* console.log('success:', res); */
     const profile = {
       email: res.profileObj.email,
       name: res.profileObj.name,
@@ -116,7 +120,7 @@ export default function Login() {
               loginAuth()
             }}>Logga in</button>
 
-          <Link style={{color: "white"}} to="/glomtlosenord">Glömt Lösenord?</Link>
+          <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
           <div className={styles.brContainer}>
             <span className={styles.brTitle}>
@@ -125,11 +129,11 @@ export default function Login() {
           </div>
 
           <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onGoogleSuccess} onFailure={(err) => {
-            console.log("Error sign in with Google: ", err)
-          }} cookiePolicy={'single_host_origin'} isSignedIn={true}/> 
+            console.error("Error sign in with Google")
+          }} cookiePolicy={'single_host_origin'} isSignedIn={true}/>
           {/* <FacebookLoginComponent/> */}
 
-          <Link to="/prenumerera" style={{color: "white"}}>Bli Prenumerant</Link>
+          <Link to="/prenumerera">Bli Prenumerant</Link>
         </section>)
     }
   </div>)

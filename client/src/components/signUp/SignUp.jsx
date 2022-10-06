@@ -1,7 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './SignUp.module.css';
 import { createAccount } from '../../dbUtils/accountActions';
+
+import {GoogleLogin} from 'react-google-login';
+import {gapi} from 'gapi-script';
+const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
+
+const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
 
 export default function SignUp() {
   const passwordRepeat = useRef();
@@ -28,9 +34,33 @@ export default function SignUp() {
     signInPlatform: "nyhetssidan",
   }
 
+  function saveToken(account) {
+    sessionStorage.setItem('token', account.token);
+    const accountToken = {
+      id: account._id,
+      token: account.token
+    }
+    updateAccount(accountToken);
+  }
+
+  async function login(accountInfoFromGoogle) {
+    const accountInfo = await loginWithEmail(accountInfoFromGoogle);
+    saveToken(accountInfo)
+
+    if (accountInfo?.email) {
+      dispatch({type: "setUser", data: accountInfo});
+    }
+  }
+
   async function register() {
     if(passwordRepeat.current.value !== account.password) {
+      console.log(passwordRepeat.current.value, account.password)
       alert("Lösenorden matchar inte");
+      return;
+    }
+
+    if(account.email === "" || account.password === "" || account.name === "") {
+      alert("Du måste fylla i alla fält");
       return;
     }
 
@@ -39,12 +69,51 @@ export default function SignUp() {
 
     dispatch({type: "setUser", data: account});
     const response = await createAccount(account);
-    console.log(response)
+
+    if(response === "account already exists") {
+      login(account);
+    }
   }
+
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({clientId: clientId, scope: ''});
+    };
+    gapi.load('client:auth2', initClient);
+  }, []);
+
+  const onGoogleSuccess = async (res) => {
+    const profile = {
+      email: res.profileObj.email,
+      name: res.profileObj.name,
+      signInPlatform: "google",
+      preference: preferences,
+    }
+
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Vill du automatiskt skapa konto med Google?")) {
+      let response = await createAccount(profile);
+      
+      if(response === "account already exists") {
+        login(profile);
+      }
+    }
+  };
 
   return (
     <section className={styles.signUp}>
       <h2>Skapa konto</h2>
+
+      <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onGoogleSuccess} onFailure={(err) => {
+        console.error("Error sign in with Google")
+      }} cookiePolicy={'single_host_origin'} isSignedIn={true}/>
+
+      <div className={styles.brContainer}>
+        <span className={styles.brTitle}>
+          Alternativt:
+        </span>
+      </div>
+
       <label htmlFor='name'>Namn *</label>
       <input type='text' placeholder='Namn' name='name' required onChange=      {handleChange}></input>
       <label htmlFor='uname'>E-post *</label>

@@ -17,7 +17,6 @@ export default function Subscribe() {
   const location = useLocation();
 
   function clickSubscribe(months) {
-    console.log(months)
     if (clickedMonths) {
       document.getElementsByClassName("month" + String(clickedMonths))[0].classList.remove("highlightedSubscribeCard")
     }
@@ -40,19 +39,19 @@ export default function Subscribe() {
 
       // Get todays date and time
       var now = new Date().getTime();
-      
+
       // Find the distance between now an the count down date
       var distance = countDownDate - now;
-      
+
       // Time calculations for days, hours, minutes and seconds
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
+
       // Output the result in an element with id="demo"
       document.getElementById("demo").innerHTML = days + "d " + minutes + "m " + seconds + "s ";
-      
-      // If the count down is over, write some text 
+
+      // If the count down is over, write some text
       if (distance < 0) {
         clearInterval(countdownfunction);
         document.getElementById("demo").innerHTML = "Din premuneration har gått ut!";
@@ -94,7 +93,6 @@ export default function Subscribe() {
       <section className="cardContainer">
         <div
           className="subscribeCard month3"
-          style={{backgroundImage: `url(${stateArticles[0]?.images[0]})`}}
 
           ref={firstCard}
           aria-label='Kort för 3 månader prenumeration'
@@ -128,8 +126,7 @@ export default function Subscribe() {
         ) : ""}
         <div
           className="subscribeCard month6"
-          style={{backgroundImage: `url(${stateArticles[1]?.images[0]})`}}
-          
+
           aria-label='Kort för 6 månader prenumeration'
           tabIndex={2}
           onClick={() => { clickSubscribe(6) }}
@@ -161,7 +158,6 @@ export default function Subscribe() {
         ) : ""}
         <div
           className="subscribeCard month12"
-          style={{backgroundImage: `url(${stateArticles[2]?.images[0]})`}}
           
           aria-label='Kort för 12 månader prenumeration'
           tabIndex={3}

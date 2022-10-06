@@ -2,7 +2,6 @@ const express = require("express");
 const nodeMailer = require('nodemailer');
 const helmet = require("helmet");
 const jwt = require("jsonwebtoken")
-require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const {
@@ -36,7 +35,6 @@ app.use(express.json())
 app.use(helmet());
 
 init().then(initAcc().then(() => {
-  console.log(`Server listening on ${PORT}`);
   app.listen(PORT);
 }))
 
@@ -64,8 +62,7 @@ app.use(function(req, res, next) {
 // 	max: 5,
 // 	standardHeaders: true,
 // 	legacyHeaders: false,
-// }
-// )
+// })
 
 
 // -------- article database --------
@@ -89,7 +86,7 @@ app.get('/allArticles', (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.log(err)
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -117,7 +114,7 @@ app.post('/articlesByCategory', async (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.log(err)
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -143,7 +140,7 @@ app.post('/articlesBySearch', async (request, response) => {
       response.json(items)
     })
     .catch((err) => {
-      console.log(err)
+      console.error(err)
       response.status(500).end()
     })
 })
@@ -161,7 +158,7 @@ app.post('/articlesBySearch', async (request, response) => {
 app.post('/postArticle', async (request, response) => {
   let article = await request.body;
   postArticle(article).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json("Success")
@@ -171,7 +168,7 @@ app.post('/postArticle', async (request, response) => {
 app.post('/deleteArticle', async (request, response) => {
   let article = await request.body.id;
   let res = await deleteArticle(article).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -191,9 +188,8 @@ app.post('/deleteArticle', async (request, response) => {
 //    }
 app.post('/updateArticle', async (request, response) => {
   let updatedArticle = await request.body
-  console.log(updatedArticle)
   let res = await updateArticle(updatedArticle).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -202,7 +198,7 @@ app.post('/updateArticle', async (request, response) => {
 app.post('/incrementViewCount', async (request, response) => {
   let article = await request.body.id;
   let res = await updateViews(article).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -218,12 +214,11 @@ app.post('/incrementViewCount', async (request, response) => {
 
 
 // -------- account database --------
-app.post('/getAccountWithEmail', /* repeatedLoginlimiter */  async (request, response) => {
+app.post('/getAccountWithEmail', async (request, response) => {
   let account = await request.body
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
-  /* console.log(account.email); */
   let res = await getAccountByEmail(account).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   if (res.length > 0) {
@@ -237,7 +232,7 @@ app.post('/getAccountWithEmail', /* repeatedLoginlimiter */  async (request, res
 app.post('/getAccountWithToken', async (request, response) => {
   let account = await request.body
   let res = await getAccountWithToken(account).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   if (res.length > 0) {
@@ -252,7 +247,7 @@ app.post('/loginWithEmail', async (request, response) => {
   let account = await request.body;
   account.email = account.email.replace(/[&\/\!\#,+()$~%'":*?<>{}]/g, '');
   let res = await getAccountByEmail(account).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   if(res[0].signInPlatform !== "nyhetssidan") {
@@ -283,9 +278,8 @@ app.post('/createAccount', async (request, response) => {
   let account = await request.body
   const accountExists = await getAccountByEmail(account)
     if(accountExists.length == 0){
-      console.log(account)
       let res = await createAccount(account).catch((err) => {
-        console.log(err)
+        console.error(err)
         response.status(500).end()
       })
       response.json(res)
@@ -299,7 +293,7 @@ app.post('/createAccount', async (request, response) => {
 app.post('/updateAccount', async (request, response) => {
   let account = await request.body
   let res = await updateAccount(account).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -307,7 +301,7 @@ app.post('/updateAccount', async (request, response) => {
 app.post('/updatePassword', async (request, response) => {
   let account = await request.body
   let res = await updatePassword(account).catch((err) => {
-    console.log(err)
+    console.error(err)
     response.status(500).end()
   })
   response.json(res)
@@ -331,8 +325,6 @@ let info = await transporter.sendMail({
   text: "Här kommer",
   html: "Here's an <b>HTML version</b> of the email.",
 });
-console.log("Message sent: %s", info.messageId); // Output message ID
-console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to preview email
   });
 
   app.get('/pw-reset', async function (req, res) {
@@ -352,6 +344,10 @@ console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to pre
     text: "Här kommer ditt nya lösenord",
     html: "Here's an <b>HTML version</b> of the email.",
   });
-  console.log("Message sent: %s", info.messageId); // Output message ID
-  console.log("View email: %s", nodeMailer.getTestMessageUrl(info)); // URL to preview email
     });
+ /*    app.post('/articlesBySearch', async (request, response) => { 
+
+
+
+      
+    } */

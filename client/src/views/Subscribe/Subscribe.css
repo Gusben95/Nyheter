@@ -5,8 +5,8 @@ h1 {
 }
 
 .subscribePage {
-  background-color: #600F0C;
-  color: #EFE1E1;
+  background-color: #F5F5F5;
+  color: #000000;
 }
 
 .subscribeHeader {
@@ -15,7 +15,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-bottom: 1px white solid;
+  border-bottom: 0.2em #600f0c solid;
 }
 
 .subscribeHeader > h4 {
@@ -29,8 +29,9 @@ h1 {
   border-radius: 0.625em;
   cursor: pointer;
   transition: all 0.3s;
-  color: black;
+  color: rgb(255, 255, 255) ;
   border: none;
+  background-color: #600f0c;
 }
 
 .cardContainer {
@@ -40,7 +41,8 @@ h1 {
 }
 
 .subscribeCard {
-  background: #390907;
+  background: #600f0c;
+  color: white;
   margin:20px auto;
   position: relative;
   width: 70%;
@@ -100,7 +102,8 @@ h1 {
 }
 
 .cardMenu {
-  background-color: #3A0C0A;
+  background-color: #ebebeb;
+  /* box-shadow: 2px 2px 4px gray inset; */
   max-height: 0px;
   animation: openUp 0.5s forwards;
   overflow: hidden;
@@ -123,7 +126,6 @@ h1 {
     border-radius: 2em;
     cursor: pointer;
     transition: all 0.3s;
-    color: black;
     padding: 15px 10px;
     margin:20px 0 0;
   }

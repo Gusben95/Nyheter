@@ -9,7 +9,7 @@ export default function Payment(props) {
     let ThreeMonthsFromToday = today + 7776000000;
     let SixMonthsFromToday = today + 15552000000;
     let TwelveMonthsFromToday = today + 31104000000;
-  
+
     let subscribeEnd;
     let subscriptionCost = 0;
     switch(props.subscription) {
@@ -39,12 +39,12 @@ export default function Payment(props) {
       /* dispatch({type: "updateUser", data: newUser});
       updateUser(newUser); */
     }
-  
+
   return (
     <div className={styles.paymentContainer}>
       <h1>Payment</h1>
-      <p>Du har valt {props.subscription} Månader.</p>
-      <p>Det kostar {subscriptionCost}kr.</p>
+      <p style={{textAlign: "center"}}>Du har valt {props.subscription} Månader.</p>
+      <p style={{textAlign: "center"}}>Det kostar {subscriptionCost}kr.</p>
 
       <section className={styles.cardDetails}>
         <h2>Kortuppgifter</h2>

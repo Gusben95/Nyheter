@@ -46,7 +46,6 @@ export default function Admin() {
   }, [stateUser])
 
   useEffect(() => {
-    console.log(newArticle)
   }, [newArticle])
 
   useEffect(() => {
@@ -97,7 +96,6 @@ export default function Admin() {
 
   async function sendArticle() {
     let response = await postArticle(newArticle);
-    console.log(response);
     if(response === "Success") {
       dispatch({type:"addArticle", data: newArticle});
       alert("Artikeln har skapats");
@@ -139,7 +137,9 @@ export default function Admin() {
       <h2 style={{textAlign: "center"}}>Live exempel av hur artikeln kommer se ut:</h2>
       <ArticleComp article={newArticle} />
 
-      <button onClick={createFakeArticle}>Post article</button>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <button onClick={createFakeArticle} className={styles.addRandomArticleBtn}>Lägg till en färdig random artikel</button>
+      </div>
     </div>
   )
 }

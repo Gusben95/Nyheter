@@ -2,7 +2,6 @@ const {
   MongoClient,
   ObjectId
 } = require('mongodb')
-require('dotenv').config();
 // Should be moved to ENV variable
 const connectionUrl = "mongodb+srv://mongo:mongo@cluster0.qzf0u01.mongodb.net/?retryWrites=true&w=majority";
 const dbName = 'nyheter'
@@ -73,7 +72,6 @@ const postArticle = async (doc) => {
 const deleteArticle = async (article) => {
   const collection = db.collection('article')
   let articleId = new ObjectId(article);
-  // console.log("id i articleDb", article)
   const doc = {
     _id: articleId
   }
