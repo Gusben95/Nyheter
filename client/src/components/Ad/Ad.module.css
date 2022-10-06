@@ -25,6 +25,15 @@
   width: 100%;
 }
 
+@media (min-width: 600px) {
+  .adContainer {
+    width: 80%;
+  }
+  .largeAd {
+    width: 95%;
+  }
+}
+
 @media (min-width: 1024px) {
   .adContainer {
     width: 50%;

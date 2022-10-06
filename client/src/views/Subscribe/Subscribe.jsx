@@ -26,7 +26,7 @@ export default function Subscribe() {
 
     // we want to scroll to the payment/sign up component, but we need to give it time to render first
     setTimeout(() => {
-      document.getElementsByClassName("month" + String(months))[0].scrollIntoView();
+      document.getElementsByClassName("menuMonth" + String(months))[0].scrollIntoView();
     }, 60);
   }
 
@@ -110,7 +110,7 @@ export default function Subscribe() {
           </div>
         </div>
         {clickedMonths === 3 ? (
-          <div className="cardMenu">
+          <div className="cardMenu menuMonth3">
             {stateUser.email ? (
               <>
                 {stateUser.stillPaying ? (
@@ -142,7 +142,7 @@ export default function Subscribe() {
           </div>
         </div>
         {clickedMonths === 6 ? (
-          <div className="cardMenu">
+          <div className="cardMenu menuMonth6">
             {stateUser.email ? (
               <>
                 {stateUser.stillPaying ? (
@@ -175,7 +175,7 @@ export default function Subscribe() {
           </div>
         </div>
           {clickedMonths === 12 ? (
-            <div className="cardMenu">
+            <div className="cardMenu menuMonth12">
               {stateUser.email ? (
                 <>
                   {stateUser.stillPaying ? (

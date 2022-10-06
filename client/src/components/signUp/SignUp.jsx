@@ -115,7 +115,7 @@ export default function SignUp() {
       </div>
 
       <label htmlFor='name'>Namn *</label>
-      <input type='text' placeholder='Namn' name='name' required onChange=      {handleChange}></input>
+      <input type='text' placeholder='Namn' name='name' required onChange={handleChange}></input>
       <label htmlFor='uname'>E-post *</label>
       <input type='text' placeholder='Email' name='email' autoComplete='on' required onChange={handleChange}></input>
       <label htmlFor='psw'>Lösenord *</label>

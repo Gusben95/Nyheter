@@ -110,15 +110,19 @@ export default function Login() {
         ? (<Profile/>)
         : (<section className={styles.loginForm}>
           <h2>Logga in</h2>
-          <label htmlFor='uname'>Email</label>
-          <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required="required"></input>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            loginAuth()
+          }}>
+            <label htmlFor='uname'>Email</label>
+            <input type='text' ref={emailInput} placeholder='Email' name='uname' autoComplete='on' required="required"></input>
 
-          <label htmlFor='psw'>Lösenord</label>
-          <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required="required"></input>
+            <label htmlFor='psw'>Lösenord</label>
+            <input type='password' ref={passwordInput} placeholder='Lösenord' name='pwd' required="required"></input>
+          
+            <button type='submit' onClick={loginAuth}>Logga in</button>
+          </form>
 
-          <button onClick={() => {
-              loginAuth()
-            }}>Logga in</button>
 
           <Link to="/glomtlosenord">Glömt Lösenord?</Link>
 
