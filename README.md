@@ -35,3 +35,11 @@ https://docs.google.com/presentation/d/1XhcqoZHaFyVIICfkQjhYfUQHw0ECYI6JLAYcBxaG
 Inlogg admin på sidan:
 hej@gmail.com
 pwd123
+
+inlogg för vanlig betalade användare:
+hejja@gmail.com
+pwd123
+
+inlogg för ej betalande användare:
+betaladaforfan@gmail.com
+pwd123
