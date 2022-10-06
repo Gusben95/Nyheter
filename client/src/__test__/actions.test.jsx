@@ -10,10 +10,10 @@ describe('Actions', () => {
   })})
 
 
-/*  Post an article to the database, will get a unique id from mongoDB.
-const postArticle = async (doc) => {
-  doc.dateAdded = new Date();
-  doc.views = 0;
-  const collection = db.collection('article');
-  return await collection.insertOne(doc);
-}  */
+// Fetches articles from the database depending on the category
+/* const getCategory = (category) => {
+  const collection = db.collection('article')
+  return collection.find({
+    'categories': category
+  }).toArray()
+} */
