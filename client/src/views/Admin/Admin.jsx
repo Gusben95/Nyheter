@@ -1,5 +1,4 @@
 import { fetchArticles, postArticle, fetchArticleAndSendToDatabase } from '../../dbUtils/articleActions';
-import { createAccount } from '../../dbUtils/accountActions';
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 
@@ -42,7 +41,7 @@ export default function Admin() {
       featchToken().catch(console.error);
     }
 
-    
+
   }, [stateUser])
 
   useEffect(() => {
@@ -67,7 +66,7 @@ export default function Admin() {
     newArticleCopy[e.target.name] = e.target.value;
     setNewArticle(newArticleCopy);
   }
-  
+
   function handleImageEdit(e) {
     let newArticleCopy = {...newArticle};
     newArticleCopy.images = [e.target.value];

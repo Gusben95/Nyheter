@@ -1,5 +1,3 @@
-// import { useRef } from 'react';
-// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import styles from './Footer.module.css'
 import logo from '../../Logo.png';
@@ -27,14 +25,14 @@ export default function Footer() {
     function linktoInstagram() {
         window.location.href = ('https://www.instagram.com')
     }
-    
+
     function navigateToComingSoon(){
         navigate("/kommersnart")
     }
 
     return (
         <footer className={styles.footer}>
-           
+
             <div className={styles.footerHead}>
             <div className={styles.imgPosition}>
             <img  src={logo} onClick={scrollToTop} alt="logo" />
