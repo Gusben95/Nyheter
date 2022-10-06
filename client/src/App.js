@@ -32,6 +32,7 @@ function App() {
 
       dispatch({type:"setArticles", data: articles});
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -48,12 +49,13 @@ function App() {
       }
       featchToken().catch(console.error);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Routes>
       <Route path="/" element={
-        [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
+        [<Homepage mostPopular key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/mestPopulara" element={

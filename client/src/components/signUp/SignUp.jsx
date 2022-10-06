@@ -7,7 +7,7 @@ import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
 const clientId = "299303035876-kus8sfr8h4e38iape0ivksrarjqmouef.apps.googleusercontent.com";
 
-const {loginWithEmail, updateAccount, getAccountWithToken} = require('../../dbUtils/accountActions')
+const {loginWithEmail, updateAccount} = require('../../dbUtils/accountActions')
 
 export default function SignUp() {
   const passwordRepeat = useRef();
@@ -93,7 +93,7 @@ export default function SignUp() {
     // eslint-disable-next-line no-restricted-globals
     if(confirm("Vill du automatiskt skapa konto med Google?")) {
       let response = await createAccount(profile);
-      
+
       if(response === "account already exists") {
         login(profile);
       }
@@ -115,7 +115,7 @@ export default function SignUp() {
       </div>
 
       <label htmlFor='name'>Namn *</label>
-      <input type='text' placeholder='Namn' name='name' required onChange=      {handleChange}></input>
+      <input type='text' placeholder='Namn' name='name' required onChange={handleChange}></input>
       <label htmlFor='uname'>E-post *</label>
       <input type='text' placeholder='Email' name='email' autoComplete='on' required onChange={handleChange}></input>
       <label htmlFor='psw'>Lösenord *</label>

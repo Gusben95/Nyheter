@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './Subscribe.css'
 
@@ -11,10 +10,7 @@ import { useEffect } from 'react';
 export default function Subscribe() {
   const [clickedMonths, setClickedMonths] = useState();
   const firstCard = useRef();
-  const navigate = useNavigate();
   const stateUser = useSelector(state => state.User);
-  const stateArticles = useSelector(state => state.Articles);
-  const location = useLocation();
 
   function clickSubscribe(months) {
     if (clickedMonths) {
@@ -26,7 +22,7 @@ export default function Subscribe() {
 
     // we want to scroll to the payment/sign up component, but we need to give it time to render first
     setTimeout(() => {
-      document.getElementsByClassName("month" + String(months))[0].scrollIntoView();
+      document.getElementsByClassName("menuMonth" + String(months))[0].scrollIntoView();
     }, 60);
   }
 
@@ -110,7 +106,7 @@ export default function Subscribe() {
           </div>
         </div>
         {clickedMonths === 3 ? (
-          <div className="cardMenu">
+          <div className="cardMenu menuMonth3">
             {stateUser.email ? (
               <>
                 {stateUser.stillPaying ? (
@@ -142,7 +138,7 @@ export default function Subscribe() {
           </div>
         </div>
         {clickedMonths === 6 ? (
-          <div className="cardMenu">
+          <div className="cardMenu menuMonth6">
             {stateUser.email ? (
               <>
                 {stateUser.stillPaying ? (
@@ -158,7 +154,7 @@ export default function Subscribe() {
         ) : ""}
         <div
           className="subscribeCard month12"
-          
+
           aria-label='Kort för 12 månader prenumeration'
           tabIndex={3}
           onClick={() => { clickSubscribe(12) }}
@@ -175,7 +171,7 @@ export default function Subscribe() {
           </div>
         </div>
           {clickedMonths === 12 ? (
-            <div className="cardMenu">
+            <div className="cardMenu menuMonth12">
               {stateUser.email ? (
                 <>
                   {stateUser.stillPaying ? (

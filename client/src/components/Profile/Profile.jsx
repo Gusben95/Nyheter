@@ -89,11 +89,15 @@ export default function Profile() {
       .</p>
       <button className={styles.changeLogout} onClick={startChangePassword}>Byt lösenord</button>
       {changingPassword?(
-        <div>
+        <form onSubmit={(e)=>{
+          e.preventDefault();
+          changePassword();
+          setChangingpassword(false);
+        }}>
           <input ref={newPassInput1} type="password" placeholder="Skriv in ditt nya lösenord"></input>
           <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
-          <button onClick={changePassword}>Spara lösenordet</button>
-        </div>
+          <button type="submit" onClick={changePassword}>Spara lösenordet</button>
+        </form>
       ):""}
       </div>
       <div className={styles.userDiv}>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import ArticleComp from '../../components/Article/ArticleComp'
 import Header from '../../components/Header/Header'
 import Ad from '../../components/Ad/Ad'
@@ -23,7 +23,6 @@ export default function Homepage({mostPopular}) {
   const stateUser = useSelector(state => state.User);
   const [articlesToSplit, setArticlesToSplit] = useState([])
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const { category } = useParams();
@@ -51,6 +50,7 @@ export default function Homepage({mostPopular}) {
         setIsLoading(false)
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category])
 
   useEffect(() =>{
@@ -90,6 +90,7 @@ export default function Homepage({mostPopular}) {
     }
 
     setArticlesToSplit(articlesToSlitBeforeState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stateArticles, location, stateUser])
 
   //split array into chunks of 10 articles
@@ -106,7 +107,7 @@ export default function Homepage({mostPopular}) {
       // make the first 2 articles in the chunk bigger
       // then make 4 in a row smaller
       // then make the last 2 in the chunk bigger
-        
+
       // add an ad after every 4 articles, between 2 small articles on either side
       if(key === 3) {
         return (
