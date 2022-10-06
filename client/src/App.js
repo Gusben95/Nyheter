@@ -32,6 +32,7 @@ function App() {
 
       dispatch({type:"setArticles", data: articles});
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
       }
       featchToken().catch(console.error);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
