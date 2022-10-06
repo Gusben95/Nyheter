@@ -2,10 +2,12 @@
   width: 100%;
   margin: 0px auto 1.25em auto;
   padding-bottom: 0.625em;
-  border-bottom: 1px solid #EFE1E1;
+  border-bottom: 3px solid #600f0c;
   position: relative;
   cursor: pointer;
   transition: all 0.1s ease;
+  box-shadow: 1px 1px 8px grey;
+  
 }
 
 .largeArticle:hover, .smallArticle:hover {
@@ -67,8 +69,8 @@
 
 .articleTag {
   padding: 5px 10px;
-  color: #000000;
-  background-color: #EFE1E1;
+  color: #ffffff;
+  background-color: #600f0c;
   border-radius: 0.625em;
   text-transform: capitalize;
   cursor: pointer;
@@ -121,6 +123,7 @@
 @media (min-width: 1024px){
   .largeArticle, .smallArticle{
     width: 50%;
+    box-shadow: 2px 2px 13px grey;
   }  
   .openedArticle {
     width: 60% !important;

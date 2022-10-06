@@ -13,6 +13,7 @@ import { getAccountWithToken } from './dbUtils/accountActions';
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
 import { useEffect } from 'react';
+import Header from './components/Header/Header';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
         var dateB = new Date(b.dateAdded);
         return dateB - dateA;
       });
-  
+
       dispatch({type:"setArticles", data: articles});
     })
   }, []);
@@ -54,7 +55,7 @@ function App() {
       <Route path="/" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
-      
+
       <Route path="/mestPopulara" element={
         [<Homepage mostPopular key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
@@ -84,10 +85,11 @@ function App() {
       } />
 
       <Route path="*" element={
-        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#600F0C"}}>
+        [<div key="1" style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center", backgroundColor: "#F5F5F5"}}>
+          <Header></Header>
           <h1>404</h1>
           <h2>Verkar som att din tidning har blivit borttappad!😭</h2>
-          <h3><Link style={{color: "white"}} to="/">Gå tillbaka till Startsidan😁</Link></h3>
+          <h3><Link to="/">Gå tillbaka till Startsidan😁</Link></h3>
         </div>, <Navbar key="2" hideSubscribe/>]
       } />
 

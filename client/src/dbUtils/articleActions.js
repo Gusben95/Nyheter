@@ -1,10 +1,9 @@
-//const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
-const BASE_URL = "http://localhost:3001"
+const BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+// const BASE_URL = "http://localhost:3001"
 
 async function fetchArticles() {
   const response = await fetch(BASE_URL + "/allArticles");
   const data = await response.json();
-  /* console.log(data); */
   return data;
 }
 
@@ -41,7 +40,6 @@ async function postArticle(article) {
     }
   });
   const data = await response.json();
- /*  console.log(data); */
   return data;
 }
 
@@ -54,7 +52,6 @@ async function deleteArticle(article) {
     }
   });
   const data = await response.json();
-  /* console.log(data); */
   return data;
 }
 
@@ -67,7 +64,6 @@ async function updateArticle(article) {
     }
   });
   const data = await response.json();
-  /* console.log(data); */
   return data;
 }
 
@@ -80,7 +76,6 @@ async function incrementViewCount(article) {
     }
   });
   const data = await response.json();
-  /* console.log(data); */
   return data;
 }
 
@@ -108,7 +103,6 @@ async function fetchArticleAndSendToDatabase(stateArticles) {
   let duplicate = false
   stateArticles.forEach(articleFromState => {
     if (articleFromState.title === articleToDB.title) {
-      console.log("Already added!")
       duplicate = true;
     }
   })

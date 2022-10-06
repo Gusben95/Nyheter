@@ -1,5 +1,5 @@
-//let BASE_URL = "https://nyhetssidan-jkl.fly.dev"
-const BASE_URL = "http://localhost:3001"
+let BASE_URL = "https://nyhetssidan-jkl.fly.dev"
+// const BASE_URL = "http://localhost:3001"
 
 async function fetchAccountWithEmail(account) {
   const response = await fetch(BASE_URL + "/getAccountWithEmail", {

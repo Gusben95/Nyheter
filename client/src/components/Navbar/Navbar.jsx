@@ -18,6 +18,12 @@ export default function Navbar({hideSubscribe}) {
   function toggleNavbar(e) {
     e.stopPropagation();
     navbarOpened ? setNavbarOpened(false) : setNavbarOpened(true);
+
+    if(navbarOpened) {
+      document.body.style.overflow = "unset";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   }
 
   function toggleTodaysSection(e) {
@@ -32,7 +38,6 @@ export default function Navbar({hideSubscribe}) {
 
   function doASearch(e) {
     e.preventDefault()
-    /* console.log(searchBarRef.current.value) */
     navigate("/search/" + searchBarRef.current.value)
   }
 
@@ -51,17 +56,17 @@ export default function Navbar({hideSubscribe}) {
 
   return (
     <div className={navbarOpened ? styles.navBarContainer + " " + styles.navbarDarkBackground : ""} onClick={toggleNavbar}>
-    <section className={styles.openNavbarBtn} onClick={toggleNavbar}>
-      <div className={styles.hamburger1}></div>
-      <div className={styles.hamburger2}></div>
-      <div className={styles.hamburger3}></div>
-    </section>
+      <section className={styles.openNavbarBtn} onClick={toggleNavbar}>
+        <div className={navbarOpened ? styles.hamburger1 + " " + styles.navbarIsOpen : styles.hamburger1}></div>
+        <div className={navbarOpened ? styles.hamburger2 + " " + styles.navbarIsOpen : styles.hamburger2}></div>
+        <div className={navbarOpened ? styles.hamburger3 + " " + styles.navbarIsOpen : styles.hamburger3}></div>
+      </section>
 
-  <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Subscribe</button>
+      <button className={styles.subscribeBtn} style={hideSubscribe ? {display: "none"} : {}} onClick={navigateToSubcribe}>Prenumerera</button>
 
       <nav className={navbarOpened ? styles.opened + " " + styles.navbar : styles.navbar} onClick={(e)=> {e.stopPropagation()}}>
-      
-  <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button>
+          
+        {/* <button className={styles.closeNavbarBtn} onClick={toggleNavbar}>𝗫</button> */}
 
         <div onClick={(e)=>{navigate("/"); toggleNavbar(e);}}>
           <Header />
@@ -72,7 +77,7 @@ export default function Navbar({hideSubscribe}) {
           <button type='submit' onClick={toggleNavbar}>🔎</button>
         </form>
 
-        <div style={{padding: "10px 0px"}}>
+        <div className={styles.LoginLogoutSection}>
           {stateUser.email ? (
             <>
               {stateUser.role === "admin" ? (
@@ -92,7 +97,7 @@ export default function Navbar({hideSubscribe}) {
           ) }
         </div>
 
-        <h2 onClick={toggleTodaysSection} style={!todaySectionOpened ? {} : {borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
+        <h2 onClick={toggleTodaysSection} style={todaySectionOpened ? {} : {borderBottom: "unset"}} className={styles.headers}>Dagens {todaySectionOpened ? "↓" : "↑"}</h2>
         {todaySectionOpened ? (
           <section className={styles.linksPart}>
             <Link onClick={toggleNavbar} to="/kategori/inrikes" className={styles.link}>Inrikes</Link>
@@ -101,9 +106,9 @@ export default function Navbar({hideSubscribe}) {
           </section>
         ) : ""}
 
-        <h2 onClick={toggleOldSection} style={{borderBottom: "1px solid #DBDBDB"}} className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
+        <h2 onClick={toggleOldSection}  className={styles.headers}>Äldre {oldSectionOpened ? "↓" : "↑"}</h2>
         {oldSectionOpened ? (
-          <section className={styles.linksPart} style={{borderBottom: "1px solid #DBDBDB"}}>
+          <section className={styles.linksPart} >
             <Link onClick={toggleNavbar} to="/helaVeckan" className={styles.link}>Hela veckan</Link>
             <Link onClick={toggleNavbar} to="/forraVeckan" className={styles.link}>Förra veckan</Link>
             <Link onClick={toggleNavbar} to="/mestPopulara" className={styles.link}>Mest populära artiklar</Link>

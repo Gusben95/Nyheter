@@ -1,0 +1,38 @@
+.adContainer {
+  display:flex;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+  box-shadow: 1px 1px 8px grey;
+  margin: 0px auto 1.25em auto;
+  position: relative;
+  cursor: pointer; 
+}
+
+.largeAd {
+  display:flex;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+  box-shadow: 1px 1px 8px grey;
+  margin: 0px auto 1.25em auto;
+  position: relative;
+  cursor: pointer; 
+}
+
+.adImage {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .adContainer {
+    width: 50%;
+    box-shadow: 2px 2px 13px grey;
+  }
+
+  .largeAd {
+    width: 70%;
+    box-shadow: 4px 4px 18px grey;
+  }
+}

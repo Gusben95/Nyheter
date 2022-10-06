@@ -11,16 +11,23 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #600F0C;
-  box-shadow: 2px 2px 4px #EFE1E1;
+  background-color: #f5f5f5;
+  box-shadow: 2px 2px 4px #dedede;
   z-index: 2;
+  overflow-x: hidden;
   transform: translateX(102%);
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 /* When navbar is opened */
 .navbar.opened {
   transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    width: 50%;
+  }
 }
 
 .navBarContainer {
@@ -29,13 +36,14 @@
 
 .headers {
   cursor: pointer;
-  border-top: 1px solid #EFE1E1;
+  border-bottom: 0.2em solid #600f0c;
+  border-top: 0.2em solid #600f0c;
   padding: 10px;
   margin: 0;
 }
 
 .link {
-  color: #EFE1E1;
+  color: #000000;
   text-decoration: none;
   font-size: 1.4em;
   font-weight: bold;
@@ -53,7 +61,7 @@
   left: 0;
   right: 0;
   height: 100%;
-  background-color: rgba(106, 106, 106, 0.4);
+  background-color: #6a6a6a66;
   z-index: 1;
 }
 
@@ -67,7 +75,7 @@
   top: -2.5px;
   right: -2.5px;
   border: none;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-left-radius: 15px;
   width: 20%;
   height: 4%;
@@ -79,9 +87,27 @@
   font-stretch: expanded;
   cursor: pointer;
   padding: 5px 0;
+  z-index: 3;
 }
 
-.openNavbarBtn:hover .hamburger1{
+.navbarIsOpen.hamburger1 {
+  transform: rotate(45deg) translate(6px, 6px);
+  /* animation: none !important; */
+  width: 30%;
+}
+
+.navbarIsOpen.hamburger2 {
+  opacity: 0;
+  /* animation: none !important; */
+}
+
+.navbarIsOpen.hamburger3 {
+  transform: rotate(-45deg) translate(7px, -6px);
+  /* animation: none !important; */
+  width: 30%;
+}
+
+/* .openNavbarBtn:hover .hamburger1{
 	animation: pulse 1.8s infinite;
 }
 .openNavbarBtn:hover .hamburger2{
@@ -91,7 +117,7 @@
 .openNavbarBtn:hover .hamburger3{
 	animation: pulse 1.8s infinite;
   animation-delay: 0.4s;
-}
+} */
 
 @keyframes pulse {
 	0% {
@@ -108,11 +134,13 @@
 }
 
 .hamburger1, .hamburger2, .hamburger3{
-  background: black;
+  background: #f5f5f5;
   flex-direction: column;
   width: 45%;
   height: 1px;
-  border: solid 1.5px black;
+  border: solid 1.5px rgb(255, 255, 255);
+  transition: all 0.3s ease;
+  transform: rotate(0deg);
 }
 
 /* The subscribe button in the top left */
@@ -123,7 +151,7 @@
   align-items: center;
   top: -2.5px;
   left: -2.5px;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-right-radius: 15px;
   width: 20%;
   height: 4%;
@@ -134,6 +162,12 @@
   cursor: pointer;
   z-index:3;
   border: none;
+  color: #f5f5f5;
+  transition: all 0.3s ease;
+}
+
+.subscribeBtn:hover {
+  background-color: black;
 }
 
 .closeNavbarBtn {
@@ -144,7 +178,7 @@
   top: -2.5px;
   right: -2.5px;
   border: none;
-  background: #EFE1E1;
+  background: #600f0c;
   border-bottom-left-radius: 15px;
   width: 20%;
   height: 4%;
@@ -153,6 +187,7 @@
   font-size: 2em;
   font-stretch: expanded;
   cursor: pointer;
+  color: #f5f5f5;
 }
 
 .searchPart {
@@ -186,6 +221,35 @@
   margin-bottom: 10px;
 }
 
+.LoginLogoutSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5px;
+  padding: 0.5em;
+}
+
+.LoginLogoutSection a, .LoginLogoutSection button {
+  text-decoration: none;
+  color: white;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+
+  background-color: #600f0c;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.LoginLogoutSection button {
+  background-color: rgb(146, 0, 0)
+}
+
+.LoginLogoutSection a:hover, .LoginLogoutSection button:hover {
+  background-color: #000000;
+}
+
 .upperPart > *, .userAndSearchPart > * {
   margin-top: 10px;
 }
@@ -193,54 +257,32 @@
 .login {
   border: 1px solid black;
   box-shadow: rgba(0, 1, 2, 25%);
-  background-color: #EFE1E1;
+  background-color: #600f0c;
   border-radius: 0.25em;
   cursor: pointer;
   transition: 0.3s all ease;
-  margin: 1.25em;
+  color: white;
 }
 
 .login:hover {
-  background-color: rgb(100, 98, 98);
+  background-color: rgb(0, 0, 0);
 }
 
 @media (min-width:1024px){
   .searchPart {
-    position: relative;
-    width: 100%;
-  }
-  
-  .searchPart > input {
     width: 40%;
+    margin: 0 auto;
+  }
+
+  .searchPart > input {
     font-size: 1.25em;
     padding: 0.6em 2.5em 0.6em 0.6em;
     border-radius: 1em;
   }
 
-  .searchPart > button {
-    visibility: hidden;
-  }
-
   .login {
-    border: 1px solid black;
-    box-shadow: rgba(0, 1, 2, 25%);
-    background-color: #EFE1E1;
     border-radius: 1.25em;
-    cursor: pointer;
-    transition: 0.3s all ease;
     margin: 1.25em;
     height: 2em;
-    width: 8%;
   }
-  
-  .login:hover {
-    background-color: rgb(100, 98, 98);
-  }
-
-  .headers {
-  cursor: pointer;
-  border-top: 1px solid #EFE1E1;
-  padding: 10px;
-  margin: 0;
-}
 }
