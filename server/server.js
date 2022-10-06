@@ -36,6 +36,7 @@ app.use(helmet());
 
 init().then(initAcc().then(() => {
   app.listen(PORT);
+  console.log("server rinning on port 3001");
 }))
 
 // Add headers before the routes are defined
@@ -345,9 +346,3 @@ let info = await transporter.sendMail({
     html: "Here's an <b>HTML version</b> of the email.",
   });
     });
- /*    app.post('/articlesBySearch', async (request, response) => { 
-
-
-
-      
-    } */
