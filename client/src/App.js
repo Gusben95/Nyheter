@@ -8,6 +8,7 @@ import Search from './views/Search/Search'
 import Footer from './components/Footer/Footer';
 /* import Comingsoon from './components/Footer/Footer.module.css'; */
 import Comingsoon from './views/Comingsoon/Comingsoon';
+import { getAccountWithToken } from './dbUtils/accountActions';
 
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from './dbUtils/articleActions';
@@ -32,10 +33,30 @@ function App() {
     })
   }, []);
 
+  useEffect(() => {
+    const sessionToken = sessionStorage.getItem("token");
+    if (sessionToken !== null || sessionToken === "") {
+      let account = {
+        token: sessionToken
+      }
+      const featchToken = async () => {
+        let accountInfo = await getAccountWithToken(account);
+        if (accountInfo !== []) {
+          dispatch({type: "setUser", data: accountInfo});
+        }
+      }
+      featchToken().catch(console.error);
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={
         [<Homepage key="1" />, <Navbar key="2" />, <Footer key="3" />]
+      } />
+      
+      <Route path="/mestPopulara" element={
+        [<Homepage mostPopular key="1" />, <Navbar key="2" />, <Footer key="3" />]
       } />
 
       <Route path="/kategori/:category" element={

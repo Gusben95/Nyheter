@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import styles from './Admin.module.css'
 import { useNavigate } from 'react-router-dom';
 import ArticleComp from '../../components/Article/ArticleComp';
+import { getAccountWithToken } from '../../dbUtils/accountActions';
 
 
 export default function Admin() {
@@ -24,10 +25,24 @@ export default function Admin() {
   })
 
   useEffect(() => {
-    if(stateUser?.role !== "admin") {
-      alert("Du måste vara admin för att komma åt denna sida");
-      navigate('/');
+    const sessionToken = sessionStorage.getItem("token");
+    if (sessionToken !== null || sessionToken === "") {
+      let account = {
+        token: sessionToken
+      }
+      const featchToken = async () => {
+        let accountInfo = await getAccountWithToken(account);
+        if (accountInfo !== []) {
+          dispatch({type: "setUser", data: accountInfo});
+        } else if(accountInfo.role !== "admin") {
+          alert("Du måste vara admin för att komma åt denna sida");
+          navigate('/');
+        }
+      }
+      featchToken().catch(console.error);
     }
+
+    
   }, [stateUser])
 
   useEffect(() => {
@@ -80,9 +95,16 @@ export default function Admin() {
     setNewArticle(newArticleCopy);
   }
 
-  function sendArticle() {
-    postArticle(newArticle);
-    dispatch({type: "addArticle", data: newArticle});
+  async function sendArticle() {
+    let response = await postArticle(newArticle);
+    console.log(response);
+    if(response === "Success") {
+      dispatch({type:"addArticle", data: newArticle});
+      alert("Artikeln har skapats");
+      window.location.reload();
+    } else {
+      alert("Något gick fel");
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
 .homepage {
-  background: rgb(96, 15, 12);
+  background: #600F0C;
   /* background: rgb(0, 0, 0); */
   /* background: linear-gradient(180deg, rgba(0, 0, 0, 1) 4%, rgba(96, 15, 12, 1) 6%); */
 }
@@ -19,28 +19,34 @@
   padding: 10px;
   padding-bottom: 3em;
   background: rgb(96, 15, 12);
-  background: linear-gradient(180deg, rgba(96, 15, 12, 1) 65%, rgba(0, 0, 0, 1) 93%, rgba(96, 15, 12, 1) 100%);
+  background: linear-gradient(180deg,#600F0C 40%, black);
   color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0.225em;
 }
 
 .superAd a {
   background-color: white;
   color: black;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 1em;
   text-decoration: none;
   font-size: 1.5em;
   margin-top: 20px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px lightgrey;
+  box-shadow: rgba(0, 1, 2, 25%);
   display: block;
+  width: 60%;
+}
+
+.Login a {
+  width: 100%;
 }
 
 .superAd a:hover {
-  background-color: rgb(221, 221, 221);
+  background-color: #E82C25;
 }
 
 .adText{
@@ -49,14 +55,32 @@
 }
 
 .toTheTop {
-  position: relative;
+  position: fixed;
   display: flex;
-  padding-left: 8%;
-  background: #f0e0e1;
+  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  height: 8vh;
-  width: 100%;
+  bottom: 10px;
+  right: 10px;
+  border-bottom-left-radius: 15px;
+  color: rgb(75, 75, 75);
   font-size: 2em;
+  font-stretch: expanded;
   cursor: pointer;
-  color: black;
+  padding: 5px 0;
+}
+
+
+@media (min-width:1024px) {
+  .superAd a {
+    width:30%;
+    border-radius: 1em
+  }
+ 
+  .Login a {
+    width: 110%;
+    border-radius: 1em;
+    justify-items: center;
+    margin-top: 0;
+  }
 }
