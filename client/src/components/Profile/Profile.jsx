@@ -9,7 +9,6 @@ import styles from './Profile.module.css'
 export default function Profile() {
   const stateUser = useSelector(state => state.User);
   const dispatch = useDispatch();
-  const [changingPassword,setChangingpassword] = useState(false);
   const newPassInput1 = useRef("");
   const newPassInput2 = useRef("");
 
@@ -55,10 +54,6 @@ export default function Profile() {
    }
   }
 
-  function startChangePassword (){
-    setChangingpassword(true);
-  }
-
   function logoutBtn(){
     sessionStorage.setItem('token', "");
     dispatch({type: "logout"})
@@ -68,7 +63,7 @@ export default function Profile() {
 
   return (
     <section className={styles.loggedIn}>
-      <div className={styles.changePasswordDiv}>
+      <div className={styles.generalInfoDiv}>
       <h2 style={{display: "inline"}}>Hej <span
         contentEditable
         suppressContentEditableWarning={true}
@@ -87,42 +82,40 @@ export default function Profile() {
         name="email"
         >{stateUser.email}</span>
       .</p>
-      <button className={styles.changeLogout} onClick={startChangePassword}>Byt lösenord</button>
-      {changingPassword?(
+      </div>
+      <div className={styles.changePasswordDiv}>
         <form onSubmit={(e)=>{
-          e.preventDefault();
-          changePassword();
-          setChangingpassword(false);
-        }}>
+            e.preventDefault();
+            changePassword();
+          }}>
           <input ref={newPassInput1} type="password" placeholder="Skriv in ditt nya lösenord"></input>
           <input ref={newPassInput2} type="password" placeholder="Upprepa ditt nya lösenord"></input>
           <button type="submit" onClick={changePassword}>Spara lösenordet</button>
         </form>
-      ):""}
       </div>
       <div className={styles.userDiv}>
-      <h4>Du är {stateUser.role}.</h4>
-      {stateUser.stillPaying ? (
-        <>
-          <p>Du betalar fortfarande</p>
-          <p>Kom ihåg att din prenumeration slutar {subscriptionEndFormatted}</p>
-        </>
-      ) : (
-        <div>
-          <p>Du betalar inte längre</p>
-          <Link to="/prenumerera">Prenumera igen enkelt!</Link>
+        <h4>Du är {stateUser.role}.</h4>
+        {stateUser.stillPaying ? (
+          <>
+            <p>Du betalar fortfarande</p>
+            <p>Kom ihåg att din prenumeration slutar {subscriptionEndFormatted}</p>
+          </>
+        ) : (
+          <div>
+            <p>Du betalar inte längre</p>
+            <Link to="/prenumerera">Prenumera igen enkelt!</Link>
+          </div>
+        )}
+        <h4>Dina preferenser</h4>
+        <div className={styles.preferencesContainer}>
+          <label htmlFor="inrikes">Inrikes</label>
+          <input id="inrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="inrikes" defaultChecked={stateUser.preference.includes("inrikes")} />
+          <label htmlFor="utrikes">Utrikes</label>
+          <input id="utrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="utrikes" defaultChecked={stateUser.preference.includes("utrikes")} />
+          <label htmlFor="sport">Sport</label>
+          <input id="sport" className={styles.options}type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
         </div>
-      )}
-      <h4>Dina preferenser</h4>
-      <div className={styles.preferencesContainer}>
-        <label htmlFor="inrikes">Inrikes</label>
-        <input id="inrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="inrikes" defaultChecked={stateUser.preference.includes("inrikes")} />
-        <label htmlFor="utrikes">Utrikes</label>
-        <input id="utrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="utrikes" defaultChecked={stateUser.preference.includes("utrikes")} />
-        <label htmlFor="sport">Sport</label>
-        <input id="sport" className={styles.options}type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
-      </div>
-      <button onClick={logoutBtn} className={styles.changeLogout} >Logga ut</button>
+        <button onClick={logoutBtn} className={styles.changeLogout} >Logga ut</button>
       </div>
 
     </section>

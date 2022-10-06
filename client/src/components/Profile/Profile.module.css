@@ -1,9 +1,10 @@
 .loggedIn {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
+
+  gap: 10px;
 }
 
 .editableText {
@@ -11,38 +12,57 @@
   cursor: pointer;
 }
 
-.changeLogout  {
-  box-shadow: rgba(0, 1, 2, 25%);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 2em;
-  width: 35%;
-  height: 40px;
-  margin-top: 0.625em;
-  background-color: #600f0c;
-  color: white;
-}
-
-.changePasswordDiv{
-  background-color: white;
-  border: 5px black;
-  height:400px;
-  width:400px;
+.changePasswordDiv, .userDiv, .generalInfoDiv {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userDiv{
-  background-color: white;
-  border-top: 3px solid ;
-  border-color:#600f0c;
-  height:400px;
-  width:400px;
-  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background-color: white;
+
+  max-width: 350px;
+  width: 100%;
+
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px black;
+
+  transition: all 0.3s ease;
+}
+
+.changePasswordDiv form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.changePasswordDiv form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #600f0c;
+}
+
+.changeLogout {
+  margin-top: 10px;
+}
+
+.changePasswordDiv form button, .changeLogout {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #600f0c;
+  background-color: #600f0c;
+  color: white;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.changePasswordDiv form button:hover, .changeLogout:hover {
+  background-color: black;
 }
 
 .options{
@@ -52,15 +72,7 @@
 }
 
 @media (min-width:1024px){
-  .loggedIn {
-    flex-direction: row;
+  .changePasswordDiv, .userDiv, .generalInfoDiv {
+    max-width: 500px;
   }
-
-  .userDiv{
-    border-top: none ;
-    border-left:3px solid #600f0c;
-    border-color:#600f0c;
-    
-  }
-
 }

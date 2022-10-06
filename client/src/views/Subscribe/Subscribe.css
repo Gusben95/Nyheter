@@ -100,7 +100,6 @@ h1 {
 
 .cardMenu {
   background-color: #ebebeb;
-  /* box-shadow: 2px 2px 4px gray inset; */
   max-height: 0px;
   animation: openUp 0.5s forwards;
   overflow: hidden;
