@@ -68,6 +68,7 @@ export default function Profile() {
 
   return (
     <section className={styles.loggedIn}>
+      <div className={styles.changePasswordDiv}>
       <h2 style={{display: "inline"}}>Hej <span
         contentEditable
         suppressContentEditableWarning={true}
@@ -86,7 +87,7 @@ export default function Profile() {
         name="email"
         >{stateUser.email}</span>
       .</p>
-      <button onClick={startChangePassword}>Byt lösenord</button>
+      <button className={styles.changeLogout} onClick={startChangePassword}>Byt lösenord</button>
       {changingPassword?(
         <div>
           <input ref={newPassInput1} type="password" placeholder="Skriv in ditt nya lösenord"></input>
@@ -94,6 +95,8 @@ export default function Profile() {
           <button onClick={changePassword}>Spara lösenordet</button>
         </div>
       ):""}
+      </div>
+      <div className={styles.userDiv}>
       <h4>Du är {stateUser.role}.</h4>
       {stateUser.stillPaying ? (
         <>
@@ -109,13 +112,14 @@ export default function Profile() {
       <h4>Dina preferenser</h4>
       <div className={styles.preferencesContainer}>
         <label htmlFor="inrikes">Inrikes</label>
-        <input id="inrikes" type="checkbox"  onChange={handleCheckboxEdit} value="inrikes" defaultChecked={stateUser.preference.includes("inrikes")} />
+        <input id="inrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="inrikes" defaultChecked={stateUser.preference.includes("inrikes")} />
         <label htmlFor="utrikes">Utrikes</label>
-        <input id="utrikes" type="checkbox"  onChange={handleCheckboxEdit} value="utrikes" defaultChecked={stateUser.preference.includes("utrikes")} />
+        <input id="utrikes" className={styles.options} type="checkbox"  onChange={handleCheckboxEdit} value="utrikes" defaultChecked={stateUser.preference.includes("utrikes")} />
         <label htmlFor="sport">Sport</label>
-        <input id="sport" type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
+        <input id="sport" className={styles.options}type="checkbox"  onChange={handleCheckboxEdit} value="sport" defaultChecked={stateUser.preference.includes("sport")} />
       </div>
-      <button onClick={logoutBtn}>Logga ut</button>
+      <button onClick={logoutBtn} className={styles.changeLogout} >Logga ut</button>
+      </div>
 
     </section>
   )

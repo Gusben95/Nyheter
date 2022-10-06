@@ -1,10 +1,66 @@
 .loggedIn {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
 }
 
 .editableText {
   border-bottom: 1px solid #fff;
   cursor: pointer;
+}
+
+.changeLogout  {
+  box-shadow: rgba(0, 1, 2, 25%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2em;
+  width: 35%;
+  height: 40px;
+  margin-top: 0.625em;
+  background-color: #600f0c;
+  color: white;
+}
+
+.changePasswordDiv{
+  background-color: white;
+  border: 5px black;
+  height:400px;
+  width:400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userDiv{
+  background-color: white;
+  border-top: 3px solid ;
+  border-color:#600f0c;
+  height:400px;
+  width:400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.options{
+  height:15px;
+  width:15px;
+  border-radius: 25px;
+}
+
+@media (min-width:1024px){
+  .loggedIn {
+    flex-direction: row;
+  }
+
+  .userDiv{
+    border-top: none ;
+    border-left:3px solid #600f0c;
+    border-color:#600f0c;
+    
+  }
+
 }
