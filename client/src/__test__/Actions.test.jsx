@@ -1,4 +1,4 @@
-import { fetchArticles } from '../dbUtils/articleActions'
+import { fetchArticles, fetchArticlesByCategory } from '../dbUtils/articleActions'
 
 describe('Actions', () => {
 
@@ -16,6 +16,12 @@ describe('Actions', () => {
     const articles = await fetchArticles();
     let randomArticle = Math.floor(Math.random() * articles.length);
     expect(articles[randomArticle]).toHaveProperty('mainText');
+  })
+
+/* Lukas test */
+  it('fetchArticlesByCategory fetches category', async () => {
+    const articles = fetchArticlesByCategory({category: "sport"});
+    expect(articles).toEqual(expect.any(Object))
   })
   
 })
