@@ -50,6 +50,7 @@ export default function Homepage({mostPopular}) {
         setIsLoading(false)
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category])
 
   useEffect(() =>{
@@ -89,6 +90,7 @@ export default function Homepage({mostPopular}) {
     }
 
     setArticlesToSplit(articlesToSlitBeforeState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stateArticles, location, stateUser])
 
   //split array into chunks of 10 articles
