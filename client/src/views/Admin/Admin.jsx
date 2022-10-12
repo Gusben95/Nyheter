@@ -111,13 +111,13 @@ export default function Admin() {
         <h2>Lägg till artikel:</h2>
 
         <label className={styles.editingLabel}>Titel</label>
-        <input type="text" name="title" onChange={handleEdit} />
+        <input type="text" name="title" onChange={handleEdit} className={styles.editingInput}/>
         <label className={styles.editingLabel}>Kort beskrivning</label>
-        <input type="text" name="shortDescription" onChange={handleEdit} />
+        <input type="text" name="shortDescription" onChange={handleEdit}  className={styles.editingInput}/>
         <label className={styles.editingLabel}>Brödtext</label>
-        <textarea type="text" name="mainText" onChange={handleEdit} />
+        <textarea type="text" name="mainText" onChange={handleEdit}  className={styles.editingInput} />
         <label className={styles.editingLabel}>Bilder</label>
-        <input type="text" name="images" onChange={handleImageEdit} />
+        <input type="text" name="images" onChange={handleImageEdit}className={styles.editingInput}  />
         <label className={styles.editingLabel}>Kategorier</label>
         <div>
           <label htmlFor="inrikes">Inrikes</label>
@@ -130,7 +130,7 @@ export default function Admin() {
         <label className={styles.editingLabel}>Skribent</label>
         <input type="text" name="author" onChange={handleEdit} />
 
-        <button onClick={sendArticle}>Spara</button>
+        <button onClick={sendArticle}className={styles.saveButton}>Spara</button>
       </div>
 
       <h2 style={{textAlign: "center"}}>Live exempel av hur artikeln kommer se ut:</h2>
