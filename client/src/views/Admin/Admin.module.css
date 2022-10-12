@@ -27,7 +27,7 @@
 .addRandomArticleBtn:active {
   box-shadow: none;
 }
-.saveButton{
+.saveButton :hover{
   background-color: #600f0c;
   color: white;
   padding: 0.5em 1em;
@@ -38,6 +38,7 @@
   cursor: pointer;
   box-shadow: 2px 2px 4px black;
   transition: all 0.3s ease;
+  background-color: #000000;
 }
 .editingInput {
   
