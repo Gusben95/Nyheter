@@ -27,7 +27,7 @@
 .addRandomArticleBtn:active {
   box-shadow: none;
 }
-.saveButton :hover{
+.saveButton{
   background-color: #600f0c;
   color: white;
   padding: 0.5em 1em;
@@ -49,4 +49,7 @@
     padding: 5px 0.625em;
     margin-bottom: 0.625em;
     margin-top: 0.225em;
+}
+.saveButton:hover {
+  background-color: #000000;
 }
