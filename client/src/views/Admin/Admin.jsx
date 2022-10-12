@@ -127,7 +127,7 @@ export default function Admin() {
           <label htmlFor="sport">Sport</label>
           <input id="sport" type="checkbox"  onChange={handleRadioEdit} value="sport" />
         </div>
-        <label className={styles.editingLabel}>Skribent</label>
+        <label className={styles.editingLabel}className={styles.editingInput}>Skribent</label>
         <input type="text" name="author" onChange={handleEdit} />
 
         <button onClick={sendArticle}className={styles.saveButton}>Spara</button>
