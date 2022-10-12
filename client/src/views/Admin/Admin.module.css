@@ -27,3 +27,36 @@
 .addRandomArticleBtn:active {
   box-shadow: none;
 }
+.saveButton{
+  background-color: #600f0c;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  margin: 10px;
+  border-radius: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px black;
+  transition: all 0.3s ease;
+}
+.editingInput {
+  
+  width: 100%;
+    border: 1px solid gray;
+    font-size: 1.2em;
+    border-radius: 20px;
+    padding: 5px 0.625em;
+    margin-bottom: 0.625em;
+    margin-top: 0.225em;
+}
+@media(min-width:1024px){
+  .editingLabel{
+    width: 50%;
+    border: 1px solid gray;
+    font-size: 1.2em;
+    border-radius: 5px;
+    padding: 5px 0.625em;
+    margin-bottom: 0.625em;
+    margin-top: 0.225em;
+  }
+}
