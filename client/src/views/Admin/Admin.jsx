@@ -115,13 +115,13 @@ export default function Admin() {
         <h2>Lägg till artikel:</h2>
 
         <label className={styles.editingLabel}>Titel</label>
-        <input type="text" name="title" onChange={handleEdit} style={newArticle.title !== "" ? {border: "1px solid #600f0c"} : {}} className={styles.editingInput}/>
+        <input type="text" name="title" onChange={handleEdit}  className={styles.editingInput} style={newArticle.title !== "" ? {border: "1px solid #600f0c"} : {}}/>
         <label className={styles.editingLabel}>Kort beskrivning</label>
-        <input type="text" name="title" onChange={handleEdit} style={newArticle.title !== "" ? {border: "1px solid #600f0c"} : {}} className={styles.editingInput}/>
+        <input type="text" name="shortDescription" onChange={handleEdit}  className={styles.editingInput} style={newArticle.shortDescription !== "" ? {border: "1px solid #600f0c"} : {}}/>
         <label className={styles.editingLabel}>Brödtext</label>
-        <textarea type="text" name="mainText" onChange={handleEdit}  className={styles.editingInput} />
+        <textarea type="text" name="mainText" onChange={handleEdit}  className={styles.editingInput} style={newArticle.mainText !== "" ? {border: "1px solid #600f0c"} : {}}/>
         <label className={styles.editingLabel}>Bilder</label>
-        <input type="text" name="title" onChange={handleEdit} style={newArticle.title !== "" ? {border: "1px solid #600f0c"} : {}} className={styles.editingInput}/>
+        <input type="text" name="images" onChange={handleImageEdit}className={styles.editingInput} style={newArticle.images!== "" ? {border: "1px solid #600f0c"} : {}} />
         <label className={styles.editingLabel}>Kategorier</label>
         <div>
           <label htmlFor="inrikes">Inrikes</label>
