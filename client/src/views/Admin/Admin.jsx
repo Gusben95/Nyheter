@@ -6,6 +6,7 @@ import styles from './Admin.module.css'
 import { useNavigate } from 'react-router-dom';
 import ArticleComp from '../../components/Article/ArticleComp';
 import { getAccountWithToken } from '../../dbUtils/accountActions';
+import Header from '../../components/Header/Header';
 
 
 export default function Admin() {
@@ -105,7 +106,10 @@ export default function Admin() {
   }
 
   return (
+    
     <div className={styles.adminpage}>
+
+<Header/>
 
       <div className={styles.addArticle}>
         <h2>Lägg till artikel:</h2>
