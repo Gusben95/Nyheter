@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.2.1",
+    "bootstrap": "^5.2.2",
     "dotenv": "^16.0.2",
     "gapi-script": "^1.2.0",
     "html-react-parser": "^3.0.4",
